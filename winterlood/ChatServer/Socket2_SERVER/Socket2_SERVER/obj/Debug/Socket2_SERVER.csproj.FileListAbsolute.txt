@@ -1,0 +1,14 @@
+C:\Users\king1\source\repos\Socket2_SERVER\Socket2_SERVER\obj\Debug\Socket2_SERVER.csprojAssemblyReference.cache
+C:\Users\king1\source\repos\Socket2_SERVER\Socket2_SERVER\obj\Debug\MainWindow.g.cs
+C:\Users\king1\source\repos\Socket2_SERVER\Socket2_SERVER\obj\Debug\App.g.cs
+C:\Users\king1\source\repos\Socket2_SERVER\Socket2_SERVER\obj\Debug\Socket2_SERVER_MarkupCompile.cache
+C:\Users\king1\source\repos\Socket2_SERVER\Socket2_SERVER\obj\Debug\MainWindow.baml
+C:\Users\king1\source\repos\Socket2_SERVER\Socket2_SERVER\obj\Debug\Socket2_SERVER.g.resources
+C:\Users\king1\source\repos\Socket2_SERVER\Socket2_SERVER\obj\Debug\Socket2_SERVER.Properties.Resources.resources
+C:\Users\king1\source\repos\Socket2_SERVER\Socket2_SERVER\obj\Debug\Socket2_SERVER.csproj.GenerateResource.cache
+C:\Users\king1\source\repos\Socket2_SERVER\Socket2_SERVER\obj\Debug\Socket2_SERVER.csproj.CoreCompileInputs.cache
+C:\Users\king1\source\repos\Socket2_SERVER\Socket2_SERVER\bin\Debug\Socket2_SERVER.exe.config
+C:\Users\king1\source\repos\Socket2_SERVER\Socket2_SERVER\bin\Debug\Socket2_SERVER.exe
+C:\Users\king1\source\repos\Socket2_SERVER\Socket2_SERVER\bin\Debug\Socket2_SERVER.pdb
+C:\Users\king1\source\repos\Socket2_SERVER\Socket2_SERVER\obj\Debug\Socket2_SERVER.exe
+C:\Users\king1\source\repos\Socket2_SERVER\Socket2_SERVER\obj\Debug\Socket2_SERVER.pdb
