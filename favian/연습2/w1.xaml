@@ -1,0 +1,25 @@
+﻿<Window x:Class="연습2.w1"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:연습2"
+        mc:Ignorable="d"
+        Title="Window1" Height="450" Width="800">
+
+    <Grid Background="AliceBlue" Margin="204,58,207.6,49">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <TextBlock x:Name="ID" HorizontalAlignment="Left" Margin="29,34,0,0" TextWrapping="Wrap" Text="아이디" VerticalAlignment="Top" Height="23" Width="69" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="IDBOX" HorizontalAlignment="Left" Height="23" Margin="120,34,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="142" Grid.ColumnSpan="2" TextChanged="IDBOX_TextChanged"/>
+        <TextBlock x:Name="PASS" HorizontalAlignment="Left" Margin="29,89,0,0" TextWrapping="Wrap" Text="비밀번호" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+        <TextBlock x:Name="AGE" HorizontalAlignment="Left" Margin="29,145,0,0" TextWrapping="Wrap" Text="나이" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="PASSWORDBOX" HorizontalAlignment="Left" Height="23" Margin="120,89,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="142" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="AGEBOX" HorizontalAlignment="Left" Height="23" Margin="120,145,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="142" Grid.ColumnSpan="2"/>
+        <Button x:Name="already" Content="중복 확인" HorizontalAlignment="Left" Margin="289,34,0,0" VerticalAlignment="Top" Width="75" Click="Already_Click" Grid.ColumnSpan="2"/>
+        <Button x:Name="complete" Content="회원 가입" HorizontalAlignment="Left" Margin="187,198,0,0" VerticalAlignment="Top" Width="75" Click="Complete_Click" Grid.ColumnSpan="2"/>
+  
+    </Grid>
+</Window>

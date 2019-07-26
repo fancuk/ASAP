@@ -1,0 +1,18 @@
+﻿<Window x:Class="Client.LoginPage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Client"
+        mc:Ignorable="d"
+        Title="LoginPage" Height="450" Width="800">
+    <Grid Background="AliceBlue">
+        <Label x:Name="SID" Content="님 환영합니다." HorizontalAlignment="Left" Margin="0,59,0,0" VerticalAlignment="Top" Width="172"/>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="0,98,0,0" TextWrapping="Wrap" Text="ID 검색" VerticalAlignment="Top"/>
+        <TextBox x:Name="FID" HorizontalAlignment="Left" Height="23" Margin="45,97,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="FID_TextChanged"/>
+        <Button x:Name="FPlus" Content="친구 추가" HorizontalAlignment="Left" Margin="179,97,0,0" VerticalAlignment="Top" Width="120" Click="FPlus_Click"/>
+        <TextBlock x:Name="Title" HorizontalAlignment="Left" Margin="306,10,0,0" TextWrapping="Wrap" Text="Damin Messenger" VerticalAlignment="Top" FontSize="30"/>
+        <Label x:Name="FName" Content="" HorizontalAlignment="Left" Margin="412,102,0,0" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="412,72,0,0" TextWrapping="Wrap" Text="친구 목록" VerticalAlignment="Top"/>
+    </Grid>
+</Window>

@@ -1,0 +1,24 @@
+﻿<Window x:Class="Client.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Client"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid DataContext="{Binding Text, ElementName=tb1}">
+        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="295" Margin="256,41,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="358" Background="AliceBlue" />
+        <Button x:Name="login" Content="로그인" HorizontalAlignment="Left" Margin="447,277,0,0" VerticalAlignment="Top" Width="157" Click="Login_Click" Background="White"/>
+        <Button x:Name="sign" Content="회원 가입" HorizontalAlignment="Left" Margin="275,277,0,0" VerticalAlignment="Top" Width="157" Background="White" Click="Sign_Click"/>
+        <TextBox x:Name="id" HorizontalAlignment="Left" Height="23" Margin="312,206,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="292"/>
+        <PasswordBox x:Name="password" HorizontalAlignment="Left" Margin="312,243,0,0" VerticalAlignment="Top" Width="292" Height="23"/>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="265,206,0,0" TextWrapping="Wrap" Text="아이디" VerticalAlignment="Top" Height="23" Width="39"/>
+        <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="256,243,0,0" TextWrapping="Wrap" Text="비밀번호" VerticalAlignment="Top" Height="23"/>
+        <Image x:Name="image" HorizontalAlignment="Left" Height="160" Margin="256,41,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Width="401">
+            <Image.Source>
+                <BitmapImage UriSource="C:\Users\damin\새 폴더\OneDrive\바탕 화면\새 폴더\image.jpg"/>
+            </Image.Source>
+        </Image>
+
+    </Grid>
+</Window>
