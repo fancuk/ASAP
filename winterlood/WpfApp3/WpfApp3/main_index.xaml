@@ -1,0 +1,31 @@
+﻿<Page x:Class="WpfApp3.main_index"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfApp3"
+      mc:Ignorable="d" 
+     d:DesignHeight="361" d:DesignWidth="602"
+      Title="main_index">
+    <Grid>
+        <StackPanel HorizontalAlignment="Left" Height="361" VerticalAlignment="Top" Width="602">
+            <StackPanel Height="56"/>
+            <StackPanel Height="244">
+                <StackPanel Height="134">
+                    <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text="카카오톡 자동 메세지 보내기!!"/>
+                    <TextBlock x:Name="textBlock1" TextWrapping="Wrap" Text="대상 이름!"/>
+                    <TextBox x:Name="name" Height="23" TextWrapping="Wrap"/>
+                    <TextBlock x:Name="textBlock2" TextWrapping="Wrap" Text="뭐라고 보낼까요?"/>
+                    <TextBox x:Name="mess" Height="23" TextWrapping="Wrap"/>
+                    <Button x:Name="button" Content="Send_Message" Click="sm"/>
+                </StackPanel>
+                <StackPanel Height="100">
+                    <StackPanel Orientation="Horizontal" Margin="0,0,-38,0"/>
+                    <Button x:Name="Start_Moniter" Content="start Monitoring" Click="Start_Moniter_Click"/>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Height="75"/>
+        </StackPanel>
+
+    </Grid>
+</Page>

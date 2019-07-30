@@ -1,0 +1,83 @@
+﻿<Page x:Class="WpfApp3.Login"
+         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfApp3"
+      mc:Ignorable="d" 
+      d:DesignHeight="500" d:DesignWidth="350"
+
+      Title="Login">
+
+    <Grid>
+        <StackPanel MaxWidth="450">
+            <StackPanel
+                HorizontalAlignment="Left" Height="30" VerticalAlignment="Top" Width="350" Background="#FF363636" Orientation="Horizontal">
+                <StackPanel Width="100"/>
+                <StackPanel Width="100"/>
+                <StackPanel Width="52"/>
+                <StackPanel Width="102" Orientation="Horizontal" RenderTransformOrigin="0.5,0.5">
+                    <StackPanel.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform AngleY="-0.429"/>
+                            <RotateTransform/>
+                            <TranslateTransform Y="-0.326"/>
+                        </TransformGroup>
+                    </StackPanel.RenderTransform>
+                    <Button x:Name="MinButton" Click="MinButton_Click"  Content="ㅡ" Width="33" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}"/>
+                    <Button x:Name="MaxButton" Click="MaxButton_Click"   Content="ㅁ" Width="33" Height="30" VerticalAlignment="Top" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}"/>
+                    <Button x:Name="CloseButton" Click="CloseButton_Click"  Content="X" Width="33" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}"/>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Height="198">
+                <StackPanel Height="70">
+                    <TextBlock  
+                           Margin="10"  
+   Foreground="Black" TextAlignment="Center" Height="67" FontWeight="Bold" FontSize="48" FontFamily="Sylfaen"  ><Run Text="F A N" FontFamily="Microsoft Uighur" TextDecorations="{x:Null}"/></TextBlock>
+                </StackPanel>
+                <StackPanel Height="121" Width="121">
+                    <StackPanel.Background>
+                        <ImageBrush ImageSource="Resources/logo2.png" Stretch="Uniform"/>
+                    </StackPanel.Background>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Height="80"  >
+                <StackPanel Height="210">
+                    <StackPanel Orientation="Vertical" Height="274" Background="#FFF1F1F1">
+                        <StackPanel Height="38">
+                            <TextBox x:Name="inputID" Width="240" Height="35"/>
+                        </StackPanel>
+                        <StackPanel Height="52">
+                            <TextBox x:Name="inputPW" Width="240" Height="35"/>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Height="224">
+                <StackPanel Margin="5,0,0,0" Orientation="Vertical" Height="198">
+                    <StackPanel Height="38">
+                        <Button x:Name="login"  
+                    Background="#2B88D9"  
+                    BorderThickness="0" Content="로그인" Foreground="White" Click="Login_Click" Width="240" Height="30" />
+                    </StackPanel>
+                    <StackPanel Height="38">
+                        <Button x:Name="Register"  
+                    Background="#FF9EA0A2"  
+                    BorderThickness="0"  
+                    Foreground="White" Content="무료 계정 만들기" Click="Register_Click" Width="240" Height="30" />
+                    </StackPanel>
+
+                </StackPanel>
+                <StackPanel Margin="171,0,170,0" Orientation="Vertical">
+                    <TextBlock Foreground="#CCCCCC"  
+                    FontSize="14"  
+                    HorizontalAlignment="Center"><Bold><Run Text="계정을 만들면"/></Bold></TextBlock>
+                    <TextBlock Foreground="#CCCCCC"  
+                    FontSize="14"  
+                    HorizontalAlignment="Center" Margin="21,0,22,0"><Run Text="됩니다."/></TextBlock>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Page>
