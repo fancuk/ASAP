@@ -1,0 +1,55 @@
+﻿<Page x:Class="WpfApp3.leftbar"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfApp3"
+      mc:Ignorable="d" 
+      d:DesignHeight="361" d:DesignWidth="198"
+      Title="leftbar">
+    <Grid>
+        <StackPanel HorizontalAlignment="Left" Height="361" VerticalAlignment="Top" Width="198">
+            <StackPanel Height="32">
+                <StackPanel Height="17"/>
+            </StackPanel>
+            <StackPanel Height="43">
+                <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text="Spooler Controller" TextAlignment="Center"/>
+                <Button x:Name="Start" 
+                                  Background="#FFD6E5F1"  
+                    BorderThickness="0" Content="Start" Click="Start_Click"/>
+            </StackPanel>
+            <StackPanel Height="48">
+                <StackPanel Height="50">
+                    <TextBlock x:Name="SpoolerStatus" TextWrapping="Wrap" Text="" Height="27" TextAlignment="Center"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock x:Name="textBlock1" TextWrapping="Wrap" Text="Number Of Jobs : "/>
+                        <TextBlock x:Name="noj" TextWrapping="Wrap" Text="TextBlock" Width="79" TextAlignment="Center"/>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Height="53">
+                <StackPanel>
+                    <TextBlock x:Name="textBlock3" TextWrapping="Wrap" Text="Your Default Pirnter " TextAlignment="Center"/>
+                    <TextBlock x:Name="defaultPrinter" TextWrapping="Wrap" Text="ddd" RenderTransformOrigin="0.5,0.5" TextAlignment="Center">
+                        <TextBlock.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleY="-1" ScaleX="-1"/>
+                                <SkewTransform AngleY="0" AngleX="0"/>
+                                <RotateTransform Angle="-180"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </TextBlock.RenderTransform>
+                    </TextBlock>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Height="100">
+                <StackPanel>
+                    <TextBlock x:Name="dd" TextWrapping="Wrap" TextAlignment="Center" Height="17"><Run Text="Other"/><Run Text=" Pirnter "/></TextBlock>
+                    <ComboBox x:Name="cboPrinter"/>
+                </StackPanel>
+                <Button x:Name="button" Content="Set Default Printer" Click="set_DP"/>
+            </StackPanel>
+        </StackPanel>
+
+    </Grid>
+</Page>
