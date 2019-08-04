@@ -1,0 +1,17 @@
+C:\Users\damin\source\repos\실전\실전\bin\Debug\실전.exe.config
+C:\Users\damin\source\repos\실전\실전\bin\Debug\실전.exe
+C:\Users\damin\source\repos\실전\실전\bin\Debug\실전.pdb
+C:\Users\damin\source\repos\실전\실전\obj\Debug\실전.csprojAssemblyReference.cache
+C:\Users\damin\source\repos\실전\실전\obj\Debug\MainWindow.g.cs
+C:\Users\damin\source\repos\실전\실전\obj\Debug\sign_up.g.cs
+C:\Users\damin\source\repos\실전\실전\obj\Debug\App.g.cs
+C:\Users\damin\source\repos\실전\실전\obj\Debug\실전_MarkupCompile.cache
+C:\Users\damin\source\repos\실전\실전\obj\Debug\실전_MarkupCompile.lref
+C:\Users\damin\source\repos\실전\실전\obj\Debug\MainWindow.baml
+C:\Users\damin\source\repos\실전\실전\obj\Debug\sign_up.baml
+C:\Users\damin\source\repos\실전\실전\obj\Debug\실전.g.resources
+C:\Users\damin\source\repos\실전\실전\obj\Debug\실전.Properties.Resources.resources
+C:\Users\damin\source\repos\실전\실전\obj\Debug\실전.csproj.GenerateResource.cache
+C:\Users\damin\source\repos\실전\실전\obj\Debug\실전.csproj.CoreCompileInputs.cache
+C:\Users\damin\source\repos\실전\실전\obj\Debug\실전.exe
+C:\Users\damin\source\repos\실전\실전\obj\Debug\실전.pdb

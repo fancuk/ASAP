@@ -1,0 +1,18 @@
+﻿<Window x:Class="실전.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:실전"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="339.6" Width="283.467">
+    <Grid>
+        <Button x:Name="sign_Up" Content="Sign Up" Command="{Binding _sign_Up}" HorizontalAlignment="Left" Margin="10,262,0,0" VerticalAlignment="Top" Width="108"/>
+        <Button x:Name="log_In" Content="Log in" HorizontalAlignment="Left" Margin="153,262,0,0" VerticalAlignment="Top" Width="114"/>
+        <TextBox x:Name="id" HorizontalAlignment="Left" Height="23" Margin="67,206,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="200"/>
+        <TextBlock x:Name="idBlock" HorizontalAlignment="Left" Margin="10,206,0,0" TextWrapping="Wrap" Text="ID" VerticalAlignment="Top"/>
+        <TextBlock x:Name="passwordBlock" HorizontalAlignment="Left" Margin="10,235,0,0" TextWrapping="Wrap" Text="Password" VerticalAlignment="Top"/>
+        <PasswordBox x:Name="password" HorizontalAlignment="Left" Margin="67,235,0,0" VerticalAlignment="Top" Width="200"/>
+
+    </Grid>
+</Window>
