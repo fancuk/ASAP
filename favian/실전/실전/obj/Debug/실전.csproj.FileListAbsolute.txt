@@ -15,3 +15,11 @@ C:\Users\damin\source\repos\실전\실전\obj\Debug\실전.csproj.GenerateResour
 C:\Users\damin\source\repos\실전\실전\obj\Debug\실전.csproj.CoreCompileInputs.cache
 C:\Users\damin\source\repos\실전\실전\obj\Debug\실전.exe
 C:\Users\damin\source\repos\실전\실전\obj\Debug\실전.pdb
+C:\Users\damin\source\repos\실전\실전\bin\Debug\MySql.Data.dll
+C:\Users\damin\source\repos\실전\실전\bin\Debug\Google.Protobuf.dll
+C:\Users\damin\source\repos\실전\실전\bin\Debug\BouncyCastle.Crypto.dll
+C:\Users\damin\source\repos\실전\실전\bin\Debug\MySql.Data.xml
+C:\Users\damin\source\repos\실전\실전\obj\Debug\실전.csproj.CopyComplete
+C:\Users\damin\source\repos\실전\실전\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\damin\source\repos\실전\실전\obj\Debug\Log_In.g.cs
+C:\Users\damin\source\repos\실전\실전\obj\Debug\Log_In.baml

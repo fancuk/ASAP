@@ -11,14 +11,15 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+
 namespace 실전
 {
     /// <summary>
-    /// sign_up.xaml에 대한 상호 작용 논리
+    /// Log_In.xaml에 대한 상호 작용 논리
     /// </summary>
-    public partial class sign_up : Window
+    public partial class Log_In : Window
     {
-        public sign_up()
+        public Log_In()
         {
             InitializeComponent();
             this.DataContext = new ViewModel();
