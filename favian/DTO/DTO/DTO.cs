@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DTO
 {
-    class Program
+    class DTO
     {
         static void Main(string[] args)
         {
@@ -27,6 +27,11 @@ namespace DTO
             Id = _Id;
             Password = _Password;
             Name = _Name;
+        }
+        public info(string _Id, string _Password)
+        {
+            Id = _Id;
+            Password = _Password;
         }
     }
 }

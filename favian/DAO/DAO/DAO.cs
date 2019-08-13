@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 using MySql.Data;
 using MySql.Data.MySqlClient;
 using DTO;
+
 using System.Collections.ObjectModel;
 namespace DAO
 {
-    class Program
+    class DAO
     {
         static void Main(string[] args)
         {
@@ -26,13 +27,13 @@ namespace DAO
                 "Database=member; Uid=root; Pwd=1234";
             return Conn;
         }
-        #region Create
-        public bool create(string Name,string Password,string Age)
+        #region Create 인자 3개 받아서 insert
+        public bool create(string Id,string Password,string Age)
         {
             bool flag = false;
             string query =
                 "INSERT INTO members(id,password,age) " +
-                "VALUES('" + Name + "','" + Password + "','" + Age + "')";
+                "VALUES('" + Id + "','" + Password + "','" + Age + "')";
 
             MySqlConnection Conn = new MySqlConnection(str());
             try
@@ -44,7 +45,7 @@ namespace DAO
             }
             catch(Exception e)
             {
-                
+                //추가
             }
             finally
             {
@@ -76,7 +77,7 @@ namespace DAO
             }
             catch(Exception e)
             {
-
+                //추가
             }
             finally
             {
@@ -91,6 +92,22 @@ namespace DAO
             bool flag = false;
             string query = "Update members Set " +
                 "id =" + AfterId + " Where id = '" + BeforeId;
+            MySqlConnection Conn = new MySqlConnection(str());
+            try
+            {
+                Conn.Open();
+                MySqlCommand Command = new MySqlCommand(query, Conn);
+                Command.ExecuteNonQuery();
+                flag = true;
+            }
+            catch(Exception e)
+            {
+                // 추가
+            }
+            finally
+            {
+                Conn.Close();
+            }
             return flag;
         }
         #endregion
@@ -110,7 +127,7 @@ namespace DAO
             }
             catch(Exception e)
             {
-
+                //추가
             }
             finally
             {
