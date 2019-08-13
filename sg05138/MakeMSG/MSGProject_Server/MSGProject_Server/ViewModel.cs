@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Navigation;
 using MySql.Data;
 using MySql.Data.MySqlClient;
 
@@ -21,7 +22,8 @@ namespace MSGProject_Server
         private string newpwdcheck = "";
         private string newemail = "";
         private string newname = "";
-        public bool check = false;
+        public bool pwdcheck = false;
+        public bool idcheck = false;
 
         protected void OnpropertyChanged(string str)
         {
@@ -95,8 +97,9 @@ namespace MSGProject_Server
 
         public ICommand newPage_open { get; set; }//회원가입 page
         public ICommand loginPage { get; set; }//로그인 page
-        public ICommand checkButton { get; set; } //비밀번호확인
-        public ICommand newPage { get; set; }
+        public ICommand pwdcheckButton { get; set; }//비밀번호확인
+        public ICommand idcheckButton { get; set; }//아이디 중복확인
+        public ICommand newPage { get; set; }//아이디 생성
 
         private MySqlConnection getConn()
         {
@@ -104,11 +107,11 @@ namespace MSGProject_Server
             MySqlConnection conn = new MySqlConnection(strConn);
             return conn;
         }
-
+        //회원가입
         private void makeNewid(object obj)
         {
-            MySqlConnection connect = getConn();
-            connect.Open();
+            MySqlConnection connectt = getConn();
+            connectt.Open();
             if (newname == "")
             {
                 MessageBox.Show("이름을 입력하세요");
@@ -129,30 +132,43 @@ namespace MSGProject_Server
                 MessageBox.Show("PWD를 입력하세요!!");
                 return;
             }
-            else if (check == false)
+            else if (pwdcheck == false)
             {
                 MessageBox.Show("비밀번호 확인을 해주세요");
                 return;
             }
+            else if(idcheck == false)
+            {
+                MessageBox.Show("아이디 중복확인을 해주세요");
+                return;
+            }
             string insertQuery = "INSERT INTO info(id,password,name,age) VALUES('" + newid + "','" + newpwd + "','" + newname + "','" + newemail + "')";
-            connect.Open();
-            MySqlCommand cmd = new MySqlCommand(insertQuery, connect);
-            try
+            MySqlCommand cmd = new MySqlCommand(insertQuery, connectt);
+            if (idcheck == true)
             {
-                if (cmd.ExecuteNonQuery() == 1)//내가 처리한 mysql에 정상적으로 들어감
-                {
-                    MessageBox.Show("회원가입 완료");
-                }
-                else
-                {
-                    MessageBox.Show("오류");
-                }
+                int len = cmd.ExecuteNonQuery();
+                connectt.Close();
+                MessageBox.Show("회원가입 완료");
             }
-            catch (Exception ex)
+        }
+        private void idCheck(object obj)
+        {
+            MySqlConnection conn = getConn();
+            conn.Open();
+            string sql1 = "SELECT * FROM info WHERE id='" + newid + "'";
+            MySqlCommand cmd1 = new MySqlCommand(sql1, conn);
+            MySqlDataReader idread = cmd1.ExecuteReader();
+            System.Console.Write("%s\n", newid);
+            if (idread.Read())
             {
-                MessageBox.Show("같은 아이디가 있습니다");
+                MessageBox.Show("중복된 아이디 입니다");
             }
-            connect.Close();
+            else
+            {
+                idcheck = true;
+                MessageBox.Show("사용 가능한 아이디입니다");
+            }
+            conn.Close();
         }
         private void pwdCheck(object obj)
         {
@@ -161,12 +177,12 @@ namespace MSGProject_Server
                 if (newpwd == newpwdcheck)
                 {
                     MessageBox.Show("비밀번호 확인 완료");
-                    check = true;
+                    pwdcheck = true;
                 }
                 else
                 {
                     MessageBox.Show("비밀번호가 일치하지 않습니다");
-                    check = false;
+                    pwdcheck = false;
                 }
             }
         }
@@ -182,7 +198,6 @@ namespace MSGProject_Server
                 MessageBox.Show("PWD를 입력하세요!!");
                 return;
             }
-
             MySqlConnection connect = getConn();
             connect.Open();
             string ConnectQurey = "SELECT * FROM info WHERE id='" + logid + "'AND password='" + logpwd + "'";
@@ -190,7 +205,6 @@ namespace MSGProject_Server
             MySqlDataReader read = command.ExecuteReader();
             System.Console.Write("%s\n", logid);
             System.Console.Write("%s\n", logpwd);
-            
             if (read.Read())
             {
                 MessageBox.Show("로그인 완료");
@@ -202,15 +216,15 @@ namespace MSGProject_Server
         }
         private void signIn(object obj)
         {
-            Window signpage = new New();
-            signpage.ShowDialog();
+            Uri uri = new Uri("New.xaml", UriKind.Relative);
         }
         public ViewModel()
         {
             loginPage = new Command(dbLogin, canExcute);
+            idcheckButton = new Command(idCheck, canExcute);
             newPage = new Command(makeNewid, canExcute);
             newPage_open = new Command(signIn, canExcute);
-            checkButton = new Command(pwdCheck, canExcute);
+            pwdcheckButton = new Command(pwdCheck, canExcute);
         }
         public bool canExcute(object obj)
         {
