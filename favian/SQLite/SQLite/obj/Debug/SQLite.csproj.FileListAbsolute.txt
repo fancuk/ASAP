@@ -1,0 +1,12 @@
+C:\Users\damin\source\repos\SQLite\SQLite\bin\Debug\SQLite.exe.config
+C:\Users\damin\source\repos\SQLite\SQLite\bin\Debug\SQLite.exe
+C:\Users\damin\source\repos\SQLite\SQLite\bin\Debug\SQLite.pdb
+C:\Users\damin\source\repos\SQLite\SQLite\bin\Debug\System.Data.SQLite.dll
+C:\Users\damin\source\repos\SQLite\SQLite\bin\Debug\System.Data.SQLite.pdb
+C:\Users\damin\source\repos\SQLite\SQLite\bin\Debug\System.Data.SQLite.dll.config
+C:\Users\damin\source\repos\SQLite\SQLite\obj\Debug\SQLite.csprojAssemblyReference.cache
+C:\Users\damin\source\repos\SQLite\SQLite\obj\Debug\SQLite.csproj.CoreCompileInputs.cache
+C:\Users\damin\source\repos\SQLite\SQLite\obj\Debug\SQLite.csproj.CopyComplete
+C:\Users\damin\source\repos\SQLite\SQLite\obj\Debug\SQLite.exe
+C:\Users\damin\source\repos\SQLite\SQLite\obj\Debug\SQLite.pdb
+C:\Users\damin\source\repos\SQLite\SQLite\bin\Debug\SQLite.Interop.dll
