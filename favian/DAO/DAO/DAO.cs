@@ -21,14 +21,16 @@ namespace DAO
 
     public class database
     {
+        #region DB Connection
         private string str()
         {
             string Conn = "Server=localhost; Port=3306; " +
                 "Database=member; Uid=root; Pwd=1234";
             return Conn;
         }
-        #region Create 인자 3개 받아서 insert
-        public bool create(string Id,string Password,string Age)
+        #endregion
+        #region Create 인자 3개->member 인자 2개 ->friend
+        public bool memberCreate(string Id,string Password,string Age) //Member 넣기
         {
             bool flag = false;
             string query =
@@ -53,9 +55,34 @@ namespace DAO
             }
             return flag;
         }
+        public bool friendCreate(string MyID,string FriendID) //친구추가
+        {
+            bool flag = false;
+            string query =
+                "INSERT INTO friends(myID,friendID) " +
+                "VALUES('" + MyID + "','" + FriendID + ")";
+
+            MySqlConnection Conn = new MySqlConnection(str());
+            try
+            {
+                Conn.Open();
+                MySqlCommand Command = new MySqlCommand(query, Conn);
+                Command.ExecuteNonQuery();
+                flag = true;
+            }
+            catch (Exception e)
+            {
+                //추가
+            }
+            finally
+            {
+                Conn.Close();
+            }
+            return flag;
+        }
         #endregion
-        #region Read 반환형 ObservableCollection 성공 실패는 반환값을 count
-        public ObservableCollection<info> read()
+        #region Read 반환형 ObservableCollection
+        public ObservableCollection<info> membersRead() //멤버들 목록 확인
         {
             ObservableCollection<info> information = new ObservableCollection<info>();
             MySqlConnection Conn = new MySqlConnection(str());
@@ -76,6 +103,34 @@ namespace DAO
                 }
             }
             catch(Exception e)
+            {
+                //추가
+            }
+            finally
+            {
+                Conn.Close();
+            }
+            return information;
+        }
+
+        public ObservableCollection<string> friendsRead(string MyID) //친구목록
+        {
+            ObservableCollection<string> information = new ObservableCollection<string>();
+            MySqlConnection Conn = new MySqlConnection(str());
+            string query = "SELECT friendID FROM friends " +
+                    "ORDER BY id ASC";
+            try
+            {
+                Conn.Open();
+                MySqlCommand Command = new MySqlCommand(query, Conn);
+                MySqlDataReader Datareader = Command.ExecuteReader();
+                while (Datareader.Read())
+                {
+                    string FriendId = Datareader["id"].ToString();
+                    information.Add(FriendId);
+                }
+            }
+            catch (Exception e)
             {
                 //추가
             }
