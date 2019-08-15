@@ -1,0 +1,12 @@
+C:\Users\sg051\source\repos\SQLTEST\SQLTEST\bin\Debug\SQLTEST.exe.config
+C:\Users\sg051\source\repos\SQLTEST\SQLTEST\bin\Debug\SQLTEST.exe
+C:\Users\sg051\source\repos\SQLTEST\SQLTEST\bin\Debug\SQLTEST.pdb
+C:\Users\sg051\source\repos\SQLTEST\SQLTEST\bin\Debug\System.Data.SQLite.pdb
+C:\Users\sg051\source\repos\SQLTEST\SQLTEST\bin\Debug\System.Data.SQLite.xml
+C:\Users\sg051\source\repos\SQLTEST\SQLTEST\bin\Debug\System.Data.SQLite.dll.config
+C:\Users\sg051\source\repos\SQLTEST\SQLTEST\obj\Debug\SQLTEST.csprojAssemblyReference.cache
+C:\Users\sg051\source\repos\SQLTEST\SQLTEST\obj\Debug\SQLTEST.csproj.CoreCompileInputs.cache
+C:\Users\sg051\source\repos\SQLTEST\SQLTEST\obj\Debug\SQLTEST.csproj.CopyComplete
+C:\Users\sg051\source\repos\SQLTEST\SQLTEST\obj\Debug\SQLTEST.exe
+C:\Users\sg051\source\repos\SQLTEST\SQLTEST\obj\Debug\SQLTEST.pdb
+C:\Users\sg051\source\repos\SQLTEST\SQLTEST\bin\Debug\System.Data.SQLite.dll
