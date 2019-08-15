@@ -12,26 +12,39 @@ namespace DTO
         {
         }
     }
-    public class info
+    public class friends
     {
-        private string Id;
-        private string Password;
-        private string Name;
+        private string FriendName;
+        private string MyName;
 
-        public string id { get => Id; set => Id = value; }
-        public string password { get => Password; set => Password = value; }
-        public string name { get => Name; set => Name = value; }
+        public friends(string friendName, string myName)
+        {
+            FriendName = friendName;
+            MyName = myName;
+        }
 
-        public info(string _Id,string _Password,string _Name)
+        public string friendName { get => FriendName; set => FriendName = value; }
+        public string myName { get => MyName; set => MyName = value; }
+    }
+    public class chatting
+    {
+        private string Msg;
+        private string Time;
+        private string Receiver;
+        private string Sender;
+
+        public chatting(string msg, string time, 
+            string receiver, string sender)
         {
-            Id = _Id;
-            Password = _Password;
-            Name = _Name;
+            Msg = msg;
+            Time = time;
+            Receiver = receiver;
+            Sender = sender;
         }
-        public info(string _Id, string _Password)
-        {
-            Id = _Id;
-            Password = _Password;
-        }
+
+        public string msg { get => Msg; set => Msg = value; }
+        public string time { get => Time; set => Time = value; }
+        public string receiver { get => Receiver; set => Receiver = value; }
+        public string sender { get => Sender; set => Sender = value; }
     }
 }

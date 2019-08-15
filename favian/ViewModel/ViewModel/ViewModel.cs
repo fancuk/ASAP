@@ -13,7 +13,10 @@ using System.Net.Sockets;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace ViewModel
+namespace ViewModel //WPF에서 Flag 저장해주기.
+                    //최초의 로그인 -> 친구목록SQLite File, 대화목록SQLite File 생성
+                    //Flag = false;
+                    //문제가 생김 -> 다른 컴퓨터에서 로그인은 어쩔껀지?
 {
     class ViewModel : INotifyPropertyChanged
     {
@@ -140,27 +143,15 @@ namespace ViewModel
         #region 로그인
         private void logIn(object obj)
         {
-            if (LogInId == ""||LogInPassword=="")//입력안하면 그냥 리턴
+            if (signUpId == "" || signUpPassword == "" ||)
             {
+                MessageBox.Show("빈칸 금지");
                 return;
             }
-            info MemberLogIn = new info(LogInId, LogInPassword);
-            database Database = new database();
-            ObservableCollection<info> Members = 
-                Database.membersRead();
-            int cnt = Members.Count;
-            for(int i = 0; i < cnt; i++)
-            {
-                if (Members[i].id == MemberLogIn.id &&
-                    Members[i].password == MemberLogIn.password) 
-                {
-                    //로그인 정보 일치
-                    //기능 추가
-                    //친구목록 로드
-                    friendLoad();
-                    break;
-                }
-            }
+            byte[] LogInMsg = Encoding.Default.GetBytes
+                ("<LOG>/" + logInId + "/" + logInPassword);
+            Client.BeginSend(LogInMsg, 0, LogInMsg.Length, SocketFlags.None,
+                new AsyncCallback(sendMsg), Client);
         }
         #endregion
         #region 친구 목록 불러오기
@@ -173,50 +164,33 @@ namespace ViewModel
         #region 회원가입
         private void signUp(object obj)
         {
-            if (SignUpId == "" || 
-                SignUpPassword == "" || 
-                SignUpName == "")
+            if (signUpId == "" || signUpPassword == "" ||
+                signUpName == "")
             {
+                MessageBox.Show("빈칸 금지");
                 return;
             }
-            if (IdFlag == false) return; //갑자기 바꿨다면
-            database MemberInsert = new database();
-            bool success = MemberInsert.memberCreate
-                (SignUpId, SignUpPassword, SignUpName);
-            if (success)
+            if (IdFlag)
             {
-                //회원가입 성공했다면, 기능 추가
+                byte[] LogInMsg = Encoding.Default.GetBytes
+                     ("<SUP>/" + signUpId + "/" + signUpPassword + "/" + signUpName); ;
+                Client.BeginSend(LogInMsg, 0, LogInMsg.Length, SocketFlags.None,
+                    new AsyncCallback(sendMsg), Client);
+                MessageBox.Show("회원가입 성공.");
             }
             else
             {
-                //회원가입 실패, 기능 추가
+                MessageBox.Show("중복확인 해주세요.");
             }
         }
         #endregion
         #region ID 중복확인
         private void idCheck(object obj)
         {
-            bool Already = true; //이미 있는지 확인
-            if (SignUpId == "") return;
-            ObservableCollection<info> IdCheck = new ObservableCollection<info>();
-            database Database = new database();
-            IdCheck = Database.membersRead();
-            int cnt = IdCheck.Count();
-            for(int i = 0; i < cnt; i++)
-            {
-                if(IdCheck[i].id == SignUpId)
-                {
-                    Already = false;
-                }
-            }
-            if (Already == false)
-            {
-                //중복, 기능추가
-            }
-            else
-            {
-                //가능, 기능추가
-            }
+            byte[] LogInMsg = Encoding.Default.GetBytes
+                 ("<CHK>/" + signUpId); ;
+            Client.BeginSend(LogInMsg, 0, LogInMsg.Length, SocketFlags.None,
+                new AsyncCallback(sendMsg), Client);
         }
         #endregion
         #region ID 바꾸기
@@ -279,6 +253,7 @@ namespace ViewModel
             }
             else if (SubString == "<FRY>") //친구 요청 수락
             {
+                MessageBox.Show(str); //<FRY> 뺴야함
                 for (int i = 5; i < strlen; i++) //친구 닉네임 추가
                 {
                     if (str[i] == '님') break;
@@ -288,18 +263,33 @@ namespace ViewModel
                 database Database = new database();
                 bool flag = Database.friendCreate(LogInId, FriendName);
             }
-            else if(SubString == "<FRN>")
+            else if(SubString == "<FRN>") //거절
             {
                 // 거절하면 아무것도 없다.
             }
             #endregion
-            else if (SubString == "<EOF>") //메세지
+            else if (SubString == "<FNE>") //아이디 존재x
             {
-
+                MessageBox.Show("해당 아이디는 존재하지 않습니다.");
             }
-            else if (SubString == "<LOG>") //
+            else if (SubString == "<LOY>") //로그인 가능
             {
-
+                MessageBox.Show("로그인 성공");
+                // 메인 화면 띄우기
+                friendLoad();
+            }
+            else if (SubString == "<LON>")
+            {
+                MessageBox.Show("아이디, 비밀번호를 확인해주세요.");
+            }
+            else if (SubString == "CHY")
+            {
+                MessageBox.Show("아이디 사용 가능");
+                IdFlag = true;
+            }
+            else if (SubString == "CHN")
+            {
+                MessageBox.Show("사용중입니다.");
             }
             Client.BeginReceive(Msg, 0, Msg.Length, SocketFlags.None,
                 new AsyncCallback(receiveMsg), Client);
@@ -315,35 +305,10 @@ namespace ViewModel
         #region 친구요청
         private void friendPlus()
         {
-            if (friendPlusID == logInId) //자기 자신 친구추가
-            {
-                MessageBox.Show("장난치지마세용~");
-                return;
-            }
-            bool isit = false; // 아이디 있는지 확인
-            database Database = new database();
-            ObservableCollection<info> Members =
-                Database.membersRead();
-            int cnt = Members.Count;
-            for(int i = 0; i < cnt; i++)
-            {
-                if (friendPlusID == Members[i].id)
-                {
-                    isit = true;
-                    break;
-                }
-            }
-            if (isit) // 해당 아이디 존재
-            {
-                byte[] FriendPlus = Encoding.Default.GetBytes
-                    (LogInId + "님이 친구 요청이 왔습니다.");
-                Client.BeginSend(FriendPlus, 0, FriendPlus.Length
-                    , SocketFlags.None, new AsyncCallback(sendMsg), Client);
-            }
-            else
-            {
-                MessageBox.Show("해당 ID는 존재하지 않습니다.");
-            }
+            byte[] LogInMsg = Encoding.Default.GetBytes
+                 ("<FRR>/" + signUpId); ;
+            Client.BeginSend(LogInMsg, 0, LogInMsg.Length, SocketFlags.None,
+                new AsyncCallback(sendMsg), Client);
         }
         #endregion
     }
