@@ -1,6 +1,8 @@
 **연습,Client는 MVVM패턴이 아니다.**
 
-**실전부터는 MVVM패턴으로 만들었다.**
+**실전은 MVVM패턴으로 만들었다.**
+
+**실질적인 MessengerProject는 ViewModel에 있다.**
 
 ## 기능
 
