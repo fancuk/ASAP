@@ -108,12 +108,18 @@ namespace TelerikWpfApp3
             }
 
         }
-
+        public string Get_MyIP()
+        {
+            IPHostEntry host = Dns.GetHostByName(Dns.GetHostName());
+            string myip = host.AddressList[0].ToString();
+            return myip;
+        }
         public void AfterConnection()
         {
             AsyncObject ao = new AsyncObject(4096);
             ao.WorkingSocket = mSock;
-            byte[] bDts = Encoding.UTF8.GetBytes(UserName + '\x01' + "<SOF>");
+            string ipad = Get_MyIP();
+            byte[] bDts = Encoding.UTF8.GetBytes("<SOF>" + '/' + ipad);
           ao.WorkingSocket.Send(bDts);
           ao.WorkingSocket.BeginReceive(ao.Buffer, 0, ao.BufferSize, 0, DataReceived, ao);
         }
@@ -236,31 +242,23 @@ namespace TelerikWpfApp3
         #region OnSendData
       public void OnSendData(string Texts, string type)
         {
-            // 서버가 대기중인지 확인한다.
-            if (!mSock.IsBound)
-            {
-                MessageBox.Show("서버가 실행되고 있지 않습니다!");
-                return;
-            }
             // 보낼 텍스트
             string tts = Texts.Trim();
-            string addr = IPAddress.Loopback.ToString();
-            if (string.IsNullOrEmpty(tts))
-            {
-                MessageBox.Show("텍스트 입력 바람!");
-       
-                return;
-            }
-            byte[] bDts = null; ;
+            byte[] bDts = null; 
             if (type.Equals("<LOG>"))
             {
-                bDts = Encoding.UTF8.GetBytes(tts + '\x01' + type);
+                bDts = Encoding.UTF8.GetBytes(type + '/' +tts);
+            }
+            else if (type.Equals("<REG>"))
+            {
+
             }
             else if (type.Equals("<MSG>"))
             {
                 ((App)Application.Current).AddChat(true,tts);
-              bDts = Encoding.UTF8.GetBytes(UserName + '\x01' + tts);
+              bDts = Encoding.UTF8.GetBytes(UserName + '/' + tts);
             }
+
             mSock.Send(bDts);
             MessageBox.Show(tts+"send complete");
         }
