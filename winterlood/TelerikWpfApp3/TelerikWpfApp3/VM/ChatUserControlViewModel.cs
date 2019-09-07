@@ -29,12 +29,14 @@ namespace TelerikWpfApp3.VM
         public ICommand friendPlus { get; set; }
         public ChatUserControlViewModel()
         {
-            //friendPlus = new Command();
+            friendPlus = new Command(fpButton, CanExecuteMethod);
         }
 
         public void fpButton(object org)
         {
-            //string 
+            string str = searchName + "/" + Application.Current.Properties["id"].ToString();
+            ((App)Application.Current).SendData("<FRR>", str);
+            
         }
 
         private bool CanExecuteMethod(object arg)

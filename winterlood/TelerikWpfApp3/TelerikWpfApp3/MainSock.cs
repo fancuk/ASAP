@@ -202,6 +202,7 @@ namespace TelerikWpfApp3
                     if (flag.Equals("true"))
                     {
                         MessageBox.Show("Login Sucess! in view");
+                        Application.Current.Properties["id"] = tokens[2];
                         DispatchService.Invoke(() =>
                         {
                             ((App)Application.Current).StartMainWindow();
@@ -247,7 +248,18 @@ namespace TelerikWpfApp3
                         MessageBox.Show("ID Check Failed.....TT");
                     }
                 }
-                else if (tag.Equals("<FRR>")) // 친구추가
+                else if (tag.Equals("<FRR>"))
+                {
+                    if (tokens[1] == "true")
+                    {
+                        MessageBox.Show("hi");
+                    }
+                    else
+                    {
+                        MessageBox.Show("false");
+                    }
+                }
+                /*else if (tag.Equals("<FRR>")) // 친구추가
                 {
                     if (MessageBoxResult.Yes == //친구 요청 받으면
                     MessageBox.Show(tokens[1] + tokens[3], "친구 요청", MessageBoxButton.YesNo))
@@ -271,7 +283,7 @@ namespace TelerikWpfApp3
                         ((App)Application.Current).StartMainWindow();
                     });
                 }
-
+                */
                 else if (tag.Equals("<MSG>")) // 메세지
                 {
                     database sqlite = new database();
@@ -327,10 +339,10 @@ namespace TelerikWpfApp3
             {
                 bDts = Encoding.UTF8.GetBytes(type + '/' + tts + '/');
             }
-            else if (type.Equals("<FRA>"))
+            /*else if (type.Equals("<FRA>"))
             {
                 bDts = Encoding.UTF8.GetBytes(type + '/' + tts + '/');
-            }
+            }*/
             else if (type.Equals("<MSG>"))
             {
                 bDts = Encoding.UTF8.GetBytes(UserName + '/' + tts + '/');
