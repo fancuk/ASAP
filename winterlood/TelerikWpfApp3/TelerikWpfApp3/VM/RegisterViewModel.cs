@@ -114,21 +114,10 @@ namespace TelerikWpfApp3.VM
             nameChk = "X";
             emailChk = "X";
             pw1Chk = "X";
-            test = new Command(ExecuteTest, CanExecute);
             pw2Changed = new Command(ExecuteChkPwEquals, CanExecute);
         }
 
-        private void ExecuteTest(object obj)
-        {
-            Window s = new SuccessMsgBox("회원가입 성공");
-            Window x = new FalseMsgBox("Fail!");
-
-            //var desktopWorkingArea = System.Windows.SystemParameters.WorkArea;
-            //s.Left = desktopWorkingArea.Right - s.Width;
-            //s.Top = desktopWorkingArea.Bottom - s.Height;
-            x.Show();
-            s.Show();
-        }
+        
         private void ExecuteChkPwEquals(object obj)
         {
             MessageBox.Show("ss");

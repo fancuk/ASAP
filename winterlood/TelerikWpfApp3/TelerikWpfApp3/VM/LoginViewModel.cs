@@ -69,7 +69,7 @@ namespace TelerikWpfApp3.VM
             else
             {
                 string parameter = "<LOG>" + this.Uid + "/" + this.Upw;
-                //((App)Application.Current).SendData(parameter);
+                ((App)Application.Current).SendData(parameter);
             }
         }
 

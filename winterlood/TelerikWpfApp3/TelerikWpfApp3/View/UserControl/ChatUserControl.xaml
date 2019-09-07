@@ -16,6 +16,31 @@
         <StackPanel Orientation="Horizontal">
             <Border BorderThickness="0,0,1,0" BorderBrush="#FFDCD8D8">
                 <StackPanel Width="212" Margin="0">
+                    <StackPanel>
+                        <Border>
+                            <StackPanel HorizontalAlignment="Center">
+                                <TextBlock Text="친구 추가">
+
+                                </TextBlock>
+                            </StackPanel>
+                        </Border>
+                        <Border>
+                            <StackPanel>
+                                <TextBox Height="37.16" Text="{Binding searchName}">
+
+                                </TextBox>
+                            </StackPanel>
+
+                        </Border>
+                        <Border>
+                            <StackPanel>
+                                <Button Height="32.8"  Content="추가">
+
+                                </Button>
+                            </StackPanel>
+                        </Border>
+
+                    </StackPanel>
                     <ListBox BorderThickness="0,0,0,0" x:Name="ClientList" Height="522" ItemsSource="{Binding}"   IsSynchronizedWithCurrentItem="True" BorderBrush="{x:Null}" IsEnabled="False">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
@@ -42,7 +67,7 @@
             </Border>
             <Border>
                 <StackPanel Width="708">
-                    <ListBox BorderThickness="0,0,0,0" x:Name="ChatBox" Height="522" ItemsSource="{Binding}"   IsSynchronizedWithCurrentItem="True" BorderBrush="{x:Null}" IsEnabled="False">
+                    <ListBox    BorderThickness="0,0,0,0" x:Name="ChatBox" Height="522" ItemsSource="{Binding}"   IsSynchronizedWithCurrentItem="True" BorderBrush="{x:Null}" >
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Width="690" HorizontalAlignment="Left" >
@@ -98,7 +123,7 @@
                                                     </TextBlock>
                                             </StackPanel>
                                         </Border>
-                                     
+
                                     </StackPanel>
                                 </StackPanel>
                             </Border>

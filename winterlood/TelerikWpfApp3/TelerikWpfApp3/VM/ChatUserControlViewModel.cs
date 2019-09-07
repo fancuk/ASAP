@@ -13,79 +13,30 @@ using System.Collections.ObjectModel;
 
 namespace TelerikWpfApp3.VM
 {
-    class ChatUserControlViewModel:INotifyPropertyChanged
+    class ChatUserControlViewModel : INotifyPropertyChanged
     {
-        MainSock mainSock = null;
-        private string _serverStatus;
-        private string _msgTextBox;
-        private bool nowListen = false;
-        public string msgTextBox
-        {
-            get
-            {
-                return this._msgTextBox;
-            }
-            set
-            {
-                this._msgTextBox = value;
-                OnPropertyChanged(msgTextBox);
-            }
-        }
-        public string serverStatus
-        {
-            get
-            {
-                return this._serverStatus;
-            }
-            set
-            {
-                this._serverStatus = value;
-
-                OnPropertyChanged("serverStatus");
-            }
-        }
+        private string searchname;
         
-        object cl = ((App)Application.Current).getChat();
-
-        public ICommand serverRun { get; set; }
-        public ICommand SendText { get; set; }
-
+        public string searchName
+        {
+            get { return searchname; }
+            set
+            {
+                searchname = value;
+                OnPropertyChanged("searchname");
+            }
+        }
+        public ICommand friendPlus { get; set; }
         public ChatUserControlViewModel()
         {
-            serverRun = new Command(ExecuteServerRun, CanExecuteMethod);
-            SendText = new Command(ExeceuteSendMsg, CanExecuteMethod);
-
+            //friendPlus = new Command();
         }
 
-        private void ExecuteConnectServer(object obj)
+        public void fpButton(object org)
         {
-            
+            //string 
         }
 
-        private void ExecuteServerRun(object obj)
-        {
-            if (this.nowListen == true)
-            {
-                MessageBox.Show("Server is Already Run!!");
-                return;
-            }
-            else
-            {
-                mainSock = new MainSock();
-                mainSock.mSock = mainSock.makeSock();
-                mainSock.bindSock(mainSock.mSock);
-                mainSock.RunServer(mainSock.mSock);
-                this.nowListen = true;
-                serverStatus = "now Server is Running";
-               
-            }
-        }
-
-        private void ExeceuteSendMsg(object obj)
-        {
-           ((App)Application.Current).SendData(obj as string);
-            msgTextBox = "";
-        }
         private bool CanExecuteMethod(object arg)
         {
             return true;

@@ -18,7 +18,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TelerikWpfApp3.VM;
-using TelerikWpfApp3.VM.DBControl;
 using TelerikWpfApp3.M;
 
 namespace TelerikWpfApp3.M

@@ -78,7 +78,7 @@ namespace TelerikWpfApp3
         {
             return ClientList;
         }
-        public void AddChat(bool type,string text)
+        public void AddChat(bool type, string text)
         {
             if (type)
             {
@@ -87,7 +87,7 @@ namespace TelerikWpfApp3
             }
             else
             {
-
+                ChatList.Add(new Chatitem(text, "받음", DateTime.Now.ToString(), type));
             }
         }
         public void AddClient(bool type, string user,string status)
@@ -125,10 +125,10 @@ namespace TelerikWpfApp3
             }
         }
 
-        public void SendData(string text, string type)
+        public void SendData(string type, string text)
         {
             if (nowConnect == false) StartSocket();
-            Msock.OnSendData(text,"<LOG>");
+            Msock.OnSendData(type,text);
             
         }
         public void SendData(string text)

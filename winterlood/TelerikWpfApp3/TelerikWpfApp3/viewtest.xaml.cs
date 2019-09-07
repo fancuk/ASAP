@@ -11,7 +11,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-
 namespace TelerikWpfApp3
 {
     /// <summary>
@@ -38,8 +37,9 @@ namespace TelerikWpfApp3
         {
             string Uid = idbox.Text;
             string Upw = pwbox.Password.ToString();
-            string parameter =   Uid + "/" + Upw;
-            ((App)Application.Current).SendData(parameter,"<LOG>");
+            string parameter = Uid + "/" + Upw + "/";
+            ((App)Application.Current).SendData("<LOG>",parameter);
         }
+
     }
 }
