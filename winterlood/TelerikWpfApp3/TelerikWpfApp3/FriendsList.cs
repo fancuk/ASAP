@@ -12,6 +12,6 @@ namespace TelerikWpfApp3
     {
         public List<string> friends = new List<string>();
         string str = Application.Current.Properties["id"].ToString() + "/";
-        //((App) Application.Current).SendData("<FRD>", str);
+        
     }
 }

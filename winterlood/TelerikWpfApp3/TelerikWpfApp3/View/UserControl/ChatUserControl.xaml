@@ -34,8 +34,8 @@
                         </Border>
                         <Border>
                             <StackPanel>
-                                <Button Height="32.8"  Content="추가">
-
+                                <Button Height="32.8"  Content="추가" Command="{Binding friendPlus}">
+                                    
                                 </Button>
                             </StackPanel>
                         </Border>

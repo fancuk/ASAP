@@ -36,7 +36,6 @@ namespace TelerikWpfApp3.VM
         {
             string str = searchName + "/" + Application.Current.Properties["id"].ToString();
             ((App)Application.Current).SendData("<FRR>", str);
-            
         }
 
         private bool CanExecuteMethod(object arg)
