@@ -80,8 +80,8 @@ namespace TelerikWpfApp3
 
         public bool StartConnect()
         {
-           //string address = "127.0.0.1";
-          string address = "203.229.204.23"; // "127.0.0.1" 도 가능
+          string address = "127.0.0.1";
+          // string address = "203.229.204.23"; // "127.0.0.1" 도 가능
             int port = 11000;
              return   BeginConnection(address, port);
         }
@@ -191,13 +191,12 @@ namespace TelerikWpfApp3
                 // 0x01 기준으로 짜른다.
                 // tokens[0] - 보낸 사람 IP
                 // tokens[1] - 보낸 메세지
-                string[] tokens = text.Split('\x01');
-                string ip = tokens[0];
-                string msg = tokens[1];
-                string fchk = msg.Substring(0, 5);
-                if (fchk.Equals("<LOG>"))
+                string[] tokens = text.Split('/');
+                string tag = tokens[0];
+                if (tag.Equals("<LOG>"))
                 {
-                    if (ip.Equals("success"))
+                    string flag = tokens[1];
+                    if (flag.Equals("true"))
                     {
                         MessageBox.Show("Login Sucess! in view");
                         DispatchService.Invoke(() =>
@@ -210,14 +209,7 @@ namespace TelerikWpfApp3
                         MessageBox.Show("Login Failed.....TT");
                     }
                 }
-                else
-                {
-                    DispatchService.Invoke(() =>
-                    {
-                        ((App)Application.Current).AddChat(false,msg);
-                    });
-                    Console.WriteLine("Server Send : {0}", msg);
-                }
+         
                 // 텍스트박스에 추가해준다.
                 // 비동기식으로 작업하기 때문에 폼의 UI 스레드에서 작업을 해줘야 한다.
                 // 따라서 대리자를 통해 처리한다.
@@ -247,7 +239,7 @@ namespace TelerikWpfApp3
             byte[] bDts = null; 
             if (type.Equals("<LOG>"))
             {
-                bDts = Encoding.UTF8.GetBytes(type + '/' +tts);
+                bDts = Encoding.UTF8.GetBytes(type + '/' +tts+'/');
             }
             else if (type.Equals("<REG>"))
             {
@@ -256,7 +248,7 @@ namespace TelerikWpfApp3
             else if (type.Equals("<MSG>"))
             {
                 ((App)Application.Current).AddChat(true,tts);
-              bDts = Encoding.UTF8.GetBytes(UserName + '/' + tts);
+              bDts = Encoding.UTF8.GetBytes(UserName + '/' + tts+'/');
             }
 
             mSock.Send(bDts);
