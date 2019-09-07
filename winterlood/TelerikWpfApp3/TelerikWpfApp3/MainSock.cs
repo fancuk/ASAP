@@ -18,12 +18,14 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TelerikWpfApp3.M;
 using System.Windows.Threading;
+using DBCmember;
+using DBConn;
 
 namespace TelerikWpfApp3
 {
     class MainSock
     {
-        public  Socket mSock = null;
+        public Socket mSock = null;
         public bool nowListen = false;
         public List<Socket> connectedClients = new List<Socket>();
         private string userName;
@@ -63,7 +65,7 @@ namespace TelerikWpfApp3
 
         public MainSock()
         {
-         
+
         }
 
         public Socket makeSock()
@@ -80,10 +82,10 @@ namespace TelerikWpfApp3
 
         public bool StartConnect()
         {
-          string address = "127.0.0.1";
-          // string address = "203.229.204.23"; // "127.0.0.1" 도 가능
+            //string address = "127.0.0.1";
+            string address = "203.229.204.23"; // "127.0.0.1" 도 가능
             int port = 11000;
-             return   BeginConnection(address, port);
+            return BeginConnection(address, port);
         }
 
         public bool BeginConnection(string address, int port)
@@ -101,7 +103,7 @@ namespace TelerikWpfApp3
                 AfterConnection();
                 return true;
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
                 MessageBox.Show("Server Connect Fail!");
                 return false;
@@ -114,14 +116,15 @@ namespace TelerikWpfApp3
             string myip = host.AddressList[0].ToString();
             return myip;
         }
+
         public void AfterConnection()
         {
             AsyncObject ao = new AsyncObject(4096);
             ao.WorkingSocket = mSock;
             string ipad = Get_MyIP();
             byte[] bDts = Encoding.UTF8.GetBytes("<SOF>" + '/' + ipad);
-          ao.WorkingSocket.Send(bDts);
-          ao.WorkingSocket.BeginReceive(ao.Buffer, 0, ao.BufferSize, 0, DataReceived, ao);
+            ao.WorkingSocket.Send(bDts);
+            ao.WorkingSocket.BeginReceive(ao.Buffer, 0, ao.BufferSize, 0, DataReceived, ao);
         }
 
         public void RunServer(Socket sock)
@@ -175,7 +178,7 @@ namespace TelerikWpfApp3
                 MessageBox.Show("Server is now ShutDown!");
                 return;
             }
-                
+
             try
             {
                 //int received = obj.WorkingSocket.EndReceive(ar);
@@ -193,7 +196,7 @@ namespace TelerikWpfApp3
                 // tokens[1] - 보낸 메세지
                 string[] tokens = text.Split('/');
                 string tag = tokens[0];
-                if (tag.Equals("<LOG>"))
+                if (tag.Equals("<LOG>")) // 로그인
                 {
                     string flag = tokens[1];
                     if (flag.Equals("true"))
@@ -209,7 +212,75 @@ namespace TelerikWpfApp3
                         MessageBox.Show("Login Failed.....TT");
                     }
                 }
-         
+                else if (tag.Equals("<REG>")) // 회원가입
+                {
+                    string flag = tokens[1];
+                    if (flag.Equals("true"))
+                    {
+                        Window s = new SuccessMsgBox("회원가입 성공");
+                        DispatchService.Invoke(() =>
+                        {
+                            ((App)Application.Current).StartMainWindow();
+                        });
+                        s.Show();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Register Failed.....TT");
+                        Window x = new FalseMsgBox("Fail!");
+                        x.Show();
+                    }
+                }
+                else if (tag.Equals("<ICF>")) // ID 체크
+                {
+                    string flag = tokens[1];
+                    if (flag.Equals("true"))
+                    {
+                        MessageBox.Show("ID Check Sucess! in view");
+                        DispatchService.Invoke(() =>
+                        {
+                            ((App)Application.Current).StartMainWindow();
+                        });
+                    }
+                    else
+                    {
+                        MessageBox.Show("ID Check Failed.....TT");
+                    }
+                }
+                else if (tag.Equals("<FRR>")) // 친구추가
+                {
+                    if (MessageBoxResult.Yes == //친구 요청 받으면
+                    MessageBox.Show(tokens[1] + tokens[3], "친구 요청", MessageBoxButton.YesNo))
+                    {
+                        OnSendData("<FRA>", tokens[1] + "/" + tokens[2]+ "/Yes/");
+                    }
+                    else
+                    {
+                        OnSendData("<FRA>", tokens[1] + "/" + tokens[2] + "/No/");
+                    }
+                    DispatchService.Invoke(() =>
+                    {
+                        ((App)Application.Current).StartMainWindow();
+                    });
+                }
+                else if (tag.Equals("<FRA>")) // 친구 feedback
+                {
+                    MessageBox.Show(tokens[2] + tokens[3]);
+                    DispatchService.Invoke(() =>
+                    {
+                        ((App)Application.Current).StartMainWindow();
+                    });
+                }
+
+                else if (tag.Equals("<MSG>")) // 메세지
+                {
+                    database sqlite = new database();
+                    sqlite.ChattingCreate(tokens[1], tokens[2], tokens[3], tokens[4]);
+                    DispatchService.Invoke(() =>
+                    {
+                        ((App)Application.Current).StartMainWindow();
+                    });
+                }
                 // 텍스트박스에 추가해준다.
                 // 비동기식으로 작업하기 때문에 폼의 UI 스레드에서 작업을 해줘야 한다.
                 // 따라서 대리자를 통해 처리한다.
@@ -232,27 +303,41 @@ namespace TelerikWpfApp3
         #endregion
 
         #region OnSendData
-      public void OnSendData(string Texts, string type)
+        public void OnSendData(string type, string Texts)
         {
             // 보낼 텍스트
             string tts = Texts.Trim();
-            byte[] bDts = null; 
+
+            byte[] bDts = null;
+
+
             if (type.Equals("<LOG>"))
             {
-                bDts = Encoding.UTF8.GetBytes(type + '/' +tts+'/');
+                bDts = Encoding.UTF8.GetBytes(type + '/' + tts + '/');
             }
             else if (type.Equals("<REG>"))
             {
-
+                bDts = Encoding.UTF8.GetBytes(type + '/' + tts + '/');
+            }
+            else if (type.Equals("<ICF>"))
+            {
+                bDts = Encoding.UTF8.GetBytes(type + '/' + tts + '/');
+            }
+            else if (type.Equals("<FRR>"))
+            {
+                bDts = Encoding.UTF8.GetBytes(type + '/' + tts + '/');
+            }
+            else if (type.Equals("<FRA>"))
+            {
+                bDts = Encoding.UTF8.GetBytes(type + '/' + tts + '/');
             }
             else if (type.Equals("<MSG>"))
             {
-                ((App)Application.Current).AddChat(true,tts);
-              bDts = Encoding.UTF8.GetBytes(UserName + '/' + tts+'/');
+                bDts = Encoding.UTF8.GetBytes(UserName + '/' + tts + '/');
             }
 
             mSock.Send(bDts);
-            MessageBox.Show(tts+"send complete");
+            MessageBox.Show(tts + "send complete");
         }
         #endregion
 
