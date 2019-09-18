@@ -1,0 +1,31 @@
+﻿<Window x:Class="MSGProject_Server.RealMainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MSGProject_Server"
+        mc:Ignorable="d"
+        Title="RealMainWindow" Height="550" Width="350">
+    <Window.DataContext>
+        <local:ViewModel></local:ViewModel>
+    </Window.DataContext>
+    <Grid RenderTransformOrigin="0.504,0.474">
+        <Image x:Name="Puzzle1" Source="C:\Users\sg051\source\repos\MSGProject_Server\MSGProject_Server\Resources\puzzle.png" Margin="96,69,94.333,332.667" RenderTransformOrigin="0.5,0.5">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleX="-1"/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-45.499"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <TextBlock x:Name ="IDBlock" HorizontalAlignment="Left" Margin="36,218,0,0" TextWrapping="Wrap" Text="ID" VerticalAlignment="Top" Height="27" Width="29" FontWeight="Bold" FontSize="20" RenderTransformOrigin="0.402,-0.969"/>
+        <TextBlock x:Name="PWDBlock" HorizontalAlignment="Left" Margin="26,261,0,0" TextWrapping="Wrap" Text="PWD" VerticalAlignment="Top" Height="36" Width="55" FontSize="20" FontWeight="Bold"/>
+        <TextBox x:Name="IDBox" HorizontalAlignment="Left" Height="36" Margin="89,212,0,0" Text="{Binding logId}" TextWrapping="Wrap" VerticalAlignment="Top" Width="199" BorderBrush="Black"/>
+        <TextBox x:Name ="PWDBox" HorizontalAlignment="Left" Margin="90,260,0,0" Text="{Binding logPwd}" TextWrapping="Wrap" VerticalAlignment="Top" Width="197" Height="37" BorderBrush="Black"/>
+        <Button x:Name="Newbutton" Command ="{Binding newPage_open}" Content="회원가입" HorizontalAlignment="Left" Margin="144,458,0,0" VerticalAlignment="Top" Width="66" RenderTransformOrigin="0.187,0.525" Height="19" FontWeight="Bold" Background="{x:Null}" BorderBrush="{x:Null}"/>
+        <Button x:Name="Loginbutton" Command="{Binding loginPage}" Content="로그인" HorizontalAlignment="Left" Margin="136,388,0,0" VerticalAlignment="Top" Width="77" RenderTransformOrigin="0.187,0.525" Height="32" Background="Black" Foreground="White" FontWeight="Bold" FontSize="16"/>
+        <Button x:Name ="Kakaobutton" Content="kakao연동로그인" HorizontalAlignment="Left" Margin="49,322,0,0" VerticalAlignment="Top" Width="253" Height="41" Click="Kakaobutton_Click" />
+    </Grid>
+</Window>
