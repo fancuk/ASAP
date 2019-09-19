@@ -82,8 +82,8 @@
 
                                             </StackPanel>
                                         </Border>
-                                        <StackPanel   x:Name="wp">
-                                            <TextBlock Text="{Binding Ename }" />
+                                        <StackPanel MouseLeftButtonDown="Wp_MouseLeftButtonDown" x:Name="wp">
+                                            <TextBlock x:Name="hoh" Text="{Binding Ename }" />
                                             <Border x:Name="chatBack" CornerRadius="0" Margin="0,3" >
                                                 <TextBlock Text="{Binding Job }" TextWrapping="Wrap" Grid.Column="1" FontSize="11" Margin="5,3,5,7"/>
                                             </Border>
@@ -101,6 +101,69 @@
                             </ListBox.ItemTemplate>
                         </ListBox>
                     </StackPanel>
+                </StackPanel>
+            </Border>
+            <Border Width="703.2">
+                <StackPanel Width="708">
+                    <TextBlock x:Name="tx"  Text="{Binding tt}"></TextBlock>
+                    <ListBox BorderThickness="0,0,0,0" x:Name="ChatBox" Height="334.8" ItemsSource="{Binding}"   IsSynchronizedWithCurrentItem="True" BorderBrush="{x:Null}" IsEnabled="False">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Width="690" HorizontalAlignment="Left" >
+                                    <StackPanel x:Name="wp">
+                                        <TextBlock Text="{Binding User}" />
+                                        <Border x:Name="chatBack" CornerRadius="10" Margin="0,3" >
+                                            <TextBlock Text="{Binding Text}" TextWrapping="Wrap" Grid.Column="1" FontSize="18" Margin="5,3,5,7"/>
+                                        </Border>
+                                        <TextBlock x:Name="PART_Time" Text="{Binding Time, StringFormat=hh:mm:ss}" FontSize="8"/>
+                                    </StackPanel>
+                                </StackPanel>
+                                <DataTemplate.Triggers>
+                                    <DataTrigger Binding="{Binding Chk}" Value="true">
+                                        <Setter TargetName="chatBack" Property="Background" Value="#FF8CE8E5"/>
+                                        <Setter TargetName="wp" Property="HorizontalAlignment" Value="Right"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Chk}"  Value="false">
+                                        <Setter TargetName="chatBack" Property="Background" Value="#FFE2D9D9"/>
+                                        <Setter TargetName="wp" Property="HorizontalAlignment" Value="left"/>
+                                    </DataTrigger>
+                                </DataTemplate.Triggers>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <Border BorderThickness="0,1,0,0" BorderBrush="#FFCCCCCC" Height="97">
+                        <StackPanel Orientation="Horizontal" Height="80" Margin="0,8,10,8">
+                            <Border BorderBrush="#FFCCCCCC" BorderThickness="1,1,1,1" Width="675" Margin="13,16,0,0" CornerRadius="29" Background="White">
+                                <Border.Effect>
+                                    <DropShadowEffect Color="#FFCCCCCC"/>
+                                </Border.Effect>
+                                <StackPanel Margin="-1,0,0,0" Orientation="Horizontal">
+                                    <TextBox Width="217.2"></TextBox>
+                                    <Border BorderBrush="#FFCCCCCC" BorderThickness="0.8,1,0.5,1"></Border>
+                                    <StackPanel RenderTransformOrigin="0.5,0.5" Width="92" Margin="20,0,0,-3">
+                                        <Border Background="#FF03BCBF" Height="50"  CornerRadius="17" Margin="0,7,0,0">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock>
+                                               <Hyperlink TextDecorations="{x:Null}" Command="{Binding SendText}" CommandParameter="{Binding ElementName=MessageBox, Path=Text}">
+                                                    <StackPanel Orientation="Horizontal">
+                                                <TextBlock x:Name="Msg" Text="Send" Margin="7,12,0,10" Foreground="White" FontSize="22" Width="54" FontFamily="Impact"></TextBlock>
+                                                <Canvas Width="30" Margin="-5,10,5,10" >
+                                                    <Canvas.Background>
+                                                        <ImageBrush ImageSource="./img/2.jpg"/>
+                                                    </Canvas.Background>
+                                                </Canvas>
+                                                        </StackPanel>
+                                                   </Hyperlink>
+                                                    </TextBlock>
+                                            </StackPanel>
+                                        </Border>
+
+                                    </StackPanel>
+                                </StackPanel>
+                            </Border>
+
+                        </StackPanel>
+                    </Border>
                 </StackPanel>
             </Border>
         </StackPanel>

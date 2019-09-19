@@ -53,6 +53,7 @@ namespace test
         }
         private void DataGrid_GotFocus(object sender, RoutedEventArgs e)
         {
+            MessageBox.Show("he");
             // Lookup for the source to be DataGridCell
             if (e.OriginalSource.GetType() == typeof(DataGridCell))
             {
@@ -72,90 +73,98 @@ namespace test
 
             MyCollectionView = (ListCollectionView)CollectionViewSource.GetDefaultView(ClientList.DataContext);
         }
+
+        private void Wp_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            tx.Text = null;
+            string ct = (((sender as StackPanel).FindName("hoh") as TextBlock).Text);
+            tx.Text += ct;
+            MessageBox.Show(ct);
+        }
         /*
 
-        public void defaultCategory()
-        {
+public void defaultCategory()
+{
 
-        }
-        public void OnTreeItemDoubleClick(object sender, EventArgs args)
-        {
-            TreeViewItem tvi = (TreeViewItem)sender;
-        }
-        public void make_defaultView() // - 1
-        {
-            DBConn dbconn = new DBConn();
+}
+public void OnTreeItemDoubleClick(object sender, EventArgs args)
+{
+   TreeViewItem tvi = (TreeViewItem)sender;
+}
+public void make_defaultView() // - 1
+{
+   DBConn dbconn = new DBConn();
 
-            DataTable dt = new DataTable();
-            dt.Clear();
-            dt.Columns.Add("Project", typeof(string));
+   DataTable dt = new DataTable();
+   dt.Clear();
+   dt.Columns.Add("Project", typeof(string));
 
-            try
-            {
-                dbconn.DBOpen();
-                MySqlCommand cmd = new MySqlCommand();
-                cmd.Connection = dbconn.myconn;
-                cmd.CommandText = "SELECT * FROM groupcomponent WHERE Name = @Name ORDER BY TopGroupNumber ASC";
-                cmd.Parameters.Add("@Name", MySqlDbType.VarChar, 50);
-                cmd.Parameters[0].Value = "hjg0629";
-                MySqlDataAdapter adp = new MySqlDataAdapter(cmd);
-                DataSet ds = new DataSet();
+   try
+   {
+       dbconn.DBOpen();
+       MySqlCommand cmd = new MySqlCommand();
+       cmd.Connection = dbconn.myconn;
+       cmd.CommandText = "SELECT * FROM groupcomponent WHERE Name = @Name ORDER BY TopGroupNumber ASC";
+       cmd.Parameters.Add("@Name", MySqlDbType.VarChar, 50);
+       cmd.Parameters[0].Value = "hjg0629";
+       MySqlDataAdapter adp = new MySqlDataAdapter(cmd);
+       DataSet ds = new DataSet();
 
-                adp.Fill(ds);
+       adp.Fill(ds);
 
-                foreach (DataRow TableComponent in ds.Tables[0].Rows)
-                {
-                    DataRow dr = dt.NewRow();
-                    MessageBox.Show((string)TableComponent["TopGroupName"]);
-                    dr["Project"] = (string)TableComponent["TopGroupName"];
-                    dt.Rows.Add(dr);
-                    ClientList.ItemsSource = dt.DefaultView;
-                }
+       foreach (DataRow TableComponent in ds.Tables[0].Rows)
+       {
+           DataRow dr = dt.NewRow();
+           MessageBox.Show((string)TableComponent["TopGroupName"]);
+           dr["Project"] = (string)TableComponent["TopGroupName"];
+           dt.Rows.Add(dr);
+           ClientList.ItemsSource = dt.DefaultView;
+       }
 
-            }
-            catch (MySqlException MSE)
-            {
-                MessageBox.Show(MSE.ToString());
-            }
-            finally
-            {
-                dbconn.myconn.Close();
-            }
-        }
+   }
+   catch (MySqlException MSE)
+   {
+       MessageBox.Show(MSE.ToString());
+   }
+   finally
+   {
+       dbconn.myconn.Close();
+   }
+}
 
-        public void make_obj() // 2
-        {
-            Myobj dr = new Myobj();
-            dr.Frist = "A";
+public void make_obj() // 2
+{
+   Myobj dr = new Myobj();
+   dr.Frist = "A";
 
-            ClientList.Items.Add(dr);
-        }
+   ClientList.Items.Add(dr);
+}
 
-        public class Myobj // 2-2
-        {
-            public string Frist { get; set; }
-        }
-        private void DataGrid_GotFocus(object sender, RoutedEventArgs e)
-        {
-            // Lookup for the source to be DataGridCell
-            if (e.OriginalSource.GetType() == typeof(DataGridCell))
-            {
-                TreeViewItem t = null;
-                MessageBox.Show(e.OriginalSource.ToString());
-                string[] result = e.OriginalSource.ToString().Split(new char[] { ' ' });
-                MessageBox.Show(result[0].ToString());
-                MessageBox.Show(result[1].ToString());
-                clickGroup(result[1], t);
+public class Myobj // 2-2
+{
+   public string Frist { get; set; }
+}
+private void DataGrid_GotFocus(object sender, RoutedEventArgs e)
+{
+   // Lookup for the source to be DataGridCell
+   if (e.OriginalSource.GetType() == typeof(DataGridCell))
+   {
+       TreeViewItem t = null;
+       MessageBox.Show(e.OriginalSource.ToString());
+       string[] result = e.OriginalSource.ToString().Split(new char[] { ' ' });
+       MessageBox.Show(result[0].ToString());
+       MessageBox.Show(result[1].ToString());
+       clickGroup(result[1], t);
 
-                // Starts the Edit on the row;
+       // Starts the Edit on the row;
 
-            }
-        }
-        public void clickGroup(string Group, TreeViewItem TVI)
-        {
-            
-            
-        }
-        */
+   }
+}
+public void clickGroup(string Group, TreeViewItem TVI)
+{
+
+
+}
+*/
     }
 }
