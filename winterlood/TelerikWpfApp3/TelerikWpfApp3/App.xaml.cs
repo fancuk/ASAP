@@ -46,7 +46,16 @@ namespace TelerikWpfApp3
             public string Time { get => time; set => time = value; }
             public bool Chk { get => chk; set => chk = value; }
         }
+        public string myID;
 
+        public string getmyID()
+        {
+            return myID;
+        }
+        public void setmyID(string myid)
+        {
+            myID = myid;
+        }
         public class ClientItem
         {
             private string user;

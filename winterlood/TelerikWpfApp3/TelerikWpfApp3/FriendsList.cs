@@ -12,6 +12,9 @@ namespace TelerikWpfApp3
     {
         public List<string> friends = new List<string>();
         string str = Application.Current.Properties["id"].ToString() + "/";
-        
+        public static void StartMainWindow()
+        {
+            ((App)Application.Current).StartMainWindow();
+        }
     }
 }

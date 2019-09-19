@@ -34,8 +34,9 @@ namespace TelerikWpfApp3.VM
 
         public void fpButton(object org)
         {
-            string str = searchName + "/" + Application.Current.Properties["id"].ToString();
-            ((App)Application.Current).SendData("<FRR>", str);
+            string str = searchName + "/";
+            string member = ((App)Application.Current).getmyID();
+            ((App)Application.Current).SendData("<FRR>", str + member);
         }
 
         private bool CanExecuteMethod(object arg)

@@ -202,7 +202,6 @@ namespace TelerikWpfApp3
                     if (flag.Equals("true"))
                     {
                         MessageBox.Show("Login Sucess! in view");
-                        Application.Current.Properties["id"] = tokens[2];
                         DispatchService.Invoke(() =>
                         {
                             ((App)Application.Current).StartMainWindow();
@@ -321,23 +320,24 @@ namespace TelerikWpfApp3
             string tts = Texts.Trim();
 
             byte[] bDts = null;
+            string str = type + '/' + tts + '/';
 
 
             if (type.Equals("<LOG>"))
             {
-                bDts = Encoding.UTF8.GetBytes(type + '/' + tts + '/');
+                bDts = Encoding.UTF8.GetBytes(str);
             }
             else if (type.Equals("<REG>"))
             {
-                bDts = Encoding.UTF8.GetBytes(type + '/' + tts + '/');
+                bDts = Encoding.UTF8.GetBytes(str);
             }
             else if (type.Equals("<ICF>"))
             {
-                bDts = Encoding.UTF8.GetBytes(type + '/' + tts + '/');
+                bDts = Encoding.UTF8.GetBytes(str);
             }
             else if (type.Equals("<FRR>"))
             {
-                bDts = Encoding.UTF8.GetBytes(type + '/' + tts + '/');
+                bDts = Encoding.UTF8.GetBytes(str);
             }
             /*else if (type.Equals("<FRA>"))
             {
@@ -345,7 +345,7 @@ namespace TelerikWpfApp3
             }*/
             else if (type.Equals("<MSG>"))
             {
-                bDts = Encoding.UTF8.GetBytes(UserName + '/' + tts + '/');
+                //bDts = Encoding.UTF8.GetBytes(UserName + '/' + tts + '/');
             }
 
             mSock.Send(bDts);
