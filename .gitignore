@@ -533,3 +533,21 @@ $RECYCLE.BIN/
 # BeatPulse healthcheck temp database
 
 # Backup folder for Package Reference Convert tool in Visual Studio 2017
+*.baml
+winterlood/TelerikWpfApp3/TelerikWpfApp3/obj/x86/Debug/login.baml
+winterlood/TelerikWpfApp3/TelerikWpfApp3/obj/x86/Debug/App.baml
+winterlood/TelerikWpfApp3/TelerikWpfApp3/obj/x86/Debug/FalseMsgBox.baml
+winterlood/TelerikWpfApp3/TelerikWpfApp3/obj/x86/Debug/login.baml
+winterlood/TelerikWpfApp3/TelerikWpfApp3/obj/x86/Debug/MainWindow.baml
+winterlood/TelerikWpfApp3/TelerikWpfApp3/obj/x86/Debug/Register.baml
+winterlood/TelerikWpfApp3/TelerikWpfApp3/obj/x86/Debug/StartWindow.baml
+winterlood/TelerikWpfApp3/TelerikWpfApp3/obj/x86/Debug/SuccessMsgBox.baml
+winterlood/TelerikWpfApp3/TelerikWpfApp3/obj/x86/Debug/TelerikWpfApp3.csproj.CoreCompileInputs.cache
+winterlood/TelerikWpfApp3/TelerikWpfApp3/obj/x86/Debug/TelerikWpfApp3.csprojAssemblyReference.cache
+winterlood/TelerikWpfApp3/TelerikWpfApp3/obj/x86/Debug/TelerikWpfApp3_MarkupCompile.cache
+winterlood/TelerikWpfApp3/TelerikWpfApp3/obj/x86/Debug/TelerikWpfApp3_MarkupCompile.lref
+winterlood/TelerikWpfApp3/TelerikWpfApp3/obj/x86/Debug/testpage1.baml
+winterlood/TelerikWpfApp3/TelerikWpfApp3/obj/x86/Debug/View/UserControl/ChatUserControl.baml
+winterlood/TelerikWpfApp3/TelerikWpfApp3/obj/x86/Debug/View/UserControl/UserControl1.baml
+winterlood/TelerikWpfApp3/TelerikWpfApp3/obj/x86/Debug/View/UserControl/UserControl2.baml
+winterlood/TelerikWpfApp3/TelerikWpfApp3/obj/x86/Debug/viewtest.baml
