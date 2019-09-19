@@ -73,6 +73,17 @@ namespace TelerikWpfApp3
             mSock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.IP);
             return mSock;
         }
+        
+        public void closeSock()
+        {
+            mSock.Close();
+            viewtest();
+        }
+        public void viewtest()
+        {
+            Window m = new viewtest();
+            m.Show();
+        }
         public Socket bindSock(Socket sock)
         {
             IPEndPoint serverEP = new IPEndPoint(IPAddress.Any, 11000);
@@ -201,7 +212,6 @@ namespace TelerikWpfApp3
                     string flag = tokens[1];
                     if (flag.Equals("true"))
                     {
-                        MessageBox.Show("Login Sucess! in view");
                         DispatchService.Invoke(() =>
                         {
                             ((App)Application.Current).StartMainWindow();
@@ -210,6 +220,7 @@ namespace TelerikWpfApp3
                     else
                     {
                         MessageBox.Show("Login Failed.....TT");
+                        ((App)Application.Current).CloseSocket();
                     }
                 }
                 else if (tag.Equals("<REG>")) // 회원가입
@@ -221,6 +232,7 @@ namespace TelerikWpfApp3
                         DispatchService.Invoke(() =>
                         {
                             ((App)Application.Current).StartMainWindow();
+
                         });
                         s.Show();
                     }
@@ -228,8 +240,12 @@ namespace TelerikWpfApp3
                     {
                         MessageBox.Show("Register Failed.....TT");
                         Window x = new FalseMsgBox("Fail!");
-                        x.Show();
+                        DispatchService.Invoke(() => //너무 많은 UI 어쩌구저쩌구 SPA? STA 나와서 invoke 처리 2019-09-19 다민
+                        {
+                            x.Show();
+                        });
                     }
+                    ((App)Application.Current).CloseSocket();
                 }
                 else if (tag.Equals("<ICF>")) // ID 체크
                 {
@@ -292,6 +308,10 @@ namespace TelerikWpfApp3
                         ((App)Application.Current).StartMainWindow();
                     });
                 }
+                else if (tag.Equals("<FIN>"))
+                {
+                    closeSock();
+                }
                 // 텍스트박스에 추가해준다.
                 // 비동기식으로 작업하기 때문에 폼의 UI 스레드에서 작업을 해줘야 한다.
                 // 따라서 대리자를 통해 처리한다.
@@ -322,32 +342,7 @@ namespace TelerikWpfApp3
             byte[] bDts = null;
             string str = type + '/' + tts + '/';
 
-
-            if (type.Equals("<LOG>"))
-            {
-                bDts = Encoding.UTF8.GetBytes(str);
-            }
-            else if (type.Equals("<REG>"))
-            {
-                bDts = Encoding.UTF8.GetBytes(str);
-            }
-            else if (type.Equals("<ICF>"))
-            {
-                bDts = Encoding.UTF8.GetBytes(str);
-            }
-            else if (type.Equals("<FRR>"))
-            {
-                bDts = Encoding.UTF8.GetBytes(str);
-            }
-            /*else if (type.Equals("<FRA>"))
-            {
-                bDts = Encoding.UTF8.GetBytes(type + '/' + tts + '/');
-            }*/
-            else if (type.Equals("<MSG>"))
-            {
-                //bDts = Encoding.UTF8.GetBytes(UserName + '/' + tts + '/');
-            }
-
+            bDts = Encoding.UTF8.GetBytes(str);
             mSock.Send(bDts);
             MessageBox.Show(tts + "send complete");
         }

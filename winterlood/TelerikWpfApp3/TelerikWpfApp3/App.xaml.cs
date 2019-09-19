@@ -19,13 +19,19 @@ namespace TelerikWpfApp3
         public App()
         {
             this.InitializeComponent();
-            MessageBox.Show("DD");
             ChatList.Add(new Chatitem("안녕하세요 server입니다 병신아.", "server", "19:20:22", false));
             ChatList.Add(new Chatitem("안녕하세요 Client 입니다 병신아.", "Client", "19:20:22", true));
             ClientList.Add(new ClientItem("SERVER", "SERVER입니다 반갑습니다.", true));
             ClientList.Add(new ClientItem("ME", "나 자신임", false));
-
-            StartSocket();
+        }
+        protected override void OnExit(ExitEventArgs e)
+        {
+            if (nowConnect == true)
+            {
+                CloseSocket();
+            }
+            MessageBox.Show("AA");
+            base.OnExit(e);
         }
         public class Chatitem
         {
@@ -116,7 +122,12 @@ namespace TelerikWpfApp3
         public  bool nowConnect = false;
         public string nowConnectStatus = "false";
 
-
+        public void CloseSocket()
+        {
+            nowConnect = false;
+            SendData("<FIN>/", "close/");
+            Msock.closeSock();
+        }
         public void StartSocket()
         {
             if (nowConnect == true) return;
@@ -138,12 +149,11 @@ namespace TelerikWpfApp3
         {
             if (nowConnect == false) StartSocket();
             Msock.OnSendData(type,text);
-            
         }
         public void SendData(string text)
         {
             if (nowConnect == false) StartSocket();
-            Msock.OnSendData(text, "<MSG>");
+            Msock.OnSendData("<MSG>", text);
         }
         public  void StartMainWindow()
         {

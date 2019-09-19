@@ -98,9 +98,9 @@ namespace TelerikWpfApp3
         {
             string id = idbox1.Text;
             string pw1 = pwbox.Password.ToString();
-            string pw2 = pwbox2.Password.ToString();
             string email = emailBox.Text;
             string parameter = id + "/" + pw1 + "/" + email + "/";
+            ((App)Application.Current).StartSocket();
             ((App)Application.Current).SendData("<REG>", parameter);
         }
     }
