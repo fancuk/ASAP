@@ -29,5 +29,17 @@ namespace TelerikWpfApp3.View.UserControl
             ChatBox.DataContext = a;
             ClientList.DataContext = b;
         }
+
+        private void ChatBox_TextInput(object sender, TextCompositionEventArgs e)
+        {
+            ChatBox.UpdateLayout();
+            ChatBox.ScrollIntoView(ChatBox.Items[ChatBox.Items.Count - 1]);
+        }
+
+        private void ChatBox_TargetUpdated(object sender, DataTransferEventArgs e)
+        {
+            ChatBox.UpdateLayout();
+            ChatBox.ScrollIntoView(ChatBox.Items[ChatBox.Items.Count - 1]);
+        }
     }
 }

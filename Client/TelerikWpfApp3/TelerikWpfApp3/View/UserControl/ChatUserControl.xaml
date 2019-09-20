@@ -67,16 +67,15 @@
             </Border>
             <Border>
                 <StackPanel Width="708">
-                    <ListBox BorderThickness="0,0,0,0" x:Name="ChatBox" Height="522" 
-                                IsHitTestVisible="False" ItemsSource="{Binding}"   IsSynchronizedWithCurrentItem="False" BorderBrush="{x:Null}" >
-                       
+                    <ListBox BorderThickness="0,0,0,0" x:Name="ChatBox" Height="522" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                            VM:ListBoxBehavior.ScrollOnNewItem="True" IsHitTestVisible="False" ItemsSource="{Binding}"   IsSynchronizedWithCurrentItem="False" BorderBrush="{x:Null}" >
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Width="690" HorizontalAlignment="Left" >
                                     <StackPanel   x:Name="wp">
                                         <TextBlock Text="{Binding User}" />
                                         <Border x:Name="chatBack" CornerRadius="10" Margin="0,3" >
-                                            <TextBlock Text="{Binding Text}" TextWrapping="Wrap" Grid.Column="1" FontSize="18" Margin="5,3,5,7"/>
+                                            <TextBlock Text="{Binding Text}" TextWrapping="Wrap" FontSize="18" Margin="5,3,5,7"/>
                                         </Border>
                                         <TextBlock x:Name="PART_Time" Text="{Binding Time, StringFormat=hh:mm:ss}" FontSize="8"/>
                                     </StackPanel>
@@ -85,6 +84,7 @@
                                     <DataTrigger Binding="{Binding Chk}" Value="true">
                                         <Setter TargetName="chatBack" Property="Background" Value="#FF8CE8E5"/>
                                         <Setter TargetName="wp" Property="HorizontalAlignment" Value="Right"/>
+                                        <Setter TargetName="wp" Property="Margin" Value="0,0,15,0"/>
                                     </DataTrigger>
                                     <DataTrigger Binding="{Binding Chk}"  Value="false">
                                         <Setter TargetName="chatBack" Property="Background" Value="#FFE2D9D9"/>
