@@ -171,15 +171,15 @@ namespace TelerikWpfApp3
 
         public void ShowLoginView()
         {
-            Window s = Application.Current.MainWindow;
+            Window s = TelerikWpfApp3.StartWindow.Instance;
             Window n = new viewtest();
             n.Show();
             s.Close();
         }
-        public  void StartMainWindow()
+        public void StartMainWindow()
         {
             Window s = Application.Current.MainWindow;
-            Window m = new StartWindow();
+            Window m = TelerikWpfApp3.StartWindow.Instance;
             m.Show();
             s.Close();
 

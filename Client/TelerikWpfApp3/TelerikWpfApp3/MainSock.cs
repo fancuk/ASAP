@@ -93,8 +93,8 @@ namespace TelerikWpfApp3
 
         public bool StartConnect()
         {
-            //string address = "127.0.0.1";
-            string address = "203.229.204.23"; // "127.0.0.1" 도 가능
+            string address = "127.0.0.1";
+            //string address = "203.229.204.23"; // "127.0.0.1" 도 가능
             int port = 11000;
             return BeginConnection(address, port);
         }
@@ -333,7 +333,11 @@ namespace TelerikWpfApp3
             }
             catch (Exception e)
             {
-                ((App)Application.Current).ShowLoginView();
+                DispatchService.Invoke(() =>
+                {
+                    ((App)Application.Current).ShowLoginView();
+                });
+                closeSock();
                 MessageBox.Show("서버와의 연결 오류!");
                 return;
             }

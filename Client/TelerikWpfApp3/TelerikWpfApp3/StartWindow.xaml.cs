@@ -19,7 +19,19 @@ namespace TelerikWpfApp3
     /// </summary>
     public partial class StartWindow : Window
     {
-        public StartWindow()
+        private static StartWindow instance = null;
+        public static StartWindow Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new StartWindow();
+                }
+                return instance;
+            }
+        }
+        private StartWindow()
         {
             InitializeComponent();
         }

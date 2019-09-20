@@ -141,6 +141,7 @@
     <Compile Include="VM\ChatUserControlViewModel.cs" />
     <Compile Include="VM\DBControl\DBCmember.cs" />
     <Compile Include="VM\DBControl\DBConn.cs" />
+    <Compile Include="VM\ListBoxBehavior.cs" />
     <Compile Include="VM\LoginViewModel.cs" />
     <Compile Include="VM\RegisterViewModel.cs" />
     <Compile Include="VM\StartWindowViewModel.cs" />
