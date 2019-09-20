@@ -26,7 +26,6 @@ namespace TelerikWpfApp3.View.UserControl
         {
             InitializeComponent(); 
             object b = ((App)Application.Current).getClient();
-            ChatBox.DataContext = a;
             ClientList.DataContext = b;
             GetMessageById2();
         }
@@ -40,6 +39,11 @@ namespace TelerikWpfApp3.View.UserControl
             string target = "12";
             // string target  = (((sender as StackPanel).FindName("TargetBox") as TextBlock).Text);
             a = ((App)Application.Current).getChat(target);
+            ChatBox.DataContext = a;
+
+            target = "12";
+
+
         }
         private void ChatBox_TextInput(object sender, TextCompositionEventArgs e)
         {
