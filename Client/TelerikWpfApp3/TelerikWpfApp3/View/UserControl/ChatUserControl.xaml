@@ -41,11 +41,11 @@
                         </Border>
 
                     </StackPanel>
-                    <ListBox BorderThickness="0,0,0,0" x:Name="ClientList" Height="522" ItemsSource="{Binding}"   IsSynchronizedWithCurrentItem="True" BorderBrush="{x:Null}" IsEnabled="False">
+                    <ListBox BorderThickness="0,0,0,0" x:Name="ClientList" Height="522" ItemsSource="{Binding}"   IsSynchronizedWithCurrentItem="False" BorderBrush="{x:Null}" IsEnabled="False">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Width="210" HorizontalAlignment="Left" >
-                                    <StackPanel   x:Name="wp">
+                                    <StackPanel MouseLeftButtonDown="FriendListClick" x:Name="wp">
                                         <TextBlock Text="{Binding Status}" />
                                         <Border x:Name="chatBack" CornerRadius="0" Margin="0,3" >
                                             <TextBlock Text="{Binding User}" TextWrapping="Wrap" Grid.Column="1" FontSize="11" Margin="5,3,5,7"/>
@@ -68,7 +68,8 @@
             <Border>
                 <StackPanel Width="708">
                     <ListBox BorderThickness="0,0,0,0" x:Name="ChatBox" Height="522" 
-                                IsHitTestVisible="False" ItemsSource="{Binding}"   IsSynchronizedWithCurrentItem="True" BorderBrush="{x:Null}" >
+                                IsHitTestVisible="False" ItemsSource="{Binding}"   IsSynchronizedWithCurrentItem="False" BorderBrush="{x:Null}" >
+                       
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Width="690" HorizontalAlignment="Left" >
