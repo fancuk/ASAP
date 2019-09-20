@@ -148,7 +148,7 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                                     <Border 
                                         BorderThickness="0,0,0,0" BorderBrush="#FFA8AFAD" HorizontalAlignment="Left" Margin="48,5,17,0">
                                         <StackPanel 
-                                            HorizontalAlignment="Center" Width="270" Orientation="Horizontal" >
+                                            HorizontalAlignment="Center" Width="416" Orientation="Horizontal" >
                                             <i:Interaction.Triggers>
                                                 <i:EventTrigger EventName="OnMouseDown" >
                                                     <i:InvokeCommandAction Command="{Binding textChange}" />
@@ -178,7 +178,7 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                                                             <DataTrigger Binding="{Binding nameChk}"  Value="X" >
                                                                 <Setter Property="Foreground" Value="Red"/>
                                                                 <Setter Property="Text" Value="X"></Setter>
-                                                             </DataTrigger>
+                                                            </DataTrigger>
                                                             <DataTrigger Binding="{Binding nameChk}" Value="V">
                                                                 <Setter Property="Foreground" Value="Green"></Setter>
                                                                 <Setter Property="Text" Value="V"></Setter>
@@ -187,6 +187,15 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                                                     </Style>
                                                 </TextBlock.Style>
                                             </TextBlock>
+                                            <StackPanel>
+                                                <Border>
+                                                    <StackPanel>
+                                                        <Button x:Name="IdDoubleCheck" Background="#FF00C4BF"  Click="IdDoubleCheck_Click"
+                                                        BorderThickness="0" Content="중복확인" Foreground="White" RenderTransformOrigin="0.482,-0.359" 
+                                                        HorizontalAlignment="Left" VerticalAlignment="Center" Width="70" Height="30" Margin="10,0,0,0" />
+                                                    </StackPanel>
+                                                </Border>
+                                            </StackPanel>
                                         </StackPanel>
                                     </Border>
                                 </StackPanel>
