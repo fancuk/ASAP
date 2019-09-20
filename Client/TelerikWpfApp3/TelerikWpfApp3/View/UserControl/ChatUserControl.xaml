@@ -45,7 +45,7 @@
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Width="210" HorizontalAlignment="Left" >
-                                    <StackPanel MouseLeftButtonDown="FriendListClick" x:Name="wp">
+                                    <StackPanel x:Name="wp">
                                         <TextBlock Text="{Binding Status}" />
                                         <Border x:Name="chatBack" CornerRadius="0" Margin="0,3" >
                                             <TextBlock Text="{Binding User}" TextWrapping="Wrap" Grid.Column="1" FontSize="11" Margin="5,3,5,7"/>

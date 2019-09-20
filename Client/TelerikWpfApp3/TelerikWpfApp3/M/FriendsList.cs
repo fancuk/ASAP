@@ -11,7 +11,7 @@ namespace TelerikWpfApp3
 {
     class FriendsList: INotifyPropertyChanged
     {
-        private ObservableCollection<string> friends = new ObservableCollection<string>< ();
+        private ObservableCollection<string> friends = new ObservableCollection<string>();
         public FriendsList()
         {
 
