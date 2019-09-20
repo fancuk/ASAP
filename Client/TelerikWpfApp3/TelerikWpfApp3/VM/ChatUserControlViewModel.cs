@@ -65,6 +65,7 @@ namespace TelerikWpfApp3.VM
             string str = searchName + "/";
             string member = ((App)Application.Current).getmyID();
             ((App)Application.Current).SendData("<FRR>", str + member);
+            ((App)Application.Current).setfriends(searchname);
         }
 
         public void ExeceuteSendMsg(object org)

@@ -121,7 +121,12 @@ namespace TelerikWpfApp3
         MainSock Msock = new MainSock();
         public  bool nowConnect = false;
         public string nowConnectStatus = "false";
-
+        FriendsList friends = new FriendsList();
+        
+        public void setfriends(string friendId)
+        {
+            friends.setFriends(friendId);
+        }
         public void CloseSocket()
         {
             SendData("<FIN>", "close");

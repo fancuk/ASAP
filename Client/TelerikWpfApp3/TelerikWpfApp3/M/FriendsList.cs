@@ -11,12 +11,12 @@ namespace TelerikWpfApp3
 {
     class FriendsList: INotifyPropertyChanged
     {
-        private List<string> friends = new List<string>();
+        private ObservableCollection<string> friends = new ObservableCollection<string>< ();
         public FriendsList()
         {
 
         }
-        public List<string> getFriends()
+        public ObservableCollection<string> getFriends()
         {
             return friends;
         }

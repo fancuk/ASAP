@@ -317,8 +317,7 @@ namespace TelerikWpfApp3
                 }
                 else if (tag.Equals("<FLD>"))
                 {
-                    FriendsList friend = new FriendsList();
-                    friend.setFriends(tokens[1]);
+                    ((App)Application.Current).setfriends(tokens[1]);
                 }
                 // 텍스트박스에 추가해준다.
                 // 비동기식으로 작업하기 때문에 폼의 UI 스레드에서 작업을 해줘야 한다.
