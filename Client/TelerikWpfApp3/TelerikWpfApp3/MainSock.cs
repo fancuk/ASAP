@@ -327,10 +327,14 @@ namespace TelerikWpfApp3
                 //^^^^^^^^
                 // 클라이언트에선 데이터를 전달해줄 필요가 없으므로 바로 수신 대기한다.
                 // 데이터를 받은 후엔 다시 버퍼를 비워주고 같은 방법으로 수신을 대기한다.
-                obj.ClearBuffer();
+                if (((App)Application.Current).nowConnect == true) //예외 처리 obj beginreceive
+                {
+                    obj.ClearBuffer();
 
-                // 수신 대기
-                obj.WorkingSocket.BeginReceive(obj.Buffer, 0, 4096, 0, DataReceived, obj);
+                    // 수신 대기
+                    obj.WorkingSocket.BeginReceive(obj.Buffer, 0, 4096, 0, DataReceived, obj);
+                }
+            }
             }
             catch (Exception e)
             {
