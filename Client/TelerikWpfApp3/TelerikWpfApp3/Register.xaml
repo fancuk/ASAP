@@ -190,7 +190,7 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                                             <StackPanel>
                                                 <Border>
                                                     <StackPanel>
-                                                        <Button x:Name="IdDoubleCheck" Background="#FF00C4BF"  Click="IdDoubleCheck_Click"
+                                                        <Button x:Name="IdDoubleCheck" Background="#FF00C4BF"  Click="IDcheck_Click"
                                                         BorderThickness="0" Content="중복확인" Foreground="White" RenderTransformOrigin="0.482,-0.359" 
                                                         HorizontalAlignment="Left" VerticalAlignment="Center" Width="70" Height="30" Margin="10,0,0,0" />
                                                     </StackPanel>

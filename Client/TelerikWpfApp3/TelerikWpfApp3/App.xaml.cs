@@ -174,6 +174,7 @@ namespace TelerikWpfApp3
             Window s = Application.Current.MainWindow;
             Window n = new viewtest();
             n.Show();
+            s.Close();
         }
         public  void StartMainWindow()
         {

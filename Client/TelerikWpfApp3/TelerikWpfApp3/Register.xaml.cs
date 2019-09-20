@@ -104,9 +104,11 @@ namespace TelerikWpfApp3
             ((App)Application.Current).SendData("<REG>", parameter);
         }
 
-        private void IdDoubleCheck_Click(object sender, RoutedEventArgs e)
+        private void IDcheck_Click(object sender, RoutedEventArgs e)
         {
             string id = idbox1.Text;
+            ((App)Application.Current).StartSocket();
+            ((App)Application.Current).SendData("<ICF>", id);
         }
     }
 }

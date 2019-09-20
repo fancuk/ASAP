@@ -265,6 +265,7 @@ namespace TelerikWpfApp3
                     {
                         MessageBox.Show("ID Check Failed.....TT");
                     }
+                    ((App)Application.Current).CloseSocket();
                 }
                 else if (tag.Equals("<FRR>"))
                 {
@@ -332,8 +333,8 @@ namespace TelerikWpfApp3
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.ToString());
-                obj.WorkingSocket.Close();
+                ((App)Application.Current).ShowLoginView();
+                MessageBox.Show("서버와의 연결 오류!");
                 return;
             }
         }
