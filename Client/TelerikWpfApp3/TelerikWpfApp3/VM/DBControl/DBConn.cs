@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 using System.Data.SQLite;
 using System.Collections.ObjectModel;
 using TelerikWpfApp3.M;
-namespace DBConn
+using System.Windows;
+
+namespace TelerikWpfApp3.VM.DBControl
 {
     class DAO
     {
@@ -39,10 +41,14 @@ namespace DBConn
             // 채팅 목록을 그냥 그대로 보여주고(계속 read안하고)
             // 그 채팅 삭제하면, oc에서 그 인덱스만 삭제하거나, 전체 삭제 하면 안되나?
             createChattingFile();
+
+            Receiver = "12";
+            Sender = "12";
+
             bool flag = false;
             string query =
-                "INSERT INTO chatting(sender,receiver,time,msg) " +
-                "VALUES('" + Sender + "','" + Receiver + ",'" + Time + ",'" + Msg + "')"; //timestamp,datetime
+                "INSERT INTO Chatting(sender,receiver,time,msg) " +
+                "VALUES('" + Sender + "','" + Receiver + "','" + Time + "','" + Msg + "')"; //timestamp,datetime
 
             SQLiteConnection Conn = new
                 SQLiteConnection("Data Source=Chatting;Version=3");
@@ -67,13 +73,14 @@ namespace DBConn
         #region Read 반환형 ObservableCollection
         public ObservableCollection<Chatitem> ChattingRead(string FriendID) //채팅 목록
         {
+            FriendID = "12";
             createChattingFile();
             ObservableCollection<Chatitem> information =
                 new ObservableCollection<Chatitem>();
             SQLiteConnection Conn = new
                 SQLiteConnection("Data Source=Chatting;Version=3");
-            string query = "Select * From Chatting Where sender='" + FriendID + "'Order" +
-                "By time ASC"; //시간 표시
+            string query = "select * from Chatting where receiver='" + FriendID + "' order " +
+                "by time asc"; //시간 표시
             try
             {
                 Conn.Open();
@@ -96,6 +103,7 @@ namespace DBConn
             catch (Exception e)
             {
                 //추가
+                MessageBox.Show(e.ToString());
             }
             finally
             {

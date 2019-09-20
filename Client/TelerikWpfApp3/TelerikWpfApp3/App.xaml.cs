@@ -1,4 +1,4 @@
-﻿using DBConn;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -9,6 +9,8 @@ using System.Linq;
 using System.Net.Sockets;
 using System.Windows;
 using TelerikWpfApp3.M;
+using TelerikWpfApp3.VM.DBControl;
+
 
 namespace TelerikWpfApp3
 {

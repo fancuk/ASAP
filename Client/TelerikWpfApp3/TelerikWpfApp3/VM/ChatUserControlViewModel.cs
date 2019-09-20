@@ -10,11 +10,13 @@ using TelerikWpfApp3.M;
 using TelerikWpfApp3;
 using System.Windows.Documents;
 using System.Collections.ObjectModel;
+using TelerikWpfApp3.VM.DBControl;
 
 namespace TelerikWpfApp3.VM
 {
     class ChatUserControlViewModel : INotifyPropertyChanged
     {
+        database sqlite = new database();
         private string _msgTextBox;
         private string searchname;
         private string _target;
@@ -73,6 +75,7 @@ namespace TelerikWpfApp3.VM
             string id = ((App)Application.Current).getmyID();
             string plain = org as string;
             string msg =  target + "/" + id + "/" + DateTime.Now as string + "/" + plain + "/";
+            sqlite.ChattingCreate("12", "12", "11:11:11",plain);
             ((App)Application.Current).SendData("<MSG>", msg);
             ((App)Application.Current).AddChat(true, plain);
             msgTextBox = "";
