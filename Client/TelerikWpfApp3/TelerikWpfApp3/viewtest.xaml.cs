@@ -38,7 +38,7 @@ namespace TelerikWpfApp3
             string Uid = idbox.Text;
             string Upw = pwbox.Password.ToString();
             ((App)Application.Current).setmyID(Uid);
-            string parameter = Uid + "/" + Upw + "/";
+            string parameter = Uid + "/" + Upw;
             ((App)Application.Current).StartSocket();
             ((App)Application.Current).SendData("<LOG>",parameter);
         }
