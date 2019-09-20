@@ -304,8 +304,7 @@ namespace TelerikWpfApp3
                 */
                 else if (tag.Equals("<MSG>")) // 메세지
                 {
-                    database sqlite = new database();
-                    sqlite.ChattingCreate(tokens[1], tokens[2], tokens[3], tokens[4]);
+                    ((App)Application.Current).setchatting(tokens[1], tokens[2], tokens[3], tokens[4]);
                     DispatchService.Invoke(() =>
                     {
                         ((App)Application.Current).AddChat(false,tokens[4]);
@@ -339,6 +338,7 @@ namespace TelerikWpfApp3
             }
         }
         #endregion
+ 
         private void FriendLoad(string myId)
         {
             string t = "<FLD>";

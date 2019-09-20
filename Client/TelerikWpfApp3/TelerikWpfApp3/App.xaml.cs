@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DBConn;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -85,6 +86,12 @@ namespace TelerikWpfApp3
 
         public static ObservableCollection<Chatitem> ChatList = new ObservableCollection<Chatitem>();
         public static Socket AppSock;
+        
+        public void setchatting(string Sender, string Receiver, string Time, string Msg)
+        {
+            database sqlite = new database();
+            sqlite.ChattingCreate(Sender, Receiver, Time, Msg);
+        }
         public ObservableCollection<Chatitem> getChat()
         {
             return ChatList;
