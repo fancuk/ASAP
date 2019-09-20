@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-F:\새 폴더\OneDrive\문서\GitHub\MessengerProject\Client\TelerikWpfApp3\TelerikWpfApp3\obj\x86\Debug\
+C:\Users\king1\source\repos\TelerikWpfApp3\TelerikWpfApp3\obj\x86\Debug\
 TelerikWpfApp3
 none
 false
 DEBUG;TRACE
-F:\새 폴더\OneDrive\문서\GitHub\MessengerProject\Client\TelerikWpfApp3\TelerikWpfApp3\App.xaml
+C:\Users\king1\source\repos\TelerikWpfApp3\TelerikWpfApp3\App.xaml
 11-326408926
 
-34-1879881075
-381668328899
+341882512066
+38-1965157735
 login.xaml;MainWindow.xaml;FalseMsgBox.xaml;SuccessMsgBox.xaml;Register.xaml;StartWindow.xaml;testpage1.xaml;viewtest.xaml;View\UserControl\ChatUserControl.xaml;View\UserControl\UserControl1.xaml;View\UserControl\UserControl2.xaml;
 
-True
+False
 
