@@ -335,7 +335,6 @@ namespace TelerikWpfApp3
                     obj.WorkingSocket.BeginReceive(obj.Buffer, 0, 4096, 0, DataReceived, obj);
                 }
             }
-            }
             catch (Exception e)
             {
                 DispatchService.Invoke(() =>
