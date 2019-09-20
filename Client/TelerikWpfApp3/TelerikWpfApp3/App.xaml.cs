@@ -124,9 +124,9 @@ namespace TelerikWpfApp3
 
         public void CloseSocket()
         {
-            nowConnect = false;
-            SendData("<FIN>/", "close/");
+            SendData("<FIN>", "close");
             Msock.closeSock();
+            nowConnect = false;
         }
         public void StartSocket()
         {

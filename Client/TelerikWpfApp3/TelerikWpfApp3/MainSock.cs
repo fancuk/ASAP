@@ -216,6 +216,7 @@ namespace TelerikWpfApp3
                         {
                             ((App)Application.Current).StartMainWindow();
                         });
+                        nowListen = true;
                     }
                     else
                     {
