@@ -204,3 +204,5 @@ F:\새 폴더\OneDrive\문서\GitHub\MessengerProject\winterlood\TelerikWpfApp3\
 F:\새 폴더\OneDrive\문서\GitHub\MessengerProject\winterlood\TelerikWpfApp3\TelerikWpfApp3\obj\x86\Debug\TelerikWpfApp3.pdb
 C:\Users\king1\source\repos\TelerikWpfApp3\TelerikWpfApp3\bin\Debug\System.Data.SQLite.pdb
 C:\Users\king1\source\repos\TelerikWpfApp3\TelerikWpfApp3\bin\Debug\System.Data.SQLite.dll.config
+C:\Users\king1\source\repos\TelerikWpfApp3\TelerikWpfApp3\obj\x86\Debug\TelerikWpfApp3_Content.g.cs
+C:\Users\king1\source\repos\TelerikWpfApp3\TelerikWpfApp3\bin\Debug\SQLite.Interop.dll

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SQLite;
 using System.Collections.ObjectModel;
+using TelerikWpfApp3.M;
 namespace DBConn
 {
     class DAO
@@ -20,16 +21,16 @@ namespace DBConn
             string db = @"Chatting";
             SQLiteConnection Conn = new
                     SQLiteConnection("Data Source=Chatting;Version=3");
+            Conn.Open();
             if (!System.IO.File.Exists(db))
             {
                 SQLiteConnection.CreateFile("Chatting");
-                Conn.Open();
                 string Query = "create table Chatting" +
                     " (sender varchar(20),receiver varchar(20),time varchar(20),msg varchar(200))";
                 SQLiteCommand command = new SQLiteCommand(Query, Conn);
                 int Result = command.ExecuteNonQuery();
             }
-                Conn.Close();
+            Conn.Close();
         }
         #endregion
         #region Create
@@ -64,13 +65,14 @@ namespace DBConn
         }
         #endregion
         #region Read 반환형 ObservableCollection
-        public ObservableCollection<string> ChattingRead(string FriendID) //채팅 목록
+        public ObservableCollection<Chatitem> ChattingRead(string FriendID) //채팅 목록
         {
-            ObservableCollection<string> information =
-                new ObservableCollection<string>();
+            createChattingFile();
+            ObservableCollection<Chatitem> information =
+                new ObservableCollection<Chatitem>();
             SQLiteConnection Conn = new
                 SQLiteConnection("Data Source=Chatting;Version=3");
-            string query = "Select msg From Chatting Where sender='" + FriendID + "' Order" +
+            string query = "Select * From Chatting Where sender='" + FriendID + "'Order" +
                 "By time ASC"; //시간 표시
             try
             {
@@ -79,8 +81,16 @@ namespace DBConn
                 SQLiteDataReader Datareader = Command.ExecuteReader();
                 while (Datareader.Read())
                 {
-                    string msg = Datareader.ToString();
-                    information.Add(msg);
+                    string msg = Datareader["msg"].ToString();
+                    string sender = Datareader["sender"].ToString();
+                    string receiver = Datareader["receiver"].ToString();
+                    string time = Datareader["time"].ToString();
+                    Chatitem tmpChatItem = new Chatitem();
+                    tmpChatItem.User = sender;
+                    tmpChatItem.Text = msg;
+                    tmpChatItem.Time = time;
+                    tmpChatItem.Chk = false;
+                    information.Add(tmpChatItem);
                 }
             }
             catch (Exception e)

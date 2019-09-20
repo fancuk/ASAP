@@ -34,25 +34,7 @@ namespace TelerikWpfApp3
             MessageBox.Show("AA");
             base.OnExit(e);
         }
-        public class Chatitem
-        {
-            private string text;
-            private string user;
-            private string time;
-            private bool chk;
-            public Chatitem(string text, string user, string time, bool chk)
-            {
-                this.Text = text;
-                this.User = user;
-                this.Time = time;
-                this.Chk = chk;
-            }
-
-            public string Text { get => text; set => text = value; }
-            public string User { get => user; set => user = value; }
-            public string Time { get => time; set => time = value; }
-            public bool Chk { get => chk; set => chk = value; }
-        }
+        
         public string myID;
 
         public string getmyID()
@@ -81,6 +63,10 @@ namespace TelerikWpfApp3
             public bool Chk { get => chk; set => chk = value; }
         }
 
+        IDictionary<string, ObservableCollection<Chatitem>> Chatdict 
+            = new Dictionary<string, ObservableCollection<Chatitem>>();
+
+
 
         public static ObservableCollection<ClientItem> ClientList = new ObservableCollection<ClientItem>();
 
@@ -92,9 +78,20 @@ namespace TelerikWpfApp3
             database sqlite = new database();
             sqlite.ChattingCreate(Sender, Receiver, Time, Msg);
         }
-        public ObservableCollection<Chatitem> getChat()
+        public ObservableCollection<Chatitem> getChat(string id)
         {
-            return ChatList;
+            database sqlite = new database();
+            if (Chatdict.ContainsKey(id))
+            {
+                return Chatdict[id];
+            }
+            else
+            {
+                //sqllite load
+                ObservableCollection<Chatitem> tmp =sqlite.ChattingRead(id) ;
+                Chatdict.Add(id, tmp);
+            }
+            return Chatdict[id];
         }
         public ObservableCollection<ClientItem> getClient()
         {
@@ -124,7 +121,6 @@ namespace TelerikWpfApp3
                 ClientList.Add(new ClientItem(user, "상태메세지 들어갈곳", type));
             }
         }
-        ChatList chatList;
         MainSock Msock = new MainSock();
         public  bool nowConnect = false;
         public string nowConnectStatus = "false";

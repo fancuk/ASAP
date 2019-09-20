@@ -44,11 +44,11 @@
                     <ListBox BorderThickness="0,0,0,0" x:Name="ClientList" Height="522" ItemsSource="{Binding}"   IsSynchronizedWithCurrentItem="False" BorderBrush="{x:Null}" IsEnabled="False">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <StackPanel Width="210" HorizontalAlignment="Left" >
+                                <StackPanel Width="210" HorizontalAlignment="Left"  MouseLeftButtonDown="GetMessageById">
                                     <StackPanel x:Name="wp">
                                         <TextBlock Text="{Binding Status}" />
                                         <Border x:Name="chatBack" CornerRadius="0" Margin="0,3" >
-                                            <TextBlock Text="{Binding User}" TextWrapping="Wrap" Grid.Column="1" FontSize="11" Margin="5,3,5,7"/>
+                                            <TextBlock x:Name="TargetBox" Text="{Binding User}" TextWrapping="Wrap" Grid.Column="1" FontSize="11" Margin="5,3,5,7"/>
                                         </Border>
                                     </StackPanel>
                                 </StackPanel>

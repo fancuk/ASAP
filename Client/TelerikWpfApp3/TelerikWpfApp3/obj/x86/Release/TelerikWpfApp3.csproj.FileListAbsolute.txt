@@ -67,3 +67,4 @@ C:\Users\king1\source\repos\TelerikWpfApp3\TelerikWpfApp3\obj\x86\Release\Teleri
 C:\Users\king1\source\repos\TelerikWpfApp3\TelerikWpfApp3\obj\x86\Release\TelerikWpfApp3.csproj.CopyComplete
 C:\Users\king1\source\repos\TelerikWpfApp3\TelerikWpfApp3\obj\x86\Release\TelerikWpfApp3.exe
 C:\Users\king1\source\repos\TelerikWpfApp3\TelerikWpfApp3\obj\x86\Release\TelerikWpfApp3.pdb
+C:\Users\king1\source\repos\TelerikWpfApp3\TelerikWpfApp3\obj\x86\Release\TelerikWpfApp3_Content.g.cs

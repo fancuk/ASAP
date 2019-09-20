@@ -72,8 +72,7 @@ namespace TelerikWpfApp3.VM
         {
             string id = ((App)Application.Current).getmyID();
             string plain = org as string;
-            string msg =  target + "/" + id + "/" + DateTime.Now as string + "/" + plain;
-            ((App)Application.Current).setchatting(target, id, DateTime.Now.ToString(), plain);
+            string msg =  target + "/" + id + "/" + DateTime.Now as string + "/" + plain + "/";
             ((App)Application.Current).SendData("<MSG>", msg);
             ((App)Application.Current).AddChat(true, plain);
             msgTextBox = "";

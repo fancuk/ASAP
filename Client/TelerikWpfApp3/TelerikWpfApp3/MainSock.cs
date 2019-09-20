@@ -75,9 +75,11 @@ namespace TelerikWpfApp3
         }
         
         public void closeSock()
-        {
+         {
             mSock.Dispose();
             mSock.Close();
+            mSock = null;
+            ((App)Application.Current).nowConnect = false;
         }
         public void viewtest()
         {
