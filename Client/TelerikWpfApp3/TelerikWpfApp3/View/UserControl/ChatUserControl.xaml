@@ -67,7 +67,8 @@
             </Border>
             <Border>
                 <StackPanel Width="708">
-                    <ListBox    BorderThickness="0,0,0,0" x:Name="ChatBox" Height="522" ItemsSource="{Binding}"   IsSynchronizedWithCurrentItem="True" BorderBrush="{x:Null}" >
+                    <ListBox BorderThickness="0,0,0,0" x:Name="ChatBox" Height="522" 
+                                IsHitTestVisible="False" ItemsSource="{Binding}"   IsSynchronizedWithCurrentItem="True" BorderBrush="{x:Null}" >
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Width="690" HorizontalAlignment="Left" >
