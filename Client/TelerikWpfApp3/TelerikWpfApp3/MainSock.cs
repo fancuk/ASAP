@@ -217,6 +217,8 @@ namespace TelerikWpfApp3
                             ((App)Application.Current).StartMainWindow();
                         });
                         nowListen = true;
+                        string myId = ((App)Application.Current).getmyID();
+                        FriendLoad(myId);
                     }
                     else
                     {
@@ -313,6 +315,11 @@ namespace TelerikWpfApp3
                 {
                     closeSock();
                 }
+                else if (tag.Equals("<FLD>"))
+                {
+                    FriendsList friend = new FriendsList();
+                    friend.setFriends(tokens[1]);
+                }
                 // 텍스트박스에 추가해준다.
                 // 비동기식으로 작업하기 때문에 폼의 UI 스레드에서 작업을 해줘야 한다.
                 // 따라서 대리자를 통해 처리한다.
@@ -333,7 +340,11 @@ namespace TelerikWpfApp3
             }
         }
         #endregion
-
+        private void FriendLoad(string myId)
+        {
+            string t = "<FLD>";
+            OnSendData(t, myId);
+        }
         #region OnSendData
         public void OnSendData(string type, string Texts)
         {
