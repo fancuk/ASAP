@@ -21,30 +21,27 @@ namespace TelerikWpfApp3.View.UserControl
     /// </summary>
     public partial class ChatUserControl 
     {
-        object a;
         public ChatUserControl()
         {
             InitializeComponent(); 
-            object b = ((App)Application.Current).getClient();
-            ClientList.DataContext = b;
-            GetMessageById2();
+            ChatBox.DataContext = ((App)Application.Current).getChat();
+            //((App)Application.Current).LoadMyFriends();
+            ClientList.DataContext = ((App)Application.Current).getFriends();
         }
         private void GetMessageById(object sender, RoutedEventArgs e)
         {
             string target  = (((sender as StackPanel).FindName("TargetBox") as TextBlock).Text);
-            a = ((App)Application.Current).getChat(target);
+            ((App)Application.Current).setChat(target);
+            ((App)Application.Current).setTarget(target);
+            refresh();
         }
-        private void GetMessageById2()
+
+        private void refresh()
         {
-            string target = "12";
-            // string target  = (((sender as StackPanel).FindName("TargetBox") as TextBlock).Text);
-            a = ((App)Application.Current).getChat(target);
-            ChatBox.DataContext = a;
-
-            target = "12";
-
-
+            ChatBox.DataContext = ((App)Application.Current).getChat();
+            ClientList.DataContext = ((App)Application.Current).getFriends();
         }
+
         private void ChatBox_TextInput(object sender, TextCompositionEventArgs e)
         {
             ChatBox.UpdateLayout();

@@ -18,7 +18,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TelerikWpfApp3.M;
 using System.Windows.Threading;
-
+using System.Threading;
 
 namespace TelerikWpfApp3
 {
@@ -94,8 +94,8 @@ namespace TelerikWpfApp3
 
         public bool StartConnect()
         {
-            //string address = "127.0.0.1";
-            string address = "203.229.204.23"; // "127.0.0.1" 도 가능
+            string address = "127.0.0.1";
+            //string address = "203.229.204.23"; // "127.0.0.1" 도 가능
             int port = 11000;
             return BeginConnection(address, port);
         }
@@ -219,7 +219,16 @@ namespace TelerikWpfApp3
                         });
                         nowListen = true;
                         string myId = ((App)Application.Current).getmyID();
-                        FriendLoad(myId);
+
+                        Thread.Sleep(10);
+
+                        byte[] bDts = null;
+                        string str = "<FLD>" + '/' +myId  + '/';
+
+                        bDts = Encoding.UTF8.GetBytes(str);
+                        mSock.Send(bDts);
+
+             
                     }
                     else
                     {
@@ -348,12 +357,7 @@ namespace TelerikWpfApp3
             }
         }
         #endregion
- 
-        private void FriendLoad(string myId)
-        {
-            string t = "<FLD>";
-            OnSendData(t, myId);
-        }
+
         #region OnSendData
         public void OnSendData(string type, string Texts)
         {

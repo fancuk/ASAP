@@ -102,7 +102,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="M\AllChatList.cs" />
-    <Compile Include="M\FriendsList.cs" />
     <Compile Include="login.xaml.cs">
       <DependentUpon>login.xaml</DependentUpon>
     </Compile>
@@ -110,6 +109,7 @@
     <Compile Include="M\ChatItem.cs" />
     <Compile Include="M\ChatListItem.cs" />
     <Compile Include="M\DispatchService.cs" />
+    <Compile Include="M\FriendsItem.cs" />
     <Compile Include="M\msgModel.cs" />
     <Compile Include="FalseMsgBox.xaml.cs">
       <DependentUpon>FalseMsgBox.xaml</DependentUpon>

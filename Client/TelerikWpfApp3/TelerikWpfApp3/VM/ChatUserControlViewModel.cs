@@ -73,11 +73,14 @@ namespace TelerikWpfApp3.VM
         public void ExeceuteSendMsg(object org)
         {
             string id = ((App)Application.Current).getmyID();
+            target = ((App)Application.Current).getTarget();
             string plain = org as string;
+            string nowTime = DateTime.Now.ToString();
             string msg =  target + "/" + id + "/" + DateTime.Now as string + "/" + plain + "/";
-            sqlite.ChattingCreate("12", "12", "11:11:11",plain);
+            sqlite.ChattingCreate(id, target, nowTime, plain);
             ((App)Application.Current).SendData("<MSG>", msg);
             ((App)Application.Current).AddChat(true, plain);
+
             msgTextBox = "";
         }
 

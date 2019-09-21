@@ -160,7 +160,7 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                                                 </Canvas.Background>
                                             </Canvas>
                                             <telerik:RadWatermarkTextBox x:Name="idbox1" TextWrapping="Wrap" 
-                                                 MaxLength="20"
+                                                MaxLength="10"
                                                 BorderThickness="0,0,0,1"
                                                 WatermarkContent="ID" HorizontalAlignment="Center" VerticalAlignment="Center" Height="35" Width="195" BorderBrush="#FF878A8A" Margin="6,0,0,0" Background="#FFFBFBFB" 
                                                       Text="{Binding name}"
@@ -280,7 +280,7 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                                                 </Canvas.Background>
                                             </Canvas>
                                             <telerik:RadWatermarkTextBox x:Name="emailBox" TextWrapping="Wrap" 
-                                            MaxLength="20"
+                                            MaxLength="10"
                                             BorderThickness="0,0,0,1"
                                             WatermarkContent="E-mail" HorizontalAlignment="Center" VerticalAlignment="Center" Height="35" Width="195" BorderBrush="#FF878A8A" Margin="6,0,0,0" Background="#FFFBFBFB" 
                                                       Text="{Binding email}"

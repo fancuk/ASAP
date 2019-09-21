@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -11,7 +10,6 @@ using System.Windows;
 using TelerikWpfApp3.M;
 using TelerikWpfApp3.VM.DBControl;
 
-
 namespace TelerikWpfApp3
 {
     /// <summary>
@@ -22,10 +20,6 @@ namespace TelerikWpfApp3
         public App()
         {
             this.InitializeComponent();
-            ChatList.Add(new Chatitem("안녕하세요 server입니다 병신아.", "server", "19:20:22", false));
-            ChatList.Add(new Chatitem("안녕하세요 Client 입니다 병신아.", "Client", "19:20:22", true));
-            ClientList.Add(new ClientItem("SERVER", "SERVER입니다 반갑습니다.", true));
-            ClientList.Add(new ClientItem("ME", "나 자신임", false));
         }
         protected override void OnExit(ExitEventArgs e)
         {
@@ -38,7 +32,10 @@ namespace TelerikWpfApp3
         }
         
         public string myID;
-
+        public void LoadMyFriends()
+        {
+            SendData("<FLD>", myID);
+        }
         public string getmyID()
         {
             return myID;
@@ -47,7 +44,6 @@ namespace TelerikWpfApp3
         {
             myID = myid;
         }
-
         public bool idchk;
         public bool getidchk()
         {
@@ -74,15 +70,25 @@ namespace TelerikWpfApp3
             public string Status { get => status; set => status = value; }
             public bool Chk { get => chk; set => chk = value; }
         }
+        public static string nowChatTarget;
+
+        public string getTarget()
+        {
+            return nowChatTarget;
+        }
+
+        public void setTarget(string tt)
+        {
+            nowChatTarget = tt;
+        }
 
         IDictionary<string, ObservableCollection<Chatitem>> Chatdict 
             = new Dictionary<string, ObservableCollection<Chatitem>>();
 
+        public static ObservableCollection<FriendsItem> FriendsList = new ObservableCollection<FriendsItem>();
 
+        public static ObservableCollection<Chatitem> NowChat = new ObservableCollection<Chatitem>();
 
-        public static ObservableCollection<ClientItem> ClientList = new ObservableCollection<ClientItem>();
-
-        public static ObservableCollection<Chatitem> ChatList = new ObservableCollection<Chatitem>();
         public static Socket AppSock;
         
         public void setchatting(string Sender, string Receiver, string Time, string Msg)
@@ -90,57 +96,52 @@ namespace TelerikWpfApp3
             database sqlite = new database();
             sqlite.ChattingCreate(Sender, Receiver, Time, Msg);
         }
-        public ObservableCollection<Chatitem> getChat(string id)
+        public void setChat(string id)
         {
             database sqlite = new database();
             if (Chatdict.ContainsKey(id))
             {
-                return Chatdict[id];
             }
             else
             {
                 //sqllite load
-                ObservableCollection<Chatitem> tmp =sqlite.ChattingRead(id) ;
-                Chatdict.Add(id, tmp);
+                NowChat = sqlite.ChattingRead(id) ;
+                Chatdict.Add(id, NowChat);
             }
-            return Chatdict[id];
         }
-        public ObservableCollection<ClientItem> getClient()
+
+        public ObservableCollection<Chatitem> getChat()
         {
-            return ClientList;
+            return NowChat;
+        }
+
+        public ObservableCollection<FriendsItem> getFriends()
+        {
+            return FriendsList;
         }
         public void AddChat(bool type, string text)
         {
             if (type)
             {
                 //send
-                ChatList.Add(new Chatitem(text, "보냄", DateTime.Now.ToString(), type));
+                NowChat.Add(new Chatitem(text, "보냄", DateTime.Now.ToString(), type));
             }
             else
             {
-                ChatList.Add(new Chatitem(text, "받음", DateTime.Now.ToString(), type));
+                NowChat.Add(new Chatitem(text, "받음", DateTime.Now.ToString(), type));
             }
         }
-        public void AddClient(bool type, string user,string status)
+        public void AddFriend(string user)
         {
-            if (type)
-            {
-                //send
-                ClientList.Add(new ClientItem(user, "상태메세지 들어갈곳",  type));
-            }
-            else
-            {
-                ClientList.Add(new ClientItem(user, "상태메세지 들어갈곳", type));
-            }
+                FriendsList.Add(new FriendsItem(user));
         }
         MainSock Msock = new MainSock();
         public  bool nowConnect = false;
         public string nowConnectStatus = "false";
-        FriendsList friends = new FriendsList();
         
         public void setfriends(string friendId)
         {
-            friends.setFriends(friendId);
+            AddFriend(friendId);
         }
         public void CloseSocket()
         {
@@ -174,7 +175,6 @@ namespace TelerikWpfApp3
         {
             if (nowConnect == false) StartSocket();
             Msock.OnSendData("<MSG>", text);
-            AddChat(true, text);
         }
 
         public void ShowLoginView()

@@ -41,10 +41,6 @@ namespace TelerikWpfApp3.VM.DBControl
             // 채팅 목록을 그냥 그대로 보여주고(계속 read안하고)
             // 그 채팅 삭제하면, oc에서 그 인덱스만 삭제하거나, 전체 삭제 하면 안되나?
             createChattingFile();
-
-            Receiver = "12";
-            Sender = "12";
-
             bool flag = false;
             string query =
                 "INSERT INTO Chatting(sender,receiver,time,msg) " +
@@ -73,7 +69,6 @@ namespace TelerikWpfApp3.VM.DBControl
         #region Read 반환형 ObservableCollection
         public ObservableCollection<Chatitem> ChattingRead(string FriendID) //채팅 목록
         {
-            FriendID = "12";
             createChattingFile();
             ObservableCollection<Chatitem> information =
                 new ObservableCollection<Chatitem>();
@@ -96,7 +91,7 @@ namespace TelerikWpfApp3.VM.DBControl
                     tmpChatItem.User = sender;
                     tmpChatItem.Text = msg;
                     tmpChatItem.Time = time;
-                    tmpChatItem.Chk = false;
+                    tmpChatItem.Chk = true;
                     information.Add(tmpChatItem);
                 }
             }
