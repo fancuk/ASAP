@@ -189,9 +189,8 @@ namespace TelerikWpfApp3
                 //}
 
                 // UTF8 인코더를 사용하여 바이트 배열을 문자열로 변환한다.
-                if (!mSock.Connected)
+                if (((App)Application.Current).nowConnect == false)
                 {
-                    MessageBox.Show("Server is now ShutDown!");
                     return;
                 }
                 string text = Encoding.UTF8.GetString(obj.Buffer);
