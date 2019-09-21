@@ -20,6 +20,7 @@ namespace TelerikWpfApp3
     {
         public App()
         {
+            mqState = false;
             Startup += App_Startup;
             InitializeComponent();
         }
@@ -38,6 +39,7 @@ namespace TelerikWpfApp3
         }
         
         public string myID;
+        public Boolean mqState { get; set; }
         public void LoadMyFriends()
         {
             SendData("<FLD>", myID);
@@ -83,6 +85,11 @@ namespace TelerikWpfApp3
         public void AddSQLChat(string target, Chatitem chatitem)
         {
             chatControl.addChat(target, chatitem);
+        }
+
+        public void resetSQLChat(string target)
+        {
+            chatControl.resetChat(target);
         }
 
         IDictionary<string, ObservableCollection<Chatitem>> Chatdict 
@@ -195,8 +202,7 @@ namespace TelerikWpfApp3
             Window s = Application.Current.MainWindow;
             Window m = TelerikWpfApp3.StartWindow.Instance;
             m.Show();
-            s.Close();
-
+            s.Hide();
         }
     }
 }

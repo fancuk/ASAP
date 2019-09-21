@@ -24,6 +24,7 @@ namespace TelerikWpfApp3.View.UserControl
         public ChatUserControl()
         {
             InitializeComponent();
+            ((App)Application.Current).mqState = true;
             ((App)Application.Current).loadAllChat();
             //((App)Application.Current).LoadMyFriends();
             ClientList.DataContext = ((App)Application.Current).getFriends();

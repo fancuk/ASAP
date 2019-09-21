@@ -28,15 +28,9 @@ namespace TelerikWpfApp3
         public bool nowListen = false;
         public List<Socket> connectedClients = new List<Socket>();
         private string userName;
-
+        public Boolean mqState { get; set; }
+       
         delegate void STMW();
-
-
-        public static void StartMainWindow()
-        {
-            ((App)Application.Current).StartMainWindow();
-        }
-
         public string UserName
         {
             get { return this.userName; }
@@ -90,8 +84,8 @@ namespace TelerikWpfApp3
 
         public bool StartConnect()
         {
-            //string address = "127.0.0.1";
-            string address = "203.229.204.23"; // "127.0.0.1" 도 가능
+           string address = "127.0.0.1";
+          //  string address = "203.229.204.23"; // "127.0.0.1" 도 가능
             int port = 11000;
             return BeginConnection(address, port);
         }
@@ -209,6 +203,7 @@ namespace TelerikWpfApp3
                     string flag = tokens[1];
                     if (flag.Equals("true"))
                     {
+                        Properties.Settings.Default.loginOK = true;
                         DispatchService.Invoke(() =>
                         {
                             ((App)Application.Current).StartMainWindow();
@@ -223,12 +218,11 @@ namespace TelerikWpfApp3
 
                         bDts = Encoding.UTF8.GetBytes(str);
                         mSock.Send(bDts);
-
-             
                     }
                     else
                     {
                         MessageBox.Show("Login Failed.....TT");
+                        Properties.Settings.Default.loginOK = false;
                         ((App)Application.Current).CloseSocket();
                     }
                 }
@@ -324,8 +318,13 @@ namespace TelerikWpfApp3
                     ((App)Application.Current).setchatting(tokens[1], tokens[2], tokens[3], tokens[4]);
                     DispatchService.Invoke(() =>
                     {
-                        ((App)Application.Current).AddSQLChat(tmp.User,tmp);
+                        ((App)Application.Current).AddSQLChat(tmp.User, tmp);
                     });
+                    if (!((App)Application.Current).mqState)
+                    {
+                        ((App)Application.Current).resetSQLChat(tmp.User);
+                    }
+
                 }
                 else if (tag.Equals("<FIN>"))
                 {
