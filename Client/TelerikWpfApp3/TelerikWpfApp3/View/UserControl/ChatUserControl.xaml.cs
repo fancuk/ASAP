@@ -35,6 +35,7 @@ namespace TelerikWpfApp3.View.UserControl
         private void GetMessageById(object sender, RoutedEventArgs e)
         {
             string target  = (((sender as StackPanel).FindName("TargetBox") as TextBlock).Text);
+            chatTarget.Text = target;
             ChatBox.DataContext = ((App)Application.Current).getChat(target);
             ((App)Application.Current).setTarget(target);
             refresh();
@@ -59,7 +60,7 @@ namespace TelerikWpfApp3.View.UserControl
                 }
                 else if (FriendNameInput.IsFocused)
                 {
-                    ButtonAutomationPeer peer = new ButtonAutomationPeer(FriendAdd);
+                    HyperlinkAutomationPeer peer = new HyperlinkAutomationPeer(FriendAdd);
                     IInvokeProvider invokeProv = peer.GetPattern(PatternInterface.Invoke) as IInvokeProvider;
                     invokeProv.Invoke();
                 }
