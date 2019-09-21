@@ -18,6 +18,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TelerikWpfApp3.M;
+using TelerikWpfApp3.VM;
 
 namespace TelerikWpfApp3
 {
@@ -65,6 +66,8 @@ namespace TelerikWpfApp3
             InitializeComponent();
             this.MouseLeftButtonDown += MoveWindow;
             pwchk.DataContext = pc;
+            RegisterViewModel rvm = new RegisterViewModel();
+            Closing += rvm.OnWindowClosing;
             this.PreviewKeyDown += new KeyEventHandler(HandleEsc);
         }
         private void HandleEsc(object sender, KeyEventArgs e)

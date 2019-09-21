@@ -18,6 +18,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TelerikWpfApp3.M;
+using System.ComponentModel;
+
 
 namespace TelerikWpfApp3.VM
 {
@@ -131,6 +133,17 @@ namespace TelerikWpfApp3.VM
             pw2Changed = new Command(ExecuteChkPwEquals, CanExecute);
             CloseCommand = new Command(ExecuteClose, CanExecute);
             idChecking = new Command(idCheckButton, CanExecute);
+        }
+        public void OnWindowClosing(object sender, CancelEventArgs e)
+        {
+            // Handle closing logic, set e.Cancel as needed
+            e.Cancel = true;
+            if (((App)Application.Current).nowConnect == true)
+            {
+                ((App)Application.Current).CloseSocket();
+            }
+            Window rv = TelerikWpfApp3.Register.Instance;
+            rv.Hide();
         }
         private void idCheckButton(object org)
         {
