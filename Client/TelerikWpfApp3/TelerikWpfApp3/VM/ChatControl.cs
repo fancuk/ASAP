@@ -32,5 +32,10 @@ namespace TelerikWpfApp3.VM
         {
             this.Chatdict[target] = chat;
         }
+
+        public void resetChat(string target)
+        {
+            this.Chatdict[target].Clear();
+        }
     }
 }
