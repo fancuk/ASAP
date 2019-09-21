@@ -55,7 +55,7 @@ namespace TelerikWpfApp3.VM
         {
             BoxColor = new SolidColorBrush(Colors.Gray);
             Register = new Command(ExecuteGotoRegister, CanExecute);
-            login = new Command(ExecuteLogin, CanExecute);
+            //login = new Command(ExecuteLogin, CanExecute);
             textChange = new Command(ExecuteTextChange, CanExecute);
             test = new Command(ExecuteTest, CanExecute);
             CloseCommand = new Command(ExecuteClose, CanExecute);
@@ -68,19 +68,6 @@ namespace TelerikWpfApp3.VM
             }
         }
 
-        private void ExecuteLogin(object obj)
-        {
-            if(this.Uid == "" || this.Upw == "")
-            {
-                MessageBox.Show("아이디나 비번중 하나 안쳣네요");
-                return;
-            }
-            else
-            {
-                string parameter = "<LOG>" + this.Uid + "/" + this.Upw;
-                ((App)Application.Current).SendData(parameter);
-            }
-        }
 
         private void ExecuteTest(object obj)
         {

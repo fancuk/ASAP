@@ -71,10 +71,18 @@ namespace TelerikWpfApp3
                 {
                     ((App)Application.Current).SendData("<LOG>", parameter);
                     ((App)Application.Current).setmyID(Uid);
+                    if (rememberID.IsChecked == true)
+                    {
+                        Properties.Settings.Default.idSaveCheck = true;
+                    }
+                    else
+                    {
+                        Properties.Settings.Default.idSaveCheck = false;
+                    }
+
                 }
             }
         }
-
         private void Login_Loaded(object sender, RoutedEventArgs e)
         {
             idbox.Text = Properties.Settings.Default.loginIdSave;
@@ -91,17 +99,6 @@ namespace TelerikWpfApp3
             }
         }
 
-        private void RememberID_Checked(object sender, RoutedEventArgs e)
-        {
-            if (rememberID.IsChecked == false)
-            {
-                Properties.Settings.Default.Save();
-            }
-            else
-            {
-                Properties.Settings.Default.loginIdSave = null;
-                Properties.Settings.Default.Save();
-            }
-        }
+        
     }
 }

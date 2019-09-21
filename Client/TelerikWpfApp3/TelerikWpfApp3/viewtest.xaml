@@ -300,7 +300,7 @@
                 </StackPanel>
             </StackPanel>
             <StackPanel Height="246">
-                <CheckBox x:Name="rememberID" Checked="RememberID_Checked" HorizontalAlignment="Center" Style="{DynamicResource CheckBoxStyle1}" VerticalAlignment="Center" Content="ID기억하기"/>
+                <CheckBox x:Name="rememberID" HorizontalAlignment="Center" Style="{DynamicResource CheckBoxStyle1}" VerticalAlignment="Center" Content="ID기억하기"/>
 
                 <StackPanel Orientation="Vertical" Height="56">
                     <StackPanel Height="55">
