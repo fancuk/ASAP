@@ -28,13 +28,13 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type RadioButton}">
-                        <BulletDecorator Cursor="Hand" Background="WhiteSmoke">
+                        <BulletDecorator Cursor="Hand" Background="#FF02BEC1">
                             <!--Text element-->
                             <Border Width="Auto" Height="38" CornerRadius="3" BorderBrush="{x:Null}" BorderThickness="1" Background="{x:Null}" x:Name="RadioBorder" Margin="0,0,-3,-2" >
                                 <Grid Height="38">
                                     <ContentPresenter x:Name="RadioContent"   HorizontalAlignment="Center" VerticalAlignment="Center" OpacityMask="Black" />
                                     <!--We don't need any bullet, cause our border is the switching element-->
-                                    <Border Margin="-2,0,184,0" Background="#FFCDCDCD" CornerRadius="1" x:Name="RadioMark" />
+                                    <Border Margin="-2,0,184,0" Background="#FFCDCDCD" CornerRadius="1" x:Name="RadioMark" Height="0" />
                                     <!-- To change the apearance to button stripe 2, edit the margins! -->
                                 </Grid>
                             </Border>
@@ -82,36 +82,42 @@
             <DropShadowEffect ShadowDepth="0" BlurRadius="10" Color="Gray"/>
         </Border.Effect>
         <Grid>
-            
+
             <StackPanel Orientation="Horizontal">
                 <Border Width="190" Background="WhiteSmoke" BorderThickness="0,0.1,0,0">
                     <Border.Effect>
                         <DropShadowEffect Color="#FFE4E2E2" ></DropShadowEffect>
                     </Border.Effect>
-                    <StackPanel>
-                        <Border Height="119"/>
+                    <StackPanel Background="#FF02BEC1">
+                        <Border Height="119">
+                            <Ellipse Height="70" Width="70">
+                                <Ellipse.Fill>
+                                    <ImageBrush ImageSource="Resources/logo2.jpg"/>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                        </Border>
                         <Border Height="570">
                             <StackPanel>
-                                
+
                                 <StackPanel Height="63" Margin="0,20,0,0">
-                                    <Border Background="#FF02BEC1" Height="41" Margin="10,3,10,0"  BorderThickness="1" CornerRadius="10"  >
-                                        <TextBlock>
+                                    <Border Height="41" Margin="10,3,10,0"  BorderThickness="1" CornerRadius="10" Background="White"  >
+                                        <TextBlock Foreground="#FF2D2D2D">
                                          
                                             <Hyperlink 
                                         
-                                TextDecorations="{x:Null}" Foreground="White">
+                                TextDecorations="{x:Null}">
                                                 <InlineUIContainer>
-                                    <TextBlock TextDecorations="{x:Null}"  Text="Create New" HorizontalAlignment="Center" VerticalAlignment="Center" Width="167" TextAlignment="Center" Height="21" Margin="0,8,0,0" FontFamily="Impact" FontSize="20" >
+                                    <TextBlock TextDecorations="{x:Null}"  Text="{Binding myId}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="167" TextAlignment="Center" Height="21" Margin="0,8,0,0" FontFamily="Impact" FontSize="20" Foreground="#FF02BEC1" >
                                     </TextBlock>
                                 </InlineUIContainer></Hyperlink></TextBlock>
                                     </Border>
                                 </StackPanel>
                                 <StackPanel Margin="0,20,0,0">
-                                    <Border Height="38" BorderThickness="1,1,1,1">
-                                        <StackPanel Orientation="Horizontal">
+                                    <Border Height="39" BorderThickness="1,1,1,1">
+                                        <StackPanel Orientation="Horizontal" Height="39">
                                             <RadioButton 
                                             Command="{Binding Page1}"
-                                            GroupName="menu" Content="MyPage"  Style="{StaticResource buttonstripe1}"  Background="{x:Null}" BorderBrush="{x:Null}" Width="193" FontSize="20" Foreground="#FF636060" Height="38"/>
+                                            GroupName="menu" Content="MyPage"  Style="{StaticResource buttonstripe1}"  Background="{x:Null}" BorderBrush="{x:Null}" Width="200" FontSize="20" Foreground="#FFF1F1F1" FontFamily="Impact"/>
                                         </StackPanel>
                                     </Border>
                                 </StackPanel>
@@ -120,7 +126,7 @@
                                         <StackPanel Orientation="Horizontal" Height="38" Width="195">
                                             <RadioButton 
                                             Command="{Binding Page2}"
-                                            GroupName="menu" Content="Friends"  Style="{StaticResource buttonstripe1}"  Background="{x:Null}" BorderBrush="{x:Null}" Width="193" FontSize="20" Foreground="#FF636060"/>
+                                            GroupName="menu" Content="Friends"  Style="{StaticResource buttonstripe1}"  Background="{x:Null}" BorderBrush="{x:Null}" Width="193" FontSize="20" Foreground="#FFF1F1F1" FontFamily="Impact"/>
                                         </StackPanel>
                                     </Border>
                                 </StackPanel>
@@ -129,7 +135,7 @@
                                         <StackPanel Orientation="Horizontal" Height="38" Width="195">
                                             <RadioButton 
                                             Command="{Binding ChatPageOn}"
-                                            GroupName="menu" Content="Chat"  Style="{StaticResource buttonstripe1}"  Background="{x:Null}" BorderBrush="{x:Null}" Width="193" FontSize="20" Foreground="#FF636060"/>
+                                            GroupName="menu" Content="Chat"  Style="{StaticResource buttonstripe1}"  Background="{x:Null}" BorderBrush="{x:Null}" Width="193" FontSize="20" Foreground="#FFF1F1F1" FontFamily="Impact"/>
                                         </StackPanel>
                                     </Border>
                                 </StackPanel>
@@ -138,7 +144,7 @@
                                         <StackPanel Orientation="Horizontal" Height="38" Width="195">
                                             <RadioButton 
                                             Command="{Binding Page2}"
-                                            GroupName="menu" Content="Projects"  Style="{StaticResource buttonstripe1}"  Background="{x:Null}" BorderBrush="{x:Null}" Width="193" FontSize="20" Foreground="#FF636060"/>
+                                            GroupName="menu" Content="Projects"  Style="{StaticResource buttonstripe1}"  Background="{x:Null}" BorderBrush="{x:Null}" Width="193" FontSize="20" Foreground="#FFF1F1F1" FontFamily="Impact"/>
                                         </StackPanel>
                                     </Border>
                                 </StackPanel>
@@ -148,7 +154,7 @@
                                         <StackPanel Orientation="Horizontal" Height="38" Width="195">
                                             <RadioButton 
                                             Command="{Binding Page2}"
-                                            GroupName="menu" Content="Settings"  Style="{StaticResource buttonstripe1}"  Background="{x:Null}" BorderBrush="{x:Null}" Width="193" FontSize="20" Foreground="#FF636060"/>
+                                            GroupName="menu" Content="Settings"  Style="{StaticResource buttonstripe1}"  Background="{x:Null}" BorderBrush="{x:Null}" Width="193" FontSize="20" Foreground="White" FontFamily="Impact"/>
                                         </StackPanel>
                                     </Border>
                                 </StackPanel>
@@ -157,7 +163,7 @@
                                         <StackPanel Orientation="Horizontal" Height="38" Width="195">
                                             <RadioButton 
                                                 Command="{Binding Page2}"
-                                                GroupName="menu" Content="LogOut"  Style="{StaticResource buttonstripe1}"  Background="{x:Null}" BorderBrush="{x:Null}" Width="193" FontSize="20" Foreground="#FF636060"/>
+                                                GroupName="menu" Content="LogOut"  Style="{StaticResource buttonstripe1}"  Background="{x:Null}" BorderBrush="{x:Null}" Width="193" FontSize="20" Foreground="White" FontFamily="Impact"/>
                                         </StackPanel>
                                     </Border>
                                 </StackPanel>
@@ -166,7 +172,7 @@
                     </StackPanel>
 
                 </Border>
-                <Border Width="930" Margin="8,0,0,0">
+                <Border Width="1046" Margin="5,0,0,0">
                     <StackPanel>
                         <Border Height="68" BorderThickness="0,0,0,1" BorderBrush="#FFDAD5D5" >
                             <StackPanel Margin="0,0,0,-1" Orientation="Horizontal">
@@ -201,7 +207,7 @@
                                     </StackPanel>
                                 </StackPanel>
 
-                                
+
                                 <StackPanel Orientation="Horizontal" RenderTransformOrigin="0.5,0.5" Height="30">
                                     <StackPanel.RenderTransform>
                                         <TransformGroup>
