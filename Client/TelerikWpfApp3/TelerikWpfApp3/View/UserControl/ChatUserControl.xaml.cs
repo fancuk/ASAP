@@ -27,6 +27,7 @@ namespace TelerikWpfApp3.View.UserControl
             ChatBox.DataContext = ((App)Application.Current).getChat();
             //((App)Application.Current).LoadMyFriends();
             ClientList.DataContext = ((App)Application.Current).getFriends();
+
         }
         private void GetMessageById(object sender, RoutedEventArgs e)
         {
@@ -40,18 +41,6 @@ namespace TelerikWpfApp3.View.UserControl
         {
             ChatBox.DataContext = ((App)Application.Current).getChat();
             ClientList.DataContext = ((App)Application.Current).getFriends();
-        }
-
-        private void ChatBox_TextInput(object sender, TextCompositionEventArgs e)
-        {
-            ChatBox.UpdateLayout();
-            ChatBox.ScrollIntoView(ChatBox.Items[ChatBox.Items.Count - 1]);
-        }
-        
-        private void ChatBox_TargetUpdated(object sender, DataTransferEventArgs e)
-        {
-            ChatBox.UpdateLayout();
-            ChatBox.ScrollIntoView(ChatBox.Items[ChatBox.Items.Count - 1]);
         }
     }
 }
