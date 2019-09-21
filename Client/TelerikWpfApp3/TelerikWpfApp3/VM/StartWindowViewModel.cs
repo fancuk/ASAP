@@ -7,15 +7,29 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using TelerikWpfApp3.M;
-using System.ComponentModel;
+
 
 namespace TelerikWpfApp3.VM
 {
-    class StartWindowViewModel: INotifyPropertyChanged
+    class StartWindowViewModel : INotifyPropertyChanged
     {
         private UserControlViewModel _viewModel1;
         private UserControlViewModel1 _viewModel2;
         private ChatUserControlViewModel _chatViewModel;
+        private string _myId;
+
+        public string myId
+        {
+            get
+            {
+                return this._myId;
+            }
+            set
+            {
+                this._myId = value;
+                OnPropertyChanged("myId");
+            }
+        }
         public ICommand Page1 { get; set; }
         public ICommand Page2 { get; set; }
         public ICommand ChatPageOn { get; set; }
@@ -31,20 +45,9 @@ namespace TelerikWpfApp3.VM
             Page2 = new Command(Page2Load, CE);
             ChatPageOn = new Command(loadChatPage, CE);
             ContentView = null;
-            //CloseCommand = new Command(ExecuteClose, CE);
-
+           // CloseCommand = new Command(ExecuteClose, CE);
+            myId = ((App)Application.Current).getmyID();
         }
-        /*private void ExecuteClose(object obj)
-        {
-            if (((App)Application.Current).nowConnect == true)
-            {
-                ((App)Application.Current).CloseSocket();
-            }
-            Window vt = TelerikWpfApp3.viewtest.Instance;
-            Window sw = TelerikWpfApp3.StartWindow.Instance;
-            vt.Show();
-            sw.Hide();
-        }*/
         public void OnWindowClosing(object sender, CancelEventArgs e)
         {
             // Handle closing logic, set e.Cancel as needed

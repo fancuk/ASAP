@@ -32,7 +32,6 @@ namespace TelerikWpfApp3
                 return instance;
             }
         }
-        
         private StartWindow()
         {
             InitializeComponent();
