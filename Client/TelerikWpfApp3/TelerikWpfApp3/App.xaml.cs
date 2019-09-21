@@ -47,6 +47,16 @@ namespace TelerikWpfApp3
         {
             myID = myid;
         }
+
+        public bool idchk;
+        public bool getidchk()
+        {
+            return idchk;
+        }
+        public void setidchk(bool isit)
+        {
+            idchk = isit;
+        }
         public class ClientItem
         {
             private string user;

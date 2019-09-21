@@ -43,6 +43,7 @@ namespace TelerikWpfApp3.VM
             set
             {
                 this._name = value; OnPropertyChanged("name");
+                ((App)Application.Current).setidchk(false);
                 if (this._name != "")
                 {
                     nameChk = "V";

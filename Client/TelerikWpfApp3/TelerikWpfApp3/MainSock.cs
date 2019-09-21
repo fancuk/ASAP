@@ -261,6 +261,7 @@ namespace TelerikWpfApp3
                         {
                             ((App)Application.Current).StartMainWindow();
                         });
+                        ((App)Application.Current).setidchk(true);
                     }
                     else
                     {

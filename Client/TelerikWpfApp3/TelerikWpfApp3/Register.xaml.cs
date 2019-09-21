@@ -100,13 +100,33 @@ namespace TelerikWpfApp3
             string pw1 = pwbox.Password.ToString();
             string email = emailBox.Text;
             string parameter = id + "/" + pw1 + "/" + email + "/";
-            ((App)Application.Current).StartSocket();
-            ((App)Application.Current).SendData("<REG>", parameter);
+            bool isit = ((App)Application.Current).getidchk();
+            if (!isit) //id chk 안함
+            {
+                MessageBox.Show("아이디 체크 해주세요.");
+            }
+            else if (id == "" || pw1 == "" || email == "")
+            {
+                MessageBox.Show("아이디, 비밀번호, 이메일은 공백일 수 없습니다.");
+            }
+            else if (pc.chkResult == "not Equal")
+            {
+                MessageBox.Show("비밀번호 확인 요망.");
+            }
+            else
+            {
+                ((App)Application.Current).StartSocket();
+                ((App)Application.Current).SendData("<REG>", parameter);
+            }
         }
 
         private void IDcheck_Click(object sender, RoutedEventArgs e)
         {
             string id = idbox1.Text;
+            if (id == "")
+            {
+                MessageBox.Show("ID를 입력해주세요.");
+            }
             ((App)Application.Current).StartSocket();
             ((App)Application.Current).SendData("<ICF>", id);
         }
