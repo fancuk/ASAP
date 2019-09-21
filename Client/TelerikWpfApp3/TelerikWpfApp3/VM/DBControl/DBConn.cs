@@ -160,5 +160,55 @@ namespace TelerikWpfApp3.VM.DBControl
             return flag;
         }*/
         #endregion
+
+        #region Read 반환형 ObservableCollection
+        public void ReadChat() //채팅 목록
+        {
+            string myId = ((App)Application.Current).getmyID();
+            createChattingFile();
+            ObservableCollection<Chatitem> information =
+                new ObservableCollection<Chatitem>();
+            SQLiteConnection Conn = new
+                SQLiteConnection("Data Source=Chatting;Version=3");
+            string query = "select * from Chatting order by time asc"; //시간 표시
+            try
+            {
+                Conn.Open();
+                SQLiteCommand Command = new SQLiteCommand(query, Conn);
+                SQLiteDataReader Datareader = Command.ExecuteReader();
+                while (Datareader.Read())
+                {
+                    
+                    string msg = Datareader["msg"].ToString();
+                    string sender = Datareader["sender"].ToString();
+                    string receiver = Datareader["receiver"].ToString();
+                    string time = Datareader["time"].ToString();
+                    Chatitem tmpChatItem = new Chatitem();
+                    tmpChatItem.User = sender;
+                    tmpChatItem.Text = msg;
+                    tmpChatItem.Time = time;
+                    if (sender.Equals(myId))
+                    {
+                        tmpChatItem.Chk = true;
+                        ((App)Application.Current).AddSQLChat(receiver, tmpChatItem);
+                    }
+                    else
+                    {
+                        tmpChatItem.Chk = false;
+                        ((App)Application.Current).AddSQLChat(sender, tmpChatItem);
+                    }                    
+                }
+            }
+            catch (Exception e)
+            {
+                //추가
+                MessageBox.Show(e.ToString());
+            }
+            finally
+            {
+                Conn.Close();
+            }
+        }
+        #endregion
     }
 }
