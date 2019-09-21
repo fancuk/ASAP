@@ -19,7 +19,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TelerikWpfApp3.M;
 using System.ComponentModel;
-
+using System.Text.RegularExpressions;
 
 namespace TelerikWpfApp3.VM
 {
@@ -71,11 +71,16 @@ namespace TelerikWpfApp3.VM
         {
             get { return this._email; }
             set { this._email = value; OnPropertyChanged("email");
-                if (this._email != "")
+                if (Regex.IsMatch(this._email, @"^[a-zA-Z][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]$"))
                 {
                     emailChk = "V";
+                    ((App)Application.Current).setEmailChk(true);
                 }
-                else emailChk = "X";
+                else
+                {
+                    emailChk = "X";
+                    ((App)Application.Current).setEmailChk(false);
+                }
             }
         }
         public string emailChk

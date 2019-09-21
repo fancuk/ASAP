@@ -200,16 +200,23 @@ namespace TelerikWpfApp3
                 // tokens[1] - 보낸 메세지
                 string[] tokens = text.Split('/');
                 string tag = tokens[0];
-                if (tokens.Length == 1) return;
+                if (tokens.Length == 1 && tag != "<FIN>") return;
                 if (tag.Equals("<LOG>")) // 로그인
                 {
                     string flag = tokens[1];
                     if (flag.Equals("true"))
                     {
-                        Properties.Settings.Default.loginOK = true; // 로그인 성공여부
-                        Properties.Settings.Default.loginIdSave = ((App)Application.Current).getmyID(); //id 저장
-                        Properties.Settings.Default.Save();
-
+                        //Properties.Settings.Default.loginOK = true; // 로그인 성공여부
+                        if (Properties.Settings.Default.idSaveCheck == true)
+                        {
+                            Properties.Settings.Default.loginIdSave = "";
+                            Properties.Settings.Default.Save();
+                        }
+                        else
+                        {
+                            Properties.Settings.Default.loginIdSave = ((App)Application.Current).getmyID();
+                            Properties.Settings.Default.Save();
+                        }
                         DispatchService.Invoke(() =>
                         {
                             ((App)Application.Current).StartMainWindow();
@@ -332,7 +339,14 @@ namespace TelerikWpfApp3
                 {
                     if (((App)Application.Current).nowConnect == true)
                     {
-                        closeSock();
+                        if (((App)Application.Current).nowConnect == true)
+                        {
+                            ((App)Application.Current).CloseSocket();
+                        }
+                        Window vt = TelerikWpfApp3.viewtest.Instance;
+                        Window sw = TelerikWpfApp3.StartWindow.Instance;
+                        vt.Show();
+                        sw.Hide();
                     }
                 }
                 else if (tag.Equals("<FLD>"))
