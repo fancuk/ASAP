@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net.Sockets;
 using System.Windows;
 using TelerikWpfApp3.M;
+using TelerikWpfApp3.VM;
 using TelerikWpfApp3.VM.DBControl;
 
 namespace TelerikWpfApp3
@@ -53,23 +54,7 @@ namespace TelerikWpfApp3
         {
             idchk = isit;
         }
-        public class ClientItem
-        {
-            private string user;
-            private string status;
-            private bool chk;
-
-            public ClientItem(string user, string status, bool chk)
-            {
-                this.User = user;
-                this.Status = status;
-                this.Chk = chk;
-            }
-
-            public string User { get => user; set => user = value; }
-            public string Status { get => status; set => status = value; }
-            public bool Chk { get => chk; set => chk = value; }
-        }
+       
         public static string nowChatTarget;
 
         public string getTarget()
@@ -80,6 +65,19 @@ namespace TelerikWpfApp3
         public void setTarget(string tt)
         {
             nowChatTarget = tt;
+        }
+
+       ChatControl chatControl = new ChatControl();
+
+        public void loadAllChat()
+        {
+            database sqlite = new database();
+            sqlite.ReadChat();
+        }
+
+        public void AddSQLChat(string target, Chatitem chatitem)
+        {
+            chatControl.addChat(target, chatitem);
         }
 
         IDictionary<string, ObservableCollection<Chatitem>> Chatdict 
@@ -96,6 +94,8 @@ namespace TelerikWpfApp3
             database sqlite = new database();
             sqlite.ChattingCreate(Sender, Receiver, Time, Msg);
         }
+
+
         public void setChat(string id)
         {
             database sqlite = new database();
@@ -110,8 +110,9 @@ namespace TelerikWpfApp3
             }
         }
 
-        public ObservableCollection<Chatitem> getChat()
+        public ObservableCollection<Chatitem> getChat(string target)
         {
+            NowChat = chatControl.loadChat(target);
             return NowChat;
         }
 

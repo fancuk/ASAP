@@ -270,7 +270,7 @@ namespace TelerikWpfApp3
                         {
                             ((App)Application.Current).StartMainWindow();
                         });
-                        ((App)Application.Current).setidchk(true);
+                         ((App)Application.Current).setidchk(true);
                     }
                     else
                     {
@@ -282,11 +282,16 @@ namespace TelerikWpfApp3
                 {
                     if (tokens[1] == "true")
                     {
-                        MessageBox.Show("hi");
+                        string target = tokens[2];
+                        DispatchService.Invoke(() =>
+                        {
+                            ((App)Application.Current).setfriends(target);
+                        });
+                        MessageBox.Show("친구 추가 되었습니다!");
                     }
                     else
                     {
-                        MessageBox.Show("false");
+                        MessageBox.Show("존재하지 않는 ID입니다.");
                     }
                 }
                 /*else if (tag.Equals("<FRR>")) // 친구추가
@@ -316,10 +321,14 @@ namespace TelerikWpfApp3
                 */
                 else if (tag.Equals("<MSG>")) // 메세지
                 {
+                    Chatitem tmp = new Chatitem();
+                    tmp.User = tokens[1];
+                    tmp.Time = tokens[3];
+                    tmp.Text = tokens[4];
                     ((App)Application.Current).setchatting(tokens[1], tokens[2], tokens[3], tokens[4]);
                     DispatchService.Invoke(() =>
                     {
-                        ((App)Application.Current).AddChat(false,tokens[4]);
+                        ((App)Application.Current).AddSQLChat(tmp.User,tmp);
                     });
                 }
                 else if (tag.Equals("<FIN>"))

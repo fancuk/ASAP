@@ -67,7 +67,6 @@ namespace TelerikWpfApp3.VM
             string str = searchName + "/";
             string member = ((App)Application.Current).getmyID();
             ((App)Application.Current).SendData("<FRR>", str + member);
-            ((App)Application.Current).setfriends(searchname);
         }
 
         public void ExeceuteSendMsg(object org)
@@ -78,8 +77,13 @@ namespace TelerikWpfApp3.VM
             string nowTime = DateTime.Now.ToString();
             string msg =  target + "/" + id + "/" + DateTime.Now as string + "/" + plain + "/";
             sqlite.ChattingCreate(id, target, nowTime, plain);
+            Chatitem tmp = new Chatitem();
+            tmp.User = id;
+            tmp.Text = plain;
+            tmp.Time = nowTime;
+            tmp.Chk = true;
             ((App)Application.Current).SendData("<MSG>", msg);
-            ((App)Application.Current).AddChat(true, plain);
+            ((App)Application.Current).AddSQLChat(target, tmp);
 
             msgTextBox = "";
         }

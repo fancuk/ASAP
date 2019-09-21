@@ -23,24 +23,21 @@ namespace TelerikWpfApp3.View.UserControl
     {
         public ChatUserControl()
         {
-            InitializeComponent(); 
-            ChatBox.DataContext = ((App)Application.Current).getChat();
+            InitializeComponent();
+            ((App)Application.Current).loadAllChat();
             //((App)Application.Current).LoadMyFriends();
             ClientList.DataContext = ((App)Application.Current).getFriends();
-
         }
         private void GetMessageById(object sender, RoutedEventArgs e)
         {
             string target  = (((sender as StackPanel).FindName("TargetBox") as TextBlock).Text);
-            ((App)Application.Current).setChat(target);
+            ChatBox.DataContext = ((App)Application.Current).getChat(target);
             ((App)Application.Current).setTarget(target);
             refresh();
         }
 
         private void refresh()
         {
-            ChatBox.DataContext = ((App)Application.Current).getChat();
-            ClientList.DataContext = ((App)Application.Current).getFriends();
         }
     }
 }
