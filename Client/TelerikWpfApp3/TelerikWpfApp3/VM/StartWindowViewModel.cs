@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using TelerikWpfApp3.M;
+using System.ComponentModel;
 
 namespace TelerikWpfApp3.VM
 {
@@ -30,11 +31,24 @@ namespace TelerikWpfApp3.VM
             Page2 = new Command(Page2Load, CE);
             ChatPageOn = new Command(loadChatPage, CE);
             ContentView = null;
-            CloseCommand = new Command(ExecuteClose, CE);
+            //CloseCommand = new Command(ExecuteClose, CE);
 
         }
-        private void ExecuteClose(object obj)
+        /*private void ExecuteClose(object obj)
         {
+            if (((App)Application.Current).nowConnect == true)
+            {
+                ((App)Application.Current).CloseSocket();
+            }
+            Window vt = TelerikWpfApp3.viewtest.Instance;
+            Window sw = TelerikWpfApp3.StartWindow.Instance;
+            vt.Show();
+            sw.Hide();
+        }*/
+        public void OnWindowClosing(object sender, CancelEventArgs e)
+        {
+            // Handle closing logic, set e.Cancel as needed
+            e.Cancel = true;
             if (((App)Application.Current).nowConnect == true)
             {
                 ((App)Application.Current).CloseSocket();

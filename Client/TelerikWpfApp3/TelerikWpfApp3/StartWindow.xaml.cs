@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using TelerikWpfApp3.VM;
 
 namespace TelerikWpfApp3
 {
@@ -31,9 +32,12 @@ namespace TelerikWpfApp3
                 return instance;
             }
         }
+        
         private StartWindow()
         {
             InitializeComponent();
+            StartWindowViewModel stw = new StartWindowViewModel();
+            Closing += stw.OnWindowClosing;
         }
 
         private void Banner_MouseDown(object sender, MouseButtonEventArgs e)

@@ -178,11 +178,6 @@ namespace TelerikWpfApp3
         void DataReceived(IAsyncResult ar)
         {
             AsyncObject obj = (AsyncObject)ar.AsyncState;
-            if (!mSock.Connected)
-            {
-                MessageBox.Show("Server is now ShutDown!");
-                return;
-            }
 
             try
             {
@@ -194,6 +189,11 @@ namespace TelerikWpfApp3
                 //}
 
                 // UTF8 인코더를 사용하여 바이트 배열을 문자열로 변환한다.
+                if (!mSock.Connected)
+                {
+                    MessageBox.Show("Server is now ShutDown!");
+                    return;
+                }
                 string text = Encoding.UTF8.GetString(obj.Buffer);
 
                 // 0x01 기준으로 짜른다.
@@ -201,6 +201,7 @@ namespace TelerikWpfApp3
                 // tokens[1] - 보낸 메세지
                 string[] tokens = text.Split('/');
                 string tag = tokens[0];
+                if (tokens.Length == 1) return;
                 if (tag.Equals("<LOG>")) // 로그인
                 {
                     string flag = tokens[1];
@@ -331,7 +332,10 @@ namespace TelerikWpfApp3
                 }
                 else if (tag.Equals("<FIN>"))
                 {
-                    closeSock();
+                    if (((App)Application.Current).nowConnect == true)
+                    {
+                        closeSock();
+                    }
                 }
                 else if (tag.Equals("<FLD>"))
                 {
@@ -354,11 +358,10 @@ namespace TelerikWpfApp3
             }
             catch (Exception e)
             {
-                DispatchService.Invoke(() =>
+                if (((App)Application.Current).nowConnect == true)
                 {
-                    ((App)Application.Current).ShowLoginView();
-                });
-                closeSock();
+                    closeSock();
+                }
                 MessageBox.Show("서버와의 연결 오류!");
                 return;
             }
