@@ -10,7 +10,7 @@
         xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
         xmlns:ignore="http://www.ignore.com"
         mc:Ignorable="d"
-        Title="viewtest" Height="630" Width="395"
+         Title="viewtest" Height="630" Width="395" Loaded="Login_Loaded"
         WindowStyle="None"
         ResizeMode="NoResize"
         BorderThickness="1.5,1.5,1.5,1.5" BorderBrush="#FF676565">
