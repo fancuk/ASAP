@@ -49,6 +49,15 @@ namespace TelerikWpfApp3.VM
                     nameChk = "V";
                 }
                 else nameChk = "X";
+                /*if (((App)Application.Current).getidchk() == true)
+               {
+                   nameChk = "V";
+               }
+               else
+               {
+                   nameChk = "X";
+               }*/
+
             }
         }
         public string nameChk
@@ -108,6 +117,8 @@ namespace TelerikWpfApp3.VM
         #region methods
         public ICommand pw2Changed { get; set; }
         public ICommand test { get; set; }
+        public ICommand idChecking { get; set; }
+
         #endregion
 
         public ICommand CloseCommand { get; set; }
@@ -119,6 +130,17 @@ namespace TelerikWpfApp3.VM
             pw1Chk = "X";
             pw2Changed = new Command(ExecuteChkPwEquals, CanExecute);
             CloseCommand = new Command(ExecuteClose, CanExecute);
+            idChecking = new Command(idCheckButton, CanExecute);
+        }
+        private void idCheckButton(object org)
+        {
+            string id = name;
+            if (id == "")
+            {
+                MessageBox.Show("ID를 입력해주세요.");
+            }
+          ((App)Application.Current).StartSocket();
+            ((App)Application.Current).SendData("<ICF>", id);
         }
 
         private void ExecuteClose(object obj)

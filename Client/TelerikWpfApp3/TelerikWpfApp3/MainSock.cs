@@ -235,14 +235,12 @@ namespace TelerikWpfApp3
                     string flag = tokens[1];
                     if (flag.Equals("true"))
                     {
-                        Window s = new SuccessMsgBox("회원가입 성공");
                         DispatchService.Invoke(() =>
                         {
-                            ((App)Application.Current).StartMainWindow();
-
+                            MessageBox.Show("회원가입 완료!!");
                         });
-                        s.Show();
                     }
+
                     else
                     {
                         MessageBox.Show("Register Failed.....TT");
@@ -260,15 +258,13 @@ namespace TelerikWpfApp3
                     if (flag.Equals("true"))
                     {
                         MessageBox.Show("ID Check Sucess! in view");
-                        DispatchService.Invoke(() =>
-                        {
-                            ((App)Application.Current).StartMainWindow();
-                        });
-                         ((App)Application.Current).setidchk(true);
+                        ((App)Application.Current).setidchk(true);
                     }
                     else
                     {
                         MessageBox.Show("ID Check Failed.....TT");
+                        ((App)Application.Current).setidchk(false);
+
                     }
                     ((App)Application.Current).CloseSocket();
                 }

@@ -108,7 +108,7 @@ namespace TelerikWpfApp3
                 pwchk.Foreground = new SolidColorBrush(Colors.Red);
             }
         }
-
+        
         private void RegisterButton_Click(object sender, RoutedEventArgs e)
         {
             string id = idbox1.Text;
@@ -128,6 +128,10 @@ namespace TelerikWpfApp3
             {
                 MessageBox.Show("비밀번호 확인 요망.");
             }
+            else if(agree.IsChecked == false)
+            {
+                MessageBox.Show("동의 버튼을 눌러주세요.");
+            }
             else
             {
                 ((App)Application.Current).StartSocket();
@@ -135,15 +139,6 @@ namespace TelerikWpfApp3
             }
         }
 
-        private void IDcheck_Click(object sender, RoutedEventArgs e)
-        {
-            string id = idbox1.Text;
-            if (id == "")
-            {
-                MessageBox.Show("ID를 입력해주세요.");
-            }
-            ((App)Application.Current).StartSocket();
-            ((App)Application.Current).SendData("<ICF>", id);
-        }
+       
     }
 }

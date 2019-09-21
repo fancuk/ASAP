@@ -198,7 +198,7 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                                             <StackPanel>
                                                 <Border>
                                                     <StackPanel>
-                                                        <Button x:Name="IdDoubleCheck" Background="#FF00C4BF"  Click="IDcheck_Click"
+                                                        <Button x:Name="IdDoubleCheck" Background="#FF00C4BF"  Command="{Binding idChecking}"
                                                         BorderThickness="0" Content="중복확인" Foreground="White" RenderTransformOrigin="0.482,-0.359" 
                                                         HorizontalAlignment="Left" VerticalAlignment="Center" Width="70" Height="30" Margin="10,0,0,0" />
                                                     </StackPanel>
@@ -320,7 +320,7 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                                 </StackPanel>
                                 <StackPanel>
                                     <StackPanel Height="21" Margin="0,20,0,0">
-                                        <CheckBox Margin="50,0,0,0">
+                                        <CheckBox x:Name="agree" Margin="50,0,0,0">
                                             <TextBlock Text="I agree the terms of service" Margin="10,0,0,0"></TextBlock>
                                         </CheckBox>
                                     </StackPanel>
