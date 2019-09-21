@@ -13,6 +13,28 @@
         <VM:ChatUserControlViewModel/>
     </UserControl.DataContext>
     <UserControl.Resources>
+        <Style x:Key="SimpleListBoxItem" TargetType="ListBoxItem">
+            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Border
+           Name="Border"
+           Padding="2"
+           SnapsToDevicePixels="true">
+                            <ContentPresenter />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="true">
+                                <Setter TargetName="Border" Property="Background"
+                     Value="#FFEAEAEA"/>
+        
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
         <Style x:Key="disabledListBoxWithScroll" TargetType="{x:Type ListBox}">
             <Setter Property="Template">
                 <Setter.Value>
@@ -38,7 +60,7 @@
     <Grid Background="White">
         <StackPanel Orientation="Horizontal">
             <Border BorderThickness="0,0,1,0" BorderBrush="#FFDCD8D8" Margin="0,0,0,-21">
-                <StackPanel Width="212" Margin="0" Background="#FFEDEDED">
+                <StackPanel Width="212" Margin="0" Background="#FFF9F9F9">
                     <StackPanel Orientation="Horizontal" Height="56">
                         <StackPanel Orientation="Horizontal" Width="150" Height="30.4" Margin="8,0,0,0">
                             <Border BorderThickness="1,1,1,1" Width="150" Margin="0,0,0,-12" CornerRadius="3
@@ -71,27 +93,50 @@
                             </Border>
                         </StackPanel>
                     </StackPanel>
-                    <ListBox ScrollViewer.CanContentScroll="True" 
+                    <ListBox ScrollViewer.HorizontalScrollBarVisibility="Hidden" 
                              BorderThickness="0,0,0,0" x:Name="ClientList" 
                              Height="558" ItemsSource="{Binding}"  
+                             ItemContainerStyle="{StaticResource SimpleListBoxItem}"
                              IsSynchronizedWithCurrentItem="False" 
                              BorderBrush="{x:Null}" Margin="0,10,0,0" Background="{x:Null}">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <StackPanel Width="212" Height="40" HorizontalAlignment="Left" Margin="0,10"  >
+                                <StackPanel Width="212" Height="70" HorizontalAlignment="Left" Background="{x:Null}"  >
                                     <StackPanel x:Name="wp"  Background="{x:Null}" MouseLeftButtonDown="GetMessageById">
-                                        <Border x:Name="chatBack" CornerRadius="4" Margin="0" BorderBrush="#FFEAE8E8" Background="{x:Null}" >
-                                            <StackPanel Orientation="Horizontal" >
-                                                <StackPanel >
-                                                    <Ellipse Height="70" Width="70">
-                                                        <Ellipse.Fill>
-                                                            <ImageBrush ImageSource="/TelerikWpfApp3;component/Resources/puzzlelogo1.png"/>
-                                                        </Ellipse.Fill>
-                                                    </Ellipse>
+                                        <Border x:Name="chatBack" CornerRadius="4" Margin="0" BorderBrush="{x:Null}" Background="{x:Null}" >
+                                            <StackPanel  Orientation="Horizontal" Background="{x:Null}" >
+                                                <Border Background="White" CornerRadius="22" Width="50" Height="50">
+                                                    <Border.Effect>
+                                                        <DropShadowEffect Color="#FFCCCCCC"/>
+                                                    </Border.Effect>
+                                                    <Ellipse Height="50" Width="50">
+                                                    <Ellipse.Fill>
+                                                        <ImageBrush ImageSource="/TelerikWpfApp3;component/Resources/puzzlelogo1.png"/>
+                                                    </Ellipse.Fill>
+                                                </Ellipse>
+                                                </Border>
+                                                <TextBlock  x:Name="TargetBox" Text="{Binding User}" TextWrapping="Wrap" Grid.Column="1" 
+                                                       Height="60"
+                                                           Width="212" 
+                                                       FontSize="1" Margin="0,0,0,0" Background="{x:Null}" TextAlignment="Left" Foreground="#FF060606" FontFamily="Comic Sans MS">
+                                                    <StackPanel Orientation="Vertical" >
+                                                <Border CornerRadius="5" Background="{x:Null}" Width="100" Height="35" Margin="5,5,0,0" >
+                                                   <StackPanel>
+                                                    <TextBlock 
+                                                        FontSize="22px"
+                                                        Text="{Binding ElementName=TargetBox, Path=Text}" Background="{x:Null}" Margin="0,5,0,0" TextAlignment="Left"></TextBlock>
+                                                       </StackPanel>
+                                                    <!--<TextBlock Text="{Binding ElementName=TargetBox, Path=Text}"></TextBlock>-->
+                                                </Border>
+                                                
+                                                    <Border CornerRadius="10" Background="White" Width="100" Height="30" Margin="0,0,0,0" >   
+                                                   <StackPanel>
+                                                    <TextBlock FontSize="10" Text="아 쉬고싶다....~" TextAlignment="Center"> </TextBlock>
+                                                       </StackPanel>
+                                                    <!--<TextBlock Text="{Binding ElementName=TargetBox, Path=Text}"></TextBlock>-->
+                                                </Border>
                                                 </StackPanel>
-                                                <TextBlock x:Name="TargetBox" Text="{Binding User}" TextWrapping="Wrap" Grid.Column="1" 
-                                                       Height="30"
-                                                       FontSize="18" Margin="10,0,0,20" Background="{x:Null}" TextAlignment="Center"/>
+                                                </TextBlock>
                                             </StackPanel>
                                         </Border>
                                     </StackPanel>
@@ -105,7 +150,7 @@
                 <StackPanel Width="708">
                     <StackPanel Height="82" Orientation="Horizontal">
                         <StackPanel Width="516">
-                            <TextBlock x:Name="chatTarget" FontSize="29" Text="Click Your Frinend!" FontFamily="Impact" Margin="40,20,253,0"/>
+                            <TextBlock x:Name="chatTarget" FontSize="29" Text="Click Your Frinend!" FontFamily="Impact" Margin="40,20,232,0"/>
                             <TextBlock x:Name="chatTarget_Copy" FontSize="20" Text="Puzzle Messenger" FontFamily="Impact" Margin="40,1,232,0" Foreground="#FF6D6262"/>
                         </StackPanel>
                         <StackPanel Width="189"></StackPanel>
