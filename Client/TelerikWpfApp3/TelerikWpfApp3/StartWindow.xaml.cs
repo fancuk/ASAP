@@ -35,5 +35,12 @@ namespace TelerikWpfApp3
         {
             InitializeComponent();
         }
+
+        private void Banner_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+                this.DragMove();
+        }
+
     }
 }

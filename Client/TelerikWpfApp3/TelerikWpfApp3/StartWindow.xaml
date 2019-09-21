@@ -167,16 +167,35 @@
                                 <StackPanel.DataContext>
                                     <vm:TitleControl></vm:TitleControl>
                                 </StackPanel.DataContext>
-                                <StackPanel Width="804" Orientation="Horizontal">
-                                    <StackPanel Orientation="Horizontal" Width="326">
+                                <StackPanel PreviewMouseDown="Banner_MouseDown" Width="804" Orientation="Horizontal">
+
+                                    <StackPanel Orientation="Horizontal" Width="172">
                                         <StackPanel Width="72" Height="58" VerticalAlignment="Top">
                                             <StackPanel.Background>
                                                 <ImageBrush ImageSource="Resources/logo2.jpg" Stretch="Uniform"></ImageBrush>
                                             </StackPanel.Background>
                                         </StackPanel>
-                                        <TextBlock Text="Puzzle Ver.0" Margin="0,32,0,0" FontSize="20" Foreground="#FF077B7D" FontFamily="Impact"></TextBlock>
+                                        <StackPanel>
+                                            <Border Width="100" Margin="0,0,0,0">
+                                                <TextBlock Height="31"></TextBlock>
+
+                                            </Border>
+                                            <Border Width="100" Margin="0,0,0,0">
+                                                <TextBlock Text="Puzzle Ver.0" Margin="0,0,0,0" FontSize="20" Foreground="#FF077B7D" FontFamily="Impact" Height="35"></TextBlock>
+
+                                            </Border>
+                                        </StackPanel>
+
+
+                                    </StackPanel>
+                                    <StackPanel>
+                                        <Border Height="66" Width="625">
+                                            <TextBlock></TextBlock>
+                                        </Border>
                                     </StackPanel>
                                 </StackPanel>
+
+                                
                                 <StackPanel Orientation="Horizontal" RenderTransformOrigin="0.5,0.5" Height="30">
                                     <StackPanel.RenderTransform>
                                         <TransformGroup>
