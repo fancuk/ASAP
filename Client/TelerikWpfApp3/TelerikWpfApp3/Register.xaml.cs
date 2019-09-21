@@ -132,6 +132,10 @@ namespace TelerikWpfApp3
             {
                 MessageBox.Show("동의 버튼을 눌러주세요.");
             }
+            else if((((App)Application.Current).getEmailChk() == false))
+            {
+                MessageBox.Show("이메일을 다시 작성하세요.");
+            }
             else
             {
                 ((App)Application.Current).StartSocket();

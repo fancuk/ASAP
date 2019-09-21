@@ -51,7 +51,15 @@ namespace TelerikWpfApp3
         {
             idchk = isit;
         }
-       
+        public bool emailChk;
+        public bool getEmailChk()
+        {
+            return emailChk;
+        }
+        public void setEmailChk(bool email)
+        {
+            emailChk = email;
+        }
         public static string nowChatTarget;
 
         public string getTarget()
