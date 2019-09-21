@@ -69,10 +69,13 @@ namespace TelerikWpfApp3
         
         public void closeSock()
          {
-            mSock.Dispose();
-            mSock.Close();
-            mSock = null;
-            ((App)Application.Current).nowConnect = false;
+            if (((App)Application.Current).nowConnect == true)
+            {
+                mSock.Dispose();
+                mSock.Close();
+                mSock = null;
+                ((App)Application.Current).nowConnect = false;
+            }
         }
 
         public Socket bindSock(Socket sock)
@@ -84,8 +87,8 @@ namespace TelerikWpfApp3
 
         public bool StartConnect()
         {
-           string address = "127.0.0.1";
-          //  string address = "203.229.204.23"; // "127.0.0.1" 도 가능
+           //string address = "127.0.0.1";
+            string address = "203.229.204.23"; // "127.0.0.1" 도 가능
             int port = 11000;
             return BeginConnection(address, port);
         }
@@ -373,7 +376,6 @@ namespace TelerikWpfApp3
 
             bDts = Encoding.UTF8.GetBytes(str);
             mSock.Send(bDts);
-            MessageBox.Show(tts + "send complete");
         }
         #endregion
 

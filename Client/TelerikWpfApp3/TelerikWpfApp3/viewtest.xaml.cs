@@ -64,29 +64,34 @@ namespace TelerikWpfApp3
                 Properties.Settings.Default.idSaveCheck = false;
                 MessageBox.Show("아이디 비번중에 하나를 안쳤네요.");
             }
-             ((App)Application.Current).StartSocket();
-            ((App)Application.Current).SendData("<LOG>", parameter);
-
-            if (Properties.Settings.Default.loginOK == true)//로그인 성공
+            else
             {
-                if (rememberID.IsChecked == true) //check면
+                ((App)Application.Current).StartSocket();
+                if (((App)Application.Current).nowConnect == true)
                 {
-                    Properties.Settings.Default.idSaveCheck = true; //checkbox 체크
-                    Properties.Settings.Default.loginIdSave = Uid; //id 저장
-                    Properties.Settings.Default.Save();
+                    ((App)Application.Current).SendData("<LOG>", parameter);
                 }
+                if (Properties.Settings.Default.loginOK == true)//로그인 성공
+                {
+                    if (rememberID.IsChecked == true) //check면
+                    {
+                        Properties.Settings.Default.idSaveCheck = true; //checkbox 체크
+                        Properties.Settings.Default.loginIdSave = Uid; //id 저장
+                        Properties.Settings.Default.Save();
+                    }
 
+                    else
+                    {
+                        Properties.Settings.Default.idSaveCheck = false;
+                        Properties.Settings.Default.loginIdSave = "";
+                        Properties.Settings.Default.Save();
+                    }
+                }
                 else
                 {
-                    Properties.Settings.Default.idSaveCheck = false;
                     Properties.Settings.Default.loginIdSave = "";
                     Properties.Settings.Default.Save();
                 }
-            }
-            else
-            {
-                Properties.Settings.Default.loginIdSave = "";
-                Properties.Settings.Default.Save();
             }
         }
 
