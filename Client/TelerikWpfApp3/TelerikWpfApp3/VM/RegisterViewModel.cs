@@ -127,7 +127,6 @@ namespace TelerikWpfApp3.VM
             {
                 ((App)Application.Current).CloseSocket();
             }
-            MessageBox.Show("Register view close");
         }
 
         private void ExecuteChkPwEquals(object obj)

@@ -66,7 +66,6 @@ namespace TelerikWpfApp3.VM
             {
                 ((App)Application.Current).CloseSocket();
             }
-            MessageBox.Show("viewtest close");
         }
 
         private void ExecuteLogin(object obj)

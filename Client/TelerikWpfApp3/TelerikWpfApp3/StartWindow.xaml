@@ -20,6 +20,9 @@
             <i:InvokeCommandAction  Command="{Binding CloseCommand}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
+    <Window.DataContext>
+        <vm:StartWindowViewModel/>
+    </Window.DataContext>
     <Window.Resources>
         <Style TargetType="{x:Type RadioButton}" x:Key="buttonstripe1">
             <Setter Property="Template">
@@ -79,9 +82,7 @@
             <DropShadowEffect ShadowDepth="0" BlurRadius="10" Color="Gray"/>
         </Border.Effect>
         <Grid>
-            <Grid.DataContext>
-                <vm:StartWindowViewModel/>
-            </Grid.DataContext>
+            
             <StackPanel Orientation="Horizontal">
                 <Border Width="190" Background="WhiteSmoke" BorderThickness="0,0.1,0,0">
                     <Border.Effect>

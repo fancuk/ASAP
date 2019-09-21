@@ -39,7 +39,10 @@ namespace TelerikWpfApp3.VM
             {
                 ((App)Application.Current).CloseSocket();
             }
-            MessageBox.Show("StartWindow close");
+            Window vt = TelerikWpfApp3.viewtest.Instance;
+            Window sw = TelerikWpfApp3.StartWindow.Instance;
+            vt.Show();
+            sw.Hide();
         }
         private bool CE(object obj)
         {
