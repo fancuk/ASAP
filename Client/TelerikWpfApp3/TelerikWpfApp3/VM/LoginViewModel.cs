@@ -80,7 +80,7 @@ namespace TelerikWpfApp3.VM
 
            // s.WindowStartupLocation = WindowStartupLocation.CenterOwner;
             s.Top = Application.Current.MainWindow.Top;
-            s.Left = Application.Current.MainWindow.Left+349;
+            s.Left = Application.Current.MainWindow.Left+395;
             s.Show();
         }
 
