@@ -80,11 +80,7 @@ namespace TelerikWpfApp3
             mSock = null;
             ((App)Application.Current).nowConnect = false;
         }
-        public void viewtest()
-        {
-            Window m = new viewtest();
-            m.Show();
-        }
+
         public Socket bindSock(Socket sock)
         {
             IPEndPoint serverEP = new IPEndPoint(IPAddress.Any, 11000);
@@ -94,8 +90,8 @@ namespace TelerikWpfApp3
 
         public bool StartConnect()
         {
-            string address = "127.0.0.1";
-            //string address = "203.229.204.23"; // "127.0.0.1" 도 가능
+            //string address = "127.0.0.1";
+            string address = "203.229.204.23"; // "127.0.0.1" 도 가능
             int port = 11000;
             return BeginConnection(address, port);
         }

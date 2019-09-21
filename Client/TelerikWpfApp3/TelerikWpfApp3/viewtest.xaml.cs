@@ -18,7 +18,24 @@ namespace TelerikWpfApp3
     /// </summary>
     public partial class viewtest : Window
     {
-        public viewtest()
+        private static viewtest instance = null;
+
+        public static viewtest Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new viewtest();
+                }
+                return instance;
+            }
+        }
+        static viewtest()
+        {
+            instance = new viewtest();
+        }
+        private viewtest()
         {
             InitializeComponent();
             this.MouseLeftButtonDown += MoveWindow;

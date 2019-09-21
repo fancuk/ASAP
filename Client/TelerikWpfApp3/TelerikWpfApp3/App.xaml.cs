@@ -20,7 +20,12 @@ namespace TelerikWpfApp3
     {
         public App()
         {
-            this.InitializeComponent();
+            Startup += App_Startup;
+            InitializeComponent();
+        }
+        private void App_Startup(object sender, StartupEventArgs e)
+        {
+            TelerikWpfApp3.viewtest.Instance.Show();
         }
         protected override void OnExit(ExitEventArgs e)
         {
@@ -181,7 +186,7 @@ namespace TelerikWpfApp3
         public void ShowLoginView()
         {
             Window s = TelerikWpfApp3.StartWindow.Instance;
-            Window n = new viewtest();
+            Window n = TelerikWpfApp3.viewtest.Instance;
             n.Show();
             s.Hide();
         }
