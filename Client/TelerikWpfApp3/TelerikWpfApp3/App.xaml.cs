@@ -28,16 +28,6 @@ namespace TelerikWpfApp3
         {
             TelerikWpfApp3.viewtest.Instance.Show();
         }
-        protected override void OnExit(ExitEventArgs e)
-        {
-            if (nowConnect == true)
-            {
-                CloseSocket();
-            }
-            MessageBox.Show("AA");
-            base.OnExit(e);
-        }
-        
         public string myID;
         public Boolean mqState { get; set; }
         public void LoadMyFriends()
