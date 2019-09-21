@@ -207,7 +207,10 @@ namespace TelerikWpfApp3
                     string flag = tokens[1];
                     if (flag.Equals("true"))
                     {
-                        Properties.Settings.Default.loginOK = true;
+                        Properties.Settings.Default.loginOK = true; // 로그인 성공여부
+                        Properties.Settings.Default.loginIdSave = ((App)Application.Current).getmyID(); //id 저장
+                        Properties.Settings.Default.Save();
+
                         DispatchService.Invoke(() =>
                         {
                             ((App)Application.Current).StartMainWindow();

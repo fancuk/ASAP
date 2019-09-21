@@ -70,27 +70,7 @@ namespace TelerikWpfApp3
                 if (((App)Application.Current).nowConnect == true)
                 {
                     ((App)Application.Current).SendData("<LOG>", parameter);
-                }
-                if (Properties.Settings.Default.loginOK == true)//로그인 성공
-                {
-                    if (rememberID.IsChecked == true) //check면
-                    {
-                        Properties.Settings.Default.idSaveCheck = true; //checkbox 체크
-                        Properties.Settings.Default.loginIdSave = Uid; //id 저장
-                        Properties.Settings.Default.Save();
-                    }
-
-                    else
-                    {
-                        Properties.Settings.Default.idSaveCheck = false;
-                        Properties.Settings.Default.loginIdSave = "";
-                        Properties.Settings.Default.Save();
-                    }
-                }
-                else
-                {
-                    Properties.Settings.Default.loginIdSave = "";
-                    Properties.Settings.Default.Save();
+                    ((App)Application.Current).setmyID(Uid);
                 }
             }
         }
@@ -108,6 +88,19 @@ namespace TelerikWpfApp3
                 ButtonAutomationPeer peer = new ButtonAutomationPeer(login);
                 IInvokeProvider invokeProv = peer.GetPattern(PatternInterface.Invoke) as IInvokeProvider;
                 invokeProv.Invoke();
+            }
+        }
+
+        private void RememberID_Checked(object sender, RoutedEventArgs e)
+        {
+            if (rememberID.IsChecked == false)
+            {
+                Properties.Settings.Default.Save();
+            }
+            else
+            {
+                Properties.Settings.Default.loginIdSave = null;
+                Properties.Settings.Default.Save();
             }
         }
     }
