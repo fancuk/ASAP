@@ -26,6 +26,7 @@ namespace TelerikWpfApp3
     /// </summary>
     public partial class Register : Window
     {
+
         public class pwChk:INotifyPropertyChanged
         {
             private string _ckhreuslt;
@@ -45,7 +46,21 @@ namespace TelerikWpfApp3
             }
         }
         pwChk pc = new pwChk();
-        public Register()
+
+        private static Register instance = null;
+
+        public static Register Instance
+        {
+            get
+            {
+                if(instance == null)
+                {
+                    instance = new Register();
+                }
+                return instance;
+            }
+        }
+        private Register()
         {
             InitializeComponent();
             this.MouseLeftButtonDown += MoveWindow;

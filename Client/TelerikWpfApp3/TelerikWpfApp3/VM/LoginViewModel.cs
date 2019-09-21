@@ -79,7 +79,7 @@ namespace TelerikWpfApp3.VM
         }
         private void ExecuteGotoRegister(object obj)
         {
-            Window s = new Register();
+            Window s = TelerikWpfApp3.Register.Instance;
             s.Owner = Application.Current.MainWindow; // We must also set the owner for this to work.
 
            // s.WindowStartupLocation = WindowStartupLocation.CenterOwner;
