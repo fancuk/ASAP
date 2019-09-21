@@ -15,6 +15,11 @@
 
         Background="{x:Null}"
         >
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Closing">
+            <i:InvokeCommandAction  Command="{Binding CloseCommand}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Window.Resources>
         <Style TargetType="{x:Type RadioButton}" x:Key="buttonstripe1">
             <Setter Property="Template">

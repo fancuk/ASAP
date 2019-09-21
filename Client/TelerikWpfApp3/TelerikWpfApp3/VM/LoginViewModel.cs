@@ -45,6 +45,7 @@ namespace TelerikWpfApp3.VM
         }
         public string InputBoxColor { get; set; }
 
+        public ICommand CloseCommand { get; set; }
         public ICommand test { get; set; }
         public ICommand Register { get; set; }
         public ICommand textChange { get; set; }
@@ -57,6 +58,15 @@ namespace TelerikWpfApp3.VM
             login = new Command(ExecuteLogin, CanExecute);
             textChange = new Command(ExecuteTextChange, CanExecute);
             test = new Command(ExecuteTest, CanExecute);
+            CloseCommand = new Command(ExecuteClose, CanExecute);
+        }
+        private void ExecuteClose(object obj)
+        {
+            if (((App)Application.Current).nowConnect == true)
+            {
+                ((App)Application.Current).CloseSocket();
+            }
+            MessageBox.Show("viewtest close");
         }
 
         private void ExecuteLogin(object obj)

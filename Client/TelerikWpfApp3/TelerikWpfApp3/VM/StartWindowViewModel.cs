@@ -18,6 +18,9 @@ namespace TelerikWpfApp3.VM
         public ICommand Page1 { get; set; }
         public ICommand Page2 { get; set; }
         public ICommand ChatPageOn { get; set; }
+        public ICommand CloseCommand { get; set; }
+
+
         public StartWindowViewModel()
         {
             this._viewModel1 = new UserControlViewModel();
@@ -26,7 +29,17 @@ namespace TelerikWpfApp3.VM
             Page1 = new Command(Page1Load, CE);
             Page2 = new Command(Page2Load, CE);
             ChatPageOn = new Command(loadChatPage, CE);
-            ContentView = null;            
+            ContentView = null;
+            CloseCommand = new Command(ExecuteClose, CE);
+
+        }
+        private void ExecuteClose(object obj)
+        {
+            if (((App)Application.Current).nowConnect == true)
+            {
+                ((App)Application.Current).CloseSocket();
+            }
+            MessageBox.Show("StartWindow close");
         }
         private bool CE(object obj)
         {

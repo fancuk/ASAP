@@ -110,15 +110,26 @@ namespace TelerikWpfApp3.VM
         public ICommand test { get; set; }
         #endregion
 
+        public ICommand CloseCommand { get; set; }
+
         public RegisterViewModel()
         {
             nameChk = "X";
             emailChk = "X";
             pw1Chk = "X";
             pw2Changed = new Command(ExecuteChkPwEquals, CanExecute);
+            CloseCommand = new Command(ExecuteClose, CanExecute);
         }
 
-        
+        private void ExecuteClose(object obj)
+        {
+            if (((App)Application.Current).nowConnect == true)
+            {
+                ((App)Application.Current).CloseSocket();
+            }
+            MessageBox.Show("Register view close");
+        }
+
         private void ExecuteChkPwEquals(object obj)
         {
             MessageBox.Show("ss");

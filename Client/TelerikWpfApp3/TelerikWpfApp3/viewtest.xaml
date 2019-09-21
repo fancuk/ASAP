@@ -14,6 +14,11 @@
         WindowStyle="None"
         ResizeMode="NoResize"
         BorderThickness="1.5,1.5,1.5,1.5" BorderBrush="#FF676565">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Closing">
+            <i:InvokeCommandAction  Command="{Binding CloseCommand}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Window.Resources>
 
         <Style x:Key="CheckBoxStyle1" TargetType="{x:Type CheckBox}">
