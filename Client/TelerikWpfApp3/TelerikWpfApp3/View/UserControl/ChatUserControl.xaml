@@ -49,7 +49,7 @@
                         </Border>
                         <Border>
                             <StackPanel>
-                                <TextBox Height="37.16" Text="{Binding searchName}">
+                                <TextBox x:Name="FriendNameInput" Height="37.16" Text="{Binding searchName}">
 
                                 </TextBox>
                             </StackPanel>
@@ -57,7 +57,7 @@
                         </Border>
                         <Border>
                             <StackPanel>
-                                <Button Height="32.8"  Content="추가" Command="{Binding friendPlus}">
+                                <Button  x:Name="FriendAdd" Height="32.8"  Content="추가" Command="{Binding friendPlus}">
                                     
                                 </Button>
                             </StackPanel>
@@ -139,7 +139,7 @@
                                         <Border Background="#FF03BCBF" Height="50"  CornerRadius="17" Margin="0,7,0,0">
                                             <StackPanel Orientation="Horizontal">
                                                 <TextBlock>
-                                               <Hyperlink TextDecorations="{x:Null}" Command="{Binding SendText}" CommandParameter="{Binding ElementName=MessageBox, Path=Text}">
+                                               <Hyperlink x:Name="sendTextMsgButton" TextDecorations="{x:Null}" Command="{Binding SendText}" CommandParameter="{Binding ElementName=MessageBox, Path=Text}">
                                                     <StackPanel Orientation="Horizontal">
                                                 <TextBlock x:Name="Msg" Text="Send" Margin="7,12,0,10" Foreground="White" FontSize="22" Width="54" FontFamily="Impact"></TextBlock>
                                                 <Canvas Width="30" Margin="-5,10,5,10" >

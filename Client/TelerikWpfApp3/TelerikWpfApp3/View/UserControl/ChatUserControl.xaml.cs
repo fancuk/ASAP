@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Automation.Peers;
+using System.Windows.Automation.Provider;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
@@ -28,6 +30,7 @@ namespace TelerikWpfApp3.View.UserControl
             ((App)Application.Current).loadAllChat();
             //((App)Application.Current).LoadMyFriends();
             ClientList.DataContext = ((App)Application.Current).getFriends();
+            this.PreviewKeyDown += new KeyEventHandler(OnEnterKeyDownHandler);
         }
         private void GetMessageById(object sender, RoutedEventArgs e)
         {
@@ -40,5 +43,33 @@ namespace TelerikWpfApp3.View.UserControl
         private void refresh()
         {
         }
+
+        // 여기는 메세지 박스내에서 엔터시 focus 없애는것.
+
+        private void OnEnterKeyDownHandler(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Return)
+            {
+                if (MessageBox.IsFocused)
+                {
+                    HyperlinkAutomationPeer peer = new HyperlinkAutomationPeer(sendTextMsgButton);
+                    IInvokeProvider invokeProv = peer.GetPattern(PatternInterface.Invoke) as IInvokeProvider;
+                    invokeProv.Invoke();
+                    MessageBox.Focus();
+                }
+                else if (FriendNameInput.IsFocused)
+                {
+                    ButtonAutomationPeer peer = new ButtonAutomationPeer(FriendAdd);
+                    IInvokeProvider invokeProv = peer.GetPattern(PatternInterface.Invoke) as IInvokeProvider;
+                    invokeProv.Invoke();
+                }
+                else
+                {
+                    MessageBox.Focus();
+                }
+            }
+
+        }
+
     }
 }

@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Automation.Peers;
+using System.Windows.Automation.Provider;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
@@ -40,6 +42,7 @@ namespace TelerikWpfApp3
             InitializeComponent();
             this.MouseLeftButtonDown += MoveWindow;
             this.PreviewKeyDown += new KeyEventHandler(HandleEsc);
+            this.PreviewKeyDown += new KeyEventHandler(OnEnterKeyDownHandler); // Enter 인식 하면 로그인 실행
         }
         private void HandleEsc(object sender, KeyEventArgs e)
         {
@@ -92,6 +95,15 @@ namespace TelerikWpfApp3
             idbox.Text = Properties.Settings.Default.loginIdSave;
         }
 
-
+        // 여기는 메세지 박스내에서 엔터시 로그인 버튼 실행
+        private void OnEnterKeyDownHandler(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Return)
+            {
+                ButtonAutomationPeer peer = new ButtonAutomationPeer(login);
+                IInvokeProvider invokeProv = peer.GetPattern(PatternInterface.Invoke) as IInvokeProvider;
+                invokeProv.Invoke();
+            }
+        }
     }
 }
