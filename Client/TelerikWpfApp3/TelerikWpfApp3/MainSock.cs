@@ -200,7 +200,7 @@ namespace TelerikWpfApp3
                 // tokens[1] - 보낸 메세지
                 string[] tokens = text.Split('/');
                 string tag = tokens[0];
-                if (tokens.Length == 1) return;
+                if (tokens.Length == 1 && tag != "<FIN>") return;
                 if (tag.Equals("<LOG>")) // 로그인
                 {
                     string flag = tokens[1];
@@ -217,11 +217,6 @@ namespace TelerikWpfApp3
                             Properties.Settings.Default.loginIdSave = ((App)Application.Current).getmyID();
                             Properties.Settings.Default.Save();
                         }
-                        DispatchService.Invoke(() =>
-                        {
-                            ((App)Application.Current).StartMainWindow();
-                        });
-
                         DispatchService.Invoke(() =>
                         {
                             ((App)Application.Current).StartMainWindow();
