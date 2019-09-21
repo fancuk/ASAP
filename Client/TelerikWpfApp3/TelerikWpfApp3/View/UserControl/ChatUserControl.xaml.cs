@@ -39,10 +39,24 @@ namespace TelerikWpfApp3.View.UserControl
             ChatBox.DataContext = ((App)Application.Current).getChat(target);
             ((App)Application.Current).setTarget(target);
             refresh();
+
+            UpdateScrollBar(ChatBox);
         }
 
         private void refresh()
         {
+        }
+
+        // 친구 클릭시 아래로 내려감.
+        private void UpdateScrollBar(ListBox listBox)
+        {
+            if (listBox != null)
+            {
+                var border = (Border)VisualTreeHelper.GetChild(listBox, 0);
+                var scrollViewer = (ScrollViewer)VisualTreeHelper.GetChild(border, 0);
+                scrollViewer.ScrollToBottom();
+            }
+
         }
 
         // 여기는 메세지 박스내에서 엔터시 focus 없애는것.
