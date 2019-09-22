@@ -163,7 +163,7 @@
                                     <StackPanel   x:Name="wp">
                                         <TextBlock Text="{Binding User}" />
                                         <Border x:Name="chatBack" CornerRadius="10" Margin="0,3" >
-                                            <TextBlock Text="{Binding Text}" TextWrapping="Wrap" FontSize="18" Margin="5,3,5,7"/>
+                                            <TextBlock Text="{Binding Text}" TextWrapping="Wrap" FontSize="18" MaxWidth="200" Margin="5,3,5,7"/>
                                         </Border>
                                         <TextBlock x:Name="PART_Time" Text="{Binding Time, StringFormat=hh:mm:ss}" FontSize="8"/>
                                     </StackPanel>
