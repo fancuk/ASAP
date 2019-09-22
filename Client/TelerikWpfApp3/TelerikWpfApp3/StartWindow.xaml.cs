@@ -35,6 +35,7 @@ namespace TelerikWpfApp3
         private StartWindow()
         {
             InitializeComponent();
+            this.DataContext = new StartWindowViewModel();
             StartWindowViewModel stw = new StartWindowViewModel();
             Closing += stw.OnWindowClosing;
         }

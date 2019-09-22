@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -17,6 +18,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TelerikWpfApp3.M;
+using System.ComponentModel;
 
 namespace TelerikWpfApp3.VM
 {
@@ -58,15 +60,25 @@ namespace TelerikWpfApp3.VM
             //login = new Command(ExecuteLogin, CanExecute);
             textChange = new Command(ExecuteTextChange, CanExecute);
             test = new Command(ExecuteTest, CanExecute);
-            CloseCommand = new Command(ExecuteClose, CanExecute);
+            //CloseCommand = new Command(ExecuteClose, CanExecute);
         }
-        private void ExecuteClose(object obj)
+        public void OnWindowClosing(object sender, CancelEventArgs e)
+        {
+            // Handle closing logic, set e.Cancel as needed
+            e.Cancel = true;
+            if (((App)Application.Current).nowConnect == true)
+            {
+                ((App)Application.Current).CloseSocket();
+            }
+            Process.GetCurrentProcess().Kill();
+        }
+        /*private void ExecuteClose(object obj)
         {
             if (((App)Application.Current).nowConnect == true)
             {
                 ((App)Application.Current).CloseSocket();
             }
-        }
+        }*/
 
 
         private void ExecuteTest(object obj)

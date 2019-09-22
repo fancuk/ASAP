@@ -13,6 +13,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using TelerikWpfApp3.VM;
+
 namespace TelerikWpfApp3
 {
     /// <summary>
@@ -43,7 +45,10 @@ namespace TelerikWpfApp3
             this.MouseLeftButtonDown += MoveWindow;
             this.PreviewKeyDown += new KeyEventHandler(HandleEsc);
             this.PreviewKeyDown += new KeyEventHandler(OnEnterKeyDownHandler); // Enter 인식 하면 로그인 실행
+            LoginViewModel lvm = new LoginViewModel();
+            Closing += lvm.OnWindowClosing;
         }
+
         private void HandleEsc(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Escape)

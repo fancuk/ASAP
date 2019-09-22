@@ -20,9 +20,7 @@
             <i:InvokeCommandAction  Command="{Binding CloseCommand}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
-    <Window.DataContext>
-        <vm:StartWindowViewModel/>
-    </Window.DataContext>
+    
     <Window.Resources>
         <Style TargetType="{x:Type RadioButton}" x:Key="buttonstripe1">
             <Setter Property="Template">
@@ -75,6 +73,7 @@
             </Setter>
         </Style>
     </Window.Resources>
+    
     <Border BorderBrush="Gray"
             BorderThickness="0"
             Background="White" Margin="5">
