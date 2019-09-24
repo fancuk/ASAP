@@ -58,39 +58,34 @@ namespace TelerikWpfApp3
         {
             this.DragMove();
         }
-        public void Login(object sender, RoutedEventArgs e)
+        private void Login(object sender, RoutedEventArgs e)
         {
             string Uid = idbox.Text;
             string Upw = pwbox.Password.ToString();
-            ((App)Application.Current).setmyID(Uid);
-            string parameter = Uid + "/" + Upw;
             if (Uid == "" || Upw == "")
             {
                 Properties.Settings.Default.idSaveCheck = false;
                 MessageBox.Show("아이디 비번중에 하나를 안쳤네요.");
+                return;
             }
             else
             {
-                ((App)Application.Current).StartSocket();
-                if (((App)Application.Current).nowConnect == true)
+                LoginViewModel login = new LoginViewModel();
+                login.LogIn(Uid, Upw);
+                if (rememberID.IsChecked == true)
                 {
-                    ((App)Application.Current).SendData("<LOG>", parameter);
-                    ((App)Application.Current).setmyID(Uid);
-                    if (rememberID.IsChecked == true)
-                    {
-                        Properties.Settings.Default.idSaveCheck = true;
-                    }
-                    else
-                    {
-                        Properties.Settings.Default.idSaveCheck = false;
-                    }
-
+                    Properties.Settings.Default.idSaveCheck = true;
+                }
+                else
+                {
+                    Properties.Settings.Default.idSaveCheck = false;
                 }
             }
         }
         private void Login_Loaded(object sender, RoutedEventArgs e)
         {
-            idbox.Text = Properties.Settings.Default.loginIdSave;
+            LoginViewModel login = new LoginViewModel();
+            login.Uid = Properties.Settings.Default.loginIdSave;
         }
 
         // 여기는 메세지 박스내에서 엔터시 로그인 버튼 실행

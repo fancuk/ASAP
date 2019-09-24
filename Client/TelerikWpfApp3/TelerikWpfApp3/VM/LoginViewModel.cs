@@ -47,20 +47,11 @@ namespace TelerikWpfApp3.VM
         }
         public string InputBoxColor { get; set; }
 
-        public ICommand CloseCommand { get; set; }
-        public ICommand test { get; set; }
         public ICommand Register { get; set; }
-        public ICommand textChange { get; set; }
-        public ICommand Func1 { get; set; }
-        public ICommand login { get; set; }
         public LoginViewModel()
         {
             BoxColor = new SolidColorBrush(Colors.Gray);
             Register = new Command(ExecuteGotoRegister, CanExecute);
-            //login = new Command(ExecuteLogin, CanExecute);
-            textChange = new Command(ExecuteTextChange, CanExecute);
-            test = new Command(ExecuteTest, CanExecute);
-            //CloseCommand = new Command(ExecuteClose, CanExecute);
         }
         public void OnWindowClosing(object sender, CancelEventArgs e)
         {
@@ -72,19 +63,7 @@ namespace TelerikWpfApp3.VM
             }
             Process.GetCurrentProcess().Kill();
         }
-        /*private void ExecuteClose(object obj)
-        {
-            if (((App)Application.Current).nowConnect == true)
-            {
-                ((App)Application.Current).CloseSocket();
-            }
-        }*/
 
-
-        private void ExecuteTest(object obj)
-        {
-            MessageBox.Show("Test 중인 기능입니다.");
-        }
         private void ExecuteGotoRegister(object obj)
         {
             Window s = TelerikWpfApp3.Register.Instance;
@@ -96,11 +75,18 @@ namespace TelerikWpfApp3.VM
             s.Show();
         }
 
-        private void ExecuteTextChange(object obj)
+        public void LogIn(string id,string pw)
         {
-
-
+            ((App)Application.Current).setmyID(Uid);
+            string parameter = Uid + "/" + Upw;
+            ((App)Application.Current).StartSocket();
+            if (((App)Application.Current).nowConnect == true)
+            {
+                ((App)Application.Current).SendData("<LOG>", parameter);
+                ((App)Application.Current).setmyID(Uid);
+            }
         }
+        
 
         public bool ChangeColor { get; set; }
         public Brush BoxColor
