@@ -7,6 +7,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Security;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -28,7 +29,7 @@ namespace TelerikWpfApp3
     public partial class Register : Window
     {
 
-        public class pwChk:INotifyPropertyChanged
+        public class pwChk : INotifyPropertyChanged
         {
             private string _ckhreuslt;
             public string chkResult
@@ -46,7 +47,28 @@ namespace TelerikWpfApp3
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
             }
         }
+
+        public class pw1Chk : INotifyPropertyChanged
+        {
+            private string _passChk;
+            public string passChk
+            {
+                get { return this._passChk; }
+                set
+                {
+                    this._passChk = value;
+                    OnPropertyChanged("passChk");
+                }
+            }
+            public event PropertyChangedEventHandler PropertyChanged;
+            protected void OnPropertyChanged(string name)
+            {
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+            }
+        }
+
         pwChk pc = new pwChk();
+        pw1Chk pwd = new pw1Chk();
 
         private static Register instance = null;
 
@@ -64,8 +86,11 @@ namespace TelerikWpfApp3
         private Register()
         {
             InitializeComponent();
+            pwd.passChk = "X";
+            pw1chk.Foreground = new SolidColorBrush(Colors.Red);
             this.MouseLeftButtonDown += MoveWindow;
             pwchk.DataContext = pc;
+            pw1chk.DataContext = pwd;
             RegisterViewModel rvm = new RegisterViewModel();
             Closing += rvm.OnWindowClosing;
             this.PreviewKeyDown += new KeyEventHandler(HandleEsc);
@@ -75,43 +100,13 @@ namespace TelerikWpfApp3
             if (e.Key == Key.Escape)
                 Close();
         }
+
         void MoveWindow(object sender, MouseEventArgs e)
+
         {
             this.DragMove();
         }
 
-        private void Pwbox2_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            string p1 = pwbox.Password.ToString();
-            string p2 = pwbox2.Password.ToString();
-            if (p1.Equals(p2))
-            {
-                pc.chkResult = "pwEqual";
-                pwchk.Foreground = new SolidColorBrush(Colors.Green);
-            }
-            else
-            {
-                pc.chkResult = "not Equal";
-                pwchk.Foreground = new SolidColorBrush(Colors.Red);
-            }
-        }
-
-        private void Pwbox2_LostFocus(object sender, RoutedEventArgs e)
-        {
-            string p1 = pwbox.Password.ToString();
-            string p2 = pwbox2.Password.ToString();
-            if (p1.Equals(p2))
-            {
-                pc.chkResult = "pwEqual";
-                pwchk.Foreground = new SolidColorBrush(Colors.Green);
-            }
-            else
-            {
-                pc.chkResult = "not Equal";
-                pwchk.Foreground = new SolidColorBrush(Colors.Red);
-            }
-        }
-        
         private void RegisterButton_Click(object sender, RoutedEventArgs e)
         {
             string id = idbox1.Text;
@@ -146,6 +141,68 @@ namespace TelerikWpfApp3
             }
         }
 
-       
+        private void Pwbox2_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string p1 = pwbox.Password.ToString();
+            string p2 = pwbox2.Password.ToString();
+            if (p1.Equals(p2) && String.IsNullOrWhiteSpace(p1) == false)
+            {
+                pc.chkResult = "pwEqual";
+                pwchk.Foreground = new SolidColorBrush(Colors.Green);
+            }
+            else
+            {
+                pc.chkResult = "not Equal";
+                pwchk.Foreground = new SolidColorBrush(Colors.Red);
+            }
+        }
+
+        private void Pwbox2_LostFocus(object sender, RoutedEventArgs e)
+        {
+            string p1 = pwbox.Password.ToString();
+            string p2 = pwbox2.Password.ToString();
+            if (p1.Equals(p2) && String.IsNullOrWhiteSpace(p1) == false)
+            {
+                pc.chkResult = "pwEqual";
+                pwchk.Foreground = new SolidColorBrush(Colors.Green);
+            }
+            else
+            {
+                pc.chkResult = "not Equal";
+                pwchk.Foreground = new SolidColorBrush(Colors.Red);
+            }
+        }
+
+        private void Pwbox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string p1 = pwbox.Password.ToString();
+
+            if (String.IsNullOrWhiteSpace(p1)==false && p1!="")
+            {
+                pwd.passChk = "V";
+                pw1chk.Foreground = new SolidColorBrush(Colors.Green);
+            }
+            else
+            {
+                pwd.passChk = "X";
+                pw1chk.Foreground = new SolidColorBrush(Colors.Red);
+            }
+        }
+
+        private void Pwbox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            string p1 = pwbox.Password.ToString();
+
+            if (String.IsNullOrWhiteSpace(p1) == false && p1 != "")
+            {
+                pwd.passChk = "V";
+                pw1chk.Foreground = new SolidColorBrush(Colors.Green);
+            }
+            else
+            {
+                pwd.passChk = "X";
+                pw1chk.Foreground = new SolidColorBrush(Colors.Red);
+            }
+        }
     }
 }
