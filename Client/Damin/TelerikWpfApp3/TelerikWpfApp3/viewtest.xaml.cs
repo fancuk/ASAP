@@ -84,8 +84,7 @@ namespace TelerikWpfApp3
         }
         private void Login_Loaded(object sender, RoutedEventArgs e)
         {
-            LoginViewModel login = new LoginViewModel();
-            login.Uid = Properties.Settings.Default.loginIdSave;
+            idbox.Text = Properties.Settings.Default.loginIdSave;
         }
 
         // 여기는 메세지 박스내에서 엔터시 로그인 버튼 실행

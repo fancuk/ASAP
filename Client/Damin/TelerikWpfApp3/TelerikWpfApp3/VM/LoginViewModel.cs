@@ -77,13 +77,13 @@ namespace TelerikWpfApp3.VM
 
         public void LogIn(string id,string pw)
         {
-            ((App)Application.Current).setmyID(Uid);
-            string parameter = Uid + "/" + Upw;
+            ((App)Application.Current).setmyID(id);
+            string parameter = id + "/" + pw;
             ((App)Application.Current).StartSocket();
             if (((App)Application.Current).nowConnect == true)
             {
+                ((App)Application.Current).setmyID(id);
                 ((App)Application.Current).SendData("<LOG>", parameter);
-                ((App)Application.Current).setmyID(Uid);
             }
         }
         
