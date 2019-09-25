@@ -83,6 +83,7 @@ namespace TelerikWpfApp3
                 return instance;
             }
         }
+
         private Register()
         {
             InitializeComponent();
@@ -95,6 +96,7 @@ namespace TelerikWpfApp3
             Closing += rvm.OnWindowClosing;
             this.PreviewKeyDown += new KeyEventHandler(HandleEsc);
         }
+
         private void HandleEsc(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Escape)
@@ -141,11 +143,11 @@ namespace TelerikWpfApp3
             }
         }
 
-        private void Pwbox2_TextChanged(object sender, TextChangedEventArgs e)
+        private void Pwbox2_TextChanged(object sender, TextChangedEventArgs e) 
         {
             string p1 = pwbox.Password.ToString();
             string p2 = pwbox2.Password.ToString();
-            if (p1.Equals(p2) && String.IsNullOrWhiteSpace(p1) == false)
+            if (p1.Equals(p2) && Regex.IsMatch(p1, @"^[a-zA-Z][\w\.-]*[a-zA-Z0-9]$"))
             {
                 pc.chkResult = "pwEqual";
                 pwchk.Foreground = new SolidColorBrush(Colors.Green);
@@ -161,7 +163,7 @@ namespace TelerikWpfApp3
         {
             string p1 = pwbox.Password.ToString();
             string p2 = pwbox2.Password.ToString();
-            if (p1.Equals(p2) && String.IsNullOrWhiteSpace(p1) == false)
+            if (p1.Equals(p2) && Regex.IsMatch(p1, @"^[a-zA-Z][\w\.-]*[a-zA-Z0-9]$"))
             {
                 pc.chkResult = "pwEqual";
                 pwchk.Foreground = new SolidColorBrush(Colors.Green);
@@ -177,7 +179,7 @@ namespace TelerikWpfApp3
         {
             string p1 = pwbox.Password.ToString();
 
-            if (String.IsNullOrWhiteSpace(p1)==false && p1!="")
+            if (Regex.IsMatch(p1, @"^[a-zA-Z][\w\.-]*[a-zA-Z0-9]$") && p1!="")
             {
                 pwd.passChk = "V";
                 pw1chk.Foreground = new SolidColorBrush(Colors.Green);
@@ -193,7 +195,7 @@ namespace TelerikWpfApp3
         {
             string p1 = pwbox.Password.ToString();
 
-            if (String.IsNullOrWhiteSpace(p1) == false && p1 != "")
+            if (Regex.IsMatch(p1, @"^[a-zA-Z][\w\.-]*[a-zA-Z0-9]$") && p1 != "")
             {
                 pwd.passChk = "V";
                 pw1chk.Foreground = new SolidColorBrush(Colors.Green);
