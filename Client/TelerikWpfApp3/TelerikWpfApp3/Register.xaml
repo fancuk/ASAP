@@ -145,7 +145,7 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                 <StackPanel Margin="0,0,-0.4,-145">
 
                     <StackPanel Height="405" Orientation="Horizontal">
-                        <Border Margin="10,10,10,-84.2" BorderBrush="DarkGray" BorderThickness="1" CornerRadius="4"
+                        <Border Margin="10,10,10,-84.667" BorderBrush="DarkGray" BorderThickness="1" CornerRadius="4"
         Background="#FFFBFBFB">
                             <Border.Effect>
                                 <DropShadowEffect/>
@@ -185,11 +185,11 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                                                         <Style.Triggers>
                                                             <DataTrigger Binding="{Binding nameChk}"  Value="X" >
                                                                 <Setter Property="Foreground" Value="Red"/>
-                                                                <Setter Property="Text" Value="X"></Setter>
+                                                                <Setter Property="Text" Value="X"/>
                                                             </DataTrigger>
                                                             <DataTrigger Binding="{Binding nameChk}" Value="V">
-                                                                <Setter Property="Foreground" Value="Green"></Setter>
-                                                                <Setter Property="Text" Value="V"></Setter>
+                                                                <Setter Property="Foreground" Value="Green"/>
+                                                                <Setter Property="Text" Value="V"/>
                                                             </DataTrigger>
                                                         </Style.Triggers>
                                                     </Style>
@@ -218,25 +218,13 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                                                 </Canvas.Background>
                                             </Canvas>
                                             <telerik:RadPasswordBox x:Name="pwbox" TextWrapping="Wrap"
-                                            MaxLength="10"                                      
-                                                                    Text="{Binding pw1}"
+                                                                     TextChanged="Pwbox_TextChanged"    
+                                                                    LostFocus="Pwbox_LostFocus"
+                                            MaxLength="15"       
                                             BorderThickness="0,0,0,1.5"    
                                             WatermarkContent="PassWord" Height="35" HorizontalAlignment="Center" VerticalAlignment="Center" Width="195" BorderBrush="#FF878A8A" Margin="6,0,0,0" Background="#FFFBFBFB"/>
-                                            <TextBlock  x:Name="pw1Chk"   TextWrapping="Wrap" Text="{Binding pw1Chk}" Width="25" Margin="5,5.5,0,10.5">
-                                                <TextBlock.Style>
-                                                    <Style TargetType="{x:Type TextBlock}">
-                                                        <Style.Triggers>
-                                                            <DataTrigger Binding="{Binding  pw1Chk}"  Value="X" >
-                                                                <Setter Property="Foreground" Value="Red"/>
-                                                                <Setter Property="Text" Value="X"/>
-                                                            </DataTrigger>
-                                                            <DataTrigger Binding="{Binding  pw1Chk}" Value="V">
-                                                                <Setter Property="Foreground" Value="Green"/>
-                                                                <Setter Property="Text" Value="V"/>
-                                                            </DataTrigger>
-                                                        </Style.Triggers>
-                                                    </Style>
-                                                </TextBlock.Style>
+                                            <TextBlock  x:Name="pw1chk"   TextWrapping="Wrap" Text="{Binding passChk}" Width="25" Margin="5,5.5,0,10.5">
+                                                
                                             </TextBlock>
                                         </StackPanel>
                                     </Border>
@@ -255,14 +243,13 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                                                                     TextChanged="Pwbox2_TextChanged"    
                                                                     LostFocus="Pwbox2_LostFocus"
  
-                                        MaxLength="10"            
-                                                                    Text="{Binding pw2}"
+                                        MaxLength="15"     
                                         BorderThickness="0,0,0,1.5"    
                                                      
                                         WatermarkContent="Confirm PassWord" Height="35" HorizontalAlignment="Center" VerticalAlignment="Center" Width="195" BorderBrush="#FF878A8A" Margin="6,0,0,0" Background="#FFFBFBFB">
                                                 <i:Interaction.Triggers>
                                                     <i:EventTrigger EventName="TextChanged">
-                                                        <i:InvokeCommandAction  CommandParameter="{Binding ElementName=pwbox2, Path=PasswordChar}" Command="{Binding pw22Changed}" />
+                                                        <i:InvokeCommandAction  CommandParameter="{Binding PasswordChar, ElementName=pwbox2}" Command="{Binding pw22Changed}" />
                                                     </i:EventTrigger>
                                                 </i:Interaction.Triggers>
                                             </telerik:RadPasswordBox>
@@ -321,7 +308,7 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                                 <StackPanel>
                                     <StackPanel Height="21" Margin="20,20,0,0">
                                         <CheckBox x:Name="agree" Margin="50,0,0,0">
-                                            <TextBlock Text="I agree the terms of service" Margin="10,0,0,0"></TextBlock>
+                                            <TextBlock Text="I agree the terms of service" Margin="10,0,0,0"/>
                                         </CheckBox>
                                     </StackPanel>
                                     <Button x:Name="RegisterButton"  

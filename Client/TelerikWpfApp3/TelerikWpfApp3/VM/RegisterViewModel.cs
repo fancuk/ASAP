@@ -88,17 +88,18 @@ namespace TelerikWpfApp3.VM
             get { return this._emailChk; }
             set { this._emailChk = value; OnPropertyChanged("emailChk"); }
         }
-        public string pw1
+       public string pw1
         {
             get { return this._pw1; }
             set { this._pw1 = value; OnPropertyChanged("pw1");
-                if (this._pw1 != "")
+               /* if (this._pw1 != "")
                 {
                     pw1Chk = "V";
                 }
-                else pw1Chk = "X";
+                else pw1Chk = "X";*/
             }
         }
+        
         public string pw1Chk
         {
             get { return this._pw1Chk; }
@@ -107,18 +108,20 @@ namespace TelerikWpfApp3.VM
                 this._pw1Chk = value; OnPropertyChanged("pw1Chk");
             }
         }
+        /*
         public string pw2
         {
             get { return this._pw2; }
             set { this._pw2 = value; OnPropertyChanged("pw2"); pwCheck(); }
         }
 
-
+            */
         public string pwChk
         {
             get { return this._pwChk; }
             set { this._pwChk = value; OnPropertyChanged("pwChk"); }
         }
+        
         #endregion
 
         #region methods
@@ -134,8 +137,7 @@ namespace TelerikWpfApp3.VM
         {
             nameChk = "X";
             emailChk = "X";
-            pw1Chk = "X";
-            pw2Changed = new Command(ExecuteChkPwEquals, CanExecute);
+            //pw2Changed = new Command(ExecuteChkPwEquals, CanExecute);
             CloseCommand = new Command(ExecuteClose, CanExecute);
             idChecking = new Command(idCheckButton, CanExecute);
         }
@@ -169,21 +171,21 @@ namespace TelerikWpfApp3.VM
             }
         }
 
-        private void ExecuteChkPwEquals(object obj)
+        /*private void ExecuteChkPwEquals(object obj)
         {
             MessageBox.Show("ss");
             if (this.pw1.Equals(this.pw2))
             {
   
             }
-        }
+        }*/
 
         private bool CanExecute(object obj)
         {
             return true;
         }
 
-        private void pwCheck()
+        /*private void pwCheck()
         {
             if (pw1.Equals(pw2))
             {
@@ -193,7 +195,7 @@ namespace TelerikWpfApp3.VM
             {
                 pwChk = "Reconfirm your Password!!!";
             }
-        }
+        }*/
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string name)
