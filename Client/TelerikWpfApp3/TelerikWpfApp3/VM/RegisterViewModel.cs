@@ -71,7 +71,7 @@ namespace TelerikWpfApp3.VM
         {
             get { return this._email; }
             set { this._email = value; OnPropertyChanged("email");
-                if (Regex.IsMatch(this._email, @"^[a-zA-Z][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]$"))
+                if (Regex.IsMatch(this._email, @"^[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]$"))
                 {
                     emailChk = "V";
                     ((App)Application.Current).setEmailChk(true);

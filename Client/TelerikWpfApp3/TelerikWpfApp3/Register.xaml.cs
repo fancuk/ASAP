@@ -147,7 +147,7 @@ namespace TelerikWpfApp3
         {
             string p1 = pwbox.Password.ToString();
             string p2 = pwbox2.Password.ToString();
-            if (p1.Equals(p2) && Regex.IsMatch(p1, @"^[a-zA-Z][\w\.-]*[a-zA-Z0-9]$"))
+            if (p1.Equals(p2) && Regex.IsMatch(p1, @"^[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]$"))
             {
                 pc.chkResult = "pwEqual";
                 pwchk.Foreground = new SolidColorBrush(Colors.Green);
@@ -163,7 +163,7 @@ namespace TelerikWpfApp3
         {
             string p1 = pwbox.Password.ToString();
             string p2 = pwbox2.Password.ToString();
-            if (p1.Equals(p2) && Regex.IsMatch(p1, @"^[a-zA-Z][\w\.-]*[a-zA-Z0-9]$"))
+            if (p1.Equals(p2) && Regex.IsMatch(p1, @"^[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]$"))
             {
                 pc.chkResult = "pwEqual";
                 pwchk.Foreground = new SolidColorBrush(Colors.Green);
@@ -179,7 +179,7 @@ namespace TelerikWpfApp3
         {
             string p1 = pwbox.Password.ToString();
 
-            if (Regex.IsMatch(p1, @"^[a-zA-Z][\w\.-]*[a-zA-Z0-9]$") && p1!="")
+            if (Regex.IsMatch(p1, @"^[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]$") && p1!="")
             {
                 pwd.passChk = "V";
                 pw1chk.Foreground = new SolidColorBrush(Colors.Green);
@@ -195,7 +195,7 @@ namespace TelerikWpfApp3
         {
             string p1 = pwbox.Password.ToString();
 
-            if (Regex.IsMatch(p1, @"^[a-zA-Z][\w\.-]*[a-zA-Z0-9]$") && p1 != "")
+            if (Regex.IsMatch(p1, @"^[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]$") && p1 != "")
             {
                 pwd.passChk = "V";
                 pw1chk.Foreground = new SolidColorBrush(Colors.Green);
