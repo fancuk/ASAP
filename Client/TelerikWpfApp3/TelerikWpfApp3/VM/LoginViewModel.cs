@@ -67,11 +67,18 @@ namespace TelerikWpfApp3.VM
         private void ExecuteGotoRegister(object obj)
         {
             Window s = TelerikWpfApp3.Register.Instance;
-            s.Owner = Application.Current.MainWindow; // We must also set the owner for this to work.
 
-           // s.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-            s.Top = Application.Current.MainWindow.Top;
-            s.Left = Application.Current.MainWindow.Left+395;
+            s.Owner = TelerikWpfApp3.viewtest.Instance;
+            //    s.Owner = Application.Current.MainWindow; // We must also set the owner for this to work.
+
+            // s.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            // s.Top = Application.Current.MainWindow.Top;
+            //s.Left = Application.Current.MainWindow.Left+395;
+            
+            // 누가 싱글턴 인스턴스를 Current Main Window로호출하죠 >??
+
+            s.Top = TelerikWpfApp3.viewtest.Instance.Top;
+            s.Left = TelerikWpfApp3.viewtest.Instance.Left + 395;
             s.Show();
         }
 
