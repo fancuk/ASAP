@@ -19,10 +19,10 @@ namespace TelerikWpfApp3.Networking
         {
             if (((App)Application.Current).nowConnect == true)
             {
+                ((App)Application.Current).nowConnect = false;
                 nowSock.Dispose();
                 nowSock.Close();
                 nowSock = null;
-                ((App)Application.Current).nowConnect = false;
             }
         }
 

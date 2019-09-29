@@ -35,6 +35,7 @@ namespace TelerikWpfApp3.VM
         public ICommand ChatPageOn { get; set; }
         public ICommand CloseCommand { get; set; }
 
+        public ICommand LogOut { get; set; }
 
         public StartWindowViewModel()
         {
@@ -45,8 +46,24 @@ namespace TelerikWpfApp3.VM
             Page2 = new Command(Page2Load, CE);
             ChatPageOn = new Command(loadChatPage, CE);
             ContentView = null;
-            // CloseCommand = new Command(ExecuteClose, CE);
+            //CloseCommand = new Command(ExecuteClose, CE);
             myId = ((App)Application.Current).myID;
+            LogOut = new Command(logout, CE);
+        }
+        public void logout(object obj)
+        {
+            if (MessageBox.Show("로그아웃 하시겠습니까?",
+                "로그아웃", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            {
+                if (((App)Application.Current).nowConnect == true)
+                {
+                    ((App)Application.Current).CloseSocket();
+                }
+                Window vt = TelerikWpfApp3.viewtest.Instance;
+                Window sw = TelerikWpfApp3.StartWindow.Instance;
+                vt.Show();
+                sw.Hide();
+            }
         }
         public void OnWindowClosing(object sender, CancelEventArgs e)
         {

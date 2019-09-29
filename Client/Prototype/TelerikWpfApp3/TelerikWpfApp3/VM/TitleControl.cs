@@ -36,10 +36,10 @@ namespace TelerikWpfApp3.VM
         }
         private void ExecuteCloseWindow(object obj)
         {
-            Task t1 = new Task(new Action(SendClose));
-            t1.Start(); t1.Wait();
+            //Task t1 = new Task(new Action(SendClose));
+            //t1.Start(); t1.Wait();
             SystemCommands.CloseWindow(obj as Window);
-            Process.GetCurrentProcess().Kill();
+            //Process.GetCurrentProcess().Kill();
         }
 
         private void SendClose()
