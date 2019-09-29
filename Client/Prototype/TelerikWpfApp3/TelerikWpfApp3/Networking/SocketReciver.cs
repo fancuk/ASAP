@@ -204,6 +204,11 @@ namespace TelerikWpfApp3.Networking
                     DispatchService.Invoke(() =>
                     {
                         ((App)Application.Current).AddFriend(tokens[1]);
+                        /*int count = Int32.Parse(tokens[1]);
+                        for (int i = 0; i < count; i++)
+                        {
+                            ((App)Application.Current).AddFriend(tokens[i+2]);
+                        }*/
                     });
                 }
                 // 텍스트박스에 추가해준다.
