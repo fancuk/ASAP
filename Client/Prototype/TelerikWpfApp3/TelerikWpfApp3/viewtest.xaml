@@ -9,6 +9,7 @@
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
         xmlns:ignore="http://www.ignore.com"
+        Icon="Resources/puzzleicon.ico"
         mc:Ignorable="d"
          Title="viewtest" Height="630" Width="395" Loaded="Login_Loaded"
         WindowStyle="None"

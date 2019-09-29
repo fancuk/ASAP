@@ -64,22 +64,30 @@ namespace TelerikWpfApp3.VM
             Process.GetCurrentProcess().Kill();
         }
 
+        // Register 클릭시 viewtest의 위치가 가운데 기준으로 Register를 왼쪽 오른쪽에 띄울지 결정하여 띄워줌
         private void ExecuteGotoRegister(object obj)
         {
             Window s = TelerikWpfApp3.Register.Instance;
+            Window loginView = TelerikWpfApp3.viewtest.Instance;
+            double screenWidth = System.Windows.SystemParameters.PrimaryScreenWidth;
+            screenWidth = (screenWidth / 2) - 197.5;
 
-            s.Owner = TelerikWpfApp3.viewtest.Instance;
-            //    s.Owner = Application.Current.MainWindow; // We must also set the owner for this to work.
+            if (screenWidth >= loginView.Left)
+            {
+                s.Owner = loginView;
 
-            // s.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-            // s.Top = Application.Current.MainWindow.Top;
-            //s.Left = Application.Current.MainWindow.Left+395;
-            
-            // 누가 싱글턴 인스턴스를 Current Main Window로호출하죠 >??
+                s.Top = loginView.Top;
+                s.Left = loginView.Left + 395;
+                s.Show();
+            }
+            else
+            {
+                s.Owner = loginView;
 
-            s.Top = TelerikWpfApp3.viewtest.Instance.Top;
-            s.Left = TelerikWpfApp3.viewtest.Instance.Left + 395;
-            s.Show();
+                s.Top = loginView.Top;
+                s.Left = loginView.Left - 541;
+                s.Show();
+            }
         }
 
         public void LogIn(string id,string pw)

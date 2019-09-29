@@ -93,7 +93,7 @@
                             </Border>
                         </StackPanel>
                     </StackPanel>
-                    <ListBox ScrollViewer.HorizontalScrollBarVisibility="Hidden" 
+                    <ListBox ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                              BorderThickness="0,0,0,0" x:Name="ClientList" 
                              Height="558" ItemsSource="{Binding}"  
                              ItemContainerStyle="{StaticResource SimpleListBoxItem}"
@@ -170,7 +170,7 @@
                             </StackPanel>
                         </StackPanel>
                     </StackPanel>
-                    <ListBox Style="{DynamicResource disabledListBoxWithScroll}" BorderThickness="0,0,0,0" x:Name="ChatBox" Height="434" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                    <ListBox Style="{DynamicResource disabledListBoxWithScroll}" BorderThickness="0,0,0,0" x:Name="ChatBox" Height="434" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionChanged="ChatBox_SelectionChanged"
                             VM:ListBoxBehavior.ScrollOnNewItem="True" ItemsSource="{Binding}"   IsSynchronizedWithCurrentItem="False" BorderBrush="{x:Null}" >
                         <ListBox.ItemTemplate>
                             <DataTemplate>

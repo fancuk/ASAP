@@ -8,6 +8,7 @@
         xmlns:vm="clr-namespace:TelerikWpfApp3.VM"
                 xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" x:Class="TelerikWpfApp3.StartWindow"
         mc:Ignorable="d"
+        Icon="Resources/puzzleicon.ico"
         Title="StartWindow" Height="700" Width="1133"
         WindowStyle="None"
         ResizeMode="NoResize"
