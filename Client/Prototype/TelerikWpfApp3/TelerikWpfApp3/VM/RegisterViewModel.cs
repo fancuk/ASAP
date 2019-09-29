@@ -159,8 +159,10 @@ namespace TelerikWpfApp3.VM
             {
                 MessageBox.Show("ID를 입력해주세요.");
             }
-          ((App)Application.Current).StartSocket();
-            ((App)Application.Current).SendData("<ICF>", id);
+            if (((App)Application.Current).StartSocket() == true)
+            {
+                ((App)Application.Current).SendData("<ICF>", id);
+            }
         }
 
         private void ExecuteClose(object obj)

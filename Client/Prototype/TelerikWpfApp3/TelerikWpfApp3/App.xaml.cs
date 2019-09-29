@@ -58,10 +58,10 @@ namespace TelerikWpfApp3
         #endregion
 
         #region StartSocket
-        public void StartSocket()
+        public bool StartSocket()
         {
             makeSocket();
-            nowConnect =  socketConnector.SocketConnect();
+            return socketConnector.SocketConnect();
         }
         #endregion
 
