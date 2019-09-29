@@ -333,6 +333,7 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\graph.png" />
+    <Resource Include="Resources\puzzleicon.ico" />
     <Content Include="SQLite.Interop.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
