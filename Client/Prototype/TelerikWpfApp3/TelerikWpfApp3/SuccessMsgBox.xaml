@@ -1,0 +1,56 @@
+﻿<Window x:Class="TelerikWpfApp3.SuccessMsgBox"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TelerikWpfApp3"
+        mc:Ignorable="d"
+        xmlns:VM="clr-namespace:TelerikWpfApp3.VM"
+        Title="myMessageBox" Height="149.812" Width="231.144"
+        WindowStyle="None"
+        Background="{x:Null}"
+        AllowsTransparency="True"
+        ResizeMode="NoResize">
+    <Border BorderBrush="Gray" 
+            BorderThickness="0"
+            Background="White" Margin="5">
+        <Border.Effect>
+            <DropShadowEffect ShadowDepth="0" BlurRadius="10" Color="Gray"></DropShadowEffect>
+        </Border.Effect>
+        <Grid>
+            <StackPanel>
+                <StackPanel Height="17"></StackPanel>
+                <StackPanel Height="87">
+                    <Border Height="87">
+                        <StackPanel x:Name="body">
+                            <TextBlock Text="{Binding msg}" TextAlignment="Center"></TextBlock>
+                            <Canvas Width="57" Height="50" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="82,11,82,0">
+                                <Canvas.Background>
+                                    <ImageBrush ImageSource="Resources/greenchk.png"/>
+                                </Canvas.Background>
+                            </Canvas>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+                <StackPanel Height="35">
+                    <Border Background="#FF131313" Height="28" Width="80" Margin="0,3,0,0" BorderBrush="#FF3A3939" BorderThickness="1" CornerRadius="4"  >
+                        <Border.Effect>
+                            <DropShadowEffect></DropShadowEffect>
+                        </Border.Effect>
+                        <TextBlock>
+                            <TextBlock.DataContext>
+                                <VM:TitleControl></VM:TitleControl>
+                            </TextBlock.DataContext>
+                            <Hyperlink Command="{Binding close}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
+                                TextDecorations="{x:Null}" Foreground="White">
+                                <InlineUIContainer>
+                                    <TextBlock TextDecorations="{x:Null}"  Text="OK" HorizontalAlignment="Center" VerticalAlignment="Center" Width="80" TextAlignment="Center" Height="21" Margin="0,3,0,0" />
+                                </InlineUIContainer>
+                            </Hyperlink>
+                        </TextBlock>
+                    </Border>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </Border>
+</Window>
