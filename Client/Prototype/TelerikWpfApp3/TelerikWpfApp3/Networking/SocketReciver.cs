@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using TelerikWpfApp3.M;
 using TelerikWpfApp3.Networking.NetworkModel;
+using TelerikWpfApp3.VM;
 
 namespace TelerikWpfApp3.Networking
 {
@@ -26,18 +27,17 @@ namespace TelerikWpfApp3.Networking
             AsyncObject obj = (AsyncObject)ar.AsyncState;
             try
             {
+                if (((App)Application.Current).nowConnect == false)
+                {
+                    return;
+                }
                 int received = obj.WorkingSocket.EndReceive(ar);
                 if (received <= 0)
                 {
                     obj.WorkingSocket.Close();
                     return;
                 }
-
                 // UTF8 인코더를 사용하여 바이트 배열을 문자열로 변환한다.
-                if (((App)Application.Current).nowConnect == false)
-                {
-                    return;
-                }
                 string text = Encoding.UTF8.GetString(obj.Buffer);
                 string[] tokens = text.Split('/');
                 string tag = tokens[0];
@@ -94,7 +94,13 @@ namespace TelerikWpfApp3.Networking
                     if (flag.Equals("true"))
                     {
                         MessageBox.Show("ID Check Sucess! in view");
-                        ((App)Application.Current).idchk = (true);
+                        DispatchService.Invoke(() =>
+                        {
+                            RegisterViewModel a = TelerikWpfApp3.Register.Instance.DataContext as RegisterViewModel;
+                            a.nameChk = "V";
+                            TelerikWpfApp3.Register.Instance.DataContext = a;
+                           ((App)Application.Current).idchk = (true);
+                        });
                     }
                     else
                     {
@@ -151,20 +157,19 @@ namespace TelerikWpfApp3.Networking
                     tmp.User = tokens[1];
                     tmp.Time = tokens[3];
                     tmp.Text = tokens[4];
-                    MessageBox.Show(tmp.Text);
                     ((App)Application.Current).setchatting(tokens[1], tokens[2], tokens[3], tokens[4]);
                     DispatchService.Invoke(() =>
                     {
                         ((App)Application.Current).AddSQLChat(tmp.User, tmp);
                     });
-                     if (!((App)Application.Current).mqState)
-                    {
-                        ((App)Application.Current).resetSQLChat(tmp.User);
-                    }
-                    DispatchService.Invoke(() =>
-                    {
-                       // ((App)Application.Current).LoadMSGAlert();
-                    });
+                    // if (!((App)Application.Current).mqState)
+                    //{
+                    //    ((App)Application.Current).resetSQLChat(tmp.User);
+                    //}
+                    //DispatchService.Invoke(() =>
+                    //{
+                    //   // ((App)Application.Current).LoadMSGAlert();
+                    //});
                 }
                 else if (tag.Equals("<MSQ>"))
                 {
@@ -177,10 +182,15 @@ namespace TelerikWpfApp3.Networking
                         string user = token2[0];
                         string msg = token2[1];
                         string time = token2[2];
-                        MessageBox.Show(user + ": " + msg + " , " + time);
-                    }
 
-              
+                        Chatitem tmp = new Chatitem();
+                        tmp.User = user;
+                        tmp.Time = time;
+                        tmp.Text = msg;
+      
+                        ((App)Application.Current).setchatting(user, 
+                            ((App)Application.Current).myID,time,msg);
+                    }              
                 }
                 else if (tag.Equals("<FIN>"))
                 {

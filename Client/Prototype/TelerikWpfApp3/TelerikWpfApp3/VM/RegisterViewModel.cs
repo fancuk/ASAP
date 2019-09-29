@@ -48,7 +48,6 @@ namespace TelerikWpfApp3.VM
                 ((App)Application.Current).idchk = false;
                 if (this._name != "")
                 {
-                    nameChk = "V";
                 }
                 else nameChk = "X";
                 /*if (((App)Application.Current).getidchk() == true)
@@ -155,9 +154,10 @@ namespace TelerikWpfApp3.VM
         private void idCheckButton(object org)
         {
             string id = name;
-            if (id == "")
+            if (id == null)
             {
                 MessageBox.Show("ID를 입력해주세요.");
+                return;
             }
             if (((App)Application.Current).StartSocket() == true)
             {

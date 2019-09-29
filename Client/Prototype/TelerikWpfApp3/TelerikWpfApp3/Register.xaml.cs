@@ -93,6 +93,7 @@ namespace TelerikWpfApp3
             pwchk.DataContext = pc;
             pw1chk.DataContext = pwd;
             RegisterViewModel rvm = new RegisterViewModel();
+            this.DataContext = rvm;
             Closing += rvm.OnWindowClosing;
             this.PreviewKeyDown += new KeyEventHandler(HandleEsc);
         }

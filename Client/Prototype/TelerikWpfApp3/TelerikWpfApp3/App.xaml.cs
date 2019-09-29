@@ -109,7 +109,6 @@ namespace TelerikWpfApp3
             sqlite.ChattingCreate(Sender, Receiver, Time, Msg);
         }
 
-
         public void setChat(string id)
         {
             database sqlite = new database();
