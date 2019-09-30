@@ -34,8 +34,8 @@ namespace TelerikWpfApp3.VM
         public ICommand Page2 { get; set; }
         public ICommand ChatPageOn { get; set; }
         public ICommand CloseCommand { get; set; }
-
         public ICommand LogOut { get; set; }
+
 
         public StartWindowViewModel()
         {
@@ -46,7 +46,7 @@ namespace TelerikWpfApp3.VM
             Page2 = new Command(Page2Load, CE);
             ChatPageOn = new Command(loadChatPage, CE);
             ContentView = null;
-            //CloseCommand = new Command(ExecuteClose, CE);
+            // CloseCommand = new Command(ExecuteClose, CE);
             myId = ((App)Application.Current).myID;
             LogOut = new Command(logout, CE);
         }
@@ -65,7 +65,7 @@ namespace TelerikWpfApp3.VM
                 sw.Hide();
             }
         }
-        public void OnWindowClosing(object sender, CancelEventArgs e)
+          public void OnWindowClosing(object sender, CancelEventArgs e)
         {
             // Handle closing logic, set e.Cancel as needed
             e.Cancel = true;

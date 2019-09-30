@@ -48,6 +48,7 @@ namespace TelerikWpfApp3.VM
                 ((App)Application.Current).idchk = false;
                 if (this._name != "")
                 {
+                    nameChk = "X";
                 }
                 else nameChk = "X";
                 /*if (((App)Application.Current).getidchk() == true)
@@ -164,8 +165,10 @@ namespace TelerikWpfApp3.VM
             }
             else
             {
-                ((App)Application.Current).StartSocket();
-                ((App)Application.Current).SendData("<ICF>", id);
+                if (((App)Application.Current).StartSocket() == true)
+                {
+                    ((App)Application.Current).SendData("<ICF>", id);
+                }
             }
         }
 

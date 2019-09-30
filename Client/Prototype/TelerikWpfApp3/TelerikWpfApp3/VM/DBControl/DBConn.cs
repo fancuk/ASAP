@@ -27,12 +27,19 @@ namespace TelerikWpfApp3.VM.DBControl
             if (!System.IO.File.Exists(db))
             {
                 SQLiteConnection.CreateFile("Chatting");
-                string Query = "create table Chatting" +
-                    " (sender varchar(20),receiver varchar(20),time varchar(20),msg varchar(200))";
+             }
+            try
+            {
+                string Query = "create table if not exists Chatting" +
+                     " (sender varchar(20),receiver varchar(20),time varchar(20),msg varchar(200))";
                 SQLiteCommand command = new SQLiteCommand(Query, Conn);
                 int Result = command.ExecuteNonQuery();
+                Conn.Close();
             }
-            Conn.Close();
+            catch(Exception e)
+            {
+                MessageBox.Show(e.ToString());
+            }
         }
         #endregion
         #region Create
@@ -107,59 +114,7 @@ namespace TelerikWpfApp3.VM.DBControl
             return information;
         }
         #endregion
-        #region Update 아이디 바꾸기,대화 수정 등등...
-        /*
-    public bool update(string BeforeId,string AfterId)
-    {
-        bool flag = false;
-        string query = "Update members Set " +
-            "id =" + AfterId + " Where id = '" + BeforeId;
-        MySqlConnection Conn = new MySqlConnection(str());
-        try
-        {
-            Conn.Open();
-            MySqlCommand Command = new MySqlCommand(query, Conn);
-            Command.ExecuteNonQuery();
-            flag = true;
-        }
-        catch(Exception e)
-        {
-            // 추가
-        }
-        finally
-        {
-            Conn.Close();
-        }
-        return flag;
-    }
-    #endregion
-*/
-        /*#region Delete 친구삭제, 대화삭제 등등...
-        public bool delete(string Id)
-        {
-            bool flag = false;
-            string query = "Delete from members " +
-                "Where id ='" + Id + "'";
-            MySqlConnection Conn = new MySqlConnection(str());
-            try
-            {
-                Conn.Open();
-                MySqlCommand Command = new MySqlCommand(query, Conn);
-                Command.ExecuteNonQuery();
-                flag = true;
-            }
-            catch(Exception e)
-            {
-                //추가
-            }
-            finally
-            {
-                Conn.Close();
-            }
-
-            return flag;
-        }*/
-        #endregion
+ 
 
         #region Read 반환형 ObservableCollection
         public void ReadChat() //채팅 목록
@@ -201,6 +156,7 @@ namespace TelerikWpfApp3.VM.DBControl
             catch (Exception e)
             {
                 //추가
+                
                 MessageBox.Show(e.ToString());
             }
             finally

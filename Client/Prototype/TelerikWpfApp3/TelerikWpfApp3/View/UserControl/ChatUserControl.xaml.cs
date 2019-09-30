@@ -93,7 +93,6 @@ namespace TelerikWpfApp3.View.UserControl
             }
 
         }
-
         // 새로운 대화가 추가될때 선택되는 형태이므로 선택에 변화가 생기면 Unselect 해주게 변경.
         private void ChatBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

@@ -153,7 +153,6 @@ namespace TelerikWpfApp3
             string p1 = pwbox.Password.ToString();
             string p2 = pwbox2.Password.ToString();
             if (p1.Equals(p2) && Regex.IsMatch(p1, @"^[a-z0-9]{7,13}$"))
-
             {
                 pc.chkResult = "pwEqual";
                 pwchk.Foreground = new SolidColorBrush(Colors.Green);
@@ -162,7 +161,7 @@ namespace TelerikWpfApp3
             {
                 pc.chkResult = "not Equal";
                 pwchk.Foreground = new SolidColorBrush(Colors.Red);
-            }
+            } 
         }
 
         private void Pwbox2_LostFocus(object sender, RoutedEventArgs e)
@@ -186,7 +185,6 @@ namespace TelerikWpfApp3
             string p1 = pwbox.Password.ToString();
 
             if (Regex.IsMatch(p1, @"^[a-z0-9]{7,13}$") && p1 != "")
-
             {
                 pwd.passChk = "V";
                 pw1chk.Foreground = new SolidColorBrush(Colors.Green);

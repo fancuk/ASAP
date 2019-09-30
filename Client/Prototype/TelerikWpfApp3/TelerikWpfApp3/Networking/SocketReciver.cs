@@ -106,7 +106,13 @@ namespace TelerikWpfApp3.Networking
                     {
                         MessageBox.Show("ID Check Failed.....TT");
                         ((App)Application.Current).idchk = (false);
-
+                        DispatchService.Invoke(() =>
+                        {
+                            RegisterViewModel a = TelerikWpfApp3.Register.Instance.DataContext as RegisterViewModel;
+                            a.nameChk = "X";
+                            TelerikWpfApp3.Register.Instance.DataContext = a;
+                            ((App)Application.Current).idchk = (true);
+                        });
                     }
                     ((App)Application.Current).CloseSocket();
                 }
@@ -201,15 +207,15 @@ namespace TelerikWpfApp3.Networking
                 }
                 else if (tag.Equals("<FLD>"))
                 {
-                    DispatchService.Invoke(() =>
+                    int count = Int32.Parse(tokens[1]);
+                    int idx = 2;
+                    for (int i = 0; i < count; i++)
                     {
-                        ((App)Application.Current).AddFriend(tokens[1]);
-                        /*int count = Int32.Parse(tokens[1]);
-                        for (int i = 0; i < count; i++)
+                        DispatchService.Invoke(() =>
                         {
-                            ((App)Application.Current).AddFriend(tokens[i+2]);
-                        }*/
-                    });
+                            ((App)Application.Current).AddFriend(tokens[idx+i]);
+                        });
+                    }
                 }
                 // 텍스트박스에 추가해준다.
                 // 비동기식으로 작업하기 때문에 폼의 UI 스레드에서 작업을 해줘야 한다.
