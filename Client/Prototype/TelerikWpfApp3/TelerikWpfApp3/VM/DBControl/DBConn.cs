@@ -81,7 +81,7 @@ namespace TelerikWpfApp3.VM.DBControl
                 new ObservableCollection<Chatitem>();
             SQLiteConnection Conn = new
                 SQLiteConnection("Data Source=Chatting;Version=3");
-            string query = "select * from Chatting where receiver='" + FriendID + "' order " +
+            string query = "select distinct * from Chatting where receiver='" + FriendID + "' order " +
                 "by time asc"; //시간 표시
             try
             {
@@ -125,7 +125,7 @@ namespace TelerikWpfApp3.VM.DBControl
                 new ObservableCollection<Chatitem>();
             SQLiteConnection Conn = new
                 SQLiteConnection("Data Source=Chatting;Version=3");
-            string query = "select * from Chatting order by time asc"; //시간 표시
+            string query = "select  distinct * from Chatting order by time asc"; //시간 표시
             try
             {
                 Conn.Open();
@@ -146,7 +146,7 @@ namespace TelerikWpfApp3.VM.DBControl
                         tmpChatItem.Chk = true;
                         ((App)Application.Current).AddSQLChat(receiver, tmpChatItem);
                     }
-                    else
+                    else if(receiver.Equals(myId))
                     {
                         tmpChatItem.Chk = false;
                         ((App)Application.Current).AddSQLChat(sender, tmpChatItem);
