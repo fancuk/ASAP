@@ -51,7 +51,9 @@ namespace TelerikWpfApp3.VM.DBControl
             bool flag = false;
             string query =
                 "INSERT INTO Chatting(sender,receiver,time,msg) " +
-                "VALUES('" + Sender + "','" + Receiver + "','" + Time + "','" + Msg + "')"; //timestamp,datetime
+                "VALUES('" + Sender + "','" + Receiver + "','" + Time + "','" + Msg + "') ";
+                //"WHERE NOT EXISTS (SELECT Sender, Receiver, Time, Msg FROM Chatting WHERE " +
+                //"sender = '"+Sender+"', receiver ='"+Receiver+"', time = '"+Time+"', msg ='"+Msg+"')"; //timestamp,datetime
 
             SQLiteConnection Conn = new
                 SQLiteConnection("Data Source=Chatting;Version=3");
