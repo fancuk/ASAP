@@ -137,6 +137,10 @@ namespace TelerikWpfApp3
             {
                 MessageBox.Show("이메일을 다시 작성하세요.");
             }
+            else if (!Regex.IsMatch(pw1, @"^[a-z0-9]{7,13}$"))
+            {
+                MessageBox.Show("비밀번호는 7~13자리 숫자, 영문 소문자만 가능합니다.");
+            }
             else
             {
                 ((App)Application.Current).StartSocket();
@@ -148,7 +152,8 @@ namespace TelerikWpfApp3
         {
             string p1 = pwbox.Password.ToString();
             string p2 = pwbox2.Password.ToString();
-            if (p1.Equals(p2) && Regex.IsMatch(p1, @"^[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]$"))
+            if (p1.Equals(p2) && Regex.IsMatch(p1, @"^[a-z0-9]{7,13}$"))
+
             {
                 pc.chkResult = "pwEqual";
                 pwchk.Foreground = new SolidColorBrush(Colors.Green);
@@ -164,7 +169,7 @@ namespace TelerikWpfApp3
         {
             string p1 = pwbox.Password.ToString();
             string p2 = pwbox2.Password.ToString();
-            if (p1.Equals(p2) && Regex.IsMatch(p1, @"^[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]$"))
+            if (p1.Equals(p2) && Regex.IsMatch(p1, @"^[a-z0-9]{7,13}$"))
             {
                 pc.chkResult = "pwEqual";
                 pwchk.Foreground = new SolidColorBrush(Colors.Green);
@@ -180,7 +185,8 @@ namespace TelerikWpfApp3
         {
             string p1 = pwbox.Password.ToString();
 
-            if (Regex.IsMatch(p1, @"^[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]$") && p1!="")
+            if (Regex.IsMatch(p1, @"^[a-z0-9]{7,13}$") && p1 != "")
+
             {
                 pwd.passChk = "V";
                 pw1chk.Foreground = new SolidColorBrush(Colors.Green);
@@ -196,7 +202,7 @@ namespace TelerikWpfApp3
         {
             string p1 = pwbox.Password.ToString();
 
-            if (Regex.IsMatch(p1, @"^[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]$") && p1 != "")
+            if (Regex.IsMatch(p1, @"^[a-z0-9]{7,13}$") && p1 != "")
             {
                 pwd.passChk = "V";
                 pw1chk.Foreground = new SolidColorBrush(Colors.Green);

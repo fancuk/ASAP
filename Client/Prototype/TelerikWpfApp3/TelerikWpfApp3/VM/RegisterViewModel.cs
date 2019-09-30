@@ -157,10 +157,14 @@ namespace TelerikWpfApp3.VM
             if (id == null)
             {
                 MessageBox.Show("ID를 입력해주세요.");
-                return;
             }
-            if (((App)Application.Current).StartSocket() == true)
+            else if (!Regex.IsMatch(id, @"^[a-z0-9]{5,10}$"))
             {
+                MessageBox.Show("5~10자리 숫자, 영문 소문자만 가능합니다.");
+            }
+            else
+            {
+                ((App)Application.Current).StartSocket();
                 ((App)Application.Current).SendData("<ICF>", id);
             }
         }
