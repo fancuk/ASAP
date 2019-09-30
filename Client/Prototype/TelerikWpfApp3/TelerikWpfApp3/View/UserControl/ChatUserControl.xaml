@@ -86,7 +86,7 @@
                                 </Border.Effect>
                                 <TextBlock><Hyperlink 
                                         x:Name="FriendAdd"
-                                    Command="{Binding friendPlus}"
+                                    Command="{Binding friendPlus}" CommandParameter="{Binding ElementName=FriendNameInput, Path=Text}"
                                 TextDecorations="{x:Null}" Foreground="White"><InlineUIContainer>
                                     <TextBlock TextDecorations="{x:Null}"  Text="+" HorizontalAlignment="Center" VerticalAlignment="Center" Width="34" TextAlignment="Center" Height="21" Margin="0,3,0,0" FontFamily="Impact" FontSize="20" />
                                 </InlineUIContainer></Hyperlink></TextBlock>

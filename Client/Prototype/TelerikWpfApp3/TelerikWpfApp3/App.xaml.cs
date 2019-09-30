@@ -151,6 +151,18 @@ namespace TelerikWpfApp3
                 FriendsList.Add(new FriendsItem(user,null));
         }
 
+        //친구 추가 중복 체크
+        public bool FriendDoubleCheck(string user)
+        {
+            for (int i = 0; i < FriendsList.Count; i++)
+            {
+                if (FriendsList[i].User == user)
+                    return true;
+            }
+            return false;
+        }
+
+
         public void ShowLoginView()
         {
             windowManager.ShowLoginView();

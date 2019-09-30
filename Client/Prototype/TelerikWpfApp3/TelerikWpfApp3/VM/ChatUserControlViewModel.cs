@@ -63,28 +63,53 @@ namespace TelerikWpfApp3.VM
 
         public void fpButton(object org)
         {
-            string str = searchName + "/";
-            string member = ((App)Application.Current).myID;
-            ((App)Application.Current).SendData("<FRR>", str + member);
+            //친구추가 공백 방지!
+            if (string.IsNullOrWhiteSpace(org as string) == true)
+            {
+                MessageBox.Show("추가할 친구를 입력해주세요.");
+            }
+            else
+            {//친구추가 중복시 방지!
+                if (((App)Application.Current).FriendDoubleCheck(org as string))
+                {
+                    MessageBox.Show("해당 친구는 친구목록에 존재합니다.");
+                }
+                else
+                {
+                    searchName = org as string;
+                    string str = searchName + "/";
+                    string member = ((App)Application.Current).myID;
+                    ((App)Application.Current).SendData("<FRR>", str + member);
+                }
+
+            }
         }
 
         public void ExeceuteSendMsg(object org)
-        {
-            string id = ((App)Application.Current).myID;
-            target = ((App)Application.Current).nowChatTarget;
-            string plain = org as string;
-            string nowTime = DateTime.Now.ToString();
-            string msg =  target + "/" + id + "/" + DateTime.Now as string + "/" + plain + "/";
-            sqlite.ChattingCreate(id, target, nowTime, plain);
-            Chatitem tmp = new Chatitem();
-            tmp.User = id;
-            tmp.Text = plain;
-            tmp.Time = nowTime;
-            tmp.Chk = true;
-            ((App)Application.Current).SendData("<MSG>", msg);
-            ((App)Application.Current).AddSQLChat(target, tmp);
+        {//메세지 공백 방지!
+            if (string.IsNullOrWhiteSpace(org as string) == true)
+            {
+                MessageBox.Show("메세지를 입력해주세요.");
+            }
+            else
+            {
+                string id = ((App)Application.Current).myID;
+                target = ((App)Application.Current).nowChatTarget;
+                string plain = org as string;
+                string nowTime = DateTime.Now.ToString();
+                string msg = target + "/" + id + "/" + DateTime.Now as string + "/" + plain + "/";
+                sqlite.ChattingCreate(id, target, nowTime, plain);
+                Chatitem tmp = new Chatitem();
+                tmp.User = id;
+                tmp.Text = plain;
+                tmp.Time = nowTime;
+                tmp.Chk = true;
+                ((App)Application.Current).SendData("<MSG>", msg);
+                ((App)Application.Current).AddSQLChat(target, tmp);
 
-            msgTextBox = "";
+                msgTextBox = "";
+            }
+
         }
 
         private bool CanExecuteMethod(object arg)
