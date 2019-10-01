@@ -22,7 +22,7 @@ namespace TelerikWpfApp3.Networking
         }
 
         #region DataReceived
-      public  void DataReceived(IAsyncResult ar)
+        public void DataReceived(IAsyncResult ar)
         {
             AsyncObject obj = (AsyncObject)ar.AsyncState;
             try
@@ -48,9 +48,16 @@ namespace TelerikWpfApp3.Networking
                     if (flag.Equals("true"))
                     {
                         Properties.Settings.Default.loginOK = true; // 로그인 성공여부
-                        Properties.Settings.Default.loginIdSave = ((App)Application.Current).myID; //id 저장
-                        Properties.Settings.Default.Save();
-
+                        if (Properties.Settings.Default.idSaveCheck == false)
+                        {
+                            Properties.Settings.Default.loginIdSave = ((App)Application.Current).myID; //id 저장
+                            Properties.Settings.Default.Save();
+                        }
+                        else
+                        {
+                            Properties.Settings.Default.loginIdSave = "";
+                            Properties.Settings.Default.Save();
+                        }
                         DispatchService.Invoke(() =>
                         {
                             ((App)Application.Current).StartMainWindow();
@@ -207,6 +214,7 @@ namespace TelerikWpfApp3.Networking
                 }
                 else if (tag.Equals("<FLD>"))
                 {
+
                     int count = Int32.Parse(tokens[1]);
                     int idx = 2;
                     for (int i = 0; i < count; i++)
