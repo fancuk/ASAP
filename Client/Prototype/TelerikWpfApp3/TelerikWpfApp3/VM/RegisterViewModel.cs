@@ -137,7 +137,6 @@ namespace TelerikWpfApp3.VM
         {
             nameChk = "X";
             emailChk = "X";
-            //pw2Changed = new Command(ExecuteChkPwEquals, CanExecute);
             CloseCommand = new Command(ExecuteClose, CanExecute);
             idChecking = new Command(idCheckButton, CanExecute);
         }
@@ -152,6 +151,7 @@ namespace TelerikWpfApp3.VM
             Window rv = TelerikWpfApp3.Register.Instance;
             rv.Hide();
         }
+
         private void idCheckButton(object org)
         {
             string id = name;
@@ -180,31 +180,10 @@ namespace TelerikWpfApp3.VM
             }
         }
 
-        /*private void ExecuteChkPwEquals(object obj)
-        {
-            MessageBox.Show("ss");
-            if (this.pw1.Equals(this.pw2))
-            {
-  
-            }
-        }*/
-
         private bool CanExecute(object obj)
         {
             return true;
         }
-
-        /*private void pwCheck()
-        {
-            if (pw1.Equals(pw2))
-            {
-                pwChk = "PassWord Equals!";
-            }
-            else
-            {
-                pwChk = "Reconfirm your Password!!!";
-            }
-        }*/
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string name)

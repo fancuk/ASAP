@@ -318,7 +318,7 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                                             <telerik:RadPasswordBox x:Name="pwbox" TextWrapping="Wrap"
                                                                      TextChanged="Pwbox_TextChanged"    
                                                                     LostFocus="Pwbox_LostFocus"
-                                            MaxLength="13"       
+                                            MaxLength="15"       
                                             BorderThickness="0,0,0,1.5"    
                                             WatermarkContent="PassWord" Height="35" HorizontalAlignment="Center" VerticalAlignment="Center" Width="396" BorderBrush="#FF878A8A" Margin="10,0,0,0"/>
                                             <TextBlock  x:Name="pw1chk"   TextWrapping="Wrap" Text="{Binding passChk}" Width="0" Margin="0">
@@ -336,7 +336,7 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                                                                     TextChanged="Pwbox2_TextChanged"    
                                                                     LostFocus="Pwbox2_LostFocus"
  
-                                        MaxLength="13"     
+                                        MaxLength="15"     
                                         BorderThickness="0,0,0,1.5"    
                                                      
                                         WatermarkContent="Confirm PassWord" Height="35" HorizontalAlignment="Center" VerticalAlignment="Center" Width="396" BorderBrush="#FF878A8A" Margin="10,0,0,0">

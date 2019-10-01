@@ -125,21 +125,21 @@ namespace TelerikWpfApp3
             {
                 MessageBox.Show("아이디, 비밀번호, 이메일은 공백일 수 없습니다.");
             }
+            else if (!Regex.IsMatch(pw1, @"^[a-z0-9]{8,15}$"))
+            {
+                MessageBox.Show("비밀번호는 8~15자리 숫자, 영문 소문자만 가능합니다.");
+            }
             else if (pc.chkResult == "not Equal")
             {
-                MessageBox.Show("비밀번호 확인 요망.");
-            }
-            else if(agree.IsChecked == false)
-            {
-                MessageBox.Show("동의 버튼을 눌러주세요.");
+                MessageBox.Show("비밀번호를 다시 확인해주세요.");
             }
             else if((((App)Application.Current).emailChk == false))
             {
                 MessageBox.Show("이메일을 다시 작성하세요.");
             }
-            else if (!Regex.IsMatch(pw1, @"^[a-z0-9]{7,13}$"))
+            else if (agree.IsChecked == false)
             {
-                MessageBox.Show("비밀번호는 7~13자리 숫자, 영문 소문자만 가능합니다.");
+                MessageBox.Show("동의 버튼을 눌러주세요.");
             }
             else
             {
@@ -152,7 +152,7 @@ namespace TelerikWpfApp3
         {
             string p1 = pwbox.Password.ToString();
             string p2 = pwbox2.Password.ToString();
-            if (p1.Equals(p2) && Regex.IsMatch(p1, @"^[a-z0-9]{7,13}$"))
+            if (p1.Equals(p2) && Regex.IsMatch(p1, @"^[a-z0-9]{8,15}$"))
             {
                 pc.chkResult = "pwEqual";
                 pwchk.Foreground = new SolidColorBrush(Colors.Green);
@@ -168,7 +168,7 @@ namespace TelerikWpfApp3
         {
             string p1 = pwbox.Password.ToString();
             string p2 = pwbox2.Password.ToString();
-            if (p1.Equals(p2) && Regex.IsMatch(p1, @"^[a-z0-9]{7,13}$"))
+            if (p1.Equals(p2) && Regex.IsMatch(p1, @"^[a-z0-9]{8,15}$"))
             {
                 pc.chkResult = "pwEqual";
                 pwchk.Foreground = new SolidColorBrush(Colors.Green);
@@ -184,7 +184,7 @@ namespace TelerikWpfApp3
         {
             string p1 = pwbox.Password.ToString();
 
-            if (Regex.IsMatch(p1, @"^[a-z0-9]{7,13}$") && p1 != "")
+            if (Regex.IsMatch(p1, @"^[a-z0-9]{8,15}$") && p1 != "")
             {
                 pwd.passChk = "V";
                 pw1chk.Foreground = new SolidColorBrush(Colors.Green);
@@ -200,7 +200,7 @@ namespace TelerikWpfApp3
         {
             string p1 = pwbox.Password.ToString();
 
-            if (Regex.IsMatch(p1, @"^[a-z0-9]{7,13}$") && p1 != "")
+            if (Regex.IsMatch(p1, @"^[a-z0-9]{8,15}$") && p1 != "")
             {
                 pwd.passChk = "V";
                 pw1chk.Foreground = new SolidColorBrush(Colors.Green);
@@ -209,6 +209,7 @@ namespace TelerikWpfApp3
             {
                 pwd.passChk = "X";
                 pw1chk.Foreground = new SolidColorBrush(Colors.Red);
+                MessageBox.Show("비밀번호는 8~15자리 숫자, 영문 소문자만 가능합니다.");
             }
         }
     }
