@@ -74,6 +74,7 @@ namespace TelerikWpfApp3.Networking
                         DispatchService.Invoke(() =>
                         {
                             MessageBox.Show("회원가입 완료!!");
+                            ((App)Application.Current).RegisterComplete();
                         });
                     }
 

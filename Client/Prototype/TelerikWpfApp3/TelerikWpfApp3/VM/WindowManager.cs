@@ -18,10 +18,16 @@ namespace TelerikWpfApp3.VM
         }
         public void StartMainWindow()
         {
-            Window s = Application.Current.MainWindow;
+            Window s = TelerikWpfApp3.viewtest.Instance;
             Window m = TelerikWpfApp3.StartWindow.Instance;
             m.Show();
             s.Hide();
         }
+        public void RegisterComplete()
+        {
+            Window Rg = TelerikWpfApp3.Register.Instance;
+            Rg.Hide();
+        }
+
     }
 }
