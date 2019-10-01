@@ -171,5 +171,9 @@ namespace TelerikWpfApp3
         {
             windowManager.StartMainWindow();
         }
+        public void RegisterComplete()
+        {
+            windowManager.RegisterComplete();
+        }
     }
 }
