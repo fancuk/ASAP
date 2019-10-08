@@ -3,7 +3,7 @@ Puzzle :  업무 협업용 메신저
 > 제1 목표 : 시장 출시!<br>
 > 제2 목표 : 교내 출시!<br>
 > 제3 목표 : 학회 내 출시!<br>
-.
+
 2019-09-28
 ===
 
@@ -26,7 +26,7 @@ Client : Main View
 ---
 ![](./img/mainviewDefault.JPG)
 > 좌측 UserControl들을 연결하는 Hamburger menu 구현 <br>
-
+1
 Client : Chat Room
 ---
 ![](./img/mainviewChat.JPG)
