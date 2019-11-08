@@ -1,0 +1,31 @@
+﻿<Application x:Class="TelerikWpfApp3.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+            >
+    <Application.Resources>
+        <ResourceDictionary 
+            xmlns:local="clr-namespace:TelerikWpfApp3"
+     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns="http://schemas.microsoft.com/netfx/2009/xaml/presentation"
+            xmlns:uc="clr-namespace:TelerikWpfApp3.View.UserControl"
+           xmlns:vm="clr-namespace:TelerikWpfApp3.VM"
+            >
+            
+            <ResourceDictionary.MergedDictionaries>
+            </ResourceDictionary.MergedDictionaries>
+            <DataTemplate DataType="{x:Type vm:UserControlViewModel}">
+                <uc:UserControl2></uc:UserControl2>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:UserControlViewModel1}">
+                <uc:UserControl1></uc:UserControl1>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:ChatUserControlViewModel}">
+                <uc:ChatUserControl></uc:ChatUserControl>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:FriendsUserControlViewModel}">
+                <uc:FriendUserControl></uc:FriendUserControl>
+            </DataTemplate>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

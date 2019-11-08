@@ -1,0 +1,152 @@
+﻿<Window x:Class="TelerikWpfApp3.View.ChatRoom"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TelerikWpfApp3.View"
+        xmlns:VM="clr-namespace:TelerikWpfApp3.VM"
+        mc:Ignorable="d"
+        Title="ChatRoom" Height="588" Width="320"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+                AllowsTransparency="True"
+        Background="{x:Null}" HorizontalAlignment="Left"
+        >
+    <Window.DataContext>
+        <VM:ChatUserControlViewModel></VM:ChatUserControlViewModel>
+    </Window.DataContext>
+    <Window.Resources>
+        <Style x:Key="SimpleListBoxItem" TargetType="ListBoxItem">
+            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Border
+           Name="Border"
+           Padding="2"
+           SnapsToDevicePixels="true">
+                            <ContentPresenter />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="true">
+                                <Setter TargetName="Border" Property="Background"
+                     Value="#FFEAEAEA"/>
+
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="disabledListBoxWithScroll" TargetType="{x:Type ListBox}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListBox}">
+                        <Border x:Name="Bd" SnapsToDevicePixels="true" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Padding="1">
+                            <ScrollViewer Padding="{TemplateBinding Padding}" Focusable="false">
+                                <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" IsEnabled="False" IsHitTestVisible="True"/>
+                            </ScrollViewer>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" TargetName="Bd" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsGrouping" Value="true">
+                                <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Border Background="White">
+        <Border.Effect>
+            <DropShadowEffect Color="#FFCBC0C0" Direction="250"></DropShadowEffect>
+        </Border.Effect>
+        <Grid>
+            <StackPanel Orientation="Vertical">
+                <Border Background="White" Height="53">
+                    <Border.Effect>
+                        <DropShadowEffect Color="#FFCBC0C0" Direction="250">
+                        </DropShadowEffect>
+                    </Border.Effect>
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel Width="256" Margin="20,0,0,0" Orientation="Horizontal">
+                            <Border CornerRadius="20" Background="Green" Width="20" VerticalAlignment="Center" Height="20" Margin="0,0,0,20"/>
+                            <TextBlock Text="{Binding target}" x:Name="TargetText"
+                                     Margin="11,10,19,10" FontSize="20" FontFamily="Microsoft YaHei UI" FontWeight="Bold" Width="219"/>
+                        </StackPanel>
+                        <StackPanel Width="72" Margin="0">
+                            <StackPanel Height="20" Width="20" Margin="-37,11,0,0">
+                                <StackPanel.Background>
+                                    <ImageBrush ImageSource="/TelerikWpfApp3;component/Resources/exitSmall.png" Stretch="Uniform"/>
+                                </StackPanel.Background>
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+                <StackPanel Height="438" Background="#FFCFCFCF" Margin="0,4,0,0">
+                    <ListBox Style="{StaticResource disabledListBoxWithScroll}" BorderThickness="0,0,0,0" x:Name="ChatBox" Height="438" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionChanged="ChatBox_SelectionChanged"
+                            VM:ListBoxBehavior.ScrollOnNewItem="True" ItemsSource="{Binding}"   IsSynchronizedWithCurrentItem="False" BorderBrush="{x:Null}" Background="{x:Null}" >
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Width="320" HorizontalAlignment="Left" >
+                                    <StackPanel   x:Name="wp">
+                                        <TextBlock Text="{Binding User}" />
+                                        <Border x:Name="chatBack" CornerRadius="10" Margin="0,3" >
+                                            <TextBlock Text="{Binding Text}" TextWrapping="Wrap" FontSize="11" MaxWidth="200" Margin="5,3,5,7" Foreground="White"/>
+                                        </Border>
+                                        <TextBlock x:Name="PART_Time" Text="{Binding Time, StringFormat=hh:mm:ss}" FontSize="8"/>
+                                    </StackPanel>
+                                </StackPanel>
+                                <DataTemplate.Triggers>
+                                    <DataTrigger Binding="{Binding Chk}" Value="true">
+                                        <Setter TargetName="chatBack" Property="Background" Value="#FFEE534F"/>
+                                        <Setter TargetName="wp" Property="HorizontalAlignment" Value="Right"/>
+                                        <Setter TargetName="wp" Property="Margin" Value="0,0,30,0"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Chk}"  Value="false">
+                                        <Setter TargetName="chatBack" Property="Background" Value="#FF818080"/>
+                                        <Setter TargetName="wp" Property="HorizontalAlignment" Value="left"/>
+                                    </DataTrigger>
+                                </DataTemplate.Triggers>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </StackPanel>
+                <StackPanel Height="92" Orientation="Horizontal">
+                    <StackPanel Width="260" Margin="0,0,0,10">
+                        <TextBox Height="84" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="18"
+                                x:Name="MessageBox" Text="{Binding msgTextBox}" >
+
+                        </TextBox>
+                    </StackPanel>
+                    <StackPanel Width="56" Margin="0,0,0,10">
+
+
+                        <Border Background="#FFEE534F" CornerRadius="10" Margin="0,7,0,0">
+
+                            <TextBlock Height="31"><Hyperlink x:Name="sendTextMsgButton" TextDecorations="{x:Null}" Command="{Binding SendText}" CommandParameter="{Binding Text, ElementName=MessageBox}"><InlineUIContainer>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock x:Name="Msg" Text="    " Margin="7,12,0,10" Foreground="White" FontSize="22" Width="46" FontFamily="Impact"/>
+                                            <Canvas Width="30" Margin="-51,5,5,10" Height="20" >
+                                                <Canvas.Background>
+                                                    <ImageBrush ImageSource="/TelerikWpfApp3;component/Resources/paperplane.png"/>
+                                                </Canvas.Background>
+                                            </Canvas>
+                                        </StackPanel>
+                                    </InlineUIContainer></Hyperlink></TextBlock>
+
+
+                        </Border>
+
+
+                        <Button Height="24" Margin="0,8,0,0" BorderBrush="{x:Null}"/>
+
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </Border>
+</Window>
