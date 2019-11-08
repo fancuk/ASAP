@@ -11,7 +11,7 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:ignore="http://www.ignore.com"
         Icon="Resources/puzzleicon.ico"
         mc:Ignorable="d"
-        Title="Register" Height="630" Width="541"
+        Title="Register" Height="630" Width="420"
            WindowStyle="None"
         ResizeMode="NoResize"
         BorderThickness="1.5,1.5,1.5,1.5" BorderBrush="#FF676565">
@@ -96,17 +96,17 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 
 
     <Grid>
-        <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Height="598" Width="538" Margin="0,0,-0.4,0">
+        <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Height="598" Width="420" Margin="0,0,-0.4,0">
             <StackPanel
-                HorizontalAlignment="Left" Height="30" VerticalAlignment="Top" Orientation="Horizontal" Width="538">
+                HorizontalAlignment="Left" Height="30" VerticalAlignment="Top" Orientation="Horizontal" Width="420">
                 <StackPanel.DataContext>
                     <VM:TitleControl/>
                 </StackPanel.DataContext>
 
-                <StackPanel Width="100"/>
-                <StackPanel Width="400"/>
+                <StackPanel Width="67" Margin="0,0,0,0.4"/>
+                <StackPanel Width="318" Margin="0,0,0,0.4"/>
 
-                <StackPanel Width="46" Orientation="Horizontal" RenderTransformOrigin="0.5,0.5">
+                <StackPanel Width="37" Orientation="Horizontal" RenderTransformOrigin="0.5,0.5" Margin="0,0,0,0.4">
                     <StackPanel.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -116,8 +116,8 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                         </TransformGroup>
                     </StackPanel.RenderTransform>
 
-                    <Button Width="39" Command="{Binding close}"  Background="{x:Null}" BorderBrush="{x:Null}" FontWeight="Bold" FontFamily="Malgun Gothic Semilight" FontSize="18"
-                        CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" >
+                    <Button Width="34" Command="{Binding close}"  Background="{x:Null}" BorderBrush="{x:Null}" FontWeight="Bold" FontFamily="Malgun Gothic Semilight" FontSize="18"
+                        CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" Margin="0,0,0,0.4" >
                         <ContentControl>
                             <Hyperlink Foreground="{x:Null}" Command="{Binding close}" 
                                 CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}">
@@ -136,26 +136,26 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 
             <Border BorderThickness="0,0,0,1" BorderBrush="#FFBBB3B3" Margin="10,0">
                 <StackPanel Height="70" Margin="0,0,-0.4,0">
-                    <TextBlock FontSize="30" FontFamily="Impact" Margin="10,20,0,0" Foreground="#FF00C4BF" TextAlignment="Center">Register</TextBlock>
+                    <TextBlock FontSize="30" FontFamily="Impact" Margin="10,20,0,0" Foreground="#FFEE534F" TextAlignment="Center">Register</TextBlock>
                 </StackPanel>
             </Border>
-            <Border Height="368">
+            <Border Height="380">
                 <StackPanel Margin="0,0,-0.4,-145">
 
                     <StackPanel Height="405" Orientation="Horizontal">
                         <Border Margin="10,10,10,-84.667" BorderThickness="1" CornerRadius="4">
-                            <StackPanel HorizontalAlignment="Left" Width="494" Margin="10,-1,10,10">
-                                <StackPanel Height="66" Orientation="Horizontal">
-                                    <StackPanel Width="70" Margin="28,0,0,0">
-                                        <TextBlock Height="25" Text="ID" Margin="0,20,0,0" FontFamily="Impact" TextAlignment="Center" FontSize="24">
+                            <StackPanel HorizontalAlignment="Left" Width="397" Margin="0,-0.8,0,-0.4">
+                                <StackPanel Height="66" Orientation="Horizontal" HorizontalAlignment="Left" Width="394">
+                                    <StackPanel Width="45" Margin="20,0,0,0">
+                                        <TextBlock Height="25" Text="ID" Margin="-10,20,0,0" FontFamily="Impact" TextAlignment="Center" FontSize="24">
                                             <TextBlock.Style>
                                                 <Style TargetType="{x:Type TextBlock}">
                                                     <Style.Triggers>
                                                         <DataTrigger Binding="{Binding ElementName=nameChk, Path=Text}"  Value="X" >
-                                                            <Setter Property="Foreground" Value="Red"/>
+                                                            <Setter Property="Foreground" Value="LightGray"/>
                                                         </DataTrigger>
                                                         <DataTrigger Binding="{Binding ElementName=nameChk, Path=Text}" Value="V">
-                                                            <Setter Property="Foreground"  Value="Green"/>
+                                                            <Setter Property="Foreground"  Value="Black"/>
                                                         </DataTrigger>
                                                     </Style.Triggers>
                                                 </Style>
@@ -163,59 +163,59 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                                         </TextBlock>
                                     </StackPanel>
                                     <StackPanel Width="30">
-                                        <TextBlock Text="44" Height="17" Margin="0,25,0,0" FontFamily="Webdings"></TextBlock>
+                                        <TextBlock Text="44" Height="17" Margin="3,25,0,0" FontFamily="Webdings"></TextBlock>
                                     </StackPanel>
-                                    <StackPanel Width="70" Margin="20,0,0,0">
-                                        <TextBlock Height="25" Text="PW" Margin="0,20,0,0" FontFamily="Impact" TextAlignment="Center" FontSize="24">
+                                    <StackPanel Width="45" Margin="20,0,0,0">
+                                        <TextBlock Height="25" Text="PW" Margin="-12,20,0,0" FontFamily="Impact" TextAlignment="Center" FontSize="24">
                                             <TextBlock.Style>
                                                 <Style TargetType="{x:Type TextBlock}">
                                                     <Style.Triggers>
                                                         <DataTrigger Binding="{Binding ElementName=pw1chk, Path=Text}"  Value="X" >
-                                                            <Setter Property="Foreground" Value="Red"/>
+                                                            <Setter Property="Foreground" Value="LightGray"/>
                                                         </DataTrigger>
                                                         <DataTrigger Binding="{Binding ElementName=pw1chk, Path=Text}" Value="V">
-                                                            <Setter Property="Foreground"  Value="Green"/>
+                                                            <Setter Property="Foreground"  Value="Black"/>
                                                         </DataTrigger>
                                                     </Style.Triggers>
                                                 </Style>
                                             </TextBlock.Style>
                                         </TextBlock>
                                     </StackPanel>
-                                    <StackPanel Width="30">
-                                        <TextBlock Text="44" Height="17" Margin="0,25,0,0" FontFamily="Webdings"></TextBlock>
+                                    <StackPanel Width="45">
+                                        <TextBlock Text="44" Height="17" Margin="7,25,0,0" FontFamily="Webdings"></TextBlock>
                                     </StackPanel>
-                                    <StackPanel Width="70" Margin="20,0,0,0">
-                                        <TextBlock Height="25" Text="PW2" Margin="0,20,0,0" FontFamily="Impact" TextAlignment="Center" FontSize="24">
+                                    <StackPanel Width="45" Margin="20,0,0,0">
+                                        <TextBlock Height="25" Text="PW2" Margin="-21,20,0,0" FontFamily="Impact" TextAlignment="Center" FontSize="24">
                                             <TextBlock.Style>
                                                 <Style TargetType="{x:Type TextBlock}">
                                                     <Style.Triggers>
                                                         <DataTrigger Binding="{Binding ElementName=pwchk, Path=Text}"  Value="" >
-                                                            <Setter Property="Foreground" Value="Red"/>
+                                                            <Setter Property="Foreground" Value="LightGray"/>
                                                         </DataTrigger>
                                                         <DataTrigger Binding="{Binding ElementName=pwchk, Path=Text}" Value="not Equal">
-                                                            <Setter Property="Foreground"  Value="Red"/>
+                                                            <Setter Property="Foreground"  Value="LightGray"/>
                                                         </DataTrigger>
                                                         <DataTrigger Binding="{Binding ElementName=pwchk, Path=Text}" Value="pwEqual">
-                                                            <Setter Property="Foreground"  Value="Green"/>
+                                                            <Setter Property="Foreground"  Value="Black"/>
                                                         </DataTrigger>
                                                     </Style.Triggers>
                                                 </Style>
                                             </TextBlock.Style>
                                         </TextBlock>
                                     </StackPanel>
-                                    <StackPanel Width="30">
-                                        <TextBlock Text="44" Height="17" Margin="0,25,0,0" FontFamily="Webdings"></TextBlock>
+                                    <StackPanel Width="45">
+                                        <TextBlock Text="44" Height="17" Margin="10,25,0,0" FontFamily="Webdings"></TextBlock>
                                     </StackPanel>
-                                    <StackPanel Width="70" Margin="20,0,0,0">
-                                        <TextBlock Height="25" Text="Email" Margin="0,20,0,0" FontFamily="Impact" TextAlignment="Center" FontSize="24">
+                                    <StackPanel Width="45" Margin="20,0,0,0">
+                                        <TextBlock Height="25" Text="Email" Margin="-15,20,0,0" FontFamily="Impact" TextAlignment="Center" FontSize="24">
                                             <TextBlock.Style>
                                                 <Style TargetType="{x:Type TextBlock}">
                                                     <Style.Triggers>
                                                         <DataTrigger Binding="{Binding ElementName=emailChk, Path=Text}"  Value="X" >
-                                                            <Setter Property="Foreground" Value="Red"/>
+                                                            <Setter Property="Foreground" Value="LightGray"/>
                                                         </DataTrigger>
                                                         <DataTrigger Binding="{Binding ElementName=emailChk, Path=Text}" Value="V">
-                                                            <Setter Property="Foreground"  Value="Green"/>
+                                                            <Setter Property="Foreground"  Value="Black"/>
                                                         </DataTrigger>
                                                     </Style.Triggers>
                                                 </Style>
@@ -227,7 +227,7 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                                     <Border 
                                         BorderThickness="0,0,0,0" BorderBrush="#FFA8AFAD" HorizontalAlignment="Left" Margin="48,5,17,0">
                                         <StackPanel Margin="0"
-                                            HorizontalAlignment="Center" Width="416" Orientation="Horizontal" >
+                                            HorizontalAlignment="Center" Width="350" Orientation="Horizontal" >
                                             <i:Interaction.Triggers>
                                                 <i:EventTrigger EventName="OnMouseDown" >
                                                     <i:InvokeCommandAction Command="{Binding textChange}" />
@@ -276,7 +276,7 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                                             <telerik:RadWatermarkTextBox x:Name="idbox1" TextWrapping="Wrap" 
                                                 MaxLength="10"
                                                 BorderThickness="0,0,0,1"
-                                                WatermarkContent="ID" HorizontalAlignment="Center" VerticalAlignment="Center" Height="35" Width="396" BorderBrush="#FF878A8A" Margin="10,0,0,0" 
+                                                WatermarkContent="ID" HorizontalAlignment="Center" VerticalAlignment="Center" Height="35" Width="309" BorderBrush="#FF878A8A" Margin="10,0,0,0" 
                                                       Text="{Binding name}"
                                                                          >
                                                 <i:Interaction.Triggers>
@@ -299,11 +299,11 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                                                 </i:EventTrigger>
                                             </i:Interaction.Triggers>
                                             <StackPanel Width="416">
-                                                <Border>
-                                                    <StackPanel>
-                                                        <Button x:Name="IdDoubleCheck1" Background="#FF00C4BF"  Command="{Binding idChecking}"
+                                                <Border Margin="0,0,44,0">
+                                                    <StackPanel Margin="0,0,20,0">
+                                                        <Button x:Name="IdDoubleCheck1" Background="#FFEE534F"  Command="{Binding idChecking}"
                                                             BorderThickness="0" Content="중복확인" Foreground="White" RenderTransformOrigin="0.482,-0.359" 
-                                                            HorizontalAlignment="Left" VerticalAlignment="Center" Width="396" Height="30" Margin="10,0,0,0" />
+                                                            HorizontalAlignment="Left" VerticalAlignment="Center" Width="339" Height="30" Margin="30,0,0,0" />
                                                     </StackPanel>
                                                 </Border>
                                             </StackPanel>
@@ -314,13 +314,13 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                                     <Border 
                                     BorderThickness="0,0,0,0" BorderBrush="#FFA8AFAD" HorizontalAlignment="Left" Margin="48,5,17,0">
 
-                                        <StackPanel Margin="0" HorizontalAlignment="Center" Width="416" Orientation="Horizontal" Height="40">
+                                        <StackPanel Margin="0" HorizontalAlignment="Center" Width="357" Orientation="Horizontal" Height="40">
                                             <telerik:RadPasswordBox x:Name="pwbox" TextWrapping="Wrap"
                                                                      TextChanged="Pwbox_TextChanged"    
                                                                     LostFocus="Pwbox_LostFocus"
                                             MaxLength="15"       
                                             BorderThickness="0,0,0,1.5"    
-                                            WatermarkContent="PassWord" Height="35" HorizontalAlignment="Center" VerticalAlignment="Center" Width="396" BorderBrush="#FF878A8A" Margin="10,0,0,0"/>
+                                            WatermarkContent="PassWord" Height="36" HorizontalAlignment="Center" VerticalAlignment="Center" Width="309" BorderBrush="#FF878A8A" Margin="10,2,0,2"/>
                                             <TextBlock  x:Name="pw1chk"   TextWrapping="Wrap" Text="{Binding passChk}" Width="0" Margin="0">
 
                                             </TextBlock>
@@ -331,7 +331,7 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                                     <Border 
                                 BorderThickness="0,0,0,0" BorderBrush="#FFA8AFAD" HorizontalAlignment="Left" Margin="48,5,17,0">
 
-                                        <StackPanel Margin="0" HorizontalAlignment="Center" Width="416" Orientation="Horizontal" Height="40">
+                                        <StackPanel Margin="-10,2,0,2.8" HorizontalAlignment="Center" Width="332" Orientation="Horizontal" Height="40">
                                             <telerik:RadPasswordBox x:Name="pwbox2" TextWrapping="Wrap"
                                                                     TextChanged="Pwbox2_TextChanged"    
                                                                     LostFocus="Pwbox2_LostFocus"
@@ -339,7 +339,7 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                                         MaxLength="15"     
                                         BorderThickness="0,0,0,1.5"    
                                                      
-                                        WatermarkContent="Confirm PassWord" Height="35" HorizontalAlignment="Center" VerticalAlignment="Center" Width="396" BorderBrush="#FF878A8A" Margin="10,0,0,0">
+                                        WatermarkContent="Confirm PassWord" Height="36" HorizontalAlignment="Center" VerticalAlignment="Center" Width="308" BorderBrush="#FF878A8A" Margin="10,2,0,2">
                                                 <i:Interaction.Triggers>
                                                     <i:EventTrigger EventName="TextChanged">
                                                         <i:InvokeCommandAction  CommandParameter="{Binding PasswordChar, ElementName=pwbox2}" Command="{Binding pw22Changed}" />
@@ -356,7 +356,7 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                                     <Border 
                                     BorderThickness="0,0,0,0" BorderBrush="#FFA8AFAD" HorizontalAlignment="Left" Margin="48,5,17,0">
                                         <StackPanel Margin="0"
-                                        HorizontalAlignment="Center" Width="416" Orientation="Horizontal" >
+                                        HorizontalAlignment="Center" Width="350" Orientation="Horizontal" >
                                             <i:Interaction.Triggers>
                                                 <i:EventTrigger EventName="OnMouseDown" >
                                                     <i:InvokeCommandAction Command="{Binding textChange}" />
@@ -365,7 +365,7 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                                             <telerik:RadWatermarkTextBox x:Name="emailBox" TextWrapping="Wrap" 
                                             MaxLength="30"
                                             BorderThickness="0,0,0,1"
-                                            WatermarkContent="E-mail" HorizontalAlignment="Center" VerticalAlignment="Center" Height="35" Width="396" BorderBrush="#FF878A8A" Margin="10,0,0,0" 
+                                            WatermarkContent="E-mail" HorizontalAlignment="Center" VerticalAlignment="Center" Height="35" Width="162" BorderBrush="#FF878A8A" Margin="10,0,0,0" 
                                                       Text="{Binding email}"
                                                                          >
                                                 <i:Interaction.Triggers>
@@ -379,30 +379,31 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                                                     <Style TargetType="{x:Type TextBlock}">
                                                         <Style.Triggers>
                                                             <DataTrigger Binding="{Binding emailChk}"  Value="X" >
-                                                                <Setter Property="Foreground" Value="Red"/>
+                                                                <Setter Property="Foreground" Value="LightGray"/>
                                                                 <Setter Property="Text" Value="X"/>
                                                             </DataTrigger>
                                                             <DataTrigger Binding="{Binding emailChk}" Value="V">
-                                                                <Setter Property="Foreground" Value="Green"/>
+                                                                <Setter Property="Foreground" Value="Black"/>
                                                                 <Setter Property="Text" Value="V"/>
                                                             </DataTrigger>
                                                         </Style.Triggers>
                                                     </Style>
                                                 </TextBlock.Style>
                                             </TextBlock>
+                                            <ComboBox x:Name="emailSelect" Width="140" Text ="메일을 선택하세요" ItemsSource="{Binding Path=emails}" />
                                         </StackPanel>
                                     </Border>
                                 </StackPanel>
                                 <StackPanel>
-                                    <StackPanel Height="21" Margin="20,20,0,0">
+                                    <StackPanel Height="21" Margin="20,15,0,25">
                                         <CheckBox x:Name="agree" Margin="30,0,0,0">
                                             <TextBlock Text="I agree the terms of service" Margin="10,0,0,0"/>
                                         </CheckBox>
                                     </StackPanel>
                                     <Button x:Name="RegisterButton"  
-                                    Background="#FF00C4BF"  
+                                    Background="#FFEE534F"  
                                             Click="RegisterButton_Click"
-                                    BorderThickness="0" Content="Register" Foreground="White" RenderTransformOrigin="0.482,-0.359" HorizontalAlignment="Left" VerticalAlignment="Center" Width="396" Height="31" Margin="59,10,0,0" />
+                                    BorderThickness="0" Content="Register" Foreground="White" RenderTransformOrigin="0.482,-0.359" HorizontalAlignment="Left" VerticalAlignment="Center" Width="288" Height="31" Margin="59,10,0,0" />
                                 </StackPanel>
                             </StackPanel>
                         </Border>

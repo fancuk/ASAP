@@ -36,8 +36,24 @@ namespace TelerikWpfApp3.VM
         private string _emailChk;
         #endregion
 
-
+        public class Email
+        {
+            private string _emailSelect;
+            public string EmailSelect
+            {
+                get { return _emailSelect; }
+                set { _emailSelect = value; }
+            }
+        }
         #region properties..
+
+        private ObservableCollection<Email> _emails;
+
+        public ObservableCollection<Email> emails
+        {
+            get{return _emails;}
+            set { _emails = value; }
+        }
 
         public string name
         {
@@ -71,7 +87,7 @@ namespace TelerikWpfApp3.VM
         {
             get { return this._email; }
             set { this._email = value; OnPropertyChanged("email");
-                if (Regex.IsMatch(this._email, @"^[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]$"))
+                if (Regex.IsMatch(this._email, @"^[a-z0-9]{5,10}$"))
                 {
                     emailChk = "V";
                     ((App)Application.Current).emailChk = (true);
@@ -121,25 +137,28 @@ namespace TelerikWpfApp3.VM
             get { return this._pwChk; }
             set { this._pwChk = value; OnPropertyChanged("pwChk"); }
         }
-        
+
+
         #endregion
 
         #region methods
         public ICommand pw2Changed { get; set; }
         public ICommand test { get; set; }
         public ICommand idChecking { get; set; }
-
-        #endregion
-
+        public ICommand emailSelecting { get; set; }
         public ICommand CloseCommand { get; set; }
+        #endregion
 
         public RegisterViewModel()
         {
             nameChk = "X";
             emailChk = "X";
+            
             CloseCommand = new Command(ExecuteClose, CanExecute);
             idChecking = new Command(idCheckButton, CanExecute);
+            emailSelecting = new Command(emailChoosing, CanExecute);
         }
+
         public void OnWindowClosing(object sender, CancelEventArgs e)
         {
             // Handle closing logic, set e.Cancel as needed
@@ -148,10 +167,13 @@ namespace TelerikWpfApp3.VM
             {
                 ((App)Application.Current).CloseSocket();
             }
+           
             Window rv = TelerikWpfApp3.Register.Instance;
+            Register rr = (Register)rv;
+            rr.allReset();
+            rv = rr;
             rv.Hide();
         }
-
         private void idCheckButton(object org)
         {
             string id = name;
@@ -170,6 +192,14 @@ namespace TelerikWpfApp3.VM
                     ((App)Application.Current).SendData("<ICF>", id);
                 }
             }
+        }
+
+        private void emailChoosing(object org)
+        {
+            emails = new ObservableCollection<Email>()
+            {
+                new Email(){EmailSelect = "@naver.com"}, new Email(){EmailSelect = "@gmail.com"}
+            };
         }
 
         private void ExecuteClose(object obj)

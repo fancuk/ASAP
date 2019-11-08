@@ -87,6 +87,7 @@ namespace TelerikWpfApp3
         private Register()
         {
             InitializeComponent();
+            emailSelectBox();
             pwd.passChk = "X";
             pw1chk.Foreground = new SolidColorBrush(Colors.Red);
             this.MouseLeftButtonDown += MoveWindow;
@@ -155,12 +156,12 @@ namespace TelerikWpfApp3
             if (p1.Equals(p2) && Regex.IsMatch(p1, @"^[a-z0-9]{8,15}$"))
             {
                 pc.chkResult = "pwEqual";
-                pwchk.Foreground = new SolidColorBrush(Colors.Green);
+                pwchk.Foreground = new SolidColorBrush(Colors.Black);
             }
             else
             {
                 pc.chkResult = "not Equal";
-                pwchk.Foreground = new SolidColorBrush(Colors.Red);
+                pwchk.Foreground = new SolidColorBrush(Colors.LightGray);
             } 
         }
 
@@ -171,12 +172,12 @@ namespace TelerikWpfApp3
             if (p1.Equals(p2) && Regex.IsMatch(p1, @"^[a-z0-9]{8,15}$"))
             {
                 pc.chkResult = "pwEqual";
-                pwchk.Foreground = new SolidColorBrush(Colors.Green);
+                pwchk.Foreground = new SolidColorBrush(Colors.Black);
             }
             else
             {
                 pc.chkResult = "not Equal";
-                pwchk.Foreground = new SolidColorBrush(Colors.Red);
+                pwchk.Foreground = new SolidColorBrush(Colors.LightGray);
             }
         }
 
@@ -187,12 +188,12 @@ namespace TelerikWpfApp3
             if (Regex.IsMatch(p1, @"^[a-z0-9]{8,15}$") && p1 != "")
             {
                 pwd.passChk = "V";
-                pw1chk.Foreground = new SolidColorBrush(Colors.Green);
+                pw1chk.Foreground = new SolidColorBrush(Colors.Black);
             }
             else
             {
                 pwd.passChk = "X";
-                pw1chk.Foreground = new SolidColorBrush(Colors.Red);
+                pw1chk.Foreground = new SolidColorBrush(Colors.LightGray);
             }
         }
 
@@ -203,14 +204,31 @@ namespace TelerikWpfApp3
             if (Regex.IsMatch(p1, @"^[a-z0-9]{8,15}$") && p1 != "")
             {
                 pwd.passChk = "V";
-                pw1chk.Foreground = new SolidColorBrush(Colors.Green);
+                pw1chk.Foreground = new SolidColorBrush(Colors.Black);
             }
             else
             {
                 pwd.passChk = "X";
-                pw1chk.Foreground = new SolidColorBrush(Colors.Red);
+                pw1chk.Foreground = new SolidColorBrush(Colors.LightGray);
                 MessageBox.Show("비밀번호는 8~15자리 숫자, 영문 소문자만 가능합니다.");
             }
         }
+
+        public void allReset()
+        {
+            pw1chk.Text = "";
+            idbox1.Text = "";
+            pwbox2.Text = "";
+            emailBox.Text = "";
+            agree.IsChecked = false;
+        }
+        
+        public void emailSelectBox()
+        {
+            emailSelect.Items.Add("@naver.com");
+            emailSelect.Items.Add("@gmail.com");
+            emailSelect.Items.Add("@daum.net");
+        }
+
     }
 }
