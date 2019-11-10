@@ -87,7 +87,6 @@ namespace TelerikWpfApp3
         private Register()
         {
             InitializeComponent();
-            emailSelectBox();
             pwd.passChk = "X";
             pw1chk.Foreground = new SolidColorBrush(Colors.Red);
             this.MouseLeftButtonDown += MoveWindow;
@@ -138,6 +137,10 @@ namespace TelerikWpfApp3
             {
                 MessageBox.Show("이메일을 다시 작성하세요.");
             }
+            /*else if ((((App)Application.Current).emailSelect == false))
+            {
+                MessageBox.Show("이메일형식을 선택해주세요.");
+            }*/
             else if (agree.IsChecked == false)
             {
                 MessageBox.Show("동의 버튼을 눌러주세요.");
@@ -222,13 +225,5 @@ namespace TelerikWpfApp3
             emailBox.Text = "";
             agree.IsChecked = false;
         }
-        
-        public void emailSelectBox()
-        {
-            emailSelect.Items.Add("@naver.com");
-            emailSelect.Items.Add("@gmail.com");
-            emailSelect.Items.Add("@daum.net");
-        }
-
     }
 }

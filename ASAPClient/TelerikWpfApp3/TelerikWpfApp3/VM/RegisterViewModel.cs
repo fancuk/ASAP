@@ -36,24 +36,8 @@ namespace TelerikWpfApp3.VM
         private string _emailChk;
         #endregion
 
-        public class Email
-        {
-            private string _emailSelect;
-            public string EmailSelect
-            {
-                get { return _emailSelect; }
-                set { _emailSelect = value; }
-            }
-        }
-        #region properties..
-
-        private ObservableCollection<Email> _emails;
-
-        public ObservableCollection<Email> emails
-        {
-            get{return _emails;}
-            set { _emails = value; }
-        }
+       
+        #region properties
 
         public string name
         {
@@ -67,6 +51,7 @@ namespace TelerikWpfApp3.VM
                     nameChk = "X";
                 }
                 else nameChk = "X";
+
                 /*if (((App)Application.Current).getidchk() == true)
                {
                    nameChk = "V";
@@ -75,7 +60,6 @@ namespace TelerikWpfApp3.VM
                {
                    nameChk = "X";
                }*/
-
             }
         }
         public string nameChk
@@ -104,6 +88,7 @@ namespace TelerikWpfApp3.VM
             get { return this._emailChk; }
             set { this._emailChk = value; OnPropertyChanged("emailChk"); }
         }
+
        public string pw1
         {
             get { return this._pw1; }
@@ -115,7 +100,6 @@ namespace TelerikWpfApp3.VM
                 else pw1Chk = "X";*/
             }
         }
-        
         public string pw1Chk
         {
             get { return this._pw1Chk; }
@@ -129,23 +113,20 @@ namespace TelerikWpfApp3.VM
         {
             get { return this._pw2; }
             set { this._pw2 = value; OnPropertyChanged("pw2"); pwCheck(); }
-        }
+        } */
 
-            */
         public string pwChk
         {
             get { return this._pwChk; }
             set { this._pwChk = value; OnPropertyChanged("pwChk"); }
         }
-
-
         #endregion
 
         #region methods
         public ICommand pw2Changed { get; set; }
         public ICommand test { get; set; }
         public ICommand idChecking { get; set; }
-        public ICommand emailSelecting { get; set; }
+        //public ICommand emailSelecting { get; set; }
         public ICommand CloseCommand { get; set; }
         #endregion
 
@@ -153,11 +134,17 @@ namespace TelerikWpfApp3.VM
         {
             nameChk = "X";
             emailChk = "X";
-            
             CloseCommand = new Command(ExecuteClose, CanExecute);
             idChecking = new Command(idCheckButton, CanExecute);
-            emailSelecting = new Command(emailChoosing, CanExecute);
+            //emailSelecting = new Command(emailSelect, CanExecute);
+
+            Emails = new ObservableCollection<Email>()
+            {
+                new Email(){EmailAddress="@gamil.com"}, new Email(){EmailAddress="@naver.com"}
+                ,new Email(){EmailAddress="@daum.net"}
+            };
         }
+
 
         public void OnWindowClosing(object sender, CancelEventArgs e)
         {
@@ -193,15 +180,57 @@ namespace TelerikWpfApp3.VM
                 }
             }
         }
-
-        private void emailChoosing(object org)
+        /*
+        private void emailSelect(object org)
         {
-            emails = new ObservableCollection<Email>()
+            Emails = new ObservableCollection<Email>()
             {
-                new Email(){EmailSelect = "@naver.com"}, new Email(){EmailSelect = "@gmail.com"}
+                new Email(){EmailAddress="@gamil.com"}, new Email(){EmailAddress="@naver.com"}
+                ,new Email(){EmailAddress="@daum.net"}
             };
+        }*/
+        public class Email
+        {
+            private string _emailAddress;
+          
+            public string EmailAddress
+            {
+                get { return _emailAddress; }
+                set { _emailAddress = value; }
+            }
         }
 
+        private ObservableCollection<Email> _emails;
+        public ObservableCollection<Email> Emails
+        {
+            get { return _emails; }
+            set { _emails = value; }
+        }
+
+        private string _emailselect;
+        public string EmailSelect
+        {
+            get { return _emailselect; }
+            set
+            {
+                _emailselect = value;
+                ((App)Application.Current).emailSelect = false;
+                if (this._emailselect != " ")
+                {
+                    ((App)Application.Current).emailSelect = true;
+                }
+            }
+        }
+
+        private Email _semail;
+        public Email Seamil
+        {
+            get { return _semail; }
+            set
+            {
+                _semail = value;
+            }
+        }
         private void ExecuteClose(object obj)
         {
             if (((App)Application.Current).nowConnect == true)
