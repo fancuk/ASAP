@@ -73,7 +73,7 @@ namespace TelerikWpfApp3.VM
             set { this._email = value; OnPropertyChanged("email");
                 if (Regex.IsMatch(this._email, @"^[a-z0-9]{5,10}$"))
                 {
-                    emailChk = "V";
+                     emailChk = "V";
                     ((App)Application.Current).emailChk = (true);
                 }
                 else
@@ -120,13 +120,15 @@ namespace TelerikWpfApp3.VM
             get { return this._pwChk; }
             set { this._pwChk = value; OnPropertyChanged("pwChk"); }
         }
+
+        public ObservableCollection<string> Email { get; set; }
         #endregion
 
         #region methods
         public ICommand pw2Changed { get; set; }
         public ICommand test { get; set; }
         public ICommand idChecking { get; set; }
-        //public ICommand emailSelecting { get; set; }
+        public ICommand emailSelecting { get; set; }
         public ICommand CloseCommand { get; set; }
         #endregion
 
@@ -136,15 +138,12 @@ namespace TelerikWpfApp3.VM
             emailChk = "X";
             CloseCommand = new Command(ExecuteClose, CanExecute);
             idChecking = new Command(idCheckButton, CanExecute);
-            //emailSelecting = new Command(emailSelect, CanExecute);
-
-            Emails = new ObservableCollection<Email>()
+            Email = new ObservableCollection<string>()
             {
-                new Email(){EmailAddress="@gamil.com"}, new Email(){EmailAddress="@naver.com"}
-                ,new Email(){EmailAddress="@daum.net"}
+                 "@naver.com","@gamil.com"
             };
+            emailSelecting = new Command(emailSelect, CanSelect);
         }
-
 
         public void OnWindowClosing(object sender, CancelEventArgs e)
         {
@@ -160,6 +159,19 @@ namespace TelerikWpfApp3.VM
             rr.allReset();
             rv = rr;
             rv.Hide();
+        }
+        private void emailSelect(object org)
+        {
+            if ((string)org == null)
+            {
+                ((App)Application.Current).emailSelect = false;
+                MessageBox.Show("이메일을 선택하세요");
+            }
+            else
+            {
+                ((App)Application.Current).emailSelect = true;
+                MessageBox.Show("이메일 확인 완료");
+            }
         }
         private void idCheckButton(object org)
         {
@@ -180,63 +192,22 @@ namespace TelerikWpfApp3.VM
                 }
             }
         }
-        /*
-        private void emailSelect(object org)
-        {
-            Emails = new ObservableCollection<Email>()
-            {
-                new Email(){EmailAddress="@gamil.com"}, new Email(){EmailAddress="@naver.com"}
-                ,new Email(){EmailAddress="@daum.net"}
-            };
-        }*/
-        public class Email
-        {
-            private string _emailAddress;
-          
-            public string EmailAddress
-            {
-                get { return _emailAddress; }
-                set { _emailAddress = value; }
-            }
-        }
-
-        private ObservableCollection<Email> _emails;
-        public ObservableCollection<Email> Emails
-        {
-            get { return _emails; }
-            set { _emails = value; }
-        }
-
-        private string _emailselect;
-        public string EmailSelect
-        {
-            get { return _emailselect; }
-            set
-            {
-                _emailselect = value;
-                ((App)Application.Current).emailSelect = false;
-                if (this._emailselect != " ")
-                {
-                    ((App)Application.Current).emailSelect = true;
-                }
-            }
-        }
-
-        private Email _semail;
-        public Email Seamil
-        {
-            get { return _semail; }
-            set
-            {
-                _semail = value;
-            }
-        }
+   
         private void ExecuteClose(object obj)
         {
             if (((App)Application.Current).nowConnect == true)
             {
                 ((App)Application.Current).CloseSocket();
             }
+        }
+
+        private bool CanSelect(object msg)
+        {
+            if ((string)msg == "")
+            {
+                return false;
+            }
+            return true;
         }
 
         private bool CanExecute(object obj)

@@ -137,10 +137,10 @@ namespace TelerikWpfApp3
             {
                 MessageBox.Show("이메일을 다시 작성하세요.");
             }
-            /*else if ((((App)Application.Current).emailSelect == false))
+            else if ((((App)Application.Current).emailSelect == false))
             {
-                MessageBox.Show("이메일형식을 선택해주세요.");
-            }*/
+                MessageBox.Show("이메일을 확인해주세요");
+            }
             else if (agree.IsChecked == false)
             {
                 MessageBox.Show("동의 버튼을 눌러주세요.");
