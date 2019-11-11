@@ -131,7 +131,7 @@ namespace TelerikWpfApp3.Networking
                         string target = tokens[2];
                         DispatchService.Invoke(() =>
                         {
-                            ((App)Application.Current).AddFriend(target);
+                            ((App)Application.Current).AddFriend(target,"true");
                         });
                         MessageBox.Show("친구 추가 되었습니다!");
                     }
@@ -171,7 +171,7 @@ namespace TelerikWpfApp3.Networking
                     tmp.User = tokens[1];
                     tmp.Time = tokens[3];
                     tmp.Text = tokens[4];
-                    ((App)Application.Current).setchatting(tokens[1], tokens[2], tokens[3], tokens[4]);
+                    ((App)Application.Current).setchatting(tokens[1], tokens[2], tokens[3], tokens[4],"Receive");
                     DispatchService.Invoke(() =>
                     {
                         ((App)Application.Current).AddSQLChat(tmp.User, tmp);
@@ -203,7 +203,7 @@ namespace TelerikWpfApp3.Networking
                         tmp.Text = msg;
       
                         ((App)Application.Current).setchatting(user, 
-                            ((App)Application.Current).myID,time,msg);
+                            ((App)Application.Current).myID,time,msg,"Receive");
                     }              
                 }
                 else if (tag.Equals("<FIN>"))
@@ -218,13 +218,17 @@ namespace TelerikWpfApp3.Networking
 
                     int count = Int32.Parse(tokens[1]);
                     int idx = 2;
-                    for (int i = 0; i < count; i++)
+                    for (int i = 0; i < count; i+=2)
                     {
                         DispatchService.Invoke(() =>
                         {
-                            ((App)Application.Current).AddFriend(tokens[idx+i]);
+                            ((App)Application.Current).AddFriend(tokens[idx+i],tokens[idx+i+1]);
                         });
                     }
+                }
+                else if (tag.Equals("<LGO>"))
+                {
+                    ((App)Application.Current).ChangeStatus(tokens[1]);
                 }
                 // 텍스트박스에 추가해준다.
                 // 비동기식으로 작업하기 때문에 폼의 UI 스레드에서 작업을 해줘야 한다.
