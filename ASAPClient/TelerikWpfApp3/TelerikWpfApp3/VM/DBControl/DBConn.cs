@@ -18,7 +18,7 @@ namespace TelerikWpfApp3.VM.DBControl
     {
         public bool chatIsIt = false;
         #region createChattingFile
-        private void createChattingFile()
+        private void createChattingFile(string myId)
         {
             string db = @"Chatting";
             SQLiteConnection Conn = new
@@ -30,7 +30,7 @@ namespace TelerikWpfApp3.VM.DBControl
              }
             try
             {
-                string Query = "create table if not exists Chatting" +
+                string Query = "create table if not exists " + myId +
                      " (sender varchar(20),receiver varchar(20),time varchar(20),msg varchar(200))";
                 SQLiteCommand command = new SQLiteCommand(Query, Conn);
                 int Result = command.ExecuteNonQuery();
@@ -43,18 +43,27 @@ namespace TelerikWpfApp3.VM.DBControl
         }
         #endregion
         #region Create
-        public bool ChattingCreate(string Sender, string Receiver, string Time, string Msg) // 대화 추가
+        public bool ChattingCreate(string Sender, string Receiver, string Time, string Msg,string type) // 대화 추가
         {
             // 채팅 목록을 그냥 그대로 보여주고(계속 read안하고)
             // 그 채팅 삭제하면, oc에서 그 인덱스만 삭제하거나, 전체 삭제 하면 안되나?
-            createChattingFile();
+            createChattingFile(Sender);
             bool flag = false;
-            string query =
-                "INSERT INTO Chatting(sender,receiver,time,msg) " +
-                "VALUES('" + Sender + "','" + Receiver + "','" + Time + "','" + Msg + "') ";
+            string query;
+            if (type == "Send")
+            {
+                 query =
+                    "INSERT INTO " + Sender + "(sender,receiver,time,msg) " +
+                    "VALUES('" + Sender + "','" + Receiver + "','" + Time + "','" + Msg + "') ";
                 //"WHERE NOT EXISTS (SELECT Sender, Receiver, Time, Msg FROM Chatting WHERE " +
                 //"sender = '"+Sender+"', receiver ='"+Receiver+"', time = '"+Time+"', msg ='"+Msg+"')"; //timestamp,datetime
-
+            }
+            else
+            {
+                 query =
+                    "INSERT INTO " + Receiver + "(sender,receiver,time,msg) " +
+                    "VALUES('" + Sender + "','" + Receiver + "','" + Time + "','" + Msg + "') ";
+            }
             SQLiteConnection Conn = new
                 SQLiteConnection("Data Source=Chatting;Version=3");
             try
@@ -76,14 +85,14 @@ namespace TelerikWpfApp3.VM.DBControl
         }
         #endregion
         #region Read 반환형 ObservableCollection
-        public ObservableCollection<Chatitem> ChattingRead(string FriendID) //채팅 목록
+        public ObservableCollection<Chatitem> ChattingRead(string myId, string FriendID) //채팅 목록
         {
-            createChattingFile();
+            createChattingFile(myId);
             ObservableCollection<Chatitem> information =
                 new ObservableCollection<Chatitem>();
             SQLiteConnection Conn = new
                 SQLiteConnection("Data Source=Chatting;Version=3");
-            string query = "select distinct * from Chatting where receiver='" + FriendID + "' order " +
+            string query = "select distinct * from " + myId +" where receiver='" + myId + "' order " +
                 "by time asc"; //시간 표시
             try
             {
@@ -122,12 +131,12 @@ namespace TelerikWpfApp3.VM.DBControl
         public void ReadChat() //채팅 목록
         {
             string myId = ((App)Application.Current).myID;
-            createChattingFile();
+            createChattingFile(myId);
             ObservableCollection<Chatitem> information =
                 new ObservableCollection<Chatitem>();
             SQLiteConnection Conn = new
                 SQLiteConnection("Data Source=Chatting;Version=3");
-            string query = "select  distinct * from Chatting order by time asc"; //시간 표시
+            string query = "select  distinct * from " + myId + " order by time asc"; //시간 표시
             try
             {
                 Conn.Open();
