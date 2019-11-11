@@ -104,10 +104,10 @@ namespace TelerikWpfApp3
         {
             chatControl.resetChat(target);
         }
-        public void setchatting(string Sender, string Receiver, string Time, string Msg)
+        public void setchatting(string Sender, string Receiver, string Time, string Msg,string type)
         {
             database sqlite = new database();
-            sqlite.ChattingCreate(Sender, Receiver, Time, Msg);
+            sqlite.ChattingCreate(Sender, Receiver, Time, Msg,type);
         }
 
         public void setChat(string id)
@@ -119,7 +119,7 @@ namespace TelerikWpfApp3
             else
             {
                 //sqllite load
-                NowChat = sqlite.ChattingRead(id) ;
+                NowChat = sqlite.ChattingRead(myID,id) ;
                 Chatdict.Add(id, NowChat);
             }
         }
@@ -147,11 +147,28 @@ namespace TelerikWpfApp3
             return FriendsList;
         }
 
-        public void AddFriend(string user)
+        public void AddFriend(string user, string _status)
         {
-                FriendsList.Add(new FriendsItem(user,null));
+            if (_status == "true")
+            {
+                FriendsList.Add(new FriendsItem(user, null, true));
+            }
+            else
+            {
+                FriendsList.Add(new FriendsItem(user, null, false));
+            }
         }
 
+        public void ChangeStatus(string User)
+        {
+            for(int i = 0; i < FriendsList.Count; i++)
+            {
+                if (FriendsList[i].User == User)
+                {
+                    FriendsList[i].Status = false;
+                }
+            }
+        }
         //친구 추가 중복 체크
         public bool FriendDoubleCheck(string user)
         {
