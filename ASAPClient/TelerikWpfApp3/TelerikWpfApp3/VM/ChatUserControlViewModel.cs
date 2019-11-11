@@ -97,8 +97,8 @@ namespace TelerikWpfApp3.VM
                 target = ((App)Application.Current).nowChatTarget;
                 string plain = org as string;
                 string nowTime = DateTime.Now.ToString();
-                string msg = target + "/" + id + "/" + DateTime.Now as string + "/" + plain + "/";
-                sqlite.ChattingCreate(id, target, nowTime, plain);
+                string msg = target + "/" + id + "/" + nowTime + "/" + plain + "/";
+                sqlite.ChattingCreate(id, target, nowTime, plain, "Send");
                 Chatitem tmp = new Chatitem();
                 tmp.User = id;
                 tmp.Text = plain;
