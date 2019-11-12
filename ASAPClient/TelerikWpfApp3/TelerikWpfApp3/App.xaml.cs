@@ -39,7 +39,6 @@ namespace TelerikWpfApp3
         public Socket ProgramSock { get; set; }
         public bool idchk { get; set; }
         public bool emailChk { get; set; }
-        public bool emailSelect { get; set; }
         public string nowChatTarget { get; set; }
         public Boolean loadAllChk = false;
         public App()
@@ -165,7 +164,7 @@ namespace TelerikWpfApp3
             {
                 if (FriendsList[i].User == User)
                 {
-                    FriendsList[i].Status = false;
+                    FriendsList[i].Status = "false";
                 }
             }
         }
