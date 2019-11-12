@@ -133,13 +133,9 @@ namespace TelerikWpfApp3
             {
                 MessageBox.Show("비밀번호를 다시 확인해주세요.");
             }
-            else if((((App)Application.Current).emailChk == false))
+            else if (emailSelect.SelectedItem == null)
             {
-                MessageBox.Show("이메일을 다시 작성하세요.");
-            }
-            else if ((((App)Application.Current).emailSelect == false))
-            {
-                MessageBox.Show("이메일을 확인해주세요");
+                MessageBox.Show("이메일을 선택해주세요");
             }
             else if (agree.IsChecked == false)
             {

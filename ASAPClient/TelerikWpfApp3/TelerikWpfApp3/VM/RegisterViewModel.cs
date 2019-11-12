@@ -34,9 +34,10 @@ namespace TelerikWpfApp3.VM
         private string _nameChk;
         private string _email;
         private string _emailChk;
+        private string _nowSelectedEmail;
         #endregion
 
-       
+
         #region properties
 
         public string name
@@ -70,10 +71,12 @@ namespace TelerikWpfApp3.VM
         public string email
         {
             get { return this._email; }
-            set { this._email = value; OnPropertyChanged("email");
+            set
+            {
+                this._email = value; OnPropertyChanged("email");
                 if (Regex.IsMatch(this._email, @"^[a-z0-9]{5,10}$"))
                 {
-                     emailChk = "V";
+                    emailChk = "V";
                     ((App)Application.Current).emailChk = (true);
                 }
                 else
@@ -89,15 +92,17 @@ namespace TelerikWpfApp3.VM
             set { this._emailChk = value; OnPropertyChanged("emailChk"); }
         }
 
-       public string pw1
+        public string pw1
         {
             get { return this._pw1; }
-            set { this._pw1 = value; OnPropertyChanged("pw1");
-               /* if (this._pw1 != "")
-                {
-                    pw1Chk = "V";
-                }
-                else pw1Chk = "X";*/
+            set
+            {
+                this._pw1 = value; OnPropertyChanged("pw1");
+                /* if (this._pw1 != "")
+                 {
+                     pw1Chk = "V";
+                 }
+                 else pw1Chk = "X";*/
             }
         }
         public string pw1Chk
@@ -121,7 +126,16 @@ namespace TelerikWpfApp3.VM
             set { this._pwChk = value; OnPropertyChanged("pwChk"); }
         }
 
-        public ObservableCollection<string> Email { get; set; }
+        public string NowSelectedEmail
+        {
+            get => _nowSelectedEmail; set
+            {
+                _nowSelectedEmail = value;
+                OnPropertyChanged("NowSelectedEmail");
+            }
+        }
+
+        public ObservableCollection<string> emailList { get; set; }
         #endregion
 
         #region methods
@@ -138,11 +152,10 @@ namespace TelerikWpfApp3.VM
             emailChk = "X";
             CloseCommand = new Command(ExecuteClose, CanExecute);
             idChecking = new Command(idCheckButton, CanExecute);
-            Email = new ObservableCollection<string>()
+            emailList = new ObservableCollection<string>()
             {
-                 "@naver.com","@gamil.com"
+                 "@naver.com","@gamil.com","@daum.net"
             };
-            emailSelecting = new Command(emailSelect, CanSelect);
         }
 
         public void OnWindowClosing(object sender, CancelEventArgs e)
@@ -153,26 +166,14 @@ namespace TelerikWpfApp3.VM
             {
                 ((App)Application.Current).CloseSocket();
             }
-           
+
             Window rv = TelerikWpfApp3.Register.Instance;
             Register rr = (Register)rv;
             rr.allReset();
             rv = rr;
             rv.Hide();
         }
-        private void emailSelect(object org)
-        {
-            if ((string)org == null)
-            {
-                ((App)Application.Current).emailSelect = false;
-                MessageBox.Show("이메일을 선택하세요");
-            }
-            else
-            {
-                ((App)Application.Current).emailSelect = true;
-                MessageBox.Show("이메일 확인 완료");
-            }
-        }
+      
         private void idCheckButton(object org)
         {
             string id = name;
@@ -192,7 +193,7 @@ namespace TelerikWpfApp3.VM
                 }
             }
         }
-   
+
         private void ExecuteClose(object obj)
         {
             if (((App)Application.Current).nowConnect == true)

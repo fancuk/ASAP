@@ -365,7 +365,7 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                                             <telerik:RadWatermarkTextBox x:Name="emailBox" TextWrapping="Wrap" 
                                             MaxLength="30"
                                             BorderThickness="0,0,0,1"
-                                            WatermarkContent="E-mail" HorizontalAlignment="Center" VerticalAlignment="Center" Height="35" Width="125" BorderBrush="#FF878A8A" Margin="10,0,0,0" 
+                                            WatermarkContent="E-mail" HorizontalAlignment="Center" VerticalAlignment="Center" Height="35" Width="150" BorderBrush="#FF878A8A" Margin="10,0,0,0" 
                                                       Text="{Binding email}"
                                                                          >
                                                 <i:Interaction.Triggers>
@@ -398,10 +398,11 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                                                     </Style>
                                                 </TextBlock.Style>
                                             </TextBlock>
-                                            <ComboBox x:Name="emailSelect" Width="126" FontSize="15" VerticalAlignment="Center" 
-                                                      ItemsSource="{Binding Email}" />
-                                            <Button Content="확인" Width="44" Margin="10,2,2,2" Background="#FFEE534F" Command="{Binding emailSelecting}" CommandParameter="{Binding ElementName=emailSelect, Path=SelectedItem}"
-                                                    BorderThickness="0" Foreground="White" RenderTransformOrigin="0.482,-0.359" />
+                                            <ComboBox x:Name="emailSelect" Width="153" FontSize="15" VerticalAlignment="Center" 
+                                                      BorderBrush="{x:Null}"
+                                                      ItemsSource="{Binding emailList }" SelectedItem="{Binding NowSelectedEmail}" Background="{x:Null}">
+                                                
+                                                </ComboBox>
                                         </StackPanel>
                                     </Border>
                                 </StackPanel>
@@ -414,7 +415,10 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                                     <Button x:Name="RegisterButton" 
                                     Background="#FFEE534F"  
                                             Click="RegisterButton_Click"
-                                    BorderThickness="0" Content="Register" Foreground="White" RenderTransformOrigin="0.482,-0.359" HorizontalAlignment="Left" VerticalAlignment="Center" Width="288" Height="31" Margin="59,10,0,0" />
+                                    BorderThickness="0" Content="Register" 
+                                            Foreground="White" 
+                                            RenderTransformOrigin="0.482,-0.359" HorizontalAlignment="Left"
+                                            VerticalAlignment="Center" Width="288" Height="31" Margin="59,10,0,0" />
                                 </StackPanel>
                             </StackPanel>
                         </Border>
