@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TelerikWpfApp3.View"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:VM="clr-namespace:TelerikWpfApp3.VM"
         mc:Ignorable="d"
         Title="ChatRoom" Height="588" Width="320"
@@ -15,6 +16,11 @@
     <Window.DataContext>
         <VM:ChatUserControlViewModel></VM:ChatUserControlViewModel>
     </Window.DataContext>
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Closing">
+            <i:InvokeCommandAction  Command="{Binding CloseCommand}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Window.Resources>
         <Style x:Key="SimpleListBoxItem" TargetType="ListBoxItem">
             <Setter Property="FocusVisualStyle" Value="{x:Null}" />
@@ -72,18 +78,29 @@
                         </DropShadowEffect>
                     </Border.Effect>
                     <StackPanel Orientation="Horizontal">
+                        <StackPanel.DataContext>
+                            <VM:TitleControl/>
+                        </StackPanel.DataContext>
                         <StackPanel Width="256" Margin="20,0,0,0" Orientation="Horizontal">
                             <Border CornerRadius="20" Background="Green" Width="20" VerticalAlignment="Center" Height="20" Margin="0,0,0,20"/>
                             <TextBlock Text="{Binding target}" x:Name="TargetText"
                                      Margin="11,10,19,10" FontSize="20" FontFamily="Microsoft YaHei UI" FontWeight="Bold" Width="219"/>
                         </StackPanel>
-                        <StackPanel Width="72" Margin="0">
-                            <StackPanel Height="20" Width="20" Margin="-37,11,0,0">
-                                <StackPanel.Background>
-                                    <ImageBrush ImageSource="/TelerikWpfApp3;component/Resources/exitSmall.png" Stretch="Uniform"/>
-                                </StackPanel.Background>
-                            </StackPanel>
-                        </StackPanel>
+
+                        <Button Width="28" Margin="10,16,15,9.8" Command="{Binding close}" Background="{x:Null}" BorderBrush="{x:Null}" FontWeight="Bold" FontFamily="Malgun Gothic Semilight" FontSize="18"
+                                CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}}}" >
+                            <ContentControl Width="69">
+                                <Hyperlink Foreground="{x:Null}" Command="{Binding close}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}">
+                                    <InlineUIContainer>
+                                        <StackPanel Height="20" Width="20" Margin="0,0,44,0" HorizontalAlignment="Right">
+                                            <StackPanel.Background>
+                                                <ImageBrush ImageSource="/TelerikWpfApp3;component/Resources/exitSmall.png" Stretch="Uniform"/>
+                                            </StackPanel.Background>
+                                        </StackPanel>
+                                    </InlineUIContainer>
+                                </Hyperlink>
+                            </ContentControl>
+                        </Button>
                     </StackPanel>
                 </Border>
                 <StackPanel Height="438" Background="#FFCFCFCF" Margin="0,4,0,0">
