@@ -78,9 +78,6 @@
                         </DropShadowEffect>
                     </Border.Effect>
                     <StackPanel Orientation="Horizontal">
-                        <StackPanel.DataContext>
-                            <VM:TitleControl/>
-                        </StackPanel.DataContext>
                         <StackPanel Width="256" Margin="20,0,0,0" Orientation="Horizontal">
                             <Border CornerRadius="20" Background="Green" Width="20" VerticalAlignment="Center" Height="20" Margin="0,0,0,20"/>
                             <TextBlock Text="{Binding target}" x:Name="TargetText"
@@ -89,6 +86,9 @@
 
                         <Button Width="28" Margin="10,16,15,9.8" Command="{Binding close}" Background="{x:Null}" BorderBrush="{x:Null}" FontWeight="Bold" FontFamily="Malgun Gothic Semilight" FontSize="18"
                                 CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}}}" >
+                            <Button.DataContext>
+                                <VM:TitleControl></VM:TitleControl>
+                            </Button.DataContext>
                             <ContentControl Width="69">
                                 <Hyperlink Foreground="{x:Null}" Command="{Binding close}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}">
                                     <InlineUIContainer>
