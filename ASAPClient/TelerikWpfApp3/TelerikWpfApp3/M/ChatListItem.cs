@@ -22,6 +22,16 @@ namespace TelerikWpfApp3.M
         private string user;
         private string time;
         private bool chk;
+        private bool asap;
+        public bool Asap
+        {
+            get { return this.asap; }
+            set
+            {
+                this.asap = value;
+                OnPropertyChanged("Asap");
+            }
+        }
         public bool Chk
         {
             get { return this.chk; }
@@ -59,12 +69,13 @@ namespace TelerikWpfApp3.M
                 OnPropertyChanged("Time");
             }
         }
-        public ChatListItem(string user, string text, string time, bool chk)
+        public ChatListItem(string user, string text, string time, bool chk, bool asap)
         {
             this.Text = text;
             this.User = user;
             this.Time = time;
             this.Chk = chk;
+            this.Asap = asap;
         }
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string name)

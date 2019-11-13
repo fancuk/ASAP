@@ -102,6 +102,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Collection\FullyObservableCollection.cs" />
+    <Compile Include="Collection\ItemsChangeObservableCollection.cs" />
     <Compile Include="M\AllChatList.cs" />
     <Compile Include="login.xaml.cs">
       <DependentUpon>login.xaml</DependentUpon>
@@ -110,6 +112,7 @@
     <Compile Include="M\ChatListItem.cs" />
     <Compile Include="M\DispatchService.cs" />
     <Compile Include="M\FriendsItem.cs" />
+    <Compile Include="M\FriendsListObservableCollection.cs" />
     <Compile Include="M\msgModel.cs" />
     <Compile Include="FalseMsgBox.xaml.cs">
       <DependentUpon>FalseMsgBox.xaml</DependentUpon>
@@ -138,6 +141,8 @@
     <Compile Include="testpage1.xaml.cs">
       <DependentUpon>testpage1.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Utility\AsapTimer.cs" />
+    <Compile Include="Utility\DabbingPreventor.cs" />
     <Compile Include="viewtest.xaml.cs">
       <DependentUpon>viewtest.xaml</DependentUpon>
     </Compile>
@@ -166,6 +171,7 @@
       <DependentUpon>UserControl2.xaml</DependentUpon>
     </Compile>
     <Compile Include="VM\ChatControl.cs" />
+    <Compile Include="VM\ChattingRoomManager.cs" />
     <Compile Include="VM\ChatUserControlViewModel.cs" />
     <Compile Include="VM\DBControl\DBCmember.cs" />
     <Compile Include="VM\DBControl\DBConn.cs" />

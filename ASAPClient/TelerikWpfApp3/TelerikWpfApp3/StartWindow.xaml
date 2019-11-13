@@ -145,6 +145,7 @@
     </Window.Resources>
 
     <Border BorderBrush="Gray"
+            CornerRadius="10"
             BorderThickness="0"
             Background="White" Margin="5,5,0,5">
         <Border.Effect>
@@ -153,11 +154,8 @@
         <Grid Width="410" HorizontalAlignment="Left">
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                <Border Width="77" Background="WhiteSmoke" BorderThickness="0,0.1,0,0">
-                    <Border.Effect>
-                        <DropShadowEffect Color="#FFE4E2E2" ></DropShadowEffect>
-                    </Border.Effect>
-                    <StackPanel Background="White">
+                <Border CornerRadius="10" Width="77" Background="WhiteSmoke" BorderThickness="0,0.1,0,0">
+                    <StackPanel Background="#FFF9F9F9" Margin="0,10">
                         <Border Height="68">
                             <Ellipse Height="70" Width="70" VerticalAlignment="Top">
                                 <Ellipse.Fill>
@@ -167,25 +165,11 @@
                         </Border>
                         <Border Height="574">
                             <StackPanel>
-
-                                <StackPanel Height="46" Margin="0,20,0,0">
-                                    <Border Height="41" Margin="10,3,10,0"  BorderThickness="1" CornerRadius="10" Background="White"  >
-                                        <TextBlock Foreground="#FF2D2D2D">
-                                         
-                                            <Hyperlink 
-                                        
-                                TextDecorations="{x:Null}">
-                                                <InlineUIContainer>
-                                    <TextBlock TextDecorations="{x:Null}"  Text="{Binding myId}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="55" TextAlignment="Center" Height="21" Margin="0,8,0,0" FontFamily="Impact" FontSize="20" Foreground="#FF02BEC1" >
-                                    </TextBlock>
-                                </InlineUIContainer></Hyperlink></TextBlock>
-                                    </Border>
-                                </StackPanel>
                                 <StackPanel Margin="0,5,0,0">
-                                    <Border Height="39" BorderThickness="1,1,1,1">
+                                    <Border Height="39" BorderThickness="1,1,1,1" Margin="0,21,0,0">
                                         <StackPanel Orientation="Horizontal" Height="39" HorizontalAlignment="Center">
                                             <RadioButton 
-                                            Command="{Binding TalkPageOn}"
+                                            Command="{Binding FriendsPageOn}"
                                             GroupName="menu" Content="       "  Style="{StaticResource friendButton}" BorderBrush="{x:Null}"
                                                 Width="75" FontSize="20" Foreground="#FFF1F1F1" FontFamily="Impact" HorizontalAlignment="Center" VerticalAlignment="Center" 
                                                 Margin="0,2,0,1" Background="{x:Null}"/>
@@ -219,7 +203,7 @@
                     </StackPanel>
 
                 </Border>
-                <Border Width="328" Margin="5,0,0,0" HorizontalAlignment="Left">
+                <Border Width="328" Margin="0,0,0,0" HorizontalAlignment="Left">
                     <StackPanel Width="328" HorizontalAlignment="Left">
                         <Border Height="30" BorderThickness="0,0,0,1" BorderBrush="#FFDAD5D5" >
                             <StackPanel Margin="0,0,0,-1" Orientation="Horizontal">
@@ -231,7 +215,7 @@
                                     <StackPanel Orientation="Horizontal" Width="260">
                                         <StackPanel Width="109">
                                             <Border Width="100" Margin="0,0,0,0">
-                                                <TextBlock Text="ASAP Ver.0" Margin="0,0,0,0" FontSize="20" Foreground="#FFEE534F" FontFamily="Impact" Height="30" VerticalAlignment="Top"></TextBlock>
+                                                <TextBlock Text="ASAP Ver.0" Margin="0,0,-224,0" FontSize="20" Foreground="#FFEE534F" FontFamily="Impact" Height="30" VerticalAlignment="Top"></TextBlock>
 
                                             </Border>
                                         </StackPanel>
@@ -335,7 +319,7 @@
                                 </StackPanel>
                             </StackPanel>
                         </Border>
-                        <ContentControl Content="{Binding ContentView}" Height="620" Width="320"/>
+                        <ContentControl Content="{Binding ContentView}" Height="620" Margin="0,0,4,0"/>
                     </StackPanel>
                 </Border>
             </StackPanel>

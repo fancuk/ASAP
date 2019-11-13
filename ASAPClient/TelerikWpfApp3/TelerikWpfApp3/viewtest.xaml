@@ -14,7 +14,7 @@
          Title="viewtest" Height="630" Width="362" Loaded="Login_Loaded"
         WindowStyle="None"
         ResizeMode="NoResize"
-        BorderThickness="1.5,1.5,1.5,1.5" BorderBrush="#FF676565">
+        BorderThickness="1.5,1.5,1.5,1.5" Background="{x:Null}">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Closing">
             <i:InvokeCommandAction  Command="{Binding CloseCommand}" />
@@ -112,47 +112,55 @@
     <Window.DataContext>
         <VM:LoginViewModel/>
     </Window.DataContext>
-    <Grid>
+    <Border CornerRadius="10" Margin="3,3,3,3" Background="White" BorderBrush="#FF515151">
+        <Grid>
 
-        <StackPanel MaxWidth="450">
-            <StackPanel
-                MouseLeftButtonDown="MoveWindow"
-                HorizontalAlignment="Left" Height="30" VerticalAlignment="Top" Width="359" Orientation="Horizontal">
-                <StackPanel.DataContext>
-                    <VM:TitleControl/>
-                </StackPanel.DataContext>
+            <StackPanel MaxWidth="450">
+                <StackPanel
+                    MouseLeftButtonDown="MoveWindow"
+                    HorizontalAlignment="Left" Height="30" VerticalAlignment="Top" Width="359" Orientation="Horizontal">
+                    <StackPanel.DataContext>
+                        <VM:TitleControl/>
+                    </StackPanel.DataContext>
 
-                <StackPanel Width="100"/>
-                <StackPanel Width="147">
+                    <StackPanel Width="100"/>
+                    <StackPanel Width="140"/>
 
-                </StackPanel>
+                    <StackPanel Width="112" Orientation="Horizontal" RenderTransformOrigin="0.5,0.5">
+                        <StackPanel.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform AngleY="-0.429"/>
+                                <RotateTransform/>
+                                <TranslateTransform Y="-0.326"/>
+                            </TransformGroup>
+                        </StackPanel.RenderTransform>
 
-                <StackPanel Width="112" Orientation="Horizontal" RenderTransformOrigin="0.5,0.5">
-                    <StackPanel.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform/>
-                            <SkewTransform AngleY="-0.429"/>
-                            <RotateTransform/>
-                            <TranslateTransform Y="-0.326"/>
-                        </TransformGroup>
-                    </StackPanel.RenderTransform>
-
-                    <Button Width="38"   BorderBrush="{x:Null}" FontWeight="Bold" FontSize="18"
-                     Background="{x:Null}" Height="30" >
-                        <ContentControl>
-                            <Hyperlink Foreground="{x:Null}">
-                                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="20" Height="17" Margin="0">
-                                    <StackPanel.Background>
-                                        <ImageBrush ImageSource="/Resources/menuicon2.png"></ImageBrush>
-                                    </StackPanel.Background>
-                                </StackPanel>
-                            </Hyperlink>
-                        </ContentControl>
-                        <Button.Style>
-                            <Style TargetType="{x:Type Button}">
-                                <Style.Triggers>
-                                    <EventTrigger RoutedEvent="Click">
-                                        <EventTrigger.Actions>
+                        <Button Width="38"   BorderBrush="{x:Null}" FontWeight="Bold" FontSize="18"
+                            Background="{x:Null}" Height="30" >
+                            <Button.Style>
+                                <Style TargetType="{x:Type Button}">
+                                    <Setter Property="ContextMenu">
+                                        <Setter.Value>
+                                            <ContextMenu>
+                                                <MenuItem  Header="Login"/>
+                                                <MenuItem  Header="Register"/>
+                                                <Separator/>
+                                                <MenuItem Header="hi"  >
+                                                    <MenuItem.DataContext>
+                                                        <VM:TitleControl/>
+                                                    </MenuItem.DataContext>
+                                                    <i:Interaction.Triggers>
+                                                        <i:EventTrigger EventName="Click" >
+                                                            <i:InvokeCommandAction Command="{Binding test}" />
+                                                        </i:EventTrigger>
+                                                    </i:Interaction.Triggers>
+                                                </MenuItem>
+                                            </ContextMenu>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Style.Triggers>
+                                        <EventTrigger RoutedEvent="ButtonBase.Click">
                                             <BeginStoryboard>
                                                 <Storyboard>
                                                     <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="ContextMenu.IsOpen">
@@ -160,181 +168,171 @@
                                                     </BooleanAnimationUsingKeyFrames>
                                                 </Storyboard>
                                             </BeginStoryboard>
-                                        </EventTrigger.Actions>
-                                    </EventTrigger>
-                                </Style.Triggers>
-                                <Setter Property="ContextMenu">
-                                    <Setter.Value>
-                                        <ContextMenu>
-                                            <MenuItem  Header="Login"/>
-                                            <MenuItem  Header="Register"/>
-                                            <Separator></Separator>
-                                            <MenuItem Header="hi"  >
-                                                <MenuItem.DataContext>
-                                                    <VM:TitleControl></VM:TitleControl>
-                                                </MenuItem.DataContext>
-                                                <i:Interaction.Triggers>
-                                                    <i:EventTrigger EventName="Click" >
-                                                        <i:InvokeCommandAction Command="{Binding test}" />
-                                                    </i:EventTrigger>
-                                                </i:Interaction.Triggers>
-                                            </MenuItem>
-                                        </ContextMenu>
-                                    </Setter.Value>
-                                </Setter>
-                            </Style>
-                        </Button.Style>
-                    </Button>
+                                        </EventTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                            <ContentControl>
+                                <Hyperlink Foreground="{x:Null}">
+                                    <InlineUIContainer>
+                                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="20" Height="17" Margin="0">
+                                            <StackPanel.Background>
+                                                <ImageBrush ImageSource="/Resources/menuicon2.png"/>
+                                            </StackPanel.Background>
+                                        </StackPanel>
+                                    </InlineUIContainer>
+                                </Hyperlink>
+                            </ContentControl>
+                        </Button>
 
-                    <Button Width="38" Command="{Binding minimize}"  BorderBrush="{x:Null}" FontWeight="Bold" FontSize="18"
-                       CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" Background="{x:Null}" >
-                        <ContentControl>
-                            <Hyperlink Foreground="{x:Null}" Command="{Binding minimize}" 
-                                          CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}">
-                                <StackPanel Width="20" Height="17">
-                                    <StackPanel.Background>
-                                        <ImageBrush ImageSource="Resources/minimizeicon2.png"></ImageBrush>
-                                    </StackPanel.Background>
-                                </StackPanel>
-                            </Hyperlink>
-                        </ContentControl>
-                    </Button>
+                        <Button Width="38" Command="{Binding minimize}"  BorderBrush="{x:Null}" FontWeight="Bold" FontSize="18"
+                            CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" Background="{x:Null}" >
+                            <ContentControl>
+                                <Hyperlink Foreground="{x:Null}" Command="{Binding minimize}" 
+                                    CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}">
+                                    <InlineUIContainer>
+                                        <StackPanel Width="20" Height="17">
+                                            <StackPanel.Background>
+                                                <ImageBrush ImageSource="Resources/minimizeicon2.png"/>
+                                            </StackPanel.Background>
+                                        </StackPanel>
+                                    </InlineUIContainer>
+                                </Hyperlink>
+                            </ContentControl>
+                        </Button>
 
-                    <Button Width="39" Command="{Binding close}"  Background="{x:Null}" BorderBrush="{x:Null}" FontWeight="Bold" FontFamily="Malgun Gothic Semilight" FontSize="18"
-                        CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}">
-                        <ContentControl>
-                            <Hyperlink Foreground="{x:Null}" Command="{Binding close}" 
-                                          CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}">
-                                <StackPanel Width="20" Height="17">
-                                    <StackPanel.Background>
-                                        <ImageBrush ImageSource="/Resources/exiticon2.png"></ImageBrush>
-                                    </StackPanel.Background>
-                                </StackPanel>
-                            </Hyperlink>
-                        </ContentControl>
-                    </Button>
+                        <Button Width="39" Command="{Binding close}"  Background="{x:Null}" BorderBrush="{x:Null}" FontWeight="Bold" FontFamily="Malgun Gothic Semilight" FontSize="18"
+                            CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}">
+                            <ContentControl>
+                                <Hyperlink Foreground="{x:Null}" Command="{Binding close}" 
+                                    CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}">
+                                    <InlineUIContainer>
+                                        <StackPanel Width="20" Height="17">
+                                            <StackPanel.Background>
+                                                <ImageBrush ImageSource="/Resources/exiticon2.png"/>
+                                            </StackPanel.Background>
+                                        </StackPanel>
+                                    </InlineUIContainer>
+                                </Hyperlink>
+                            </ContentControl>
+                        </Button>
+                    </StackPanel>
                 </StackPanel>
-            </StackPanel>
-            <StackPanel Height="208">
-                <StackPanel Height="1" RenderTransformOrigin="0.5,0.5">
-                    <StackPanel.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform ScaleY="-1"/>
-                            <SkewTransform/>
-                            <RotateTransform/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </StackPanel.RenderTransform>
-                    <TextBlock  
-                           Margin="10"  
-   Foreground="Black" TextAlignment="Center" Height="32" FontWeight="Bold" FontSize="48" FontFamily="Times New Roman"  ><Run Text="" TextDecorations="{x:Null}"/></TextBlock>
+                <StackPanel Height="208">
+                    <StackPanel Height="1" RenderTransformOrigin="0.5,0.5">
+                        <StackPanel.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleY="-1"/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </StackPanel.RenderTransform>
+                        <TextBlock  
+                            Margin="10"  
+                            Foreground="Black" TextAlignment="Center" Height="32" FontWeight="Bold" FontSize="48" FontFamily="Times New Roman"  ><Run Text="" TextDecorations="{x:Null}"/></TextBlock>
+                    </StackPanel>
+                    <StackPanel Height="200" Width="200" Margin="0,0,0,1">
+                        <StackPanel.Background>
+                            <ImageBrush ImageSource="Resources/timerLogo.png" Stretch="Uniform"/>
+                        </StackPanel.Background>
+                    </StackPanel>
                 </StackPanel>
-                <StackPanel Height="200" Width="200" Margin="0,0,0,1">
-                    <StackPanel.Background>
-                        <ImageBrush ImageSource="Resources/timerLogo.png" Stretch="Uniform"/>
-                    </StackPanel.Background>
-                </StackPanel>
-            </StackPanel>
-            <StackPanel Height="150"  >
-                <StackPanel Height="152">
-                    <StackPanel Orientation="Vertical" Height="153">
-                        <StackPanel.DataContext>
-                            <VM:LoginViewModel></VM:LoginViewModel>
-                        </StackPanel.DataContext>
-                        <Border 
-                            BorderThickness="0,0,0,0" BorderBrush="#FFA8AFAD" HorizontalAlignment="Center" Height="50.8">
-                            <StackPanel 
-                            HorizontalAlignment="Center" Width="250" >
-                                <i:Interaction.Triggers>
-                                    <i:EventTrigger EventName="OnMouseDown" >
-                                        <i:InvokeCommandAction Command="{Binding textChange}" />
-                                    </i:EventTrigger>
-                                </i:Interaction.Triggers>
-                                <!--<Canvas Width="20" Margin="0">
-                                    <Canvas.Background>
-                                        <ImageBrush ImageSource="Resources/id.png" Stretch="Uniform"/>
-                                    </Canvas.Background>
-                                </Canvas>-->
-                                <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text="ID" Margin="2,0,109,0" FontWeight="Bold" FontSize="16"/>
-                                <!--<Canvas Width="20" Margin="0">
-                                    <Canvas.Background>
-                                        <ImageBrush ImageSource="Resources/id.png" Stretch="Uniform"/>
-                                    </Canvas.Background>
-                                </Canvas>-->
-                                <telerik:RadWatermarkTextBox x:Name="idbox" TextWrapping="Wrap" 
-                                                       MaxLength="10"
-                                                             Text="{Binding Uid}"
-                                                         BorderThickness="0,0,0,1"
-                                                         WatermarkContent="ID를 입력하세요" HorizontalAlignment="Center" VerticalAlignment="Center" Height="26" Width="250" BorderBrush="#FF878A8A" 
-                                                      >
+                <StackPanel Height="150"  >
+                    <StackPanel Height="152">
+                        <StackPanel Orientation="Vertical" Height="153">
+                            <StackPanel.DataContext>
+                                <VM:LoginViewModel/>
+                            </StackPanel.DataContext>
+                            <Border 
+                                BorderThickness="0,0,0,0" BorderBrush="#FFA8AFAD" HorizontalAlignment="Center" Height="50.8">
+                                <StackPanel 
+                                    HorizontalAlignment="Center" Width="250" >
                                     <i:Interaction.Triggers>
-                                        <i:EventTrigger EventName="MouseEnter" >
+                                        <i:EventTrigger EventName="OnMouseDown" >
                                             <i:InvokeCommandAction Command="{Binding textChange}" />
                                         </i:EventTrigger>
                                     </i:Interaction.Triggers>
-                                </telerik:RadWatermarkTextBox>
-                            </StackPanel>
-                        </Border>
-                        <Border 
-                            BorderThickness="0,0,0,0" BorderBrush="#FFA8AFAD" HorizontalAlignment="Center" Margin="0,20,0,0" Height="50.8">
+                                    <!--<Canvas Width="20" Margin="0">
+                                    <Canvas.Background>
+                                        <ImageBrush ImageSource="Resources/id.png" Stretch="Uniform"/>
+                                    </Canvas.Background>
+                                </Canvas>-->
+                                    <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text="ID" Margin="2,0,109,0" FontWeight="Bold" FontSize="16"/>
+                                    <!--<Canvas Width="20" Margin="0">
+                                    <Canvas.Background>
+                                        <ImageBrush ImageSource="Resources/id.png" Stretch="Uniform"/>
+                                    </Canvas.Background>
+                                </Canvas>-->
+                                    <telerik:RadWatermarkTextBox x:Name="idbox" TextWrapping="Wrap" 
+                                        MaxLength="10"
+                                        Text="{Binding Uid}"
+                                        BorderThickness="0,0,0,1"
+                                        WatermarkContent="ID를 입력하세요" HorizontalAlignment="Center" VerticalAlignment="Center" Height="26" Width="250" BorderBrush="#FF878A8A" 
+                                                      >
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="MouseEnter" >
+                                                <i:InvokeCommandAction Command="{Binding textChange}" />
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                    </telerik:RadWatermarkTextBox>
+                                </StackPanel>
+                            </Border>
+                            <Border 
+                                BorderThickness="0,0,0,0" BorderBrush="#FFA8AFAD" HorizontalAlignment="Center" Margin="0,20,0,0" Height="50.8">
 
-                            <StackPanel HorizontalAlignment="Center" Width="250">
-                                <!--<Canvas Width="20">
+                                <StackPanel HorizontalAlignment="Center" Width="250">
+                                    <!--<Canvas Width="20">
                                     <Canvas.Background>
                                         <ImageBrush ImageSource="Resources/pw2.png" Stretch="Uniform"/>
                                     </Canvas.Background>
                                 </Canvas>-->
-                                <TextBlock x:Name="textBlock_Copy" TextWrapping="Wrap" Text="Password" Margin="2,0,56,0" FontWeight="Bold" FontSize="16"/>
-                                <!--<Canvas Width="20">
+                                    <TextBlock x:Name="textBlock_Copy" TextWrapping="Wrap" Text="Password" Margin="2,0,56,0" FontWeight="Bold" FontSize="16"/>
+                                    <!--<Canvas Width="20">
                                     <Canvas.Background>
                                         <ImageBrush ImageSource="Resources/pw2.png" Stretch="Uniform"/>
                                     </Canvas.Background>
                                 </Canvas>-->
-                                <telerik:RadPasswordBox x:Name="pwbox" TextWrapping="Wrap"
-                                                                                                           MaxLength="10"            
-                                                                 Text="{Binding Upw}"
-                                                    BorderThickness="0,0,0,1.5"    
-                                                    WatermarkContent="PW를 입력하세요" Height="26" HorizontalAlignment="Center" VerticalAlignment="Center" Width="250" BorderBrush="#FF878A8A"/>
-                            </StackPanel>
-                        </Border>
+                                    <telerik:RadPasswordBox x:Name="pwbox" TextWrapping="Wrap"
+                                        MaxLength="10"            
+                                        Text="{Binding Upw}"
+                                        BorderThickness="0,0,0,1.5"    
+                                        WatermarkContent="PW를 입력하세요" Height="26" HorizontalAlignment="Center" VerticalAlignment="Center" Width="250" BorderBrush="#FF878A8A"/>
+                                </StackPanel>
+                            </Border>
+                        </StackPanel>
                     </StackPanel>
                 </StackPanel>
-            </StackPanel>
-            <StackPanel Height="246">
-                <CheckBox x:Name="rememberID" HorizontalAlignment="Center" Style="{DynamicResource CheckBoxStyle1}" VerticalAlignment="Center" Content="ID기억하기"/>
+                <StackPanel Height="246">
+                    <CheckBox x:Name="rememberID" HorizontalAlignment="Center" Style="{DynamicResource CheckBoxStyle1}" VerticalAlignment="Center" Content="ID기억하기"/>
 
-                <StackPanel Orientation="Vertical" Height="56">
-                    <StackPanel Height="55">
-                        <Button x:Name="login"  
-                    Background="#FFEE534F"  
+                    <StackPanel Orientation="Vertical" Height="56">
+                        <StackPanel Height="55">
+                            <Button x:Name="login"  
+                                Background="#FFEE534F"  
                                 Click="Login"
-                    BorderThickness="0" Content="로그인" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" Width="250" Height="39" Margin="0,10,0,0" >
-                            
-                        </Button>
-                        <StackPanel Height="5"/>
+                                BorderThickness="0" Content="로그인" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" Width="250" Height="39" Margin="0,10,0,0" />
+                            <StackPanel Height="5"/>
+                        </StackPanel>
+
                     </StackPanel>
+                    <StackPanel Height="70">
+                        <Button x:Name="kakaologin"  
+                            Background="{x:Null}"  
+                            BorderThickness="0" Content="The World Fastest Messenger ASAP" Foreground="#FFE2807E" VerticalAlignment="Center" HorizontalAlignment="Center" Width="250" Height="39" Margin="48,10,48,0" FontFamily="Microsoft PhagsPa" 
+                            Command="{Binding ''}"/>
 
-                </StackPanel>
-                <StackPanel Height="70">
-                    <Button x:Name="kakaologin"  
-                        Background="{x:Null}"  
-                        BorderThickness="0" Content="The World Fastest Messenger ASAP" Foreground="#FFE2807E" VerticalAlignment="Center" HorizontalAlignment="Center" Width="250" Height="39" Margin="48,10,48,0" FontFamily="Microsoft PhagsPa" 
-                            Command="{Binding }"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" Margin="0,0,0,0" Height="78">
 
-                </StackPanel>
-                <StackPanel Orientation="Vertical" Margin="0,0,0,0" Height="111">
-
-                    <TextBlock Text="계정이 없으신가요 ??" TextAlignment="Center" Foreground="#CCCCCC"  />
-                    <TextBlock>
-                    <Hyperlink Command="{Binding Register}" Foreground="Black"  TextDecorations="{x:Null}">
-                        <Hyperlink.Inlines>
-                          <TextBlock   TextAlignment="Center" Text="Register" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Width="391" Foreground="#FFEE534F"/>
-                        </Hyperlink.Inlines>
-                    </Hyperlink>
-                    </TextBlock>
-                    <TextBlock   TextAlignment="Center" Text="Copyrighted By @Puzzle" Margin="0,20,0,0" FontSize="9"/>
+                        <TextBlock Text="계정이 없으신가요 ??" TextAlignment="Center" Foreground="#CCCCCC"  />
+                        <TextBlock><Hyperlink Command="{Binding Register}" Foreground="Black"  TextDecorations="{x:Null}"><InlineUIContainer>
+                                    <TextBlock   TextAlignment="Center" Text="Register" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Width="391" Foreground="#FFEE534F"/>
+                                </InlineUIContainer></Hyperlink></TextBlock>
+                        <TextBlock   TextAlignment="Center" Text="Copyrighted By @Puzzle" Margin="0,20,0,0" FontSize="9"/>
+                    </StackPanel>
                 </StackPanel>
             </StackPanel>
-        </StackPanel>
-    </Grid>
+        </Grid>
+    </Border>
 </Window>

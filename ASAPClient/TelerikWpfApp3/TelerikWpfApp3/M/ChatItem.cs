@@ -12,12 +12,14 @@ namespace TelerikWpfApp3.M
         private string user;
         private string time;
         private bool chk;
-        public Chatitem(string text, string user, string time, bool chk)
+        private bool asap;
+        public Chatitem(string text, string user, string time, bool chk, bool asap)
         {
             this.Text = text;
             this.User = user;
             this.Time = time;
             this.Chk = chk;
+            this.Asap = asap;
         }
         public Chatitem()
         {
@@ -27,5 +29,6 @@ namespace TelerikWpfApp3.M
         public string User { get => user; set => user = value; }
         public string Time { get => time; set => time = value; }
         public bool Chk { get => chk; set => chk = value; }
+        public bool Asap { get => asap; set => asap = value; }
     }
 }

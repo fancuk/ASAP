@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TelerikWpfApp3.M
 {
-    public class FriendsItem : INotifyPropertyChanged
+    public  class FriendsItem : INotifyPropertyChanged
     {
         private string _user;
         private string _status;

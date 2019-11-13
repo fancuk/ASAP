@@ -37,13 +37,6 @@ Duration="0:0:10"
 
         <Grid>
             <StackPanel Orientation="Horizontal">
-                <StackPanel Width="77">
-                    <Ellipse Margin="2,5,0,0" Height="70" Width="70">
-                        <Ellipse.Fill>
-                            <ImageBrush ImageSource="/TelerikWpfApp3;component/Resources/menuicon.png"/>
-                        </Ellipse.Fill>
-                    </Ellipse>
-                </StackPanel>
                 <StackPanel Width="183">
                     <StackPanel Height="33" Orientation="Horizontal">
                         <TextBlock Height="21"  Margin="10,10,0,2" Text="이정환" FontWeight="Bold" FontSize="16"></TextBlock>

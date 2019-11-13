@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-C:\Users\king1\Desktop\TelerikWpfApp3\TelerikWpfApp3\obj\x86\Debug\
+C:\Users\king1\Desktop\소공\ASAP\TelerikWpfApp3\TelerikWpfApp3\obj\x86\Debug\
 TelerikWpfApp3
 none
 false
 DEBUG;TRACE
-C:\Users\king1\Desktop\TelerikWpfApp3\TelerikWpfApp3\App.xaml
+C:\Users\king1\Desktop\소공\ASAP\TelerikWpfApp3\TelerikWpfApp3\App.xaml
 15-1066253927
 12093627840
-48-1044025515
-39870959997
+541743230874
+391155982858
 login.xaml;FalseMsgBox.xaml;SuccessMsgBox.xaml;Register.xaml;StartWindow.xaml;testpage1.xaml;viewtest.xaml;View\Alert\MSGAlert.xaml;View\Alert\ServiceErrorAlert.xaml;View\ChatRoom.xaml;View\FriendAddWindow.xaml;View\UserControl\ChatUserControl.xaml;View\UserControl\FriendUserControl.xaml;View\UserControl\UserControl1.xaml;View\UserControl\UserControl2.xaml;
 
 True

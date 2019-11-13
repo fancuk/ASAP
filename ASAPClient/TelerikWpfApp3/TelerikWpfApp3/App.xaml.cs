@@ -9,6 +9,7 @@ using System.Net.Sockets;
 using System.Windows;
 using TelerikWpfApp3.M;
 using TelerikWpfApp3.Networking;
+using TelerikWpfApp3.Utility;
 using TelerikWpfApp3.View.Alert;
 using TelerikWpfApp3.VM;
 using TelerikWpfApp3.VM.DBControl;
@@ -20,6 +21,7 @@ namespace TelerikWpfApp3
     /// </summary>
     public partial class App : Application
     {
+        DabbingPreventor dabbingPreventor = DabbingPreventor.Instance;
         public bool nowConnect = false;
         public string nowConnectStatus = "false";
         SocketConnector socketConnector;
@@ -77,6 +79,7 @@ namespace TelerikWpfApp3
         #region send
         public void SendData(string type, string text)
         {
+          
             if (nowConnect == false) StartSocket();
             socketSender.OnSendData(type, text);
         }
@@ -124,24 +127,16 @@ namespace TelerikWpfApp3
         }
         public void loadAllChat()
         {
-
-            //if (loadAllChk) return; 다민
-            if (FriendsUserControlViewModel.Instance.loadAllChk) return; //다민
             database sqlite = new database();
             sqlite.ReadChat();
-         //   SendData("<MSQ>", myID);
-            /*for (int i = 0; i < FriendsList.Count; i++)
+            int count = FriendsUserControlViewModel.Instance.FriendsList.Count;
+            for (int i = 0; i < count; i++)  // 다민
             {
-                FriendsList[i].LastMesseage = chatControl.getLastChatById(FriendsList[i].User);
-            }다민*/
-            for(int i=0;i< FriendsUserControlViewModel.Instance.FriendsList.Count; i++) // 다민
-            {
-                FriendsUserControlViewModel.Instance.FriendsList[i].LastMesseage = 
+                FriendsUserControlViewModel.Instance.FriendsList[i].LastMesseage =
                     chatControl.getLastChatById(FriendsUserControlViewModel.Instance.FriendsList[i].User);
             }
-            //loadAllChk = true; 다민
-            FriendsUserControlViewModel.Instance.loadAllChk = true; //다민
         }
+
         public ObservableCollection<Chatitem> getChat(string target)
         {
             NowChat = chatControl.loadChat(target);

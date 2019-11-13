@@ -89,6 +89,8 @@ namespace TelerikWpfApp3.VM
         }
         public ICommand showFriendModal { get; set; }
 
+     
+
         /*public FriendsUserControlViewModel()
         {
             showFriendModal = new Command(showModal, CanExecute);

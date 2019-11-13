@@ -11,6 +11,7 @@ using TelerikWpfApp3;
 using System.Windows.Documents;
 using System.Collections.ObjectModel;
 using TelerikWpfApp3.VM.DBControl;
+using TelerikWpfApp3.Utility;
 
 namespace TelerikWpfApp3.VM
 {
@@ -24,7 +25,7 @@ namespace TelerikWpfApp3.VM
         {
             get
             {
-                return this. _target;
+                return this._target;
             }
             set
             {
@@ -99,6 +100,13 @@ namespace TelerikWpfApp3.VM
             }
             else
             {
+                DabbingPreventor dabbingPreventor = DabbingPreventor.Instance;
+
+                if (dabbingPreventor.isDabbing())
+                {
+                    MessageBox.Show("도배 하지 마세요!");
+                    return;
+                }
                 string id = ((App)Application.Current).myID;
                 target = ((App)Application.Current).nowChatTarget;
                 string plain = org as string;

@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using TelerikWpfApp3.M;
 using TelerikWpfApp3.Networking.NetworkModel;
+using TelerikWpfApp3.View.Alert;
 using TelerikWpfApp3.VM;
 
 namespace TelerikWpfApp3.Networking
@@ -65,7 +66,11 @@ namespace TelerikWpfApp3.Networking
                         string myId = ((App)Application.Current).myID;
 
                         Thread.Sleep(10);
-                        ((App)Application.Current).SendData("<FLD>",((App)Application.Current).myID);
+                        if (!FriendsUserControlViewModel.Instance.loadAllChk)
+                        {
+                            ((App)Application.Current).SendData("<FLD>", ((App)Application.Current).myID);
+                        }
+                        FriendsUserControlViewModel.Instance.loadAllChk = true; //다민
                     }
                     else
                     {
@@ -172,7 +177,10 @@ namespace TelerikWpfApp3.Networking
                     string FriendID = tokens[1];
                     string status = tokens[2];
                     //((App)Application.Current).ChangeStatus(FriendID, status);다민
-                    FriendsUserControlViewModel.Instance.ChangeStatus(FriendID, status);//다민
+                    DispatchService.Invoke(() =>
+                    {
+                        FriendsUserControlViewModel.Instance.ChangeStatus(FriendID, status);//다민
+                    });
                 }
                 else if (tag.Equals("<MSG>")) // 메세지
                 {
@@ -180,10 +188,23 @@ namespace TelerikWpfApp3.Networking
                     tmp.User = tokens[1];
                     tmp.Time = tokens[3];
                     tmp.Text = tokens[4];
+                    if (tokens[5].Equals("true"))
+                    {
+                        tmp.Asap = true;
+
+                    }
+                    else
+                    {
+                        tmp.Asap = false;
+                    }
+
+                    // 여기 이제 수정 필요!!
                     ((App)Application.Current).setchatting(tokens[1], tokens[2], tokens[3], tokens[4], "Receive");
                     DispatchService.Invoke(() =>
                     {
                         ((App)Application.Current).AddSQLChat(tmp.User, tmp);
+                        Window msgWindow = new MSGAlert();
+                        msgWindow.Show();
                     });
                     // if (!((App)Application.Current).mqState)
                     //{
@@ -249,11 +270,12 @@ namespace TelerikWpfApp3.Networking
                     int idx = 2;
                     for (int i = 0; i < count; i++)
                     {
+                        string[] resToken = tokens[idx + i].Split('^');
                         DispatchService.Invoke(() =>
                         {
                             //((App)Application.Current).AddFriend(tokens[idx + i]);
                             //다민((App)Application.Current).AddFriend(tokens[idx + i],"true"); // 서버에서 상태를 줄 때 까지 이걸로 실행!
-                            FriendsUserControlViewModel.Instance.AddFriend(tokens[idx + i], "true");//다민
+                            FriendsUserControlViewModel.Instance.AddFriend(resToken[0], resToken[1]);//다민
                             // 서버 update 시 위의 주석처리 된 FLD 활용
                         });
                     }
