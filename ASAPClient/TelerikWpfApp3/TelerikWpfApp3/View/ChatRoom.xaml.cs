@@ -24,10 +24,36 @@ namespace TelerikWpfApp3.View
     public partial class ChatRoom : INotifyPropertyChanged
     {
         private string target;
+        ChatUserControlViewModel cu = new ChatUserControlViewModel();
+
+        /*private static ChatRoom instance = null; // 다민
+
+        public static ChatRoom Instance //다민
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new ChatRoom();
+                }
+                return instance;
+            }
+        }*/
         public ChatRoom(string target) 
         {
             InitializeComponent();
             this.MouseLeftButtonDown += MoveWindow;
+            setTarget(target); 
+            cu.target = target; 
+            this.DataContext = cu;
+            ChatBox.DataContext = ((App)Application.Current).getChat(this.target);
+            ((App)Application.Current).nowChatTarget = (this.target);
+            UpdateScrollBar(ChatBox);
+            this.PreviewKeyDown += new KeyEventHandler(OnEnterKeyDownHandler);
+            Closing += cu.OnWindowClosing;
+        }
+        /*public void MakeChatRoom(string target) //다민
+        {
             setTarget(target);
             ChatUserControlViewModel cu = new ChatUserControlViewModel();
             cu.target = target;
@@ -36,8 +62,7 @@ namespace TelerikWpfApp3.View
             ((App)Application.Current).nowChatTarget = (this.target);
             UpdateScrollBar(ChatBox);
             this.PreviewKeyDown += new KeyEventHandler(OnEnterKeyDownHandler);
-        }
-
+        }*/
         private void HandleEsc(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Escape)
