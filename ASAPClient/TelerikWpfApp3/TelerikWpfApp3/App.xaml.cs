@@ -150,11 +150,11 @@ namespace TelerikWpfApp3
         {
             if (_status == "true")
             {
-                FriendsList.Add(new FriendsItem(user, null, true));
+                FriendsList.Add(new FriendsItem(user, null, "true"));
             }
             else
             {
-                FriendsList.Add(new FriendsItem(user, null, false));
+                FriendsList.Add(new FriendsItem(user, null, "false"));
             }
         }
 
