@@ -107,7 +107,7 @@ namespace TelerikWpfApp3.Networking
                             RegisterViewModel a = TelerikWpfApp3.Register.Instance.DataContext as RegisterViewModel;
                             a.nameChk = "V";
                             TelerikWpfApp3.Register.Instance.DataContext = a;
-                           ((App)Application.Current).idchk = (true);
+                            ((App)Application.Current).idchk = (true);
                         });
                     }
                     else
@@ -131,7 +131,7 @@ namespace TelerikWpfApp3.Networking
                         string target = tokens[2];
                         DispatchService.Invoke(() =>
                         {
-                            ((App)Application.Current).AddFriend(target,"true");
+                            ((App)Application.Current).AddFriend(target, "true");
                         });
                         MessageBox.Show("친구 추가 되었습니다!");
                     }
@@ -177,7 +177,7 @@ namespace TelerikWpfApp3.Networking
                     tmp.User = tokens[1];
                     tmp.Time = tokens[3];
                     tmp.Text = tokens[4];
-                    ((App)Application.Current).setchatting(tokens[1], tokens[2], tokens[3], tokens[4],"Receive");
+                    ((App)Application.Current).setchatting(tokens[1], tokens[2], tokens[3], tokens[4], "Receive");
                     DispatchService.Invoke(() =>
                     {
                         ((App)Application.Current).AddSQLChat(tmp.User, tmp);
@@ -193,10 +193,10 @@ namespace TelerikWpfApp3.Networking
                 }
                 else if (tag.Equals("<MSQ>"))
                 {
-          
+
                     int count = Int32.Parse(tokens[1]);
                     int idx = 2;
-                    for(int i=0; i<count; i++)
+                    for (int i = 0; i < count; i++)
                     {
                         string[] token2 = tokens[idx + i].Split(',');
                         string user = token2[0];
@@ -207,10 +207,10 @@ namespace TelerikWpfApp3.Networking
                         tmp.User = user;
                         tmp.Time = time;
                         tmp.Text = msg;
-      
-                        ((App)Application.Current).setchatting(user, 
-                            ((App)Application.Current).myID,time,msg,"Receive");
-                    }              
+
+                        ((App)Application.Current).setchatting(user,
+                            ((App)Application.Current).myID, time, msg, "Receive");
+                    }
                 }
                 else if (tag.Equals("<FIN>"))
                 {
@@ -219,7 +219,7 @@ namespace TelerikWpfApp3.Networking
                         sc.closeSock();
                     }
                 }
-                else if (tag.Equals("<FLD>"))
+                /*else if (tag.Equals("<FLD>"))
                 {
 
                     int count = tokens.Length;
@@ -231,6 +231,20 @@ namespace TelerikWpfApp3.Networking
                             string friendId = parsing[0];
                             string friendStatus = parsing[1];   
                             ((App)Application.Current).AddFriend(friendId,friendStatus);
+                        });
+                    }
+                }*/
+                else if (tag.Equals("<FLD>"))
+                {
+                    int count = Int32.Parse(tokens[1]);
+                    int idx = 2;
+                    for (int i = 0; i < count; i++)
+                    {
+                        DispatchService.Invoke(() =>
+                        {
+                            //((App)Application.Current).AddFriend(tokens[idx + i]);
+                            ((App)Application.Current).AddFriend(tokens[idx + i],"true"); // 서버에서 상태를 줄 때 까지 이걸로 실행!
+                            // 서버 update 시 위의 주석처리 된 FLD 활용
                         });
                     }
                 }
