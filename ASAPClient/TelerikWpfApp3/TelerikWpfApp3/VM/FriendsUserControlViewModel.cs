@@ -9,6 +9,7 @@ using System.Windows;
 using System.Windows.Input;
 using TelerikWpfApp3.M;
 using TelerikWpfApp3.View;
+using TelerikWpfApp3.Collection;
 using TelerikWpfApp3.VM.DBControl;
 
 namespace TelerikWpfApp3.VM
@@ -35,6 +36,8 @@ namespace TelerikWpfApp3.VM
                 return instance;
             }
         }
+        public FullyObservableCollection<FriendsItem> fl;
+        public ItemsChangeObservableCollection<FriendsItem> ico;
         private ObservableCollection<FriendsItem> _FriendsList; // 다민
 
         public ObservableCollection<FriendsItem> FriendsList
@@ -45,39 +48,41 @@ namespace TelerikWpfApp3.VM
             }
         }
 
-        public ObservableCollection<FriendsItem> getFriends() // 다민
+        public ItemsChangeObservableCollection<FriendsItem> getFriends() // 다민
         {
-            return FriendsList;
+            return ico;
         }
 
         public void AddFriend(string user, string _status) // 다민
         {
             if (_status == "true")
             {
-               FriendsList.Add(new FriendsItem(user, null, "true"));
+                FriendsList.Add(new FriendsItem(user, null, "true"));
+                ico.Add(new FriendsItem(user, null, "true"));
             }
             else
             {
-               FriendsList.Add(new FriendsItem(user, null, "false"));
+                FriendsList.Add(new FriendsItem(user, null, "false"));
+                ico.Add(new FriendsItem(user, null, "false"));
             }
         }
 
         public void ChangeStatus(string User, string _status)// 다민
         {
-            for (int i = 0; i < FriendsList.Count; i++)
+            for (int i = 0; i < ico.Count; i++)
             {
-                if (FriendsList[i].User == User)
+                if (ico[i].User == User)
                 {
-                    FriendsList[i].Status = _status;
+                    ico[i].Status = _status;
                 }
             }
         }
 
         public bool FriendDoubleCheck(string user) //다민
         {
-            for (int i = 0; i < FriendsList.Count; i++)
+            for (int i = 0; i < ico.Count; i++)
             {
-                if (FriendsList[i].User == user)
+                if (ico[i].User == user)
                     return true;
             }
             return false;
@@ -109,6 +114,8 @@ namespace TelerikWpfApp3.VM
             MyID = ((App)Application.Current).myID;
             showFriendModal = new Command(showModal, CanExecute);
             _FriendsList = new ObservableCollection<FriendsItem>();
+            fl = new FullyObservableCollection<FriendsItem>();
+            ico = new ItemsChangeObservableCollection<FriendsItem>();
         }
 
         private void showModal(object e)
