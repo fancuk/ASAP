@@ -43,7 +43,7 @@ namespace TelerikWpfApp3.VM
             this._viewModel1 = new UserControlViewModel();
             this._viewModel2 = new UserControlViewModel1();
             this._chatViewModel = new ChatUserControlViewModel();
-            this.friendsUserControlViewModel = new FriendsUserControlViewModel();
+            this.friendsUserControlViewModel = FriendsUserControlViewModel.Instance;
 
             FriendsPageOn = new Command(LoadFriendsPage, CE);
 

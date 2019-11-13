@@ -70,7 +70,7 @@ namespace TelerikWpfApp3.VM
             }
             else
             {//친구추가 중복시 방지!
-                if (((App)Application.Current).FriendDoubleCheck(org as string))
+                if (FriendsUserControlViewModel.Instance.FriendDoubleCheck(org as string)/*((App)Application.Current).FriendDoubleCheck(org as string)다민*/)
                 {
                     MessageBox.Show("해당 친구는 친구목록에 존재합니다.");
                 }

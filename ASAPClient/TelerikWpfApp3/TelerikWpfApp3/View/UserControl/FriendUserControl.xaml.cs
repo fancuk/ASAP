@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TelerikWpfApp3.M;
+using TelerikWpfApp3.VM;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Menu;
 
 namespace TelerikWpfApp3.View.UserControl
@@ -22,15 +23,18 @@ namespace TelerikWpfApp3.View.UserControl
     /// </summary>s
     public partial class FriendUserControl
     {
+
         public FriendUserControl()
         {
             InitializeComponent();
+            this.DataContext = FriendsUserControlViewModel.Instance;
             ((App)Application.Current).mqState = true;
             ((App)Application.Current).loadAllChat();
             //((App)Application.Current).LoadMyFriends();
             //sendMsgStackPanel.Height = 0;
             //defaultContent.Height = 540;
-            ClientList.DataContext = ((App)Application.Current).getFriends();
+            //ClientList.DataContext = ((App)Application.Current).getFriends(); 다민
+            ClientList.DataContext = FriendsUserControlViewModel.Instance.getFriends(); 
             //this.PreviewKeyDown += new KeyEventHandler(OnEnterKeyDownHandler);
         }
 
@@ -45,6 +49,8 @@ namespace TelerikWpfApp3.View.UserControl
             foreach(FriendsItem obj in ClientList.SelectedItems)
             {
                 target = obj.User.ToString();
+                //string myId = ((App)Application.Current).myID; 
+                //((App)Application.Current).SendData("<CHR>", myId + "/target"); <CHR> 태그 추가
             }
             Window ChatRooms = new ChatRoom(target);
             ChatRooms.Show();

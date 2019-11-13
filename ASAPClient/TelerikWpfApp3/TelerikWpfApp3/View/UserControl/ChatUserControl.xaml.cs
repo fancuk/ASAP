@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TelerikWpfApp3.VM;
 
 namespace TelerikWpfApp3.View.UserControl
 {
@@ -35,7 +36,8 @@ namespace TelerikWpfApp3.View.UserControl
             //((App)Application.Current).LoadMyFriends();
             sendMsgStackPanel.Height = 0;
             defaultContent.Height = 540;
-            ClientList.DataContext = ((App)Application.Current).getFriends();
+            //ClientList.DataContext = ((App)Application.Current).getFriends(); 다민
+            ClientList.DataContext = FriendsUserControlViewModel.Instance.getFriends(); //다민
             this.PreviewKeyDown += new KeyEventHandler(OnEnterKeyDownHandler);
         }
         private void GetMessageById(object sender, RoutedEventArgs e)

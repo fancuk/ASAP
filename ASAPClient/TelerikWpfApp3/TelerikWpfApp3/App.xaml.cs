@@ -30,17 +30,17 @@ namespace TelerikWpfApp3
 
         IDictionary<string, ObservableCollection<Chatitem>> Chatdict    = new Dictionary<string, ObservableCollection<Chatitem>>();
 
-        public static ObservableCollection<FriendsItem> FriendsList = new ObservableCollection<FriendsItem>();
+        //다민 public static ObservableCollection<FriendsItem> FriendsList = new ObservableCollection<FriendsItem>();
+
 
         public static ObservableCollection<Chatitem> NowChat = new ObservableCollection<Chatitem>();
-
         public string myID { get; set; }
         public Boolean mqState { get; set; }
         public Socket ProgramSock { get; set; }
         public bool idchk { get; set; }
         public bool emailChk { get; set; }
         public string nowChatTarget { get; set; }
-        public Boolean loadAllChk = false;
+        //public Boolean loadAllChk = false; 다민
         public App()
         {
             mqState = false;
@@ -124,16 +124,23 @@ namespace TelerikWpfApp3
         }
         public void loadAllChat()
         {
-            if (loadAllChk) return;
+
+            //if (loadAllChk) return; 다민
+            if (FriendsUserControlViewModel.Instance.loadAllChk) return; //다민
             database sqlite = new database();
             sqlite.ReadChat();
-            SendData("<FLD>", myID);
          //   SendData("<MSQ>", myID);
-            for (int i = 0; i < FriendsList.Count; i++)
+            /*for (int i = 0; i < FriendsList.Count; i++)
             {
                 FriendsList[i].LastMesseage = chatControl.getLastChatById(FriendsList[i].User);
+            }다민*/
+            for(int i=0;i< FriendsUserControlViewModel.Instance.FriendsList.Count; i++) // 다민
+            {
+                FriendsUserControlViewModel.Instance.FriendsList[i].LastMesseage = 
+                    chatControl.getLastChatById(FriendsUserControlViewModel.Instance.FriendsList[i].User);
             }
-            loadAllChk = true;
+            //loadAllChk = true; 다민
+            FriendsUserControlViewModel.Instance.loadAllChk = true; //다민
         }
         public ObservableCollection<Chatitem> getChat(string target)
         {
@@ -141,24 +148,24 @@ namespace TelerikWpfApp3
             return NowChat;
         }
 
-        public ObservableCollection<FriendsItem> getFriends()
+        /*public ObservableCollection<FriendsItem> getFriends()
         {
             return FriendsList;
-        }
+        }다민*/
 
-        public void AddFriend(string user, string _status)
+        /*public void AddFriend(string user, string _status)
         {
-            if (_status == "true")
-            {
+            //if (_status == "true")
+            //{
                 FriendsList.Add(new FriendsItem(user, null, "true"));
-            }
-            else
-            {
-                FriendsList.Add(new FriendsItem(user, null, "false"));
-            }
-        }
+            //}
+            //else
+            //{
+            //    FriendsList.Add(new FriendsItem(user, null, "false"));
+            //}
+        }다민*/
 
-        public void ChangeStatus(string User,string _status)
+        /*public void ChangeStatus(string User,string _status)
         {
             for(int i = 0; i < FriendsList.Count; i++)
             {
@@ -167,9 +174,9 @@ namespace TelerikWpfApp3
                     FriendsList[i].Status = _status;
                 }
             }
-        }
+        }다민*/
         //친구 추가 중복 체크
-        public bool FriendDoubleCheck(string user)
+        /*public bool FriendDoubleCheck(string user)
         {
             for (int i = 0; i < FriendsList.Count; i++)
             {
@@ -177,7 +184,7 @@ namespace TelerikWpfApp3
                     return true;
             }
             return false;
-        }
+        }다민*/
 
 
         public void ShowLoginView()

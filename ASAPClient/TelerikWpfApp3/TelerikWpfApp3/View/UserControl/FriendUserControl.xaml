@@ -7,9 +7,7 @@
              xmlns:VM="clr-namespace:TelerikWpfApp3.VM"
              mc:Ignorable="d" 
              d:DesignHeight="620" d:DesignWidth="320">
-    <UserControl.DataContext>
-        <VM:FriendsUserControlViewModel></VM:FriendsUserControlViewModel>
-    </UserControl.DataContext>
+
     <UserControl.Resources>
         <Style x:Key="SimpleListBoxItem" TargetType="ListBoxItem">
             <Setter Property="FocusVisualStyle" Value="{x:Null}" />
@@ -85,7 +83,7 @@
                                 </StackPanel>
                             </Border>
                             <StackPanel Height="69" Margin="0,1,0,0" Orientation="Horizontal">
-                                <TextBlock Text="MyID" Height="31" TextAlignment="Center" FontFamily="MS PGothic" Margin="22,22,10,0" FontSize="24" FontWeight="Bold"/>
+                                <TextBlock Text="{Binding MyID}" Height="31" Width="100" TextAlignment="Center" FontFamily="MS PGothic" Margin="22,22,10,0" FontSize="24" FontWeight="Bold"/>
                                 <Border CornerRadius="20" Width="13" Background="#FF39910F" Margin="0,30,0,25"/>
                                 <Border CornerRadius="20" Background="#FFF1F0F0" Margin="19,19,0,5" Width="181">
                                     <TextBlock Text="하하하..." Margin="18,14,18,12" TextAlignment="Center"/>
@@ -103,13 +101,6 @@
                                     <TextBlock Text="Friends" Height="31" TextAlignment="Center" FontFamily="MS PGothic" Margin="6,0,220,0" FontSize="24" FontWeight="Bold"/>
                                 </StackPanel>
                             </Border>
-                            <StackPanel Height="69" Margin="0,5,0,0" Orientation="Horizontal" Background="#FFFBFBFB">
-                                <TextBlock Text="그녀" Height="31" TextAlignment="Center" FontFamily="MS PGothic" Margin="22,22,10,0" FontSize="24" FontWeight="Bold"/>
-                                <Border CornerRadius="20" Width="13" Background="#FF39910F" Margin="0,30,0,25"/>
-                                <Border CornerRadius="20" Background="#FFF1F0F0" Margin="19,19,0,5" Width="181">
-                                    <TextBlock Text="하하하..." Margin="18,14,18,12" TextAlignment="Center"/>
-                                </Border>
-                            </StackPanel>
                             <ListBox
          
                                 ScrollViewer.HorizontalScrollBarVisibility="Hidden"
@@ -125,9 +116,26 @@
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel Height="69" Margin="0,5,0,0" Orientation="Horizontal" Background="#FFFBFBFB">
-                                   
+                                            <TextBlock x:Name="status" Text="{Binding Status}" MaxWidth="0" MaxHeight="0"></TextBlock>
                                             <TextBlock x:Name="User" Text="{Binding User}" Height="31" TextAlignment="Center" FontFamily="MS PGothic" Margin="22,22,10,0" FontSize="16" FontWeight="Bold"/>
-                                            <Border CornerRadius="20" Width="13" Background="#FF39910F" Margin="0,30,0,25"/>
+                                            <Border CornerRadius="20" Width="13" Margin="0,30,0,25">
+                                                <Border.Style>
+                                                    <Style>
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding ElementName=status, Path=Text}" Value="true">
+                                                                <Setter Property="Border.Background" >
+                                                                    <Setter.Value>
+                                                                        <SolidColorBrush Color="#FF22F70D"></SolidColorBrush>
+                                                                    </Setter.Value>
+                                                                </Setter>
+                                                            </DataTrigger>
+                                                            <DataTrigger Binding="{Binding ElementName=status, Path=Text}" Value="false">
+                                                                <Setter Property="Border.Background"  Value="Red"></Setter>
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </Border.Style>
+                                            </Border>
                                             <Border CornerRadius="20" Background="#FFF1F0F0" Margin="19,19,0,5" Width="181">
                                                 <TextBlock Text="{Binding LastMesseage}" Margin="18,14,18,12" TextAlignment="Center"/>
                                             </Border>

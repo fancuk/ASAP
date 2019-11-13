@@ -65,6 +65,7 @@ namespace TelerikWpfApp3.Networking
                         string myId = ((App)Application.Current).myID;
 
                         Thread.Sleep(10);
+                        ((App)Application.Current).SendData("<FLD>",((App)Application.Current).myID);
                     }
                     else
                     {
@@ -131,7 +132,8 @@ namespace TelerikWpfApp3.Networking
                         string target = tokens[2];
                         DispatchService.Invoke(() =>
                         {
-                            ((App)Application.Current).AddFriend(target, "true");
+                            //((App)Application.Current).AddFriend(target, "true"); 다민
+                            FriendsUserControlViewModel.Instance.AddFriend(target, "true"); //다민
                         });
                         MessageBox.Show("친구 추가 되었습니다!");
                     }
@@ -169,7 +171,8 @@ namespace TelerikWpfApp3.Networking
                 {
                     string FriendID = tokens[1];
                     string status = tokens[2];
-                    ((App)Application.Current).ChangeStatus(FriendID, status);
+                    //((App)Application.Current).ChangeStatus(FriendID, status);다민
+                    FriendsUserControlViewModel.Instance.ChangeStatus(FriendID, status);//다민
                 }
                 else if (tag.Equals("<MSG>")) // 메세지
                 {
@@ -234,6 +237,12 @@ namespace TelerikWpfApp3.Networking
                         });
                     }
                 }*/
+                else if (tag.Equals("CHR"))
+                {
+                    string friendId = tokens[1];
+                    string myId = tokens[2];
+                    // friend가 읽었다!! 이제 여기 채팅 수정
+                }
                 else if (tag.Equals("<FLD>"))
                 {
                     int count = Int32.Parse(tokens[1]);
@@ -243,7 +252,8 @@ namespace TelerikWpfApp3.Networking
                         DispatchService.Invoke(() =>
                         {
                             //((App)Application.Current).AddFriend(tokens[idx + i]);
-                            ((App)Application.Current).AddFriend(tokens[idx + i],"true"); // 서버에서 상태를 줄 때 까지 이걸로 실행!
+                            //다민((App)Application.Current).AddFriend(tokens[idx + i],"true"); // 서버에서 상태를 줄 때 까지 이걸로 실행!
+                            FriendsUserControlViewModel.Instance.AddFriend(tokens[idx + i], "true");//다민
                             // 서버 update 시 위의 주석처리 된 FLD 활용
                         });
                     }
