@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace TelerikWpfApp3.M
 {
-    public  class FriendsItem
+    public class FriendsItem : INotifyPropertyChanged
     {
         private string _user;
         private string _status;
@@ -20,9 +21,47 @@ namespace TelerikWpfApp3.M
             this._status = _status;
         }
 
-        public string User { get => _user; set => _user = value; }
-        public string LastMesseage { get => _lastMesseage; set => _lastMesseage = value; }
+        public string User
+        {
+            get
+            {
+                return this._user;
+            }
+            set
+            {
+                this._user = value;
+                OnPropertyChanged("User");
+            }
+        }
+        public string LastMesseage
+        {
+            get
+            {
+                return this._lastMesseage;
+            }
+            set
+            {
+                this._lastMesseage = value;
+                OnPropertyChanged("LastMesseage");
+            }
+        }
+        public string Status
+        {
+            get
+            {
+                return this._status;
+            }
+            set
+            {
+                this._status = value;
+                OnPropertyChanged("Status");
+            }
+        }
 
-        public string Status { get => _status; set => _status = value; }
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged(string name)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        }
     }
 }
