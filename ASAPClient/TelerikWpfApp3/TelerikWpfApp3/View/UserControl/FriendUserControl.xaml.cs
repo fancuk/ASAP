@@ -52,8 +52,17 @@ namespace TelerikWpfApp3.View.UserControl
                 //string myId = ((App)Application.Current).myID; 
                 //((App)Application.Current).SendData("<CHR>", myId + "/target"); <CHR> 태그 추가
             }
-            Window ChatRooms = new ChatRoom(target);
-            ChatRooms.Show();
+            /*Window ChatRooms = new ChatRoom(target);
+            ChatRooms.Show();다민*/
+            if (ChattingRoomManager.Instance.findChatRoom(target)) //다민
+            {
+                ChattingRoomManager.Instance.makeChatRoom(target);
+                ChattingRoomManager.Instance.showChatRoom(target);
+            }
+            else
+            {
+                ChattingRoomManager.Instance.showChatRoom(target);
+            }
         }
 
         private void ClientList_SelectionChanged(object sender, SelectionChangedEventArgs e)
