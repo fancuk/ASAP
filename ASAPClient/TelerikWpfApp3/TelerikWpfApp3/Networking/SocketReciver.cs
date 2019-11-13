@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Sockets;
@@ -165,6 +165,12 @@ namespace TelerikWpfApp3.Networking
                     });
                 }
                 */
+                else if (tag.Equals("<LGS>"))
+                {
+                    string FriendID = tokens[1];
+                    string status = tokens[2];
+                    ((App)Application.Current).ChangeStatus(FriendID, status);
+                }
                 else if (tag.Equals("<MSG>")) // 메세지
                 {
                     Chatitem tmp = new Chatitem();
@@ -216,19 +222,17 @@ namespace TelerikWpfApp3.Networking
                 else if (tag.Equals("<FLD>"))
                 {
 
-                    int count = Int32.Parse(tokens[1]);
-                    int idx = 2;
-                    for (int i = 0; i < count; i+=2)
+                    int count = tokens.Length;
+                    for (int i = 2; i < count; i++)
                     {
+                        string[] parsing = tokens[i].Split('^');
                         DispatchService.Invoke(() =>
                         {
-                            ((App)Application.Current).AddFriend(tokens[idx+i],tokens[idx+i+1]);
+                            string friendId = parsing[0];
+                            string friendStatus = parsing[1];   
+                            ((App)Application.Current).AddFriend(friendId,friendStatus);
                         });
                     }
-                }
-                else if (tag.Equals("<LGO>"))
-                {
-                    ((App)Application.Current).ChangeStatus(tokens[1]);
                 }
                 // 텍스트박스에 추가해준다.
                 // 비동기식으로 작업하기 때문에 폼의 UI 스레드에서 작업을 해줘야 한다.

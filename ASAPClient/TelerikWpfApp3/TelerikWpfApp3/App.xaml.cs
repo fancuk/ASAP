@@ -158,13 +158,13 @@ namespace TelerikWpfApp3
             }
         }
 
-        public void ChangeStatus(string User)
+        public void ChangeStatus(string User,string _status)
         {
             for(int i = 0; i < FriendsList.Count; i++)
             {
                 if (FriendsList[i].User == User)
                 {
-                    FriendsList[i].Status = "false";
+                    FriendsList[i].Status = _status;
                 }
             }
         }
