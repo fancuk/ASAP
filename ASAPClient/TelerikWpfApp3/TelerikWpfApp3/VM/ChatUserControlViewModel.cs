@@ -53,6 +53,12 @@ namespace TelerikWpfApp3.VM
                 OnPropertyChanged("searchname");
             }
         }
+        public void OnWindowClosing(object sender, CancelEventArgs e)
+        {
+            // Handle closing logic, set e.Cancel as needed
+            e.Cancel = true;
+            ChattingRoomManager.Instance.closeChatRoom(target);
+        }
         public ICommand SendText { get; set; }
         public ICommand friendPlus { get; set; }
         public ChatUserControlViewModel()
