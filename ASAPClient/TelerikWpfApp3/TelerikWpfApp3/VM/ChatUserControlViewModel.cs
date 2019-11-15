@@ -64,20 +64,21 @@ namespace TelerikWpfApp3.VM
         public ICommand friendPlus { get; set; }
         public ChatUserControlViewModel()
         {
-            friendPlus = new Command(fpButton, CanExecuteMethod);
+            //friendPlus = new Command(fpButton, CanExecuteMethod);
             SendText = new Command(ExeceuteSendMsg, CanExecuteMethod);
         }
 
-        public void fpButton(object org)
+       /* public void fpButton(object org)
         {
-            //친구추가 공백 방지!
+            //친구추가 공백 방지!  
             if (string.IsNullOrWhiteSpace(org as string) == true)
             {
                 MessageBox.Show("추가할 친구를 입력해주세요.");
             }
             else
             {//친구추가 중복시 방지!
-                if (FriendsUserControlViewModel.Instance.FriendDoubleCheck(org as string)/*((App)Application.Current).FriendDoubleCheck(org as string)다민*/)
+                if (FriendsUserControlViewModel.Instance.FriendDoubleCheck(org as string)
+                    //((App)Application.Current).FriendDoubleCheck(org as string)다민)
                 {
                     MessageBox.Show("해당 친구는 친구목록에 존재합니다.");
                 }
@@ -90,7 +91,7 @@ namespace TelerikWpfApp3.VM
                 }
 
             }
-        }
+        }*/
 
         public void ExeceuteSendMsg(object org)
         {//메세지 공백 방지!
@@ -120,12 +121,13 @@ namespace TelerikWpfApp3.VM
                 tmp.Chk = true;
                 ((App)Application.Current).SendData("<MSG>", msg);
                 ((App)Application.Current).AddSQLChat(target, tmp);
-
+                
                 msgTextBox = "";
             }
 
         }
 
+       
         private bool CanExecuteMethod(object arg)
         {
             return true;

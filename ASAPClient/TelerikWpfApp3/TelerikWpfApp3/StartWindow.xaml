@@ -180,7 +180,7 @@
                                     <Border Height="38" BorderThickness="1,1,1,1">
                                         <StackPanel Orientation="Horizontal" Height="38" Margin="0,0,-1,-2">
                                             <RadioButton 
-                                            Command="{Binding FriendsPageOn}"
+                                            Command="{Binding ChatListPageOn}"
                                             GroupName="menu" Content="          " Style="{StaticResource ChatButton}"  Background="{x:Null}" BorderBrush="{x:Null}" Width="76" FontSize="20" Foreground="#FFF1F1F1" FontFamily="Impact" Height="38" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                                         </StackPanel>
                                     </Border>

@@ -16,14 +16,22 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TelerikWpfApp3.VM;
+using TelerikWpfApp3.M;
 
 namespace TelerikWpfApp3.View.UserControl
 {
     /// <summary>
     /// ChatUserControl.xaml에 대한 상호 작용 논리
     /// </summary>
-    public partial class ChatUserControl 
+    public partial class ChatUserControl
     {
+
+
+        private void OnPropertyChanged(string v)
+        {
+            throw new NotImplementedException();
+        }
+
         public void initThis()
         {
 
@@ -32,25 +40,24 @@ namespace TelerikWpfApp3.View.UserControl
         {
             InitializeComponent();
             ((App)Application.Current).mqState = true;
-            ((App)Application.Current).loadAllChat();
             //((App)Application.Current).LoadMyFriends();
-            sendMsgStackPanel.Height = 0;
-            defaultContent.Height = 540;
             //ClientList.DataContext = ((App)Application.Current).getFriends(); 다민
-            ClientList.DataContext = FriendsUserControlViewModel.Instance.getFriends(); //다민
-            this.PreviewKeyDown += new KeyEventHandler(OnEnterKeyDownHandler);
+            ChatControl chatcon = new ChatControl();
+            ((App)Application.Current).loadAllChat();
+            ChatRoomList.DataContext = FriendsUserControlViewModel.Instance.getFriends();
+            //this.PreviewKeyDown += new KeyEventHandler(OnEnterKeyDownHandler);
+
+
         }
         private void GetMessageById(object sender, RoutedEventArgs e)
         {
-            defaultContent.Height = 0;
-            sendMsgStackPanel.Height = 80;
-            string target  = (((sender as StackPanel).FindName("TargetBox") as TextBlock).Text);
-            chatTarget.Text = target;
-            ChatBox.DataContext = ((App)Application.Current).getChat(target);
+            string target = (((sender as StackPanel).FindName("TargetBox") as TextBlock).Text);
+            //chatTarget.Text = target;
+            // ChatBox.DataContext = ((App)Application.Current).getChat(target);
             ((App)Application.Current).nowChatTarget = (target);
             refresh();
 
-            UpdateScrollBar(ChatBox);
+            //UpdateScrollBar(ChatBox);
         }
 
         private void refresh()
@@ -71,34 +78,55 @@ namespace TelerikWpfApp3.View.UserControl
 
         // 여기는 메세지 박스내에서 엔터시 focus 없애는것.
 
-        private void OnEnterKeyDownHandler(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Return)
-            {
-                if (MessageBox.IsFocused)
-                {
-                    HyperlinkAutomationPeer peer = new HyperlinkAutomationPeer(sendTextMsgButton);
-                    IInvokeProvider invokeProv = peer.GetPattern(PatternInterface.Invoke) as IInvokeProvider;
-                    invokeProv.Invoke();
-                    MessageBox.Focus();
-                }
-                else if (FriendNameInput.IsFocused)
-                {
-                    HyperlinkAutomationPeer peer = new HyperlinkAutomationPeer(FriendAdd);
-                    IInvokeProvider invokeProv = peer.GetPattern(PatternInterface.Invoke) as IInvokeProvider;
-                    invokeProv.Invoke();
-                }
-                else
-                {
-                    MessageBox.Focus();
-                }
-            }
+        /* private void OnEnterKeyDownHandler(object sender, KeyEventArgs e)
+         {
+             if (e.Key == Key.Return)
+             {
+                 if (MessageBox.IsFocused)
+                 {
+                     HyperlinkAutomationPeer peer = new HyperlinkAutomationPeer(sendTextMsgButton);
+                     IInvokeProvider invokeProv = peer.GetPattern(PatternInterface.Invoke) as IInvokeProvider;
+                     invokeProv.Invoke();
+                     MessageBox.Focus();
+                 }
+                 else if (FriendNameInput.IsFocused)
+                 {
+                     HyperlinkAutomationPeer peer = new HyperlinkAutomationPeer(FriendAdd);
+                     IInvokeProvider invokeProv = peer.GetPattern(PatternInterface.Invoke) as IInvokeProvider;
+                     invokeProv.Invoke();
+                 }
+                 else
+                 {
+                     MessageBox.Focus();
+                 }
+             }
 
+         }*/
+        private void RoomDoubleClick(object sender, RoutedEventArgs e)
+        {
+            string target = null;
+            foreach (FriendsItem obj in ChatRoomList.SelectedItems)
+            {
+                target = obj.User.ToString();
+                //string myId = ((App)Application.Current).myID; 
+                //((App)Application.Current).SendData("<CHR>", myId + "/target"); <CHR> 태그 추가
+            }
+            /*Window ChatRooms = new ChatRoom(target);
+            ChatRooms.Show();다민*/
+            if (ChattingRoomManager.Instance.findChatRoom(target)) //다민
+            {
+                ChattingRoomManager.Instance.makeChatRoom(target);
+                ChattingRoomManager.Instance.showChatRoom(target);
+            }
+            else
+            {
+                ChattingRoomManager.Instance.showChatRoom(target);
+            }
         }
         // 새로운 대화가 추가될때 선택되는 형태이므로 선택에 변화가 생기면 Unselect 해주게 변경.
         private void ChatBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ChatBox.UnselectAll();
+            
         }
     }
 }

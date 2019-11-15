@@ -41,6 +41,11 @@ namespace TelerikWpfApp3.VM
             }
         }
 
+        public IDictionary<string, ObservableCollection<Chatitem>> getDict()
+        {
+            return Chatdict;
+        }
+
         public void setChat(string target, ObservableCollection<Chatitem> chat)
         {
             this.Chatdict[target] = chat;

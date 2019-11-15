@@ -125,6 +125,7 @@ namespace TelerikWpfApp3
                 Chatdict.Add(id, NowChat);
             }
         }
+
         public void loadAllChat()
         {
             database sqlite = new database();
@@ -136,7 +137,15 @@ namespace TelerikWpfApp3
                     chatControl.getLastChatById(FriendsUserControlViewModel.Instance.FriendsList[i].User);
             }
         }
-
+        public void loadAllChatList()
+        {
+            database sqlite = new database();
+            sqlite.ReadChat();
+            foreach(KeyValuePair<string,ObservableCollection<Chatitem>> items in Chatdict)
+            {
+                
+            }
+        }
         public ObservableCollection<Chatitem> getChat(string target)
         {
             NowChat = chatControl.loadChat(target);
