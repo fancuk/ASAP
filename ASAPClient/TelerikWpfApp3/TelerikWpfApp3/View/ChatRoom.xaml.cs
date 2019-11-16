@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using TelerikWpfApp3.VM;
+using TelerikWpfApp3.Service;
 
 namespace TelerikWpfApp3.View
 {
@@ -46,8 +47,9 @@ namespace TelerikWpfApp3.View
             setTarget(target); 
             cu.target = target; 
             this.DataContext = cu;
-            ChatBox.DataContext = ((App)Application.Current).getChat(this.target);
-            ((App)Application.Current).nowChatTarget = (this.target);
+           
+            ChatBox.DataContext =cu.loadChat(this.target);
+            cu.target = (this.target);
             UpdateScrollBar(ChatBox);
             this.PreviewKeyDown += new KeyEventHandler(OnEnterKeyDownHandler);
             Closing += cu.OnWindowClosing;

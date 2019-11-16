@@ -9,17 +9,24 @@ using System.Windows;
 using TelerikWpfApp3.M;
 using TelerikWpfApp3.Networking.NetworkModel;
 using TelerikWpfApp3.View.Alert;
+using TelerikWpfApp3.LocalDB;
 using TelerikWpfApp3.VM;
+using TelerikWpfApp3.Service;
 
 namespace TelerikWpfApp3.Networking
 {
     class SocketReciver
     {
+        NetworkManager networkManager = ((App)Application.Current).networkManager;
+        WindowManager windowManager = ((App)Application.Current).windowManager;
+        ChatManager chatManager = ((App)Application.Current).chatManager;
+        LocalDAO localDAO = ((App)Application.Current).localDAO;
+        UserStatusManager userStatusManager = ((App)Application.Current).userStatusManager;
         private Socket nowSock;
         SocketCloser sc = new SocketCloser();
         public SocketReciver()
         {
-            nowSock = ((App)Application.Current).ProgramSock;
+            nowSock =networkManager.ProgramSock;
         }
 
         #region DataReceived
@@ -28,7 +35,7 @@ namespace TelerikWpfApp3.Networking
             AsyncObject obj = (AsyncObject)ar.AsyncState;
             try
             {
-                if (((App)Application.Current).nowConnect == false)
+                if (networkManager.nowConnect == false)
                 {
                     return;
                 }
@@ -51,7 +58,7 @@ namespace TelerikWpfApp3.Networking
                         Properties.Settings.Default.loginOK = true; // 로그인 성공여부
                         if (Properties.Settings.Default.idSaveCheck == false)
                         {
-                            Properties.Settings.Default.loginIdSave = ((App)Application.Current).myID; //id 저장
+                            Properties.Settings.Default.loginIdSave =networkManager.MyId; //id 저장
                             Properties.Settings.Default.Save();
                         }
                         else
@@ -61,14 +68,14 @@ namespace TelerikWpfApp3.Networking
                         }
                         DispatchService.Invoke(() =>
                         {
-                            ((App)Application.Current).StartMainWindow();
+                           windowManager.StartMainWindow();
                         });
-                        string myId = ((App)Application.Current).myID;
+                        string myId =networkManager.MyId;
 
                         Thread.Sleep(10);
                         if (!FriendsUserControlViewModel.Instance.loadAllChk)
                         {
-                            ((App)Application.Current).SendData("<FLD>", ((App)Application.Current).myID);
+                           networkManager.SendData("<FLD>",networkManager.MyId);
                         }
                         FriendsUserControlViewModel.Instance.loadAllChk = true; //다민
                     }
@@ -76,7 +83,7 @@ namespace TelerikWpfApp3.Networking
                     {
                         MessageBox.Show("Login Failed.....TT");
                         Properties.Settings.Default.loginOK = false;
-                        ((App)Application.Current).CloseSocket();
+                       networkManager.CloseSocket();
                     }
                 }
                 else if (tag.Equals("<REG>")) // 회원가입
@@ -87,7 +94,7 @@ namespace TelerikWpfApp3.Networking
                         DispatchService.Invoke(() =>
                         {
                             MessageBox.Show("회원가입 완료!!");
-                            ((App)Application.Current).RegisterComplete();
+                            windowManager.RegisterComplete();
                         });
                     }
 
@@ -100,7 +107,7 @@ namespace TelerikWpfApp3.Networking
                             x.Show();
                         });
                     }
-                    ((App)Application.Current).CloseSocket();
+                   networkManager.CloseSocket();
                 }
                 else if (tag.Equals("<ICF>")) // ID 체크
                 {
@@ -113,22 +120,22 @@ namespace TelerikWpfApp3.Networking
                             RegisterViewModel a = TelerikWpfApp3.Register.Instance.DataContext as RegisterViewModel;
                             a.nameChk = "V";
                             TelerikWpfApp3.Register.Instance.DataContext = a;
-                            ((App)Application.Current).idchk = (true);
+                            userStatusManager.Idchk = (true);
                         });
                     }
                     else
                     {
                         MessageBox.Show("ID Check Failed.....TT");
-                        ((App)Application.Current).idchk = (false);
+                        userStatusManager.Idchk = (false);
                         DispatchService.Invoke(() =>
                         {
                             RegisterViewModel a = TelerikWpfApp3.Register.Instance.DataContext as RegisterViewModel;
                             a.nameChk = "X";
                             TelerikWpfApp3.Register.Instance.DataContext = a;
-                            ((App)Application.Current).idchk = (true);
+                            userStatusManager.Idchk = (true);
                         });
                     }
-                    ((App)Application.Current).CloseSocket();
+                   networkManager.CloseSocket();
                 }
                 else if (tag.Equals("<FRR>"))
                 {
@@ -199,10 +206,10 @@ namespace TelerikWpfApp3.Networking
                     }
 
                     // 여기 이제 수정 필요!!
-                    ((App)Application.Current).setchatting(tokens[1], tokens[2], tokens[3], tokens[4], "Receive");
+                   localDAO.ChattingCreate(tokens[1], tokens[2], tokens[3], tokens[4], "Receive");
                     DispatchService.Invoke(() =>
                     {
-                        ((App)Application.Current).AddSQLChat(tmp.User, tmp);
+                       chatManager.addChat(tmp.User, tmp);
                         Window msgWindow = new MSGAlert();
                         msgWindow.Show();
                     });
@@ -232,13 +239,13 @@ namespace TelerikWpfApp3.Networking
                         tmp.Time = time;
                         tmp.Text = msg;
 
-                        ((App)Application.Current).setchatting(user,
-                            ((App)Application.Current).myID, time, msg, "Receive");
+                       localDAO.ChattingCreate(user,
+                           networkManager.MyId, time, msg, "Receive");
                     }
                 }
                 else if (tag.Equals("<FIN>"))
                 {
-                    if (((App)Application.Current).nowConnect == true)
+                    if (networkManager.nowConnect == true)
                     {
                         sc.closeSock();
                     }
@@ -273,13 +280,13 @@ namespace TelerikWpfApp3.Networking
                         string[] resToken = tokens[idx + i].Split('^');
                         DispatchService.Invoke(() =>
                         {
-                            //((App)Application.Current).AddFriend(tokens[idx + i]);
-                            //다민((App)Application.Current).AddFriend(tokens[idx + i],"true"); // 서버에서 상태를 줄 때 까지 이걸로 실행!
-                            //FriendsUserControlViewModel.Instance.AddFriend(resToken[0], resToken[1]);//다민
-                            FriendsUserControlViewModel.Instance.AddFriend(tokens[idx + i], "true");//다민
-                            // 서버 update 시 위의 주석처리 된 FLD 활용
+                            FriendsUserControlViewModel.Instance.AddFriend(resToken[0], resToken[1]);//다민
                         });
                     }
+                    DispatchService.Invoke(() =>
+                    {
+                        localDAO.ReadChat();
+                    });
                 }
                 // 텍스트박스에 추가해준다.
                 // 비동기식으로 작업하기 때문에 폼의 UI 스레드에서 작업을 해줘야 한다.
@@ -288,7 +295,7 @@ namespace TelerikWpfApp3.Networking
                 //^^^^^^^^
                 // 클라이언트에선 데이터를 전달해줄 필요가 없으므로 바로 수신 대기한다.
                 // 데이터를 받은 후엔 다시 버퍼를 비워주고 같은 방법으로 수신을 대기한다.
-                if (((App)Application.Current).nowConnect == true) //예외 처리 obj beginreceive
+                if (networkManager.nowConnect == true) //예외 처리 obj beginreceive
                 {
                     obj.ClearBuffer();
 
@@ -298,7 +305,7 @@ namespace TelerikWpfApp3.Networking
             }
             catch (Exception e)
             {
-                if (((App)Application.Current).nowConnect == true)
+                if (networkManager.nowConnect == true)
                 {
                     sc.closeSock();
                 }

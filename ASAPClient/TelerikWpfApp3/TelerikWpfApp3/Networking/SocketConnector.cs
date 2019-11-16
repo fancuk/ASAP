@@ -6,22 +6,25 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using TelerikWpfApp3.Networking.NetworkModel;
+using TelerikWpfApp3.Service;
 
 namespace TelerikWpfApp3.Networking
 {
     class SocketConnector
     {
+        NetworkManager networkManager = ((App)Application.Current).networkManager;
+
         private Socket nowSock;
         SocketReciver sr = new SocketReciver();
 
         public SocketConnector()
         {
-            nowSock = ((App)Application.Current).ProgramSock;
+            nowSock =networkManager.ProgramSock;
         }
         public bool SocketConnect()
         {
-            string address = "13.125.254.210";
-           //string address = "127.0.0.1";
+           // string address = "13.125.254.210";
+           string address = "127.0.0.1";
            //string address = "203.229.204.23"; // "127.0.0.1" 도 가능
             int port = 11000;
             return BeginConnection(address, port);
@@ -47,7 +50,7 @@ namespace TelerikWpfApp3.Networking
             AsyncObject ao = new AsyncObject(4096);
             ao.WorkingSocket = nowSock;
             ao.WorkingSocket.BeginReceive(ao.Buffer, 0, ao.BufferSize, 0, sr.DataReceived, ao);
-            ((App)Application.Current).nowConnect = true;
+            networkManager.nowConnect = true;
         }
     }
 }

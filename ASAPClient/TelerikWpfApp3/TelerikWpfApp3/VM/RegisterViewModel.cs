@@ -20,11 +20,14 @@ using System.Windows.Shapes;
 using TelerikWpfApp3.M;
 using System.ComponentModel;
 using System.Text.RegularExpressions;
+using TelerikWpfApp3.Service;
 
 namespace TelerikWpfApp3.VM
 {
     class RegisterViewModel : INotifyPropertyChanged
     {
+        NetworkManager networkManager = ((App)Application.Current).networkManager;
+
         #region type
         private string _pw1;
         private string _pw2;
@@ -46,7 +49,7 @@ namespace TelerikWpfApp3.VM
             set
             {
                 this._name = value; OnPropertyChanged("name");
-                ((App)Application.Current).idchk = false;
+                ((App)Application.Current).userStatusManager.Idchk = false;
                 if (this._name != "")
                 {
                     nameChk = "X";
@@ -74,16 +77,6 @@ namespace TelerikWpfApp3.VM
             set
             {
                 this._email = value; OnPropertyChanged("email");
-                if (Regex.IsMatch(this._email, @"^[a-z0-9]{5,10}$"))
-                {
-                    emailChk = "V";
-                    ((App)Application.Current).emailChk = (true);
-                }
-                else
-                {
-                    emailChk = "X";
-                    ((App)Application.Current).emailChk = (false);
-                }
             }
         }
         public string emailChk
@@ -162,9 +155,9 @@ namespace TelerikWpfApp3.VM
         {
             // Handle closing logic, set e.Cancel as needed
             e.Cancel = true;
-            if (((App)Application.Current).nowConnect == true)
+            if (networkManager.nowConnect == true)
             {
-                ((App)Application.Current).CloseSocket();
+                networkManager.CloseSocket();
             }
 
             Window rv = TelerikWpfApp3.Register.Instance;
@@ -187,18 +180,24 @@ namespace TelerikWpfApp3.VM
             }
             else
             {
-                if (((App)Application.Current).StartSocket() == true)
+                if (networkManager.StartSocket() == true)
                 {
-                    ((App)Application.Current).SendData("<ICF>", id);
+                    networkManager.SendData("<ICF>", id);
                 }
             }
         }
 
+        public void ExecuteRegister(MyInfo myinfo)
+        {
+            string parameter = myinfo.MyId + "/" + myinfo.Pw + "/" + myinfo.Email + "/";
+            networkManager.SendData("<REG>",parameter);
+        }
+
         private void ExecuteClose(object obj)
         {
-            if (((App)Application.Current).nowConnect == true)
+            if (networkManager.nowConnect == true)
             {
-                ((App)Application.Current).CloseSocket();
+                networkManager.CloseSocket();
             }
         }
 

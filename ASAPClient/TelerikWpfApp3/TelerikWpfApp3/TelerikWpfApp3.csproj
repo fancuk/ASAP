@@ -104,10 +104,9 @@
     </ApplicationDefinition>
     <Compile Include="Collection\FullyObservableCollection.cs" />
     <Compile Include="Collection\ItemsChangeObservableCollection.cs" />
+    <Compile Include="LocalDB\LocalDAO.cs" />
+    <Compile Include="LocalDB\LocalDTO.cs" />
     <Compile Include="M\AllChatList.cs" />
-    <Compile Include="login.xaml.cs">
-      <DependentUpon>login.xaml</DependentUpon>
-    </Compile>
     <Compile Include="M\ChatItem.cs" />
     <Compile Include="M\ChatListItem.cs" />
     <Compile Include="M\DispatchService.cs" />
@@ -117,6 +116,7 @@
     <Compile Include="FalseMsgBox.xaml.cs">
       <DependentUpon>FalseMsgBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="M\MyInfo.cs" />
     <Compile Include="Networking\NetworkModel\AsyncObject.cs" />
     <Compile Include="Networking\SocketConnector.cs" />
     <Compile Include="Networking\SocketMaker.cs" />
@@ -128,6 +128,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Service\ChatManager.cs" />
+    <Compile Include="Service\FriendsManager.cs" />
+    <Compile Include="Service\NetworkManager.cs" />
+    <Compile Include="Service\UserStatusManager.cs" />
     <Compile Include="SuccessMsgBox.xaml.cs">
       <DependentUpon>SuccessMsgBox.xaml</DependentUpon>
     </Compile>
@@ -137,9 +141,6 @@
     </Compile>
     <Compile Include="StartWindow.xaml.cs">
       <DependentUpon>StartWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="testpage1.xaml.cs">
-      <DependentUpon>testpage1.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utility\AsapTimer.cs" />
     <Compile Include="Utility\DabbingPreventor.cs" />
@@ -170,11 +171,8 @@
     <Compile Include="View\UserControl\UserControl2.xaml.cs">
       <DependentUpon>UserControl2.xaml</DependentUpon>
     </Compile>
-    <Compile Include="VM\ChatControl.cs" />
     <Compile Include="VM\ChattingRoomManager.cs" />
     <Compile Include="VM\ChatUserControlViewModel.cs" />
-    <Compile Include="VM\DBControl\DBCmember.cs" />
-    <Compile Include="VM\DBControl\DBConn.cs" />
     <Compile Include="VM\FriendsUserControlViewModel.cs" />
     <Compile Include="VM\ListBoxBehavior.cs" />
     <Compile Include="VM\LoginViewModel.cs" />
@@ -184,11 +182,7 @@
     <Compile Include="VM\TitleControl.cs" />
     <Compile Include="VM\UserControlViewModel.cs" />
     <Compile Include="VM\UserControlViewModel1.cs" />
-    <Compile Include="VM\WindowManager.cs" />
-    <Page Include="login.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
+    <Compile Include="Service\WindowManager.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
@@ -206,10 +200,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="StartWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="testpage1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

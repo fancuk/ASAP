@@ -46,6 +46,7 @@ namespace TelerikWpfApp3
             this.PreviewKeyDown += new KeyEventHandler(HandleEsc);
             this.PreviewKeyDown += new KeyEventHandler(OnEnterKeyDownHandler); // Enter 인식 하면 로그인 실행
             LoginViewModel lvm = new LoginViewModel();
+            this.DataContext = lvm;
             Closing += lvm.OnWindowClosing;
         }
 
@@ -97,7 +98,5 @@ namespace TelerikWpfApp3
                 invokeProv.Invoke();
             }
         }
-
-        
     }
 }

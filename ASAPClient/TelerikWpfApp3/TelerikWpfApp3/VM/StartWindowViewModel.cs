@@ -7,17 +7,19 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using TelerikWpfApp3.M;
+using TelerikWpfApp3.Service;
 
 
 namespace TelerikWpfApp3.VM
 {
     class StartWindowViewModel : INotifyPropertyChanged
     {
+        NetworkManager networkManager = ((App)Application.Current).networkManager;
+
         private FriendsUserControlViewModel friendsUserControlViewModel;
         private UserControlViewModel _viewModel1;
         private UserControlViewModel1 _viewModel2;
         private ChatUserControlViewModel _chatViewModel;
-        private ChatControl chatControl;
         private string _myId;
 
         public string myId
@@ -46,8 +48,6 @@ namespace TelerikWpfApp3.VM
             this._viewModel2 = new UserControlViewModel1();
             this._chatViewModel = new ChatUserControlViewModel();
             this.friendsUserControlViewModel = FriendsUserControlViewModel.Instance;
-            this.chatControl = new ChatControl();
-
             FriendsPageOn = new Command(LoadFriendsPage, CE);
 
             Page1 = new Command(Page1Load, CE);
@@ -55,7 +55,7 @@ namespace TelerikWpfApp3.VM
             ChatListPageOn = new Command(loadChatPage, CE);
             ContentView = null;
             // CloseCommand = new Command(ExecuteClose, CE);
-            myId = ((App)Application.Current).myID;
+            myId = networkManager.MyId;
             LogOut = new Command(logout, CE);
         }
 
@@ -64,9 +64,9 @@ namespace TelerikWpfApp3.VM
             if (MessageBox.Show("로그아웃 하시겠습니까?",
                 "로그아웃", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
-                if (((App)Application.Current).nowConnect == true)
+                if (networkManager.nowConnect == true)
                 {
-                    ((App)Application.Current).CloseSocket();
+                    networkManager.CloseSocket();
                 }
                 Window vt = TelerikWpfApp3.viewtest.Instance;
                 Window sw = TelerikWpfApp3.StartWindow.Instance;
@@ -78,9 +78,9 @@ namespace TelerikWpfApp3.VM
         {
             // Handle closing logic, set e.Cancel as needed
             e.Cancel = true;
-            if (((App)Application.Current).nowConnect == true)
+            if (networkManager.nowConnect == true)
             {
-                ((App)Application.Current).CloseSocket();
+                networkManager.CloseSocket();
             }
             Window vt = TelerikWpfApp3.viewtest.Instance;
             Window sw = TelerikWpfApp3.StartWindow.Instance;

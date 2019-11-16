@@ -18,12 +18,15 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TelerikWpfApp3.M;
+using TelerikWpfApp3.Service;
 using System.ComponentModel;
 
 namespace TelerikWpfApp3.VM
 {
     class LoginViewModel : INotifyPropertyChanged
     {
+        NetworkManager networkManager = ((App)Application.Current).networkManager;
+
         private string uid;
         private string upw;
 
@@ -57,9 +60,9 @@ namespace TelerikWpfApp3.VM
         {
             // Handle closing logic, set e.Cancel as needed
             e.Cancel = true;
-            if (((App)Application.Current).nowConnect == true)
+            if (networkManager.nowConnect == true)
             {
-                ((App)Application.Current).CloseSocket();
+                networkManager.CloseSocket();
             }
             Process.GetCurrentProcess().Kill();
         }
@@ -92,13 +95,13 @@ namespace TelerikWpfApp3.VM
 
         public void LogIn(string id,string pw)
         {
-            ((App)Application.Current).myID =id;
+            this.networkManager.MyId =id;
             string parameter = id + "/" + pw;
-            ((App)Application.Current).StartSocket();
-            if (((App)Application.Current).nowConnect == true)
+            networkManager.StartSocket();
+            if (networkManager.nowConnect == true)
             {
-                ((App)Application.Current).myID = id;
-                ((App)Application.Current).SendData("<LOG>", parameter);
+                networkManager.MyId = id;
+                networkManager.SendData("<LOG>", parameter);
             }
         }
         

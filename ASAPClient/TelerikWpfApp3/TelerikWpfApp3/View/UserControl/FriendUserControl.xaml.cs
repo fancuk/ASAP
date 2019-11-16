@@ -28,8 +28,8 @@ namespace TelerikWpfApp3.View.UserControl
         {
             InitializeComponent();
             this.DataContext = FriendsUserControlViewModel.Instance;
-            ((App)Application.Current).mqState = true;
-            ((App)Application.Current).loadAllChat();
+           // ((App)Application.Current).mqState = true;
+           // ((App)Application.Current).loadAllChat();
             //((App)Application.Current).LoadMyFriends();
             //sendMsgStackPanel.Height = 0;
             //defaultContent.Height = 540;

@@ -5,21 +5,23 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using TelerikWpfApp3.Service;
 
 namespace TelerikWpfApp3.Networking
 {
     class SocketCloser
     {
-        private Socket nowSock;
+        NetworkManager networkManager = ((App)Application.Current).networkManager;
+         private Socket nowSock;
         public SocketCloser()
         {
-            nowSock = ((App)Application.Current).ProgramSock;
+            nowSock = networkManager.ProgramSock;
         }
         public void closeSock()
         {
-            if (((App)Application.Current).nowConnect == true)
+            if (networkManager.nowConnect == true)
             {
-                ((App)Application.Current).nowConnect = false;
+                networkManager.nowConnect = false;
                 nowSock.Dispose();
                 nowSock.Close();
                 nowSock = null;

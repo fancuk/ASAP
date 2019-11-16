@@ -513,12 +513,10 @@ C:\Users\king1\Desktop\소공\ASAP\TelerikWpfApp3\TelerikWpfApp3\bin\Debug\it\Te
 C:\Users\king1\Desktop\소공\ASAP\TelerikWpfApp3\TelerikWpfApp3\bin\Debug\nl\Telerik.Windows.Controls.resources.dll
 C:\Users\king1\Desktop\소공\ASAP\TelerikWpfApp3\TelerikWpfApp3\bin\Debug\tr\Telerik.Windows.Controls.resources.dll
 C:\Users\king1\Desktop\소공\ASAP\TelerikWpfApp3\TelerikWpfApp3\obj\x86\Debug\TelerikWpfApp3.csprojAssemblyReference.cache
-C:\Users\king1\Desktop\소공\ASAP\TelerikWpfApp3\TelerikWpfApp3\obj\x86\Debug\login.g.cs
 C:\Users\king1\Desktop\소공\ASAP\TelerikWpfApp3\TelerikWpfApp3\obj\x86\Debug\FalseMsgBox.g.cs
 C:\Users\king1\Desktop\소공\ASAP\TelerikWpfApp3\TelerikWpfApp3\obj\x86\Debug\SuccessMsgBox.g.cs
 C:\Users\king1\Desktop\소공\ASAP\TelerikWpfApp3\TelerikWpfApp3\obj\x86\Debug\Register.g.cs
 C:\Users\king1\Desktop\소공\ASAP\TelerikWpfApp3\TelerikWpfApp3\obj\x86\Debug\StartWindow.g.cs
-C:\Users\king1\Desktop\소공\ASAP\TelerikWpfApp3\TelerikWpfApp3\obj\x86\Debug\testpage1.g.cs
 C:\Users\king1\Desktop\소공\ASAP\TelerikWpfApp3\TelerikWpfApp3\obj\x86\Debug\viewtest.g.cs
 C:\Users\king1\Desktop\소공\ASAP\TelerikWpfApp3\TelerikWpfApp3\obj\x86\Debug\View\Alert\MSGAlert.g.cs
 C:\Users\king1\Desktop\소공\ASAP\TelerikWpfApp3\TelerikWpfApp3\obj\x86\Debug\View\Alert\ServiceErrorAlert.g.cs
@@ -534,12 +532,10 @@ C:\Users\king1\Desktop\소공\ASAP\TelerikWpfApp3\TelerikWpfApp3\obj\x86\Debug\G
 C:\Users\king1\Desktop\소공\ASAP\TelerikWpfApp3\TelerikWpfApp3\obj\x86\Debug\TelerikWpfApp3_MarkupCompile.cache
 C:\Users\king1\Desktop\소공\ASAP\TelerikWpfApp3\TelerikWpfApp3\obj\x86\Debug\TelerikWpfApp3_MarkupCompile.lref
 C:\Users\king1\Desktop\소공\ASAP\TelerikWpfApp3\TelerikWpfApp3\obj\x86\Debug\App.baml
-C:\Users\king1\Desktop\소공\ASAP\TelerikWpfApp3\TelerikWpfApp3\obj\x86\Debug\login.baml
 C:\Users\king1\Desktop\소공\ASAP\TelerikWpfApp3\TelerikWpfApp3\obj\x86\Debug\FalseMsgBox.baml
 C:\Users\king1\Desktop\소공\ASAP\TelerikWpfApp3\TelerikWpfApp3\obj\x86\Debug\SuccessMsgBox.baml
 C:\Users\king1\Desktop\소공\ASAP\TelerikWpfApp3\TelerikWpfApp3\obj\x86\Debug\Register.baml
 C:\Users\king1\Desktop\소공\ASAP\TelerikWpfApp3\TelerikWpfApp3\obj\x86\Debug\StartWindow.baml
-C:\Users\king1\Desktop\소공\ASAP\TelerikWpfApp3\TelerikWpfApp3\obj\x86\Debug\testpage1.baml
 C:\Users\king1\Desktop\소공\ASAP\TelerikWpfApp3\TelerikWpfApp3\obj\x86\Debug\viewtest.baml
 C:\Users\king1\Desktop\소공\ASAP\TelerikWpfApp3\TelerikWpfApp3\obj\x86\Debug\View\Alert\MSGAlert.baml
 C:\Users\king1\Desktop\소공\ASAP\TelerikWpfApp3\TelerikWpfApp3\obj\x86\Debug\View\Alert\ServiceErrorAlert.baml

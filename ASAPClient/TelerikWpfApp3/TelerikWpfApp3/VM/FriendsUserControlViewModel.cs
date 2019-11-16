@@ -10,12 +10,14 @@ using System.Windows.Input;
 using TelerikWpfApp3.M;
 using TelerikWpfApp3.View;
 using TelerikWpfApp3.Collection;
-using TelerikWpfApp3.VM.DBControl;
+using TelerikWpfApp3.Service;
 
 namespace TelerikWpfApp3.VM
 {
     class FriendsUserControlViewModel : INotifyPropertyChanged
     {
+        NetworkManager networkManager = ((App)Application.Current).networkManager;
+
         private static FriendsUserControlViewModel instance = null; // 다민
         private string _myID;
         public string MyID {
@@ -113,7 +115,7 @@ namespace TelerikWpfApp3.VM
 
         private FriendsUserControlViewModel() //다민
         {
-            MyID = ((App)Application.Current).myID;
+            MyID = networkManager.MyId;
             showFriendModal = new Command(showModal, CanExecute);
             _FriendsList = new ObservableCollection<FriendsItem>();
             fl = new FullyObservableCollection<FriendsItem>();

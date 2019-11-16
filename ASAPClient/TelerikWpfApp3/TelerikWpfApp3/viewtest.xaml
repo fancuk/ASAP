@@ -109,9 +109,6 @@
             </Setter>
         </Style>
     </Window.Resources>
-    <Window.DataContext>
-        <VM:LoginViewModel/>
-    </Window.DataContext>
     <Border CornerRadius="10" Margin="3,3,3,3" Background="White" BorderBrush="#FF515151">
         <Grid>
 

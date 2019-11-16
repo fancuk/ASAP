@@ -8,11 +8,13 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using TelerikWpfApp3.M;
+using TelerikWpfApp3.Service;
 
 namespace TelerikWpfApp3.VM
 {
     class TitleControl : INotifyPropertyChanged
     {
+        NetworkManager networkManager = ((App)Application.Current).networkManager;
 
         public TitleControl()
         {
@@ -44,7 +46,7 @@ namespace TelerikWpfApp3.VM
 
         private void SendClose()
         {
-            ((App)Application.Current).CloseSocket();
+           networkManager.CloseSocket();
         }
         private bool CanExecute(object obj)
         {

@@ -8,15 +8,18 @@ using System.Threading.Tasks;
 using System.Windows;
 using TelerikWpfApp3.M;
 using TelerikWpfApp3.Networking.NetworkModel;
+using TelerikWpfApp3.Service;
 
 namespace TelerikWpfApp3.Networking
 {
     class SocketSender
     {
+        NetworkManager networkManager = ((App)Application.Current).networkManager;
+
         private Socket nowSock;
         public SocketSender()
         {
-            nowSock = ((App)Application.Current).ProgramSock;
+            nowSock = networkManager.ProgramSock;
         }
         public void OnSendData(string type, string Texts)
         {

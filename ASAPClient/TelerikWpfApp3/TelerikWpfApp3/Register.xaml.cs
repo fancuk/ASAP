@@ -20,6 +20,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TelerikWpfApp3.M;
 using TelerikWpfApp3.VM;
+using TelerikWpfApp3.Service;
 
 namespace TelerikWpfApp3
 {
@@ -28,6 +29,7 @@ namespace TelerikWpfApp3
     /// </summary>
     public partial class Register : Window
     {
+        RegisterViewModel rvm;
 
         public class pwChk : INotifyPropertyChanged
         {
@@ -92,7 +94,7 @@ namespace TelerikWpfApp3
             this.MouseLeftButtonDown += MoveWindow;
             pwchk.DataContext = pc;
             pw1chk.DataContext = pwd;
-            RegisterViewModel rvm = new RegisterViewModel();
+            rvm = new RegisterViewModel();
             this.DataContext = rvm;
             Closing += rvm.OnWindowClosing;
             this.PreviewKeyDown += new KeyEventHandler(HandleEsc);
@@ -115,8 +117,10 @@ namespace TelerikWpfApp3
             string id = idbox1.Text;
             string pw1 = pwbox.Password.ToString();
             string email = emailBox.Text;
+            
             string parameter = id + "/" + pw1 + "/" + email + "/";
-            bool isit = ((App)Application.Current).idchk;
+            
+            bool isit = ((App)Application.Current).userStatusManager.Idchk;
             if (!isit) //id chk 안함
             {
                 MessageBox.Show("아이디 체크 해주세요.");
@@ -143,8 +147,7 @@ namespace TelerikWpfApp3
             }
             else
             {
-                ((App)Application.Current).StartSocket();
-                ((App)Application.Current).SendData("<REG>", parameter);
+                rvm.ExecuteRegister(new MyInfo(id, pw1, email));
             }
         }
 

@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\king1\Desktop\소공\분리\분리test\TelerikWpfApp3\TelerikWpfApp3\obj\x86\Release\
+C:\Users\king1\Desktop\소공\ASAP\TelerikWpfApp3\TelerikWpfApp3\obj\x86\Release\
 TelerikWpfApp3
 none
 false
 TRACE
-C:\Users\king1\Desktop\소공\분리\분리test\TelerikWpfApp3\TelerikWpfApp3\App.xaml
-12-1068034290
+C:\Users\king1\Desktop\소공\ASAP\TelerikWpfApp3\TelerikWpfApp3\App.xaml
+14504413186
 12093627840
-43-40393044
-38-79450534
-login.xaml;FalseMsgBox.xaml;SuccessMsgBox.xaml;Register.xaml;StartWindow.xaml;testpage1.xaml;viewtest.xaml;View\Alert\MSGAlert.xaml;View\Alert\ServiceErrorAlert.xaml;View\UserControl\ChatUserControl.xaml;View\UserControl\UserControl1.xaml;View\UserControl\UserControl2.xaml;
+56-528609059
+38-913983737
+FalseMsgBox.xaml;SuccessMsgBox.xaml;Register.xaml;StartWindow.xaml;testpage1.xaml;viewtest.xaml;View\Alert\MSGAlert.xaml;View\Alert\ServiceErrorAlert.xaml;View\ChatRoom.xaml;View\FriendAddWindow.xaml;View\UserControl\ChatUserControl.xaml;View\UserControl\FriendUserControl.xaml;View\UserControl\UserControl1.xaml;View\UserControl\UserControl2.xaml;
 
 True
 

@@ -10,17 +10,22 @@ using TelerikWpfApp3.M;
 using TelerikWpfApp3;
 using System.Windows.Documents;
 using System.Collections.ObjectModel;
-using TelerikWpfApp3.VM.DBControl;
 using TelerikWpfApp3.Utility;
+using TelerikWpfApp3.Service;
+using TelerikWpfApp3.LocalDB;
 
 namespace TelerikWpfApp3.VM
 {
     class ChatUserControlViewModel : INotifyPropertyChanged
     {
-        database sqlite = new database();
+        LocalDAO localDAO = new LocalDAO();
         private string _msgTextBox;
         private string searchname;
         private string _target;
+        NetworkManager networkManager = ((App)Application.Current).networkManager;
+        WindowManager windowManager = ((App)Application.Current).windowManager;
+        ChatManager chatManager = ((App)Application.Current).chatManager;
+        DabbingPreventor dabbingPreventor = ((App)Application.Current).dabbingPreventor;
         public string target
         {
             get
@@ -68,6 +73,11 @@ namespace TelerikWpfApp3.VM
             SendText = new Command(ExeceuteSendMsg, CanExecuteMethod);
         }
 
+        public ObservableCollection<Chatitem> loadChat(string target)
+        {
+            return chatManager.loadChat(target);
+        }
+
        /* public void fpButton(object org)
         {
             //친구추가 공백 방지!  
@@ -101,26 +111,23 @@ namespace TelerikWpfApp3.VM
             }
             else
             {
-                DabbingPreventor dabbingPreventor = DabbingPreventor.Instance;
-
                 if (dabbingPreventor.isDabbing())
                 {
                     MessageBox.Show("도배 하지 마세요!");
                     return;
                 }
-                string id = ((App)Application.Current).myID;
-                target = ((App)Application.Current).nowChatTarget;
+                string id = networkManager.MyId;
                 string plain = org as string;
                 string nowTime = DateTime.Now.ToString();
                 string msg = target + "/" + id + "/" + nowTime + "/" + plain + "/";
-                sqlite.ChattingCreate(id, target, nowTime, plain, "Send");
+                localDAO.ChattingCreate(id, target, nowTime, plain, "Send");
                 Chatitem tmp = new Chatitem();
                 tmp.User = id;
                 tmp.Text = plain;
                 tmp.Time = nowTime;
                 tmp.Chk = true;
-                ((App)Application.Current).SendData("<MSG>", msg);
-                ((App)Application.Current).AddSQLChat(target, tmp);
+                networkManager.SendData("<MSG>", msg);
+                chatManager.addChat(target, tmp);
                 
                 msgTextBox = "";
             }

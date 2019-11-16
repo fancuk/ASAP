@@ -39,11 +39,9 @@ namespace TelerikWpfApp3.View.UserControl
         public ChatUserControl()
         {
             InitializeComponent();
-            ((App)Application.Current).mqState = true;
+           // ((App)Application.Current).mqState = true;
             //((App)Application.Current).LoadMyFriends();
             //ClientList.DataContext = ((App)Application.Current).getFriends(); 다민
-            ChatControl chatcon = new ChatControl();
-            ((App)Application.Current).loadAllChat();
             ChatRoomList.DataContext = FriendsUserControlViewModel.Instance.getFriends();
             //this.PreviewKeyDown += new KeyEventHandler(OnEnterKeyDownHandler);
 
@@ -54,7 +52,7 @@ namespace TelerikWpfApp3.View.UserControl
             string target = (((sender as StackPanel).FindName("TargetBox") as TextBlock).Text);
             //chatTarget.Text = target;
             // ChatBox.DataContext = ((App)Application.Current).getChat(target);
-            ((App)Application.Current).nowChatTarget = (target);
+            //((App)Application.Current).nowChatTarget = (target);
             refresh();
 
             //UpdateScrollBar(ChatBox);
