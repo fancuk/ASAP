@@ -275,7 +275,8 @@ namespace TelerikWpfApp3.Networking
                         {
                             //((App)Application.Current).AddFriend(tokens[idx + i]);
                             //다민((App)Application.Current).AddFriend(tokens[idx + i],"true"); // 서버에서 상태를 줄 때 까지 이걸로 실행!
-                            FriendsUserControlViewModel.Instance.AddFriend(resToken[0], resToken[1]);//다민
+                            //FriendsUserControlViewModel.Instance.AddFriend(resToken[0], resToken[1]);//다민
+                            FriendsUserControlViewModel.Instance.AddFriend(tokens[idx + i], "true");//다민
                             // 서버 update 시 위의 주석처리 된 FLD 활용
                         });
                     }
