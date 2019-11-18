@@ -166,6 +166,7 @@ namespace TelerikWpfApp3.LocalDB
                         chatManager.addChat(sender, tmpChatItem);
                     }
                 }
+                chatManager.setChattingList();
             }
             catch (Exception e)
             {

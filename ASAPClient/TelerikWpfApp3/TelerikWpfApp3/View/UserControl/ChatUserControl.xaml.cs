@@ -17,6 +17,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TelerikWpfApp3.VM;
 using TelerikWpfApp3.M;
+using TelerikWpfApp3.Service;
 
 namespace TelerikWpfApp3.View.UserControl
 {
@@ -26,7 +27,7 @@ namespace TelerikWpfApp3.View.UserControl
     public partial class ChatUserControl
     {
 
-
+        ChatManager chatManager = ((App)Application.Current).chatManager;
         private void OnPropertyChanged(string v)
         {
             throw new NotImplementedException();
@@ -39,10 +40,10 @@ namespace TelerikWpfApp3.View.UserControl
         public ChatUserControl()
         {
             InitializeComponent();
-           // ((App)Application.Current).mqState = true;
+            // ((App)Application.Current).mqState = true;
             //((App)Application.Current).LoadMyFriends();
             //ClientList.DataContext = ((App)Application.Current).getFriends(); 다민
-            ChatRoomList.DataContext = FriendsUserControlViewModel.Instance.getFriends();
+            ChatRoomList.DataContext = chatManager.getChattingList();
             //this.PreviewKeyDown += new KeyEventHandler(OnEnterKeyDownHandler);
 
 
@@ -103,14 +104,12 @@ namespace TelerikWpfApp3.View.UserControl
         private void RoomDoubleClick(object sender, RoutedEventArgs e)
         {
             string target = null;
-            foreach (FriendsItem obj in ChatRoomList.SelectedItems)
+            foreach (AllChatListItem obj in ChatRoomList.SelectedItems)
             {
-                target = obj.User.ToString();
+                target = obj.Target;
                 //string myId = ((App)Application.Current).myID; 
                 //((App)Application.Current).SendData("<CHR>", myId + "/target"); <CHR> 태그 추가
             }
-            /*Window ChatRooms = new ChatRoom(target);
-            ChatRooms.Show();다민*/
             if (ChattingRoomManager.Instance.findChatRoom(target)) //다민
             {
                 ChattingRoomManager.Instance.makeChatRoom(target);

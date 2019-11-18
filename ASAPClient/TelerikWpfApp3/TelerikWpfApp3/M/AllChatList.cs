@@ -7,14 +7,30 @@ using System.Threading.Tasks;
 
 namespace TelerikWpfApp3.M
 {
-    public class AllChatList
+    public class AllChatList // 채팅방 리스트(그냥 라스트메시지, 이름만 있는 말 그대로 채팅방)
     {
-        private string _target;
-        public string target
+        private ObservableCollection<AllChatListItem> chattingList;
+        public ObservableCollection<AllChatListItem> ChattingList
         {
-            get { return this._target; }
-            set { this._target = value; }
+            get
+            {
+                return chattingList;
+            }
+
         }
-        public ObservableCollection<Chatitem> MessageList;
+        AllChatListItem ACL = null;
+        public AllChatList()
+        {
+            chattingList = new ObservableCollection<AllChatListItem>();
+        }
+        public void AddChattingList(string name, string lastmessage)
+        {
+            ACL = new AllChatListItem(name, lastmessage);
+            chattingList.Add(ACL);
+        }
+        public ObservableCollection<AllChatListItem> getChattingList()
+        {
+            return chattingList;
+        }
     }
 }

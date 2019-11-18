@@ -128,8 +128,8 @@ namespace TelerikWpfApp3.VM
                 tmp.Chk = true;
                 networkManager.SendData("<MSG>", msg);
                 chatManager.addChat(target, tmp);
-                
                 msgTextBox = "";
+                chatManager.addChattingList(target, msg);
             }
 
         }

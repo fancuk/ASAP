@@ -19,6 +19,8 @@ namespace TelerikWpfApp3.Service
         }
         IDictionary<string, ObservableCollection<Chatitem>> Chatdict
                = new Dictionary<string, ObservableCollection<Chatitem>>();
+        AllChatList ACL = new AllChatList();
+        AllChatListItem temp;
 
         public void addChat(string target, Chatitem chatitem)
         {
@@ -39,6 +41,10 @@ namespace TelerikWpfApp3.Service
             }
         }
 
+        public ObservableCollection<AllChatListItem> getChattingList()
+        {
+            return ACL.ChattingList;
+        }
         public ObservableCollection<Chatitem> loadChat(string target)
         {
             if (Chatdict.ContainsKey(target))
@@ -52,9 +58,38 @@ namespace TelerikWpfApp3.Service
             }
         }
 
+        public void setChattingList() // 처음 세팅만
+        {
+            foreach(string name in Chatdict.Keys)
+            {
+                ObservableCollection<Chatitem> tmp = new ObservableCollection<Chatitem>();
+                tmp = this.Chatdict[name];
+                Chatitem a = tmp[tmp.Count - 1];
+                ACL.AddChattingList(name, a.Text);
+            }
+        }
+        public void addChattingList(string name,string lastMessage) //대화 보낼 때 마다
+        {
+            AllChatListItem temp;
+            // 이미 채팅리스트에 있는지 확인 해줘야 함
+            for(int i = 0; i < ACL.ChattingList.Count; i++)
+            {
+                temp = ACL.ChattingList[i];
+                if (temp.Target == name)
+                {
+                    temp.LastMessage = lastMessage;
+                    ACL.ChattingList[i] = temp;
+                }
+                else
+                {
+                    ACL.AddChattingList(name,lastMessage);
+                }
+            }
+        }
         public IDictionary<string, ObservableCollection<Chatitem>> getDict()
         {
             return Chatdict;
+
         }
 
         public void setChat(string target, ObservableCollection<Chatitem> chat)
@@ -67,7 +102,7 @@ namespace TelerikWpfApp3.Service
             this.Chatdict[target].Clear();
         }
         
-        public string getLastChatById(string id)
+        /*public string getLastChatById(string id)
         {
             if (!Chatdict.ContainsKey(id))
             {
@@ -77,6 +112,6 @@ namespace TelerikWpfApp3.Service
             tmp = this.Chatdict[id];
             Chatitem a = tmp[tmp.Count - 1];
             return a.Text;
-        }
+        }다민*/
     }
 }
