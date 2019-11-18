@@ -65,7 +65,7 @@ namespace TelerikWpfApp3.Service
                 ObservableCollection<Chatitem> tmp = new ObservableCollection<Chatitem>();
                 tmp = this.Chatdict[name];
                 Chatitem a = tmp[tmp.Count - 1];
-                ACL.AddChattingList(name, a.Text);
+                ACL.ChattingList.Add(new AllChatListItem(name, a.Text));
             }
         }
         public void addChattingList(string name,string lastMessage) //대화 보낼 때 마다
@@ -82,7 +82,7 @@ namespace TelerikWpfApp3.Service
                 }
                 else
                 {
-                    ACL.AddChattingList(name,lastMessage);
+                    ACL.ChattingList.Add(new AllChatListItem(name,lastMessage));
                 }
             }
         }

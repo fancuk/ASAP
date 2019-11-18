@@ -23,11 +23,6 @@ namespace TelerikWpfApp3.M
         {
             chattingList = new ObservableCollection<AllChatListItem>();
         }
-        public void AddChattingList(string name, string lastmessage)
-        {
-            ACL = new AllChatListItem(name, lastmessage);
-            chattingList.Add(ACL);
-        }
         public ObservableCollection<AllChatListItem> getChattingList()
         {
             return chattingList;
