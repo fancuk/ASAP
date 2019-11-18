@@ -71,6 +71,7 @@ namespace TelerikWpfApp3.Service
         public void addChattingList(string name,string lastMessage) //대화 보낼 때 마다
         {
             AllChatListItem temp;
+            bool isit = false;
             // 이미 채팅리스트에 있는지 확인 해줘야 함
             for(int i = 0; i < ACL.ChattingList.Count; i++)
             {
@@ -79,10 +80,18 @@ namespace TelerikWpfApp3.Service
                 {
                     temp.LastMessage = lastMessage;
                     ACL.ChattingList[i] = temp;
+                    isit = true;
                 }
-                else
+            }
+            if (ACL.ChattingList.Count == 0)
+            {
+                ACL.ChattingList.Add(new AllChatListItem(name, lastMessage));
+            }
+            else
+            {
+                if(isit == false)
                 {
-                    ACL.ChattingList.Add(new AllChatListItem(name,lastMessage));
+                    ACL.ChattingList.Add(new AllChatListItem(name, lastMessage));
                 }
             }
         }
