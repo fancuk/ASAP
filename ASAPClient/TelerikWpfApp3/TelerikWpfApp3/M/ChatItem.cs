@@ -13,6 +13,7 @@ namespace TelerikWpfApp3.M
         private string time;
         private bool chk;
         private bool asap;
+        private bool status;
         public Chatitem(string text, string user, string time, bool chk, bool asap)
         {
             this.Text = text;
@@ -30,5 +31,6 @@ namespace TelerikWpfApp3.M
         public string Time { get => time; set => time = value; }
         public bool Chk { get => chk; set => chk = value; }
         public bool Asap { get => asap; set => asap = value; }
+        public bool Status { get => status; set => status = value; }
     }
 }
