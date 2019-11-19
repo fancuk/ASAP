@@ -17,6 +17,7 @@ namespace TelerikWpfApp3.Service
         {
 
         }
+       
         IDictionary<string, ObservableCollection<Chatitem>> Chatdict
                = new Dictionary<string, ObservableCollection<Chatitem>>();
         AllChatList ACL = new AllChatList();
@@ -70,6 +71,7 @@ namespace TelerikWpfApp3.Service
             }
             return isit;
         }
+
         public void addChat(string target)
         {
             if (!this.Chatdict.ContainsKey(target))
@@ -88,6 +90,8 @@ namespace TelerikWpfApp3.Service
         {
             return ACL.ChattingList;
         }
+        
+
         public ObservableCollection<Chatitem> loadChat(string target)
         {
             if (Chatdict.ContainsKey(target))
@@ -111,6 +115,7 @@ namespace TelerikWpfApp3.Service
                 ACL.ChattingList.Add(new AllChatListItem(name, a.Text));
             }
         }
+
         public void addChattingList(string name,string lastMessage) //대화 보낼 때 마다
         {
             AllChatListItem temp;
@@ -141,7 +146,6 @@ namespace TelerikWpfApp3.Service
         public IDictionary<string, ObservableCollection<Chatitem>> getDict()
         {
             return Chatdict;
-
         }
 
         public void setChat(string target, ObservableCollection<Chatitem> chat)
@@ -154,7 +158,7 @@ namespace TelerikWpfApp3.Service
             this.Chatdict[target].Clear();
         }
         
-        /*public string getLastChatById(string id)
+        public string getLastChatById(string id)
         {
             if (!Chatdict.ContainsKey(id))
             {
@@ -164,6 +168,6 @@ namespace TelerikWpfApp3.Service
             tmp = this.Chatdict[id];
             Chatitem a = tmp[tmp.Count - 1];
             return a.Text;
-        }다민*/
+        }
     }
 }

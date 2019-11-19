@@ -25,7 +25,8 @@ namespace TelerikWpfApp3.VM
             set {
                 this._myID = value;
                 OnPropertyChanged("MyID");
-            } }
+            }
+        }
 
         public static FriendsUserControlViewModel Instance // 다민
         {
@@ -38,6 +39,7 @@ namespace TelerikWpfApp3.VM
                 return instance;
             }
         }
+
         public FullyObservableCollection<FriendsItem> fl;
         public ItemsChangeObservableCollection<FriendsItem> ico;
         private ObservableCollection<FriendsItem> _FriendsList; // 다민
@@ -89,14 +91,11 @@ namespace TelerikWpfApp3.VM
             }
             return false;
         }
+
         public ICommand showFriendModal { get; set; }
 
      
-
-        /*public FriendsUserControlViewModel()
-        {
-            showFriendModal = new Command(showModal, CanExecute);
-        }다민*/
+       
 
         private bool _loadAllChk = false; // 다민
 
@@ -111,7 +110,6 @@ namespace TelerikWpfApp3.VM
                 _loadAllChk = value;
             }
         }
-
 
         private FriendsUserControlViewModel() //다민
         {
@@ -131,12 +129,12 @@ namespace TelerikWpfApp3.VM
 
             }
         }
-
         
         private bool CanExecute(object obj)
         {
             return true;
         }
+
         protected void OnPropertyChanged(string name)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
