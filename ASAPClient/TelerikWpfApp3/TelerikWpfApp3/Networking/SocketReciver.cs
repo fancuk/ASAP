@@ -26,7 +26,7 @@ namespace TelerikWpfApp3.Networking
         SocketCloser sc = new SocketCloser();
         public SocketReciver()
         {
-            nowSock = networkManager.ProgramSock;
+            nowSock =networkManager.ProgramSock;
         }
 
         #region DataReceived
@@ -203,9 +203,18 @@ namespace TelerikWpfApp3.Networking
                     {
                         tmp.Asap = false;
                     }
-
+                    int isitfocus = chatManager.IsFriendReading(tmp.User);
+                    if (isitfocus == 1)
+                    {
+                        tmp.Status = true;
+                    }
+                    else
+                    {
+                        tmp.Status = false;
+                    }
                     // 여기 이제 수정 필요!!
-                   localDAO.ChattingCreate(tokens[1], tokens[2], tokens[3], tokens[4], "Receive");
+                    localDAO.ChattingCreate(tokens[1], tokens[2], tokens[3], tokens[4], "Receive", isitfocus); //2019-11-22
+                    //localDAO.ChattingCreate(tokens[1], tokens[2], tokens[3], tokens[4], "Receive");
                     DispatchService.Invoke(() =>
                     {
                        chatManager.addChat(tmp.User, tmp);
@@ -237,9 +246,10 @@ namespace TelerikWpfApp3.Networking
                         tmp.User = user;
                         tmp.Time = time;
                         tmp.Text = msg;
-
-                       localDAO.ChattingCreate(user,
-                           networkManager.MyId, time, msg, "Receive");
+                       localDAO.ChattingCreate(user,      //2019-11-22
+                           networkManager.MyId, time, msg, "Receive", 0);
+                        //localDAO.ChattingCreate(user,
+                           //networkManager.MyId, time, msg, "Receive");
                     }
                 }
                 else if (tag.Equals("<FIN>"))
@@ -249,21 +259,6 @@ namespace TelerikWpfApp3.Networking
                         sc.closeSock();
                     }
                 }
-                /*else if (tag.Equals("<FLD>"))
-                {
-
-                    int count = tokens.Length;
-                    for (int i = 2; i < count; i++)
-                    {
-                        string[] parsing = tokens[i].Split('^');
-                        DispatchService.Invoke(() =>
-                        {
-                            string friendId = parsing[0];
-                            string friendStatus = parsing[1];   
-                            ((App)Application.Current).AddFriend(friendId,friendStatus);
-                        });
-                    }
-                }*/
                 else if (tag.Equals("CHR")) // 서버 업데이트 후에
                 {
                     /*string friendID = tokens[1];

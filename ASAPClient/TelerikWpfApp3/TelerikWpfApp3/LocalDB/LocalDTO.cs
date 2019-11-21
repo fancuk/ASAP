@@ -14,6 +14,7 @@ namespace TelerikWpfApp3.LocalDB
             private string Time;
             private string Receiver;
             private string Sender;
+            private string Status;
 
             public chatting(string msg, string time,
                 string receiver, string sender)
@@ -28,6 +29,7 @@ namespace TelerikWpfApp3.LocalDB
             public string time { get => Time; set => Time = value; }
             public string receiver { get => Receiver; set => Receiver = value; }
             public string sender { get => Sender; set => Sender = value; }
+            public string status { get => status; set => status = value; }
         }
     }
 }

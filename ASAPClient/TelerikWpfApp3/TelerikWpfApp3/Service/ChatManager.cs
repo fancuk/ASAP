@@ -21,6 +21,7 @@ namespace TelerikWpfApp3.Service
         IDictionary<string, ObservableCollection<Chatitem>> Chatdict
                = new Dictionary<string, ObservableCollection<Chatitem>>();
         AllChatList ACL = new AllChatList();
+        LocalDAO localDAO = ((App)Application.Current).localDAO;
 
         List<string> friendsReading = new List<string>(); // 여러 명이 내 대화를 보고 있을 경우
         public void addChat(string target, Chatitem chatitem)
@@ -53,21 +54,22 @@ namespace TelerikWpfApp3.Service
                     }
                 }
                 Chatdict[friend] = tmp;
+                localDAO.ChangeChatStatus(friend);
             }
         }
         public void RemoveFriendsReading(string friend) // 친구가 채팅방 나갈 때
         {                                               // receive에서 chr false면 수행
             friendsReading.Remove(friend);
         }
-        public bool IsFriendReading(string friend) // send 할 때 쓰면 될 듯!!
+        public int IsFriendReading(string friend) // send 할 때 쓰면 될 듯!!
         {                                          // 만약 true 받으면 친구가 읽고 있다는 뜻
-            bool isit = false;                      // 아 존나게 머리 아파질거 같은게 이 메서드랑 remove메서드랑 동시에 실행되면
+            int isit = 0;                      // 아 존나게 머리 아파질거 같은게 이 메서드랑 remove메서드랑 동시에 실행되면
                                                    // 뭔가 존나게 복잡해질 거 같은 느낌적인 느낌....썅
             foreach(string target in friendsReading)
             {
                 if (target == friend)
                 {
-                    isit = true;
+                    isit = 1;
                 }
             }
             return isit;
@@ -91,6 +93,8 @@ namespace TelerikWpfApp3.Service
                     }
                 }
                 Chatdict[friend] = tmp;
+                localDAO.ChangeChatStatus(friend);
+                // dao의 alter기능 추가
             }
         }
         public void addChat(string target)

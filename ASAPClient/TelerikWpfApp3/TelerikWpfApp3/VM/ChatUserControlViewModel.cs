@@ -119,25 +119,26 @@ namespace TelerikWpfApp3.VM
                 string plain = org as string;
                 string nowTime = DateTime.Now.ToString();
                 string msg = target + "/" + id + "/" + nowTime + "/" + plain + "/";
-                localDAO.ChattingCreate(id, target, nowTime, plain, "Send");
                 Chatitem tmp = new Chatitem();
-                //bool isit = chatManager.IsFriendReading(target); 상대가 읽고 있는지 검사
+                int isit = chatManager.IsFriendReading(target); //2019-11-22
                 tmp.User = id;
                 tmp.Text = plain;
                 tmp.Time = nowTime;
                 tmp.Chk = true;
-                /*if (isit == true) 검사 내용
+                if (isit == 1)
                 {
                     tmp.Status = true;
                 }
                 else
                 {
                     tmp.Status = false;
-                }*/
+                }
                 networkManager.SendData("<MSG>", msg);
                 chatManager.addChat(target, tmp);
                 msgTextBox = "";
                 chatManager.addChattingList(target, msg);
+                //localDAO.ChattingCreate(id, target, nowTime, plain, "Send");
+                localDAO.ChattingCreate(id, target, nowTime, plain, "Send", isit); // 2019-11-22
             }
 
         }
