@@ -49,11 +49,7 @@ namespace TelerikWpfApp3.View.UserControl
             foreach(FriendsItem obj in ClientList.SelectedItems)
             {
                 target = obj.User.ToString();
-                //string myId = ((App)Application.Current).myID; 
-                //((App)Application.Current).SendData("<CHR>", myId + "/target"); <CHR> 태그 추가
             }
-            /*Window ChatRooms = new ChatRoom(target);
-            ChatRooms.Show();다민*/
             if (ChattingRoomManager.Instance.findChatRoom(target)) //다민
             {
                 ChattingRoomManager.Instance.makeChatRoom(target);

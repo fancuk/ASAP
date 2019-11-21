@@ -19,7 +19,6 @@ using TelerikWpfApp3.VM;
 using TelerikWpfApp3.M;
 using TelerikWpfApp3.Service;
 
-
 namespace TelerikWpfApp3.View.UserControl
 {
     /// <summary>
@@ -38,32 +37,30 @@ namespace TelerikWpfApp3.View.UserControl
         {
 
         }
-
         public ChatUserControl()
         {
             InitializeComponent();
-
             // ((App)Application.Current).mqState = true;
             //((App)Application.Current).LoadMyFriends();
             //ClientList.DataContext = ((App)Application.Current).getFriends(); 다민
             ChatRoomList.DataContext = chatManager.getChattingList();
-            
             //this.PreviewKeyDown += new KeyEventHandler(OnEnterKeyDownHandler);
-        }
 
-       private void GetMessageById(object sender, RoutedEventArgs e)
+
+        }
+        private void GetMessageById(object sender, RoutedEventArgs e)
         {
             string target = (((sender as StackPanel).FindName("TargetBox") as TextBlock).Text);
             //chatTarget.Text = target;
             // ChatBox.DataContext = ((App)Application.Current).getChat(target);
             //((App)Application.Current).nowChatTarget = (target);
             refresh();
+
             //UpdateScrollBar(ChatBox);
         }
 
         private void refresh()
         {
-
         }
 
         // 친구 클릭시 아래로 내려감.
@@ -104,16 +101,13 @@ namespace TelerikWpfApp3.View.UserControl
              }
 
          }*/
-
         private void RoomDoubleClick(object sender, RoutedEventArgs e)
         {
             string target = null;
             foreach (AllChatListItem obj in ChatRoomList.SelectedItems)
             {
                 target = obj.Target;
-                //string myId = ((App)Application.Current).myID; 
-                //((App)Application.Current).SendData("<CHR>", myId + "/target"); <CHR> 태그 추가
-            }
+            }                                                       
             if (ChattingRoomManager.Instance.findChatRoom(target)) //다민
             {
                 ChattingRoomManager.Instance.makeChatRoom(target);
@@ -124,7 +118,6 @@ namespace TelerikWpfApp3.View.UserControl
                 ChattingRoomManager.Instance.showChatRoom(target);
             }
         }
-
         // 새로운 대화가 추가될때 선택되는 형태이므로 선택에 변화가 생기면 Unselect 해주게 변경.
         private void ChatBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

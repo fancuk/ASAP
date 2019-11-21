@@ -72,7 +72,6 @@ namespace TelerikWpfApp3.VM
             //friendPlus = new Command(fpButton, CanExecuteMethod);
             SendText = new Command(ExeceuteSendMsg, CanExecuteMethod);
         }
-
         public ObservableCollection<Chatitem> loadChat(string target)
         {
             return chatManager.loadChat(target);
@@ -122,10 +121,19 @@ namespace TelerikWpfApp3.VM
                 string msg = target + "/" + id + "/" + nowTime + "/" + plain + "/";
                 localDAO.ChattingCreate(id, target, nowTime, plain, "Send");
                 Chatitem tmp = new Chatitem();
+                //bool isit = chatManager.IsFriendReading(target); 상대가 읽고 있는지 검사
                 tmp.User = id;
                 tmp.Text = plain;
                 tmp.Time = nowTime;
                 tmp.Chk = true;
+                /*if (isit == true) 검사 내용
+                {
+                    tmp.Status = true;
+                }
+                else
+                {
+                    tmp.Status = false;
+                }*/
                 networkManager.SendData("<MSG>", msg);
                 chatManager.addChat(target, tmp);
                 msgTextBox = "";

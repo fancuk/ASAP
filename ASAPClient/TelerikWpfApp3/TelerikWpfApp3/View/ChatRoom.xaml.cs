@@ -26,7 +26,7 @@ namespace TelerikWpfApp3.View
     {
         private string target;
         ChatUserControlViewModel cu = new ChatUserControlViewModel();
-
+        ChatManager cm = new ChatManager();
         /*private static ChatRoom instance = null; // 다민
 
         public static ChatRoom Instance //다민
@@ -116,6 +116,18 @@ namespace TelerikWpfApp3.View
                 }
             }
 
+        }
+
+        private void ChattingRoom_Activated(object sender, EventArgs e) // Focus 상태
+        {
+            bool isit = true;
+            cm.AboutFocus(isit, target);
+        }
+
+        private void ChattingRoom_Deactivated(object sender, EventArgs e) // LostFocus 상태
+        {
+            bool isit = false;
+            cm.AboutFocus(isit, target);
         }
     }
 }

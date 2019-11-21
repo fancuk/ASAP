@@ -11,7 +11,7 @@
         WindowStyle="None"
         ResizeMode="NoResize"
                 AllowsTransparency="True"
-        Background="{x:Null}" HorizontalAlignment="Left"
+        Background="{x:Null}" HorizontalAlignment="Left" Activated="ChattingRoom_Activated" Deactivated="ChattingRoom_Deactivated"
         >
     <Window.DataContext>
         <VM:ChatUserControlViewModel></VM:ChatUserControlViewModel>
@@ -141,7 +141,7 @@ VerticalScrollBarVisibility="Hidden"/>
                 </Border>
                 <StackPanel Height="410" Background="#FFEEF1F7" Margin="0,4,0,0">
                     <ListBox Style="{StaticResource disabledListBoxWithScroll}" BorderThickness="0,0,0,0" x:Name="ChatBox" Height="410" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionChanged="ChatBox_SelectionChanged"
-                            VM:ListBoxBehavior.ScrollOnNewItem="True" ItemsSource="{Binding}"   IsSynchronizedWithCurrentItem="False" BorderBrush="{x:Null}" Background="{x:Null}" >
+                            VM:ListBoxBehavior.ScrollOnNewItem="True" ItemsSource="{Binding}"   IsSynchronizedWithCurrentItem="False" BorderBrush="{x:Null}" Background="{x:Null}">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Width="320" HorizontalAlignment="Left" >

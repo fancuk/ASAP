@@ -17,10 +17,11 @@ namespace TelerikWpfApp3.Service
         {
 
         }
-       
+        NetworkManager networkManager = ((App)Application.Current).networkManager;
         IDictionary<string, ObservableCollection<Chatitem>> Chatdict
                = new Dictionary<string, ObservableCollection<Chatitem>>();
         AllChatList ACL = new AllChatList();
+
         List<string> friendsReading = new List<string>(); // 여러 명이 내 대화를 보고 있을 경우
         public void addChat(string target, Chatitem chatitem)
         {
@@ -71,7 +72,6 @@ namespace TelerikWpfApp3.Service
             }
             return isit;
         }
-
         public void addChat(string target)
         {
             if (!this.Chatdict.ContainsKey(target))
@@ -90,8 +90,6 @@ namespace TelerikWpfApp3.Service
         {
             return ACL.ChattingList;
         }
-        
-
         public ObservableCollection<Chatitem> loadChat(string target)
         {
             if (Chatdict.ContainsKey(target))
@@ -115,7 +113,6 @@ namespace TelerikWpfApp3.Service
                 ACL.ChattingList.Add(new AllChatListItem(name, a.Text));
             }
         }
-
         public void addChattingList(string name,string lastMessage) //대화 보낼 때 마다
         {
             AllChatListItem temp;
@@ -146,6 +143,7 @@ namespace TelerikWpfApp3.Service
         public IDictionary<string, ObservableCollection<Chatitem>> getDict()
         {
             return Chatdict;
+
         }
 
         public void setChat(string target, ObservableCollection<Chatitem> chat)
@@ -158,7 +156,21 @@ namespace TelerikWpfApp3.Service
             this.Chatdict[target].Clear();
         }
         
-        public string getLastChatById(string id)
+        public void AboutFocus(bool isit,string target) // 현재 focus 되어 있는지, 서버 업데이트 되면 실행
+        {
+            /*string myID = networkManager.MyId;
+            string text = myID + "/" + target;
+            if(isit == true)
+            {
+                networkManager.SendData("<CHR>", text + "/true");
+            }
+            else
+            {
+                networkManager.SendData("<CHR>", text + "/false");
+            }*/
+        }
+
+        /*public string getLastChatById(string id)
         {
             if (!Chatdict.ContainsKey(id))
             {
@@ -168,6 +180,6 @@ namespace TelerikWpfApp3.Service
             tmp = this.Chatdict[id];
             Chatitem a = tmp[tmp.Count - 1];
             return a.Text;
-        }
+        }다민*/
     }
 }
