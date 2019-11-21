@@ -39,7 +39,7 @@ namespace TelerikWpfApp3.Service
             if (Chatdict.ContainsKey(friend))
             {
                 ObservableCollection<Chatitem> tmp = Chatdict[friend];
-                for(int i = tmp.Count - 1; i >= 0; i--)
+                for(int i = tmp.Count - 1; i >= 0; i--) //채팅목록 밑에서 부터
                 {
                     Chatitem ci = tmp[i];
                     if (ci.Status == false) // true는 읽음 false는 안읽음
@@ -71,6 +71,27 @@ namespace TelerikWpfApp3.Service
                 }
             }
             return isit;
+        }
+        public void ClientRead(string friend) // 사용자가 채팅방 들어갈 때 사용자의 1 삭제
+        {
+            if (Chatdict.ContainsKey(friend))
+            {
+                ObservableCollection<Chatitem> tmp = Chatdict[friend];
+                for (int i = tmp.Count - 1; i >= 0; i--) //채팅목록 밑에서 부터
+                {
+                    Chatitem ci = tmp[i];
+                    if (ci.Status == false) // true는 읽음 false는 안읽음
+                    {
+                        ci.Status = true;
+                        tmp[i] = ci;
+                    }
+                    else
+                    {
+                        break; // 그 전의 메시지는 이미 읽었을 것임.
+                    }
+                }
+                Chatdict[friend] = tmp;
+            }
         }
         public void addChat(string target)
         {

@@ -107,7 +107,8 @@ namespace TelerikWpfApp3.View.UserControl
             foreach (AllChatListItem obj in ChatRoomList.SelectedItems)
             {
                 target = obj.Target;
-            }                                                       
+            }
+            chatManager.ClientRead(target);
             if (ChattingRoomManager.Instance.findChatRoom(target)) //다민
             {
                 ChattingRoomManager.Instance.makeChatRoom(target);

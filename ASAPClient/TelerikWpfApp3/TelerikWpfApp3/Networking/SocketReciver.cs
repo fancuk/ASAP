@@ -26,7 +26,7 @@ namespace TelerikWpfApp3.Networking
         SocketCloser sc = new SocketCloser();
         public SocketReciver()
         {
-            nowSock =networkManager.ProgramSock;
+            nowSock = networkManager.ProgramSock;
         }
 
         #region DataReceived
@@ -183,7 +183,6 @@ namespace TelerikWpfApp3.Networking
                 {
                     string FriendID = tokens[1];
                     string status = tokens[2];
-                    //((App)Application.Current).ChangeStatus(FriendID, status);다민
                     DispatchService.Invoke(() =>
                     {
                         FriendsUserControlViewModel.Instance.ChangeStatus(FriendID, status);//다민
@@ -265,11 +264,18 @@ namespace TelerikWpfApp3.Networking
                         });
                     }
                 }*/
-                else if (tag.Equals("CHR"))
+                else if (tag.Equals("CHR")) // 서버 업데이트 후에
                 {
-                    string friendId = tokens[1];
-                    string myId = tokens[2];
-                    // friend가 읽었다!! 이제 여기 채팅 수정
+                    /*string friendID = tokens[1];
+                    string isitFocus = tokens[2];
+                    if(isitFocus == "true")
+                    {
+                        chatManager.AddFriendsReading(friendID);
+                    }
+                    else
+                    {
+                        chatManager.RemoveFriendsReading(friendID);
+                    }*/
                 }
                 else if (tag.Equals("<FLD>"))
                 {
@@ -280,7 +286,7 @@ namespace TelerikWpfApp3.Networking
                         string[] resToken = tokens[idx + i].Split('^');
                         DispatchService.Invoke(() =>
                         {
-                            FriendsUserControlViewModel.Instance.AddFriend(resToken[0], resToken[1]);//다민
+                            FriendsUserControlViewModel.Instance.AddFriend(resToken[0], resToken[1]);
                         });
                     }
                     DispatchService.Invoke(() =>

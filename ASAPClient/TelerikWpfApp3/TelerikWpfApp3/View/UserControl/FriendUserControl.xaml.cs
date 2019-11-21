@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TelerikWpfApp3.M;
+using TelerikWpfApp3.Service;
 using TelerikWpfApp3.VM;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Menu;
 
@@ -23,7 +24,7 @@ namespace TelerikWpfApp3.View.UserControl
     /// </summary>s
     public partial class FriendUserControl
     {
-
+        ChatManager chatManager = ((App)Application.Current).chatManager;
         public FriendUserControl()
         {
             InitializeComponent();
@@ -50,6 +51,7 @@ namespace TelerikWpfApp3.View.UserControl
             {
                 target = obj.User.ToString();
             }
+            chatManager.ClientRead(target);
             if (ChattingRoomManager.Instance.findChatRoom(target)) //다민
             {
                 ChattingRoomManager.Instance.makeChatRoom(target);
