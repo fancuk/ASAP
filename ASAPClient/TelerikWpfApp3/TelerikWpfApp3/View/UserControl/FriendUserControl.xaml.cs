@@ -39,7 +39,24 @@ namespace TelerikWpfApp3.View.UserControl
             //this.PreviewKeyDown += new KeyEventHandler(OnEnterKeyDownHandler);
         }
 
-        
+        private void txtNameToSearch_TextChanged(object sender,
+TextChangedEventArgs e)
+        {
+            string txtOrig = txtNameToSearch.Text;
+            string upper = txtOrig.ToUpper();
+            string lower = txtOrig.ToLower();
+
+            var empFiltered = from Emp in FriendsUserControlViewModel.Instance.getFriends()
+                              let ename = Emp.User
+                              where
+                               ename.StartsWith(lower)
+                               || ename.StartsWith(upper)
+                               || ename.Contains(txtOrig)
+                              select Emp;
+
+            ClientList.DataContext = empFiltered;
+        }
+
         private void GetMessageById(object sender, RoutedEventArgs e)
         {
           

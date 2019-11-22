@@ -12,7 +12,7 @@ namespace TelerikWpfApp3.M
         private string email;
         private string pw;
 
-        public MyInfo(string myId, string email, string pw)
+        public MyInfo(string myId, string pw, string email)
         {
             MyId = myId;
             Email = email;

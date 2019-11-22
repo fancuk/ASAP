@@ -157,7 +157,7 @@
                 <Border CornerRadius="10" Width="77" Background="WhiteSmoke" BorderThickness="0,0.1,0,0">
                     <StackPanel Background="#FFF9F9F9" Margin="0,10">
                         <Border Height="68">
-                            <Ellipse Height="70" Width="70" VerticalAlignment="Top">
+                            <Ellipse RenderOptions.BitmapScalingMode="HighQuality" Height="70" Width="70" VerticalAlignment="Top">
                                 <Ellipse.Fill>
                                     <ImageBrush ImageSource="Resources/timerLogo.png"/>
                                 </Ellipse.Fill>
@@ -168,7 +168,7 @@
                                 <StackPanel Margin="0,5,0,0">
                                     <Border Height="39" BorderThickness="1,1,1,1" Margin="0,21,0,0">
                                         <StackPanel Orientation="Horizontal" Height="39" HorizontalAlignment="Center">
-                                            <RadioButton 
+                                            <RadioButton  RenderOptions.BitmapScalingMode="HighQuality"
                                             Command="{Binding FriendsPageOn}"
                                             GroupName="menu" Content="       "  Style="{StaticResource friendButton}" BorderBrush="{x:Null}"
                                                 Width="75" FontSize="20" Foreground="#FFF1F1F1" FontFamily="Impact" HorizontalAlignment="Center" VerticalAlignment="Center" 
@@ -180,6 +180,7 @@
                                     <Border Height="38" BorderThickness="1,1,1,1">
                                         <StackPanel Orientation="Horizontal" Height="38" Margin="0,0,-1,-2">
                                             <RadioButton 
+                                                RenderOptions.BitmapScalingMode="HighQuality"
                                             Command="{Binding ChatListPageOn}"
                                             GroupName="menu" Content="          " Style="{StaticResource ChatButton}"  Background="{x:Null}" BorderBrush="{x:Null}" Width="76" FontSize="20" Foreground="#FFF1F1F1" FontFamily="Impact" Height="38" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                                         </StackPanel>
@@ -193,6 +194,7 @@
                                         </Border.Background>
                                         <StackPanel Orientation="Horizontal" Height="38" Width="75">
                                             <RadioButton 
+                                                RenderOptions.BitmapScalingMode="HighQuality"
                                                 Command="{Binding LogOut}"
                                                 GroupName="menu" Content="       " Style="{StaticResource LogOutButton}"  Background="{x:Null}" BorderBrush="{x:Null}" Width="75" FontSize="20" Foreground="White" FontFamily="Impact"/>
                                         </StackPanel>
@@ -275,7 +277,9 @@
                                         <ContentControl>
                                             <Hyperlink Foreground="{x:Null}">
                                                 <InlineUIContainer>
-                                                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="10" Height="10" Margin="0">
+                                                    <StackPanel
+                                                        RenderOptions.BitmapScalingMode="HighQuality"
+                                                        HorizontalAlignment="Center" VerticalAlignment="Center" Width="10" Height="10" Margin="0">
                                                         <StackPanel.Background>
                                                             <ImageBrush ImageSource="Resources/optionSmall.png"/>
                                                         </StackPanel.Background>

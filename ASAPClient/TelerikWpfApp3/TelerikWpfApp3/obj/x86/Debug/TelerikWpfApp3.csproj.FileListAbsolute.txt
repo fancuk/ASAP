@@ -553,3 +553,7 @@ C:\Users\king1\Desktop\소공\ASAP\TelerikWpfApp3\TelerikWpfApp3\obj\x86\Debug\T
 C:\Users\king1\Desktop\소공\ASAP\TelerikWpfApp3\TelerikWpfApp3\obj\x86\Debug\TelerikWpfApp3.csproj.CopyComplete
 C:\Users\king1\Desktop\소공\ASAP\TelerikWpfApp3\TelerikWpfApp3\obj\x86\Debug\TelerikWpfApp3.exe
 C:\Users\king1\Desktop\소공\ASAP\TelerikWpfApp3\TelerikWpfApp3\obj\x86\Debug\TelerikWpfApp3.pdb
+C:\Users\king1\Desktop\소공\ASAP\TelerikWpfApp3\TelerikWpfApp3\obj\x86\Debug\View\Alert\MessageToast.baml
+C:\Users\king1\Desktop\소공\ASAP\TelerikWpfApp3\TelerikWpfApp3\obj\x86\Debug\View\Alert\MessageToast.g.cs
+C:\Users\king1\Desktop\소공\ASAP\TelerikWpfApp3\TelerikWpfApp3\bin\Debug\ToastNotifications.dll
+C:\Users\king1\Desktop\소공\ASAP\TelerikWpfApp3\TelerikWpfApp3\bin\Debug\ToastNotifications.Messages.dll

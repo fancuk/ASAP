@@ -13,6 +13,7 @@
             >
             
             <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/ToastNotifications.Messages;component/Themes/Default.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <DataTemplate DataType="{x:Type vm:UserControlViewModel}">
                 <uc:UserControl2></uc:UserControl2>

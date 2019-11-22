@@ -23,5 +23,10 @@ namespace TelerikWpfApp3.View
         {
             InitializeComponent();
         }
+
+        private void Hyperlink_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

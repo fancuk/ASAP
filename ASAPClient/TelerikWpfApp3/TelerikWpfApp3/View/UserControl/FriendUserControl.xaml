@@ -10,6 +10,11 @@
 
     <UserControl.Resources>
         <Style x:Key="SimpleListBoxItem" TargetType="ListBoxItem">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#FFABACAE" />
+                </Trigger>
+            </Style.Triggers>
             <Setter Property="FocusVisualStyle" Value="{x:Null}" />
             <Setter Property="Template">
                 <Setter.Value>
@@ -37,7 +42,7 @@
         <StackPanel Orientation="Vertical">
             <StackPanel Height="73" Orientation="Horizontal">
                 <StackPanel Width="153" Margin="13,0,0,0">
-                    <TextBlock Text="FRIENDS" Height="40" TextAlignment="Center" FontFamily="MS PGothic" Margin="0,19,0,0" FontSize="36" FontWeight="Bold"/>
+                    <TextBlock Text="FRIENDS" Height="40" FontFamily="MS PGothic" Margin="0,19,0,0" FontSize="22" FontWeight="Bold" Padding="0,14,0,0"/>
                 </StackPanel>
                 <StackPanel Width="152" Orientation="Horizontal" HorizontalAlignment="Right">
                     <TextBlock 
@@ -45,7 +50,7 @@
                                                                               Command="{Binding showFriendModal}"><InlineUIContainer>
                                         <StackPanel Orientation="Horizontal">
                                             <TextBlock x:Name="Msg" Text="    " Margin="7,12,0,10" Foreground="White" FontSize="22" Width="46" FontFamily="Impact"/>
-                                            <Canvas Width="43" Margin="-51,5,5,10" Height="28" >
+                                            <Canvas RenderOptions.BitmapScalingMode="HighQuality" Width="43" Margin="-51,5,5,10" Height="28" >
                                                 <Canvas.Background>
                                                     <ImageBrush ImageSource="/TelerikWpfApp3;component/Resources/friendAdd.png" Stretch="Uniform"/>
                                                 </Canvas.Background>
@@ -56,31 +61,35 @@
                 </StackPanel>
 
             </StackPanel>
-            <Border Height="40" BorderBrush="#FF6C6969" BorderThickness="0.3" Width="320" >
-                <StackPanel Orientation="Horizontal" Background="#FFF1F1F1" Margin="0,0,-1,0">
+            <Border CornerRadius="15" Height="40" BorderBrush="#FF6C6969" BorderThickness="0.3" Margin="10,0" Background="WhiteSmoke" >
+                <StackPanel Orientation="Horizontal" Margin="0,0,-1,0">
                     <StackPanel Margin="0" Width="320" Orientation="Horizontal">
-                        <StackPanel Width="46" Margin="8,0,0,0" Height="30">
+                        <StackPanel 
+                            RenderOptions.BitmapScalingMode="HighQuality"
+                            Width="20" Margin="8,0,0,0" Height="20">
                             <StackPanel.Background>
                                 <ImageBrush ImageSource="/TelerikWpfApp3;component/Resources/serach.png" Stretch="Uniform"/>
                             </StackPanel.Background>
                         </StackPanel>
                         <StackPanel Width="266">
-                            <TextBox Height="34" Margin="0,2,10,0" Background="{x:Null}" BorderBrush="{x:Null}"></TextBox>
+                            <TextBox 
+                                TextChanged="txtNameToSearch_TextChanged"
+                                x:Name="txtNameToSearch" Height="34" Margin="11,2,10,0" Background="{x:Null}" BorderBrush="{x:Null}"></TextBox>
                         </StackPanel>
                     </StackPanel>
                 </StackPanel>
             </Border>
             <Border Height="507">
                 <StackPanel>
-                    <Border Height="112" Margin="0,10,0,0" Background="White">
+                    <Border Height="101" Margin="0,10,0,0" Background="White">
                         <StackPanel>
-                            <Border Height="32" BorderThickness="0,0,0,0.7" BorderBrush="#FFFB8C89">
+                            <Border Height="32" BorderThickness="0,0,0,0.7" BorderBrush="#FFE8E4E4" Margin="10,0">
                                 <StackPanel>
-                                    <TextBlock Text="ME" Height="31" TextAlignment="Center" FontFamily="MS PGothic" Margin="0,0,244,0" FontSize="24" FontWeight="Bold"/>
+                                    <TextBlock Text="Me" Height="19" TextAlignment="Center" FontFamily="Calibri" Margin="0,12,257,0" FontWeight="Bold" VerticalAlignment="Bottom"/>
                                 </StackPanel>
                             </Border>
                             <StackPanel Height="69" Margin="0,1,0,0" Orientation="Horizontal">
-                                <TextBlock Text="{Binding MyID}" Height="31" Width="100" TextAlignment="Center" FontFamily="MS PGothic" Margin="22,22,10,0" FontSize="24" FontWeight="Bold"/>
+                                <TextBlock Text="{Binding MyID}" Height="31" Width="100" TextAlignment="Center" FontFamily="Calibri" Margin="22,22,10,0" FontSize="18" FontWeight="Bold"/>
                                 <Border CornerRadius="20" Width="13" Background="#FF39910F" Margin="0,30,0,25"/>
                                 <Border CornerRadius="20" Background="#FFF1F0F0" Margin="19,19,0,5" Width="146">
                                     <TextBlock Text="하하하..." Margin="18,14,18,12" TextAlignment="Center"/>
@@ -90,49 +99,59 @@
                     </Border>
                     <Border Height="374" Margin="0,10,0,0" Background="White">
                         <StackPanel>
-                            <Border Height="32" BorderThickness="0,0,0,0.7" BorderBrush="#FFFB8C89">
+                            <Border Height="32" BorderThickness="0,0,0,0.7" BorderBrush="#FFE6E1E1" Margin="10,0">
                                 <StackPanel>
-                                    <TextBlock Text="Friends" Height="31" TextAlignment="Center" FontFamily="MS PGothic" Margin="6,0,220,0" FontSize="24" FontWeight="Bold"/>
+                                    <TextBlock Text="Friends" Height="19" TextAlignment="Center" FontFamily="Calibri" Margin="0,12,241,0" FontWeight="Bold" VerticalAlignment="Bottom"/>
+                                    
                                 </StackPanel>
                             </Border>
                             <ListBox
-         
+                                
                                 ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                                 BorderThickness="0,0,0,0" x:Name="ClientList" 
-                                Height="558" ItemsSource="{Binding}"  
+                                Height="468" ItemsSource="{Binding}"  
                                 IsSynchronizedWithCurrentItem="False" 
-                                BorderBrush="{x:Null}" Margin="0,10,0,0" Background="{x:Null}" SelectionChanged="ClientList_SelectionChanged">
+                                  BorderBrush="{x:Null}" Margin="0,10,0,0" Background="{x:Null}" SelectionChanged="ClientList_SelectionChanged">
                                 <ListBox.ItemContainerStyle>
                                     <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource {x:Type ListBoxItem}}">
                                         <EventSetter Event="MouseDoubleClick" Handler="FriendDoubleClick"/>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="#FF006FFF" />
+                                            </Trigger>
+                                        </Style.Triggers>
                                     </Style>
                                 </ListBox.ItemContainerStyle>
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
-                                        <StackPanel Height="69" Margin="0,5,0,0" Orientation="Horizontal" Background="#FFFBFBFB">
-                                            <TextBlock x:Name="status" Text="{Binding Status}" MaxWidth="0" MaxHeight="0"></TextBlock>
-                                            <TextBlock x:Name="User" Text="{Binding User}" Height="31" TextAlignment="Center" FontFamily="MS PGothic" Margin="22,22,10,0" FontSize="16" FontWeight="Bold"/>
-                                            <Border CornerRadius="20" Width="13" Margin="0,30,0,25">
+                                        <StackPanel Height="69" Margin="0,5,0,0" Orientation="Horizontal" Background="{x:Null}" Width="310">
+                                            <Border RenderOptions.BitmapScalingMode="HighQuality" CornerRadius="20" Width="40" Margin="0,0,0,25" Height="40">
                                                 <Border.Style>
                                                     <Style>
                                                         <Style.Triggers>
                                                             <DataTrigger Binding="{Binding ElementName=status, Path=Text}" Value="true">
                                                                 <Setter Property="Border.Background" >
                                                                     <Setter.Value>
-                                                                        <SolidColorBrush Color="#FF22F70D"></SolidColorBrush>
+                                                                        <ImageBrush ImageSource="/TelerikWpfApp3;component/Resources/Thunder.png" Stretch="Uniform"></ImageBrush>
                                                                     </Setter.Value>
                                                                 </Setter>
                                                             </DataTrigger>
                                                             <DataTrigger Binding="{Binding ElementName=status, Path=Text}" Value="false">
-                                                                <Setter Property="Border.Background"  Value="Red"></Setter>
+                                                                <Setter Property="Border.Background" >
+                                                                    <Setter.Value>
+                                                                        <ImageBrush ImageSource="/TelerikWpfApp3;component/Resources/OffThunder.png" Stretch="Uniform"></ImageBrush>
+                                                                    </Setter.Value>
+                                                                </Setter>
                                                             </DataTrigger>
                                                         </Style.Triggers>
                                                     </Style>
                                                 </Border.Style>
                                             </Border>
-                                            <Border CornerRadius="20" Background="#FFF1F0F0" Margin="19,19,0,5" Width="181">
-                                                <TextBlock Text="{Binding LastMesseage}" Margin="18,14,18,12" TextAlignment="Center"/>
-                                            </Border>
+                                            <TextBlock x:Name="status" Text="{Binding Status}" MaxWidth="0" MaxHeight="0"></TextBlock>
+                                            <StackPanel Orientation="Vertical">
+                                                <TextBlock x:Name="User" Text="{Binding User}"  TextAlignment="Left" FontFamily="Calibri" Margin="5,0,0,0" FontSize="16" FontWeight="Bold"/>
+                                                <TextBlock Text="하하하하..." Margin="5,0,0,0"></TextBlock>
+                                            </StackPanel>
                                         </StackPanel>
                                     </DataTemplate>
                                 </ListBox.ItemTemplate>

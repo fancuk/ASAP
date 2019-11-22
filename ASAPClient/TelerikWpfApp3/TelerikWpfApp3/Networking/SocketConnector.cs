@@ -23,8 +23,7 @@ namespace TelerikWpfApp3.Networking
         }
         public bool SocketConnect()
         {
-            string address = "54.180.26.230";
-            //string address = "13.125.254.210";
+           string address = "54.180.26.230";
            //string address = "127.0.0.1";
            //string address = "203.229.204.23"; // "127.0.0.1" 도 가능
             int port = 11000;

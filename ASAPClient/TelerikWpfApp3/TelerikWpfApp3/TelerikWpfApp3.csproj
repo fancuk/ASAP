@@ -91,6 +91,12 @@
     <Reference Include="Telerik.Windows.Controls.DataVisualization, Version=2019.2.618.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
     <Reference Include="Telerik.Windows.Controls.Navigation, Version=2019.2.618.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
     <Reference Include="Telerik.Windows.Data, Version=2019.2.618.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="ToastNotifications, Version=2.5.1.0, Culture=neutral, PublicKeyToken=e89d9d7314a7c797, processorArchitecture=MSIL">
+      <HintPath>..\packages\ToastNotifications.2.5.1\lib\net40\ToastNotifications.dll</HintPath>
+    </Reference>
+    <Reference Include="ToastNotifications.Messages, Version=2.5.1.0, Culture=neutral, PublicKeyToken=e89d9d7314a7c797, processorArchitecture=MSIL">
+      <HintPath>..\packages\ToastNotifications.Messages.2.5.1\lib\net40\ToastNotifications.Messages.dll</HintPath>
+    </Reference>
     <Reference Include="UIAutomationProvider" />
     <Reference Include="UIAutomationTypes" />
     <Reference Include="WindowsBase" />
@@ -107,6 +113,7 @@
     <Compile Include="LocalDB\LocalDAO.cs" />
     <Compile Include="LocalDB\LocalDTO.cs" />
     <Compile Include="M\AllChatList.cs" />
+    <Compile Include="M\AllChatListItem.cs" />
     <Compile Include="M\ChatItem.cs" />
     <Compile Include="M\ChatListItem.cs" />
     <Compile Include="M\DispatchService.cs" />
@@ -117,6 +124,7 @@
       <DependentUpon>FalseMsgBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="M\MyInfo.cs" />
+    <Compile Include="M\ToastItem.cs" />
     <Compile Include="Networking\NetworkModel\AsyncObject.cs" />
     <Compile Include="Networking\SocketConnector.cs" />
     <Compile Include="Networking\SocketMaker.cs" />
@@ -131,6 +139,8 @@
     <Compile Include="Service\ChatManager.cs" />
     <Compile Include="Service\FriendsManager.cs" />
     <Compile Include="Service\NetworkManager.cs" />
+    <Compile Include="Service\NotifyManager.cs" />
+    <Compile Include="Service\SyncSocketReceiver.cs" />
     <Compile Include="Service\UserStatusManager.cs" />
     <Compile Include="SuccessMsgBox.xaml.cs">
       <DependentUpon>SuccessMsgBox.xaml</DependentUpon>
@@ -146,6 +156,9 @@
     <Compile Include="Utility\DabbingPreventor.cs" />
     <Compile Include="viewtest.xaml.cs">
       <DependentUpon>viewtest.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Alert\MessageToast.xaml.cs">
+      <DependentUpon>MessageToast.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Alert\MSGAlert.xaml.cs">
       <DependentUpon>MSGAlert.xaml</DependentUpon>
@@ -204,6 +217,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="viewtest.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Alert\MessageToast.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -365,6 +382,12 @@
     <Resource Include="Resources\optionSmall.png" />
     <Resource Include="Resources\friendAdd.png" />
     <Resource Include="Resources\serach.png" />
+    <Resource Include="Resources\OnGreen.png" />
+    <Resource Include="Resources\OutRed.png" />
+    <Resource Include="Resources\On.png" />
+    <Resource Include="Resources\Out.png" />
+    <Resource Include="Resources\OffThunder.png" />
+    <Resource Include="Resources\Thunder.png" />
     <Content Include="SQLite.Interop.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

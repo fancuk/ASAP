@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using TelerikWpfApp3.M;
+using TelerikWpfApp3.View.Alert;
 
 namespace TelerikWpfApp3.Service
 {
@@ -27,6 +29,16 @@ namespace TelerikWpfApp3.Service
         {
             Window Rg = TelerikWpfApp3.Register.Instance;
             Rg.Hide();
+        }
+
+        public void ShowMessageToast(Chatitem chatItem)
+        {
+            Window mt = TelerikWpfApp3.View.Alert.MessageToast.instance;
+            MessageToast messageToast = (MessageToast)mt;
+            messageToast.getToastInfo(chatItem.User,
+                chatItem.Time,chatItem.Text);
+            mt.Show();
+           
         }
 
     }

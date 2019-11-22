@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\king1\Desktop\소공\ASAP\TelerikWpfApp3\TelerikWpfApp3\App.xaml
-13825417408
+14-187891140
 12093627840
-55-1019922922
-391155982858
-FalseMsgBox.xaml;SuccessMsgBox.xaml;Register.xaml;StartWindow.xaml;viewtest.xaml;View\Alert\MSGAlert.xaml;View\Alert\ServiceErrorAlert.xaml;View\ChatRoom.xaml;View\FriendAddWindow.xaml;View\UserControl\ChatUserControl.xaml;View\UserControl\FriendUserControl.xaml;View\UserControl\UserControl1.xaml;View\UserControl\UserControl2.xaml;
+601578369103
+41-655421087
+FalseMsgBox.xaml;SuccessMsgBox.xaml;Register.xaml;StartWindow.xaml;viewtest.xaml;View\Alert\MessageToast.xaml;View\Alert\MSGAlert.xaml;View\Alert\ServiceErrorAlert.xaml;View\ChatRoom.xaml;View\FriendAddWindow.xaml;View\UserControl\ChatUserControl.xaml;View\UserControl\FriendUserControl.xaml;View\UserControl\UserControl1.xaml;View\UserControl\UserControl2.xaml;
 
 False
 

@@ -4,9 +4,82 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TelerikWpfApp3.View"
+        xmlns:vm="clr-namespace:TelerikWpfApp3.VM"
         mc:Ignorable="d"
-        Title="FriendAddWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        WindowStyle="None"
+        ResizeMode="NoResize"
+          AllowsTransparency="True"
+        Title="FriendAddWindow" Height="300" Width="303" Background="{x:Null}">
+    <Border CornerRadius="10" Background="#FFF7F7F7" Padding="0" Margin="5">
+        <Border.Effect>
+            <DropShadowEffect Color="Gray"></DropShadowEffect>
+        </Border.Effect>
+        <Grid>
+            <StackPanel>
+                <StackPanel Height="147">
+                    <Border CornerRadius="10" Background="White" Height="146">
+                        <Border.Effect>
+                            <DropShadowEffect Opacity="0.03"></DropShadowEffect>
+                        </Border.Effect>
+                        <StackPanel>
+                            <StackPanel Height="146"  Orientation="Vertical">
+                                <StackPanel Height="33" Orientation="Horizontal">
+                                    <StackPanel Width="22" Margin="264,4,0,10">
+                                        <StackPanel.DataContext>
+                                            <vm:TitleControl></vm:TitleControl>
+                                        </StackPanel.DataContext>
+                                        <TextBlock>
+                                            <Hyperlink TextDecorations="{x:Null}"
+                                                       Click="Hyperlink_Click">
+                                                <StackPanel  Width="12" Height="12" Margin="7,0,0,0">
+                                                    <StackPanel.Background>
+                                                        <ImageBrush Stretch="Uniform" ImageSource="/TelerikWpfApp3;component/Resources/exitSmall.png"/>
+                                                    </StackPanel.Background>
+                                                </StackPanel>
+                                            </Hyperlink>
+                                        </TextBlock>
+                                    </StackPanel>
+                                </StackPanel>
+                                <StackPanel RenderOptions.BitmapScalingMode="HighQuality" Width="62" HorizontalAlignment="Center" Margin="80,1,80,4" Height="54">
+                                    <StackPanel.Background>
+                                        <ImageBrush ImageSource="/TelerikWpfApp3;component/Resources/timerLogo.png" Stretch="Uniform"/>
+                                    </StackPanel.Background>
+                                </StackPanel>
+                                <StackPanel Height="71" Background="White">
+                                    <TextBlock
+                                        Text="Find Your Friends!" Foreground="#FFD41603" TextAlignment="Center" Height="50" FontSize="24" FontFamily="Calibri" FontWeight="Bold"
+                                        >
+
+                                    </TextBlock>
+                                </StackPanel>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+
+                <StackPanel Height="151" Margin="0">
+                    <StackPanel Height="142">
+                        <StackPanel Height="78">
+                            <Border Height="42" CornerRadius="10" Background="#FFE8E8E8" Margin="90,25,90,0">
+                                <StackPanel>
+                                    <TextBox Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" Height="42" FontFamily="Calibri" FontSize="18" TextAlignment="Center" Margin="0"></TextBox>
+                                </StackPanel>
+                            </Border>
+                        </StackPanel>
+                        <StackPanel Height="52">
+                            <TextBlock Height="45">
+                                <Hyperlink TextDecorations="{x:Null}">
+                            <Border CornerRadius="5" Background="#FFEC5F5F" Height="33" Margin="90,7,90,0" Width="122">
+                            <StackPanel>
+                                <TextBlock Text="Follow!" Height="32" Foreground="White" TextAlignment="Center" FontFamily="Calibri" FontWeight="Bold" FontSize="28"></TextBlock>
+                            </StackPanel>
+                            </Border>
+                                        </Hyperlink>
+                            </TextBlock>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </Border>
 </Window>

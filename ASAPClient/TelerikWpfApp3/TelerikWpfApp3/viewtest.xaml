@@ -13,6 +13,7 @@
         mc:Ignorable="d"
          Title="viewtest" Height="630" Width="362" Loaded="Login_Loaded"
         WindowStyle="None"
+        AllowsTransparency="True"
         ResizeMode="NoResize"
         BorderThickness="1.5,1.5,1.5,1.5" Background="{x:Null}">
     <i:Interaction.Triggers>
@@ -172,7 +173,7 @@
                             <ContentControl>
                                 <Hyperlink Foreground="{x:Null}">
                                     <InlineUIContainer>
-                                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="20" Height="17" Margin="0">
+                                        <StackPanel RenderOptions.BitmapScalingMode="HighQuality" HorizontalAlignment="Center" VerticalAlignment="Center" Width="20" Height="17" Margin="0">
                                             <StackPanel.Background>
                                                 <ImageBrush ImageSource="/Resources/menuicon2.png"/>
                                             </StackPanel.Background>
@@ -229,7 +230,7 @@
                             Margin="10"  
                             Foreground="Black" TextAlignment="Center" Height="32" FontWeight="Bold" FontSize="48" FontFamily="Times New Roman"  ><Run Text="" TextDecorations="{x:Null}"/></TextBlock>
                     </StackPanel>
-                    <StackPanel Height="200" Width="200" Margin="0,0,0,1">
+                    <StackPanel RenderOptions.BitmapScalingMode="HighQuality" Height="200" Width="200" Margin="0,0,0,1">
                         <StackPanel.Background>
                             <ImageBrush ImageSource="Resources/timerLogo.png" Stretch="Uniform"/>
                         </StackPanel.Background>
@@ -326,7 +327,7 @@
                         <TextBlock><Hyperlink Command="{Binding Register}" Foreground="Black"  TextDecorations="{x:Null}"><InlineUIContainer>
                                     <TextBlock   TextAlignment="Center" Text="Register" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Width="391" Foreground="#FFEE534F"/>
                                 </InlineUIContainer></Hyperlink></TextBlock>
-                        <TextBlock   TextAlignment="Center" Text="Copyrighted By @ASAP" Margin="0,20,0,0" FontSize="9"/>
+                        <TextBlock   TextAlignment="Center" Text="Copyrighted By @Puzzle" Margin="0,20,0,0" FontSize="9"/>
                     </StackPanel>
                 </StackPanel>
             </StackPanel>
