@@ -62,19 +62,19 @@
                         <StackPanel Height="78">
                             <Border Height="42" CornerRadius="10" Background="#FFE8E8E8" Margin="90,25,90,0">
                                 <StackPanel>
-                                    <TextBox Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" Height="42" FontFamily="Calibri" FontSize="18" TextAlignment="Center" Margin="0"></TextBox>
+                                    <TextBox Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" Height="36" FontFamily="Calibri" FontSize="22" HorizontalAlignment="Center" TextAlignment="Center" Margin="0,3,0,0" Width="111"/>
                                 </StackPanel>
                             </Border>
                         </StackPanel>
                         <StackPanel Height="52">
                             <TextBlock Height="45">
                                 <Hyperlink TextDecorations="{x:Null}">
-                            <Border CornerRadius="5" Background="#FFEC5F5F" Height="33" Margin="90,7,90,0" Width="122">
+                            <Border CornerRadius="5" Background="#FFEC5F5F" Height="33" Margin="90,7,90,0" Width="112">
                             <StackPanel>
-                                <TextBlock Text="Follow!" Height="32" Foreground="White" TextAlignment="Center" FontFamily="Calibri" FontWeight="Bold" FontSize="28"></TextBlock>
+                                <TextBlock Text="Follow!" Height="32" Foreground="White" TextAlignment="Center" FontFamily="Calibri" FontWeight="Bold" FontSize="28" Margin="0,0,-2,0"></TextBlock>
                             </StackPanel>
                             </Border>
-                                        </Hyperlink>
+                                </Hyperlink>
                             </TextBlock>
                         </StackPanel>
                     </StackPanel>

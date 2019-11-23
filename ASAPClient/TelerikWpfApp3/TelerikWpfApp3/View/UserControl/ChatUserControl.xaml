@@ -109,13 +109,13 @@
             </Border>
             <Border Height="507">
                 <StackPanel>
-                    <Border Height="476" Margin="0,10,0,0" Background="White">
-                        <StackPanel Margin="0,0,0,3.8">
+                    <Border Height="527" Margin="0,10,0,0" Background="White">
+                        <StackPanel Margin="0,0,0,13.4">
                             <ContentControl></ContentControl>
                             <ListBox
                                 ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                                 BorderThickness="0,0,0,0" x:Name="ChatRoomList" 
-                                Height="465" ItemsSource="{Binding}"  
+                                Height="510" ItemsSource="{Binding}"  
                                 IsSynchronizedWithCurrentItem="False" 
                                 BorderBrush="{x:Null}" Margin="0,10,0,0" Background="{x:Null}" SelectionChanged="ChatBox_SelectionChanged">
                                 <ListBox.ItemContainerStyle>
@@ -127,10 +127,10 @@
                                     <DataTemplate>
                                         <StackPanel Height="69" Margin="0,5,0,0" Orientation="Horizontal" Background="#FFFBFBFB">
 
-                                            <TextBlock x:Name="User" Text="{Binding User}" Height="31" TextAlignment="Center" FontFamily="MS PGothic" Margin="22,22,10,0" FontSize="16" FontWeight="Bold"/>
+                                            <TextBlock x:Name="User" Text="{Binding Target}" Height="31" TextAlignment="Center" FontFamily="MS PGothic" Margin="22,22,10,0" FontSize="16" FontWeight="Bold"/>
                                             <Border CornerRadius="20" Width="13" Background="#FF39910F" Margin="0,30,0,25"/>
                                             <Border CornerRadius="20" Background="#FFF1F0F0" Margin="19,19,0,5" Width="181">
-                                                <TextBlock Text="{Binding LastMesseage}" Margin="18,14,18,12" TextAlignment="Center"/>
+                                                <TextBlock Text="{Binding LastMessage}" Margin="18,14,18,12" TextAlignment="Center"/>
                                             </Border>
                                         </StackPanel>
                                     </DataTemplate>
