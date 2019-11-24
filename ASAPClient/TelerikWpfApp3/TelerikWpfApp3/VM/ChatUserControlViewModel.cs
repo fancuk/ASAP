@@ -119,6 +119,8 @@ namespace TelerikWpfApp3.VM
                 string plain = org as string;
                 string nowTime = DateTime.Now.ToString();
                 string msg = target + "/" + id + "/" + nowTime + "/" + plain + "/";
+                string[] tokens = msg.Split('/');
+                string lastmsg = tokens[3];
                 Chatitem tmp = new Chatitem();
                 int isit = chatManager.IsFriendReading(target); //2019-11-22
                 tmp.User = id;
@@ -136,7 +138,7 @@ namespace TelerikWpfApp3.VM
                 networkManager.SendData("<MSG>", msg);
                 chatManager.addChat(target, tmp);
                 msgTextBox = "";
-                chatManager.addChattingList(target, msg);
+                chatManager.addChattingList(target, lastmsg);
                 //localDAO.ChattingCreate(id, target, nowTime, plain, "Send");
                 localDAO.ChattingCreate(id, target, nowTime, plain, "Send", isit); // 2019-11-22
             }

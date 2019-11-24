@@ -45,9 +45,9 @@
                         <BulletDecorator Cursor="Hand" Background="{x:Null}">
                             <!--Text element-->
                             <Border Width="Auto" Height="Auto" CornerRadius="0" BorderBrush="{x:Null}" 
-                                    BorderThickness="1" x:Name="RadioBorder" Margin="0" Background="Black" >
+                                    BorderThickness="1" x:Name="RadioBorder" Margin="0" Background="#FFF1A2A0" >
                                 <Grid Height="38">
-                                    <ContentPresenter x:Name="RadioContent"   HorizontalAlignment="Center" VerticalAlignment="Center" OpacityMask="Black" />
+                                    <ContentPresenter x:Name="RadioContent"   HorizontalAlignment="Center" VerticalAlignment="Center" OpacityMask="#FFEE534F" />
                                     <!--We don't need any bullet, cause our border is the switching element-->
                                     <Border Margin="0,0,188.7,0" Background="{x:Null}" CornerRadius="1" x:Name="RadioMark" Height="0" />
                                     <!-- To change the apearance to button stripe 2, edit the margins! -->
@@ -57,7 +57,7 @@
                         <!--If item is checked, trigger the visibility of the mark-->
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsChecked" Value="true">
-                                <Setter TargetName="RadioBorder" Property="Background" Value="black"/>
+                                <Setter TargetName="RadioBorder" Property="Background" Value="#FFEE534F"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -75,8 +75,8 @@
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0" Width="161" Height="38">
                                 <RadioButton 
                                             Command="{Binding FriendsPageOn}"
-                                            GroupName="menu" Content="Single Chat"  Style="{StaticResource friendButton}" BorderBrush="{x:Null}"
-                                                Width="161" FontSize="20" Foreground="#FFF1F1F1" FontFamily="Impact" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{x:Null}" Height="38"/>
+                                            GroupName="menu" Content="Single Chat"  Style="{StaticResource friendButton}"  BorderBrush="{x:Null}"
+                                                Width="161" FontSize="20" Foreground="#FFF1F1F1" FontFamily="Impact" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{x:Null}" Height="38" Margin="0,0,0,0.4"/>
                             </StackPanel>
                         </Border>
                     </StackPanel>
@@ -85,8 +85,8 @@
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="-1" Width="160" Height="38">
                                 <RadioButton 
                                     Command="{Binding FriendsPageOn}"
-                                    GroupName="menu" Content="Single Chat"  Style="{StaticResource friendButton}" BorderBrush="{x:Null}"
-                                    Width="174" FontSize="20" Foreground="#FFF1F1F1" FontFamily="Impact" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{x:Null}" Height="38"/>
+                                    GroupName="menu" Content="Group Chat"  Style="{StaticResource friendButton}" BorderBrush="{x:Null}"
+                                    Width="161" FontSize="20" Foreground="#FFF1F1F1" FontFamily="Impact" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{x:Null}" Height="38" Margin="0,0,0,0.4"/>
                             </StackPanel>
                         </Border>
                     </StackPanel>
@@ -128,7 +128,7 @@
                                         <StackPanel Height="69" Margin="0,5,0,0" Orientation="Horizontal" Background="#FFFBFBFB">
 
                                             <TextBlock x:Name="User" Text="{Binding Target}" Height="31" TextAlignment="Center" FontFamily="MS PGothic" Margin="22,22,10,0" FontSize="16" FontWeight="Bold"/>
-                                            <Border CornerRadius="20" Width="13" Background="#FF39910F" Margin="0,30,0,25"/>
+                                            
                                             <Border CornerRadius="20" Background="#FFF1F0F0" Margin="19,19,0,5" Width="181">
                                                 <TextBlock Text="{Binding LastMessage}" Margin="18,14,18,12" TextAlignment="Center"/>
                                             </Border>
