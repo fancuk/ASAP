@@ -93,7 +93,7 @@ namespace TelerikWpfApp3.Service
                     }
                 }
                 Chatdict[friend] = tmp;
-                localDAO.ChangeChatStatus(friend);
+                //localDAO.ChangeChatStatus(friend); => 채팅방 목록에서 chatroom 생성이 안되서 주석처리함 (AllChatlistitem에 status 추가해야함)
                 // dao의 alter기능 추가
             }
         }
@@ -142,6 +142,7 @@ namespace TelerikWpfApp3.Service
         {
             AllChatListItem temp;
             bool isit = false;
+
             // 이미 채팅리스트에 있는지 확인 해줘야 함
             for(int i = 0; i < ACL.ChattingList.Count; i++)
             {
