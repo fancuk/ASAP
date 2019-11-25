@@ -53,7 +53,7 @@ namespace TelerikWpfApp3.VM
             Page1 = new Command(Page1Load, CE);
             Page2 = new Command(Page2Load, CE);
             ChatListPageOn = new Command(loadChatPage, CE);
-            ContentView = null;
+            ContentView = this.friendsUserControlViewModel;
             // CloseCommand = new Command(ExecuteClose, CE);
             myId = networkManager.MyId;
             LogOut = new Command(logout, CE);
