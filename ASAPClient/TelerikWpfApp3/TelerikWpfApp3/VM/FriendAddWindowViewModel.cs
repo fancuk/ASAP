@@ -53,6 +53,10 @@ namespace TelerikWpfApp3.VM
                 {
                     MessageBox.Show("해당 친구는 친구목록에 존재합니다.");
                 }
+                else if(friendID == networkManager.MyId)
+                {
+                    MessageBox.Show("나 자신은 이미 영원한 친구입니다.");
+                }
                 else
                 {
                     string str = friendID + "/";
