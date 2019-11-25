@@ -170,7 +170,7 @@
                                         <StackPanel Orientation="Horizontal" Height="39" HorizontalAlignment="Center">
                                             <RadioButton  RenderOptions.BitmapScalingMode="HighQuality"
                                             Command="{Binding FriendsPageOn}"
-                                            GroupName="menu" Content="       "  Style="{StaticResource friendButton}" BorderBrush="{x:Null}"
+                                            GroupName="menu" Content="       "  IsChecked="True" Style="{StaticResource friendButton}" BorderBrush="{x:Null}"
                                                 Width="75" FontSize="20" Foreground="#FFF1F1F1" FontFamily="Impact" HorizontalAlignment="Center" VerticalAlignment="Center" 
                                                 Margin="0,2,0,1" Background="{x:Null}"/>
                                         </StackPanel>

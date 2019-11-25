@@ -8,8 +8,13 @@
         mc:Ignorable="d"
         WindowStyle="None"
         ResizeMode="NoResize"
-          AllowsTransparency="True"
+        AllowsTransparency="True"
         Title="FriendAddWindow" Height="300" Width="303" Background="{x:Null}">
+    <Window.DataContext>
+        <vm:FriendAddWindowViewModel>
+
+        </vm:FriendAddWindowViewModel>
+    </Window.DataContext>
     <Border CornerRadius="10" Background="#FFF7F7F7" Padding="0" Margin="5">
         <Border.Effect>
             <DropShadowEffect Color="Gray"></DropShadowEffect>
@@ -40,7 +45,7 @@
                                         </TextBlock>
                                     </StackPanel>
                                 </StackPanel>
-                                <StackPanel RenderOptions.BitmapScalingMode="HighQuality" Width="62" HorizontalAlignment="Center" Margin="80,1,80,4" Height="54">
+                                <StackPanel RenderOptions.BitmapScalingMode="HighQuality" Width="69" HorizontalAlignment="Center" Margin="112,1,111.8,4" Height="61">
                                     <StackPanel.Background>
                                         <ImageBrush ImageSource="/TelerikWpfApp3;component/Resources/timerLogo.png" Stretch="Uniform"/>
                                     </StackPanel.Background>
@@ -62,14 +67,15 @@
                         <StackPanel Height="78">
                             <Border Height="42" CornerRadius="10" Background="#FFE8E8E8" Margin="90,25,90,0">
                                 <StackPanel>
-                                    <TextBox Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" Height="36" FontFamily="Calibri" FontSize="22" HorizontalAlignment="Center" TextAlignment="Center" Margin="0,3,0,0" Width="111"/>
+                                    <TextBox Text="{Binding friendID}" Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" Height="36" FontFamily="Calibri" FontSize="22" HorizontalAlignment="Center" TextAlignment="Center" Margin="0,3,0,0" Width="111"/>
                                 </StackPanel>
                             </Border>
                         </StackPanel>
                         <StackPanel Height="52">
                             <TextBlock Height="45">
-                                <Hyperlink TextDecorations="{x:Null}">
+                                <Hyperlink TextDecorations="{x:Null}" Command="{Binding friendsPlus}">
                             <Border CornerRadius="5" Background="#FFEC5F5F" Height="33" Margin="90,7,90,0" Width="112">
+                            
                             <StackPanel>
                                 <TextBlock Text="Follow!" Height="32" Foreground="White" TextAlignment="Center" FontFamily="Calibri" FontWeight="Bold" FontSize="28" Margin="0,0,-2,0"></TextBlock>
                             </StackPanel>

@@ -76,7 +76,7 @@
                                 <RadioButton 
                                             Command="{Binding FriendsPageOn}"
                                             GroupName="menu" Content="Single Chat"  Style="{StaticResource friendButton}"  BorderBrush="{x:Null}"
-                                                Width="161" FontSize="20" Foreground="#FFF1F1F1" FontFamily="Impact" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{x:Null}" Height="38" Margin="0,0,0,0.4"/>
+                                                Width="161" FontSize="20" Foreground="#FFF1F1F1" FontFamily="Impact" HorizontalAlignment="Center" IsChecked="True" VerticalAlignment="Center" Background="{x:Null}" Height="38" Margin="0,0,0,0.4"/>
                             </StackPanel>
                         </Border>
                     </StackPanel>
