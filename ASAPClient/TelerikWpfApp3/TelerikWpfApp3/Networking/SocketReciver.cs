@@ -70,14 +70,7 @@ namespace TelerikWpfApp3.Networking
                         {
                            windowManager.StartMainWindow();
                         });
-                        string myId =networkManager.MyId;
-
-                        Thread.Sleep(10);
-                        if (!FriendsUserControlViewModel.Instance.loadAllChk)
-                        {
-                           networkManager.SendData("<FLD>",networkManager.MyId);
-                        }
-                        FriendsUserControlViewModel.Instance.loadAllChk = true; //다민
+                        string myId =networkManager.MyId;               
                     }
                     else
                     {
@@ -214,11 +207,13 @@ namespace TelerikWpfApp3.Networking
                     }
                     // 여기 이제 수정 필요!!
                     localDAO.ChattingCreate(tokens[1], tokens[2], tokens[3], tokens[4], "Receive", isitfocus); //2019-11-22
+                    // sender receiver time msg type status
                     //localDAO.ChattingCreate(tokens[1], tokens[2], tokens[3], tokens[4], "Receive");
                     DispatchService.Invoke(() =>
                     {
                        chatManager.addChat(tmp.User, tmp);
-                        Window msgWindow = new MSGAlert();
+                        Window msgWindow = MessageToast.instance;
+                        MessageToast.instance.getToastInfo(tokens[1], tokens[3], tokens[4]);
                         msgWindow.Show();
                     });
                     // if (!((App)Application.Current).mqState)
@@ -249,8 +244,13 @@ namespace TelerikWpfApp3.Networking
                        localDAO.ChattingCreate(user,      //2019-11-22
                            networkManager.MyId, time, msg, "Receive", 0);
                         //localDAO.ChattingCreate(user,
-                           //networkManager.MyId, time, msg, "Receive");
+                        //networkManager.MyId, time, msg, "Receive");
                     }
+                    if (!FriendsUserControlViewModel.Instance.loadAllChk)
+                    {
+                        networkManager.SendData("<FLD>", networkManager.MyId);
+                    }
+                    FriendsUserControlViewModel.Instance.loadAllChk = true; //다민
                 }
                 else if (tag.Equals("<FIN>"))
                 {
@@ -259,18 +259,24 @@ namespace TelerikWpfApp3.Networking
                         sc.closeSock();
                     }
                 }
-                else if (tag.Equals("CHR")) // 서버 업데이트 후에
+                else if (tag.Equals("<CHR>")) // 서버 업데이트 후에
                 {
-                    /*string friendID = tokens[1];
+                    string friendID = tokens[1];
                     string isitFocus = tokens[2];
                     if(isitFocus == "true")
                     {
-                        chatManager.AddFriendsReading(friendID);
+                        DispatchService.Invoke(() =>
+                        {
+                            chatManager.AddFriendsReading(friendID);
+                        });
                     }
                     else
                     {
-                        chatManager.RemoveFriendsReading(friendID);
-                    }*/
+                        DispatchService.Invoke(() =>
+                        {
+                            chatManager.RemoveFriendsReading(friendID);
+                        });
+                    }
                 }
                 else if (tag.Equals("<FLD>"))
                 {

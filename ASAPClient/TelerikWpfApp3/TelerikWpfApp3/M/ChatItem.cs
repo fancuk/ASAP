@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace TelerikWpfApp3.M
 {
-    public class Chatitem
+    public class Chatitem : INotifyPropertyChanged
     {
         private string text;
         private string user;
@@ -26,11 +27,65 @@ namespace TelerikWpfApp3.M
         {
 
         }
-        public string Text { get => text; set => text = value; }
-        public string User { get => user; set => user = value; }
-        public string Time { get => time; set => time = value; }
-        public bool Chk { get => chk; set => chk = value; }
-        public bool Asap { get => asap; set => asap = value; }
-        public bool Status { get => status; set => status = value; }
+        public bool Chk
+        {
+            get { return this.chk; }
+            set
+            {
+                this.chk = value;
+                OnPropertyChanged("Chk");
+            }
+        }
+
+        public string Text
+        {
+            get { return this.text; }
+            set
+            {
+                this.text = value;
+                OnPropertyChanged("Text");
+            }
+        }
+        public string User
+        {
+            get { return this.user; }
+            set
+            {
+                this.user = value;
+                OnPropertyChanged("User");
+            }
+        }
+        public string Time
+        {
+            get { return this.time; }
+            set
+            {
+                this.time = value;
+                OnPropertyChanged("Time");
+            }
+        }
+        public bool Asap
+        {
+            get { return this.asap; }
+            set
+            {
+                this.asap = value;
+                OnPropertyChanged("Asap");
+            }
+        }
+        public bool Status
+        {
+            get { return this.status; }
+            set
+            {
+                this.status = value;
+                OnPropertyChanged("Status");
+            }
+        }
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged(string name)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        }
     }
 }

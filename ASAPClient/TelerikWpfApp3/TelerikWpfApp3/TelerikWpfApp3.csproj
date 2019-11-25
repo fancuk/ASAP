@@ -186,6 +186,7 @@
     </Compile>
     <Compile Include="VM\ChattingRoomManager.cs" />
     <Compile Include="VM\ChatUserControlViewModel.cs" />
+    <Compile Include="VM\FriendAddWindowViewModel.cs" />
     <Compile Include="VM\FriendsUserControlViewModel.cs" />
     <Compile Include="VM\ListBoxBehavior.cs" />
     <Compile Include="VM\LoginViewModel.cs" />

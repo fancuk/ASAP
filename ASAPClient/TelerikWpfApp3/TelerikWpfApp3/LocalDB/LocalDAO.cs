@@ -34,7 +34,7 @@ namespace TelerikWpfApp3.LocalDB
             try
             {
                 string Query = "create table if not exists " + myId +
-                     " (sender varchar(20),receiver varchar(20),time varchar(20),msg varchar(200), isRead TINYINT)";
+                     " (sender varchar(20), receiver varchar(20), time varchar(20), msg varchar(200), isRead TINYINT)";
                 SQLiteCommand command = new SQLiteCommand(Query, Conn);
                 int Result = command.ExecuteNonQuery();
                 Conn.Close();
@@ -209,7 +209,8 @@ namespace TelerikWpfApp3.LocalDB
                 new ObservableCollection<Chatitem>();
             SQLiteConnection Conn = new
                 SQLiteConnection("Data Source=Chatting;Version=3");
-            string query = "UPDATE " + myId + " SET isRead = " + 1 + " WHERE isRead = 0 AND (sender = " + reader + "OR receiver = " + reader + " )"; // change status
+            //string query = "UPDATE " + myId + " SET isRead = " + 1 + " WHERE isRead = 0 AND (sender = " + reader + " OR receiver = " + reader + " )"; // change status
+            string query = "UPDATE " + myId + " SET isRead = " + 1 + " WHERE sender = '" + reader + "' OR receiver = '" + reader + "'"; // change status
 
             try
             {

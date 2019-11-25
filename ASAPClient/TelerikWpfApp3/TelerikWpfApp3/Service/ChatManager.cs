@@ -8,6 +8,7 @@ using TelerikWpfApp3.M;
 using TelerikWpfApp3.LocalDB;
 using TelerikWpfApp3.VM;
 using System.Windows;
+using TelerikWpfApp3.Collection;
 
 namespace TelerikWpfApp3.Service
 {
@@ -15,20 +16,20 @@ namespace TelerikWpfApp3.Service
     {
         public ChatManager()
         {
-
+            localDAO = ((App)Application.Current).localDAO;
         }
         NetworkManager networkManager = ((App)Application.Current).networkManager;
-        IDictionary<string, ObservableCollection<Chatitem>> Chatdict
-               = new Dictionary<string, ObservableCollection<Chatitem>>();
+        IDictionary<string, ItemsChangeObservableCollection<Chatitem>> Chatdict
+               = new Dictionary<string, ItemsChangeObservableCollection<Chatitem>>();
         AllChatList ACL = new AllChatList();
-        LocalDAO localDAO = ((App)Application.Current).localDAO;
+        LocalDAO localDAO;
 
         List<string> friendsReading = new List<string>(); // 여러 명이 내 대화를 보고 있을 경우
         public void addChat(string target, Chatitem chatitem)
         {
             if (!this.Chatdict.ContainsKey(target))
             {
-                ObservableCollection<Chatitem> inputTmp = new ObservableCollection<Chatitem>();
+                ItemsChangeObservableCollection<Chatitem> inputTmp = new ItemsChangeObservableCollection<Chatitem>();
                 this.Chatdict.Add(target, inputTmp);
             }
             this.Chatdict[target].Add(chatitem);
@@ -39,7 +40,7 @@ namespace TelerikWpfApp3.Service
             friendsReading.Add(friend);
             if (Chatdict.ContainsKey(friend))
             {
-                ObservableCollection<Chatitem> tmp = Chatdict[friend];
+                ItemsChangeObservableCollection<Chatitem> tmp = Chatdict[friend];
                 for(int i = tmp.Count - 1; i >= 0; i--) //채팅목록 밑에서 부터
                 {
                     Chatitem ci = tmp[i];
@@ -54,7 +55,15 @@ namespace TelerikWpfApp3.Service
                     }
                 }
                 Chatdict[friend] = tmp;
-                localDAO.ChangeChatStatus(friend);
+                if (localDAO != null)
+                {
+                    localDAO.ChangeChatStatus(friend);
+                }
+                else
+                {
+                    localDAO = new LocalDAO();
+                    localDAO.ChangeChatStatus(friend);
+                }
             }
         }
         public void RemoveFriendsReading(string friend) // 친구가 채팅방 나갈 때
@@ -78,7 +87,7 @@ namespace TelerikWpfApp3.Service
         {
             if (Chatdict.ContainsKey(friend))
             {
-                ObservableCollection<Chatitem> tmp = Chatdict[friend];
+                ItemsChangeObservableCollection<Chatitem> tmp = Chatdict[friend];
                 for (int i = tmp.Count - 1; i >= 0; i--) //채팅목록 밑에서 부터
                 {
                     Chatitem ci = tmp[i];
@@ -101,7 +110,7 @@ namespace TelerikWpfApp3.Service
         {
             if (!this.Chatdict.ContainsKey(target))
             {
-                ObservableCollection<Chatitem> inputTmp = new ObservableCollection<Chatitem>();
+                ItemsChangeObservableCollection<Chatitem> inputTmp = new ItemsChangeObservableCollection<Chatitem>();
                 this.Chatdict.Add(target, inputTmp);
             }
         }
@@ -115,7 +124,7 @@ namespace TelerikWpfApp3.Service
         {
             return ACL.ChattingList;
         }
-        public ObservableCollection<Chatitem> loadChat(string target)
+        public ItemsChangeObservableCollection<Chatitem> loadChat(string target)
         {
             if (Chatdict.ContainsKey(target))
             {
@@ -132,7 +141,7 @@ namespace TelerikWpfApp3.Service
         {
             foreach(string name in Chatdict.Keys)
             {
-                ObservableCollection<Chatitem> tmp = new ObservableCollection<Chatitem>();
+                ItemsChangeObservableCollection<Chatitem> tmp = new ItemsChangeObservableCollection<Chatitem>();
                 tmp = this.Chatdict[name];
                 Chatitem a = tmp[tmp.Count - 1];
                 ACL.ChattingList.Add(new AllChatListItem(name, a.Text));
@@ -166,13 +175,13 @@ namespace TelerikWpfApp3.Service
                 }
             }
         }
-        public IDictionary<string, ObservableCollection<Chatitem>> getDict()
+        public IDictionary<string, ItemsChangeObservableCollection<Chatitem>> getDict()
         {
             return Chatdict;
 
         }
 
-        public void setChat(string target, ObservableCollection<Chatitem> chat)
+        public void setChat(string target, ItemsChangeObservableCollection<Chatitem> chat)
         {
             this.Chatdict[target] = chat;
         }
@@ -184,7 +193,7 @@ namespace TelerikWpfApp3.Service
         
         public void AboutFocus(bool isit,string target) // 현재 focus 되어 있는지, 서버 업데이트 되면 실행
         {
-            /*string myID = networkManager.MyId;
+            string myID = networkManager.MyId;
             string text = myID + "/" + target;
             if(isit == true)
             {
@@ -193,7 +202,7 @@ namespace TelerikWpfApp3.Service
             else
             {
                 networkManager.SendData("<CHR>", text + "/false");
-            }*/
+            }
         }
 
         /*public string getLastChatById(string id)

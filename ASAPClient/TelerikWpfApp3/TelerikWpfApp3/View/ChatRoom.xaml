@@ -154,6 +154,7 @@ VerticalScrollBarVisibility="Hidden"/>
                                             <TextBlock x:Name="sendReadChk" Foreground="#FF9B9B04"  Text="1" FontSize="12" FontWeight="Bold" Margin="0,0,6,0"></TextBlock >
                                             <TextBlock x:Name="PART_Time" Text="{Binding Time, StringFormat=hh:mm:ss}" FontSize="8"/>
                                             <TextBlock x:Name="recieveReadChk" Foreground="#FF9B9B04" Text="1" FontSize="12" FontWeight="Bold" Margin="6,0,0,0"></TextBlock >
+                                            <TextBlock x:Name="statusChk" Width="0" Height="0" Text="{Binding Status}"></TextBlock>
                                         </StackPanel>
                                     </StackPanel>
                                 </StackPanel>
@@ -168,6 +169,14 @@ VerticalScrollBarVisibility="Hidden"/>
                                         <Setter TargetName="chatBack" Property="Background" Value="#FF818080"/>
                                         <Setter TargetName="wp" Property="HorizontalAlignment" Value="left"/>
                                         <Setter TargetName="sendReadChk" Property="Width" Value="0"></Setter>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding ElementName=statusChk, Path=Text}" Value="True">
+                                        <Setter TargetName="recieveReadChk" Property="Text" Value="0"></Setter>
+                                        <Setter TargetName="sendReadChk" Property="Text" Value="0"></Setter>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding ElementName=statusChk, Path=Text}" Value="False">
+                                        <Setter TargetName="recieveReadChk" Property="Text" Value="1"></Setter>
+                                        <Setter TargetName="sendReadChk" Property="Text" Value="1"></Setter>
                                     </DataTrigger>
                                 </DataTemplate.Triggers>
                             </DataTemplate>

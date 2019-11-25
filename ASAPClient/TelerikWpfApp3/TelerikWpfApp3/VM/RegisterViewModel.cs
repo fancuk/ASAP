@@ -77,10 +77,6 @@ namespace TelerikWpfApp3.VM
             set
             {
                 this._email = value; OnPropertyChanged("email");
-                if (this._nowSelectedEmail != null)
-                {
-                    emailChk = "V";
-                }
             }
         }
         public string emailChk
@@ -95,6 +91,11 @@ namespace TelerikWpfApp3.VM
             set
             {
                 this._pw1 = value; OnPropertyChanged("pw1");
+                /* if (this._pw1 != "")
+                 {
+                     pw1Chk = "V";
+                 }
+                 else pw1Chk = "X";*/
             }
         }
         public string pw1Chk
@@ -105,6 +106,12 @@ namespace TelerikWpfApp3.VM
                 this._pw1Chk = value; OnPropertyChanged("pw1Chk");
             }
         }
+        /*
+        public string pw2
+        {
+            get { return this._pw2; }
+            set { this._pw2 = value; OnPropertyChanged("pw2"); pwCheck(); }
+        } */
 
         public string pwChk
         {
@@ -118,10 +125,6 @@ namespace TelerikWpfApp3.VM
             {
                 _nowSelectedEmail = value;
                 OnPropertyChanged("NowSelectedEmail");
-                if (this._email != null)
-                {
-                    emailChk = "V";
-                }
             }
         }
 
