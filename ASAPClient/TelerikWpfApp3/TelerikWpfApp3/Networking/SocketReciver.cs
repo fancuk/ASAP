@@ -22,6 +22,7 @@ namespace TelerikWpfApp3.Networking
         ChatManager chatManager = ((App)Application.Current).chatManager;
         LocalDAO localDAO = ((App)Application.Current).localDAO;
         UserStatusManager userStatusManager = ((App)Application.Current).userStatusManager;
+        ASAPManager asapManager = ((App)Application.Current).asapManager;
         private Socket nowSock;
         SocketCloser sc = new SocketCloser();
         public SocketReciver()
@@ -146,40 +147,13 @@ namespace TelerikWpfApp3.Networking
                     //   // ((App)Application.Current).LoadMSGAlert();
                     //});
                 }
-                /*else if (tag.Equals("<MSQ>"))
-                {
-
-                    int count = Int32.Parse(tokens[1]);
-                    int idx = 2;
-                    for (int i = 0; i < count; i++)
-                    {
-                        string[] token2 = tokens[idx + i].Split(',');
-                        string user = token2[0];
-                        string msg = token2[1];
-                        string time = token2[2];
-
-                        Chatitem tmp = new Chatitem();
-                        tmp.User = user;
-                        tmp.Time = time;
-                        tmp.Text = msg;
-                       localDAO.ChattingCreate(user,      //2019-11-22
-                           networkManager.MyId, time, msg, "Receive", 0);
-                        //localDAO.ChattingCreate(user,
-                        //networkManager.MyId, time, msg, "Receive");
-                    }
-                    if (!FriendsUserControlViewModel.Instance.loadAllChk)
-                    {
-                        networkManager.SendData("<FLD>", networkManager.MyId);
-                    }
-                    FriendsUserControlViewModel.Instance.loadAllChk = true; //다민
-                }
                 else if (tag.Equals("<FIN>"))
                 {
                     if (networkManager.nowConnect == true)
                     {
                         sc.closeSock();
                     }
-                }*/
+                }
                 else if (tag.Equals("<CHR>")) // 서버 업데이트 후에
                 {
                     string friendID = tokens[1];
@@ -199,23 +173,28 @@ namespace TelerikWpfApp3.Networking
                         });
                     }
                 }
-                /*else if (tag.Equals("<FLD>"))
+                else if (tag.Equals("<ASG>"))
                 {
-                    int count = Int32.Parse(tokens[1]);
-                    int idx = 2;
-                    for (int i = 0; i < count; i++)
+                    string friendID = tokens[1];
+                    string time = tokens[2];
+                    chatManager.AlertReceiveChat_ASAP(friendID, time);
+                }
+                else if (tag.Equals("<ASR>"))
+                {
+                    string friendID = tokens[1];
+                    string time = tokens[2];
+                    string isit = tokens[3];
+                    if (isit.Equals("true"))
                     {
-                        string[] resToken = tokens[idx + i].Split('^');
-                        DispatchService.Invoke(() =>
-                        {
-                            FriendsUserControlViewModel.Instance.AddFriend(resToken[0], resToken[1]);
-                        });
+                        // sqlite에 저장해라!
+                        chatManager.AddChatInLocalDB_ASAP(friendID, time);
                     }
-                    DispatchService.Invoke(() =>
+                    else
                     {
-                        localDAO.ReadChat();
-                    });
-                }*/
+                        asapManager.RemoveLastChat(time);
+                        chatManager.RemoveChat_ASAP(friendID, time);
+                    }
+                }
                 // 텍스트박스에 추가해준다.
                 // 비동기식으로 작업하기 때문에 폼의 UI 스레드에서 작업을 해줘야 한다.
                 // 따라서 대리자를 통해 처리한다.

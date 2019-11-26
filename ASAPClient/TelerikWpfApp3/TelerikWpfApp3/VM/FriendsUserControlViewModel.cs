@@ -55,6 +55,18 @@ namespace TelerikWpfApp3.VM
             return ico;
         }
 
+        public bool OnlineCheck(string target) // 친구가 들어와 있는지 확인
+        {
+            for (int i = 0; i < ico.Count; i++)
+            {
+                if (ico[i].User == target)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         public void AddFriend(string user, string _status) // 다민
         {
             if (_status == "true")

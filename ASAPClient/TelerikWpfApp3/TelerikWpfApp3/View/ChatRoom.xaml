@@ -210,7 +210,7 @@ VerticalScrollBarVisibility="Hidden"/>
                         </Border>
                         <Border Background="#FFEE534F" CornerRadius="10" Margin="0,7,0,0">
 
-                            <TextBlock Height="31"><Hyperlink x:Name="sendTextMsgButton1" TextDecorations="{x:Null}" Command="{Binding SendText}" CommandParameter="{Binding Text, ElementName=MessageBox}"><InlineUIContainer>
+                            <TextBlock Height="31"><Hyperlink x:Name="sendTextMsgButton1" TextDecorations="{x:Null}" Command="{Binding SendAsap}" CommandParameter="{Binding Text, ElementName=MessageBox}"><InlineUIContainer>
                                         <StackPanel Orientation="Horizontal">
                                             <TextBlock x:Name="Msg1" Text="    " Margin="7,12,0,10" Foreground="White" FontSize="22" Width="46" FontFamily="Impact"/>
                                             <Canvas Width="30" Margin="-51,5,5,10" Height="20" >

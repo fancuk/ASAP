@@ -110,10 +110,6 @@ namespace TelerikWpfApp3.Service
                             //tmp[i] = ci;
                         }
                     }
-                    else
-                    {
-                        break; // 그 전의 메시지는 이미 읽었을 것임.
-                    }
                 }
                // Chatdict[friend] = tmp;
                 //localDAO.ChangeChatStatus(friend); => 채팅방 목록에서 chatroom 생성이 안되서 주석처리함 (AllChatlistitem에 status 추가해야함)
@@ -137,10 +133,6 @@ namespace TelerikWpfApp3.Service
                             ci.Status = true;
                             tmp[i] = ci;
                         }
-                    }
-                    else
-                    {
-                        break; // 그 전의 메시지는 이미 읽었을 것임.
                     }
                 }
                 Chatdict[her] = tmp;
@@ -232,6 +224,53 @@ namespace TelerikWpfApp3.Service
                 }
             }
             // 정렬 실패..
+        }
+        public void RemoveLastChat(string lastTime) // ASR에서 false받으면
+        {
+            int count = ACL.ChattingList.Count;
+            if(ACL.ChattingList[count-1].LastTime == lastTime) // 마지막 메시지가 ASAP 이라면 (ASAP을 보내고 일반 메시지를 보낼 수도 있다)
+            {
+                AllChatListItem delete = ACL.ChattingList[count - 1];
+                ACL.ChattingList.Remove(delete);
+            }
+        }
+        // 정구
+        // ASAP 못읽으면 해당 Chat 삭제.
+        public void RemoveChat_ASAP(string friendID, string time) 
+        {
+            if (Chatdict.ContainsKey(friendID))
+            {
+                if (Chatdict[friendID].Where(i => i.Time == time).Any())
+                    Chatdict[friendID].Remove(Chatdict[friendID].Where(i => i.Time == time).First());
+                //2019-11-27 오전 12:30:35
+
+                //Chatdict[receiver].Remove(Chatdict[receiver].Where(i => i.Time == time).Single());
+            }
+        }
+
+        // 정구
+        // ASAP 읽었다는 신호를 Sender가 받으면 LocalDB에 저장.
+        public void AddChatInLocalDB_ASAP(string friendID, string time)
+        {
+            if (Chatdict.ContainsKey(friendID))
+            {
+                object changeChat; // 이거는 그냥 받는 용도
+                if (Chatdict[friendID].Where(i => i.Time == time).Any() != true)
+                {
+                    return;
+                }
+                changeChat = Chatdict[friendID].Where(i => i.Time == time).First();
+
+                Chatitem Chat = changeChat as Chatitem;
+                localDAO.ChattingCreate(networkManager.MyId, friendID, time, Chat.Text, "Send", 1);
+            }
+        }
+
+        // 정구
+        // ASAP - Receiver가 메세지를 받으면 MessageBox Show
+        public void AlertReceiveChat_ASAP(string friendID, string time)
+        {
+            MessageBox.Show(friendID + " 님에게 " + time + " 에 ASAP 메세지가 왔습니다");
         }
         public IDictionary<string, ItemsChangeObservableCollection<Chatitem>> getDict()
         {
