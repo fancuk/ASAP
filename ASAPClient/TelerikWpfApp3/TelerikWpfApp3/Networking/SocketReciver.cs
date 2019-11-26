@@ -50,87 +50,7 @@ namespace TelerikWpfApp3.Networking
                 string[] tokens = text.Split('/');
                 string tag = tokens[0];
                 if (tokens.Length == 1) return;
-                /*if (tag.Equals("<LOG>")) // 로그인
-                {
-                    string flag = tokens[1];
-                    if (flag.Equals("true"))
-                    {
-                        Properties.Settings.Default.loginOK = true; // 로그인 성공여부
-                        if (Properties.Settings.Default.idSaveCheck == false)
-                        {
-                            Properties.Settings.Default.loginIdSave =networkManager.MyId; //id 저장
-                            Properties.Settings.Default.Save();
-                        }
-                        else
-                        {
-                            Properties.Settings.Default.loginIdSave = "";
-                            Properties.Settings.Default.Save();
-                        }
-                        DispatchService.Invoke(() =>
-                        {
-                           windowManager.StartMainWindow();
-                        });
-                        string myId =networkManager.MyId;               
-                    }
-                    else
-                    {
-                        MessageBox.Show("Login Failed.....TT");
-                        Properties.Settings.Default.loginOK = false;
-                       networkManager.CloseSocket();
-                    }
-                }
-                else if (tag.Equals("<REG>")) // 회원가입
-                {
-                    string flag = tokens[1];
-                    if (flag.Equals("true"))
-                    {
-                        DispatchService.Invoke(() =>
-                        {
-                            MessageBox.Show("회원가입 완료!!");
-                            windowManager.RegisterComplete();
-                        });
-                    }
-
-                    else
-                    {
-                        MessageBox.Show("Register Failed.....TT");
-                        Window x = new FalseMsgBox("Fail!");
-                        DispatchService.Invoke(() => //너무 많은 UI 어쩌구저쩌구 SPA? STA 나와서 invoke 처리 2019-09-19 다민
-                        {
-                            x.Show();
-                        });
-                    }
-                   networkManager.CloseSocket();
-                }
-                else if (tag.Equals("<ICF>")) // ID 체크
-                {
-                    string flag = tokens[1];
-                    if (flag.Equals("true"))
-                    {
-                        MessageBox.Show("ID Check Sucess! in view");
-                        DispatchService.Invoke(() =>
-                        {
-                            RegisterViewModel a = TelerikWpfApp3.Register.Instance.DataContext as RegisterViewModel;
-                            a.nameChk = "V";
-                            TelerikWpfApp3.Register.Instance.DataContext = a;
-                            userStatusManager.Idchk = (true);
-                        });
-                    }
-                    else
-                    {
-                        MessageBox.Show("ID Check Failed.....TT");
-                        userStatusManager.Idchk = (false);
-                        DispatchService.Invoke(() =>
-                        {
-                            RegisterViewModel a = TelerikWpfApp3.Register.Instance.DataContext as RegisterViewModel;
-                            a.nameChk = "X";
-                            TelerikWpfApp3.Register.Instance.DataContext = a;
-                            userStatusManager.Idchk = (true);
-                        });
-                    }
-                   networkManager.CloseSocket();
-                }*/
-                else if (tag.Equals("<FRR>"))
+                if (tag.Equals("<FRR>"))
                 {
                     if (tokens[1] == "true")
                     {
@@ -196,14 +116,15 @@ namespace TelerikWpfApp3.Networking
                     {
                         tmp.Asap = false;
                     }
-                    int isitfocus = chatManager.IsFriendReading(tmp.User);
-                    if (isitfocus == 1)
+                    tmp.Status = chatManager.NowIReading(tokens[1]);
+                    int isitfocus;
+                    if (tmp.Status == true)
                     {
-                        tmp.Status = true;
+                        isitfocus = 1;
                     }
                     else
                     {
-                        tmp.Status = false;
+                        isitfocus = 0;
                     }
                     // 여기 이제 수정 필요!!
                     localDAO.ChattingCreate(tokens[1], tokens[2], tokens[3], tokens[4], "Receive", isitfocus); //2019-11-22
@@ -211,7 +132,8 @@ namespace TelerikWpfApp3.Networking
                     //localDAO.ChattingCreate(tokens[1], tokens[2], tokens[3], tokens[4], "Receive");
                     DispatchService.Invoke(() =>
                     {
-                       chatManager.addChat(tmp.User, tmp);
+                        chatManager.addChat(tmp.User, tmp);
+                        chatManager.addChattingList(tokens[1], tokens[4]) ;
                         Window msgWindow = MessageToast.instance;
                         MessageToast.instance.getToastInfo(tokens[1], tokens[3], tokens[4]);
                         msgWindow.Show();
@@ -225,40 +147,6 @@ namespace TelerikWpfApp3.Networking
                     //   // ((App)Application.Current).LoadMSGAlert();
                     //});
                 }
-                /*else if (tag.Equals("<MSQ>"))
-                {
-
-                    int count = Int32.Parse(tokens[1]);
-                    int idx = 2;
-                    for (int i = 0; i < count; i++)
-                    {
-                        string[] token2 = tokens[idx + i].Split(',');
-                        string user = token2[0];
-                        string msg = token2[1];
-                        string time = token2[2];
-
-                        Chatitem tmp = new Chatitem();
-                        tmp.User = user;
-                        tmp.Time = time;
-                        tmp.Text = msg;
-                       localDAO.ChattingCreate(user,      //2019-11-22
-                           networkManager.MyId, time, msg, "Receive", 0);
-                        //localDAO.ChattingCreate(user,
-                        //networkManager.MyId, time, msg, "Receive");
-                    }
-                    if (!FriendsUserControlViewModel.Instance.loadAllChk)
-                    {
-                        networkManager.SendData("<FLD>", networkManager.MyId);
-                    }
-                    FriendsUserControlViewModel.Instance.loadAllChk = true; //다민
-                }
-                else if (tag.Equals("<FIN>"))
-                {
-                    if (networkManager.nowConnect == true)
-                    {
-                        sc.closeSock();
-                    }
-                }*/
                 else if (tag.Equals("<CHR>")) // 서버 업데이트 후에
                 {
                     string friendID = tokens[1];
@@ -278,23 +166,6 @@ namespace TelerikWpfApp3.Networking
                         });
                     }
                 }
-                /*else if (tag.Equals("<FLD>"))
-                {
-                    int count = Int32.Parse(tokens[1]);
-                    int idx = 2;
-                    for (int i = 0; i < count; i++)
-                    {
-                        string[] resToken = tokens[idx + i].Split('^');
-                        DispatchService.Invoke(() =>
-                        {
-                            FriendsUserControlViewModel.Instance.AddFriend(resToken[0], resToken[1]);
-                        });
-                    }
-                    DispatchService.Invoke(() =>
-                    {
-                        localDAO.ReadChat();
-                    });
-                }*/
                 // 텍스트박스에 추가해준다.
                 // 비동기식으로 작업하기 때문에 폼의 UI 스레드에서 작업을 해줘야 한다.
                 // 따라서 대리자를 통해 처리한다.

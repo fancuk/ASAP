@@ -68,7 +68,7 @@ TextChangedEventArgs e)
             {
                 target = obj.User.ToString();
             }
-            chatManager.ClientRead(target);
+            chatManager.myRead(target);
             if (ChattingRoomManager.Instance.findChatRoom(target)) //다민
             {
                 ChattingRoomManager.Instance.makeChatRoom(target);

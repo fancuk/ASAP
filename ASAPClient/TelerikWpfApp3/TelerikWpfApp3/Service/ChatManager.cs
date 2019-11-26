@@ -23,8 +23,15 @@ namespace TelerikWpfApp3.Service
                = new Dictionary<string, ItemsChangeObservableCollection<Chatitem>>();
         AllChatList ACL = new AllChatList();
         LocalDAO localDAO;
+        private string nowIReading = null; // 내가 누구 꺼 읽고 있는지
 
-        List<string> friendsReading = new List<string>(); // 여러 명이 내 대화를 보고 있을 경우
+        List<string> friendsReading = new List<string>(); // 여러 명이 내 대화를 보고 있을 
+
+        public bool NowIReading(string target)
+        {
+            if (target == nowIReading) return true;
+            else return false;
+        }
         public void addChat(string target, Chatitem chatitem)
         {
             if (!this.Chatdict.ContainsKey(target))
@@ -73,7 +80,7 @@ namespace TelerikWpfApp3.Service
         public int IsFriendReading(string friend) // send 할 때 쓰면 될 듯!!
         {                                          // 만약 true 받으면 친구가 읽고 있다는 뜻
             int isit = 0;                      // 아 존나게 머리 아파질거 같은게 이 메서드랑 remove메서드랑 동시에 실행되면
-                                                   // 뭔가 존나게 복잡해질 거 같은 느낌적인 느낌....썅
+                                                   // 뭔가 존나게 복잡해질 거 같은 느낌적인 느낌
             foreach(string target in friendsReading)
             {
                 if (target == friend)
@@ -83,33 +90,6 @@ namespace TelerikWpfApp3.Service
             }
             return isit;
         }
-        public void ClientRead(string friend) // 사용자가 채팅방 들어갈 때 사용자의 1 삭제
-        {
-            if (Chatdict.ContainsKey(friend))
-            {
-                ItemsChangeObservableCollection<Chatitem> tmp = Chatdict[friend];
-                for (int i = tmp.Count - 1; i >= 0; i--) //채팅목록 밑에서 부터
-                {
-                    Chatitem ci = tmp[i];
-                    if (ci.Status == false) // true는 읽음 false는 안읽음
-                    {
-                        if (!ci.User.Equals(networkManager.MyId))
-                        {
-                            ci.Status = true;
-                            tmp[i] = ci; 
-                        }
-                    }
-                    else
-                    {
-                        break; // 그 전의 메시지는 이미 읽었을 것임.
-                    }
-                }
-                Chatdict[friend] = tmp;
-                //localDAO.ChangeChatStatus(friend); => 채팅방 목록에서 chatroom 생성이 안되서 주석처리함 (AllChatlistitem에 status 추가해야함)
-                // dao의 alter기능 추가
-            }
-        }
-
         public void myRead(string friend)
         {
             // 친구 꺼를 읽어야 한다.
@@ -134,9 +114,6 @@ namespace TelerikWpfApp3.Service
                         break; // 그 전의 메시지는 이미 읽었을 것임.
                     }
                 }
-               // Chatdict[friend] = tmp;
-                //localDAO.ChangeChatStatus(friend); => 채팅방 목록에서 chatroom 생성이 안되서 주석처리함 (AllChatlistitem에 status 추가해야함)
-                // dao의 alter기능 추가
             }
         }
 
@@ -163,7 +140,15 @@ namespace TelerikWpfApp3.Service
                     }
                 }
                 Chatdict[her] = tmp;
-                //localDAO.ChangeChatStatus(friend); => 채팅방 목록에서 chatroom 생성이 안되서 주석처리함 (AllChatlistitem에 status 추가해야함)
+                if (localDAO != null)
+                {
+                    localDAO.ChangeChatStatus(her);
+                }
+                else
+                {
+                    localDAO = new LocalDAO();
+                    localDAO.ChangeChatStatus(her);
+                }
                 // dao의 alter기능 추가
             }
         }
@@ -260,10 +245,12 @@ namespace TelerikWpfApp3.Service
             if(isit == true)
             {
                 myRead(target);
+                nowIReading = target;
                 networkManager.SendData("<CHR>", text + "/true");
             }
             else
             {
+                nowIReading = null;
                 networkManager.SendData("<CHR>", text + "/false");
             }
         }
