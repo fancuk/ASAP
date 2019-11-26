@@ -9,6 +9,7 @@ using TelerikWpfApp3.LocalDB;
 using TelerikWpfApp3.M;
 using TelerikWpfApp3.Networking;
 using TelerikWpfApp3.Networking.NetworkModel;
+using TelerikWpfApp3.View.Alert;
 using TelerikWpfApp3.VM;
 
 namespace TelerikWpfApp3.Service
@@ -17,6 +18,7 @@ namespace TelerikWpfApp3.Service
     {
         private Socket nowSock;
         NetworkManager networkManager = ((App)Application.Current).networkManager;
+        ChatManager chatManager = ((App)Application.Current).chatManager;
         WindowManager windowManager = ((App)Application.Current).windowManager;
         UserStatusManager userStatusManager = ((App)Application.Current).userStatusManager;
         LocalDAO localDAO = ((App)Application.Current).localDAO;
@@ -134,6 +136,12 @@ namespace TelerikWpfApp3.Service
                         tmp.Text = msg;
                         localDAO.ChattingCreate(user,      //2019-11-22
                             networkManager.MyId, time, msg, "Receive", 0);
+
+                        DispatchService.Invoke(() =>
+                        {
+                            chatManager.addChat(tmp.User, tmp);
+                        });
+
                         //localDAO.ChattingCreate(user,
                         //networkManager.MyId, time, msg, "Receive");
                     }

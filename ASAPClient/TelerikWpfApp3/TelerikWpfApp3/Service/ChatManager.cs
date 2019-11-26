@@ -93,8 +93,11 @@ namespace TelerikWpfApp3.Service
                     Chatitem ci = tmp[i];
                     if (ci.Status == false) // true는 읽음 false는 안읽음
                     {
-                        ci.Status = true;
-                        tmp[i] = ci;
+                        if (!ci.User.Equals(networkManager.MyId))
+                        {
+                            ci.Status = true;
+                            tmp[i] = ci; 
+                        }
                     }
                     else
                     {
@@ -106,6 +109,65 @@ namespace TelerikWpfApp3.Service
                 // dao의 alter기능 추가
             }
         }
+
+        public void myRead(string friend)
+        {
+            // 친구 꺼를 읽어야 한다.
+            if (Chatdict.ContainsKey(friend))
+            {
+                int len = Chatdict[friend].Count-1;
+                ItemsChangeObservableCollection<Chatitem> tmp = Chatdict[friend];
+                for (int i = len; i >= 0; i--) //채팅목록 밑에서 부터
+                {
+                    //Chatitem ci = tmp[i];
+                    if (Chatdict[friend][i].Status == false) // true는 읽음 false는 안읽음
+                    {
+                        if (!Chatdict[friend][i].User.Equals(networkManager.MyId))
+                        {
+                            Chatdict[friend][i].Status = true;
+                            //ci.Status = true;
+                            //tmp[i] = ci;
+                        }
+                    }
+                    else
+                    {
+                        break; // 그 전의 메시지는 이미 읽었을 것임.
+                    }
+                }
+               // Chatdict[friend] = tmp;
+                //localDAO.ChangeChatStatus(friend); => 채팅방 목록에서 chatroom 생성이 안되서 주석처리함 (AllChatlistitem에 status 추가해야함)
+                // dao의 alter기능 추가
+            }
+        }
+
+        public void herReadMe(string her)
+        {
+            // 친구가 내꺼를 읽는다.
+            if (Chatdict.ContainsKey(her))
+            {
+                ItemsChangeObservableCollection<Chatitem> tmp = Chatdict[her];
+                for (int i = tmp.Count - 1; i >= 0; i--) //채팅목록 밑에서 부터
+                {
+                    Chatitem ci = tmp[i];
+                    if (ci.Status == false) // true는 읽음 false는 안읽음
+                    {
+                        if (ci.User.Equals(networkManager.MyId))
+                        {
+                            ci.Status = true;
+                            tmp[i] = ci;
+                        }
+                    }
+                    else
+                    {
+                        break; // 그 전의 메시지는 이미 읽었을 것임.
+                    }
+                }
+                Chatdict[her] = tmp;
+                //localDAO.ChangeChatStatus(friend); => 채팅방 목록에서 chatroom 생성이 안되서 주석처리함 (AllChatlistitem에 status 추가해야함)
+                // dao의 alter기능 추가
+            }
+        }
+
         public void addChat(string target)
         {
             if (!this.Chatdict.ContainsKey(target))
@@ -197,6 +259,7 @@ namespace TelerikWpfApp3.Service
             string text = myID + "/" + target;
             if(isit == true)
             {
+                myRead(target);
                 networkManager.SendData("<CHR>", text + "/true");
             }
             else

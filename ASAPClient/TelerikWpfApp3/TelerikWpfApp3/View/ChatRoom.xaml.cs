@@ -26,7 +26,7 @@ namespace TelerikWpfApp3.View
     {
         private string target;
         ChatUserControlViewModel cu = new ChatUserControlViewModel();
-        ChatManager cm = new ChatManager();
+        ChatManager cm = ((App)Application.Current).chatManager;
         /*private static ChatRoom instance = null; // 다민
 
         public static ChatRoom Instance //다민

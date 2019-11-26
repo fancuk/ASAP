@@ -4,13 +4,14 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TelerikWpfApp3.Collection;
 
 namespace TelerikWpfApp3.M
 {
     public class AllChatList // 채팅방 리스트(그냥 라스트메시지, 이름만 있는 말 그대로 채팅방)
     {
-        private ObservableCollection<AllChatListItem> chattingList;
-        public ObservableCollection<AllChatListItem> ChattingList
+        private ItemsChangeObservableCollection<AllChatListItem> chattingList;
+        public ItemsChangeObservableCollection<AllChatListItem> ChattingList
         {
             get
             {
@@ -21,9 +22,9 @@ namespace TelerikWpfApp3.M
         AllChatListItem ACL = null;
         public AllChatList()
         {
-            chattingList = new ObservableCollection<AllChatListItem>();
+            chattingList = new ItemsChangeObservableCollection<AllChatListItem>();
         }
-        public ObservableCollection<AllChatListItem> getChattingList()
+        public ItemsChangeObservableCollection<AllChatListItem> getChattingList()
         {
             return chattingList;
         }

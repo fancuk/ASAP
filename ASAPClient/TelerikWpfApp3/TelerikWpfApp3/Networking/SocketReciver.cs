@@ -267,7 +267,7 @@ namespace TelerikWpfApp3.Networking
                     {
                         DispatchService.Invoke(() =>
                         {
-                            chatManager.AddFriendsReading(friendID);
+                            chatManager.herReadMe(friendID);
                         });
                     }
                     else

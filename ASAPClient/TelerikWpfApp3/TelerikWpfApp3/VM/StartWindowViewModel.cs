@@ -66,7 +66,6 @@ namespace TelerikWpfApp3.VM
             {
                 if (networkManager.nowConnect == true)
                 {
-
                     networkManager.CloseSocket();
                     WindowManager windowManager = ((App)Application.Current).windowManager;
                     windowManager.CloseAll();

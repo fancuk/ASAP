@@ -51,7 +51,7 @@ namespace TelerikWpfApp3.Networking
         {
             AsyncObject ao = new AsyncObject(4096);
             ao.WorkingSocket = nowSock;
-            //ao.WorkingSocket.BeginReceive(ao.Buffer, 0, ao.BufferSize, 0, sr.DataReceived, ao);
+            ao.WorkingSocket.BeginReceive(ao.Buffer, 0, ao.BufferSize, 0, sr.DataReceived, ao);
             networkManager.nowConnect = true;
         }
         public void StartReceive()
@@ -63,4 +63,3 @@ namespace TelerikWpfApp3.Networking
             ssr.syncReceive(text);
         }
     }
-}
