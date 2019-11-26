@@ -13,6 +13,7 @@ using System.Collections.ObjectModel;
 using TelerikWpfApp3.Utility;
 using TelerikWpfApp3.Service;
 using TelerikWpfApp3.LocalDB;
+using TelerikWpfApp3.View;
 
 namespace TelerikWpfApp3.VM
 {
@@ -65,10 +66,12 @@ namespace TelerikWpfApp3.VM
             e.Cancel = true;
             ChattingRoomManager.Instance.closeChatRoom(target);
         }
+        public ICommand MakeGroupEvent { get; set; }
         public ICommand SendText { get; set; }
         public ICommand friendPlus { get; set; }
         public ChatUserControlViewModel()
         {
+            MakeGroupEvent = new Command(ExecuteShowMakeGroupWindow, CanExecuteMethod);
             //friendPlus = new Command(fpButton, CanExecuteMethod);
             SendText = new Command(ExeceuteSendMsg, CanExecuteMethod);
         }
@@ -101,7 +104,11 @@ namespace TelerikWpfApp3.VM
 
             }
         }*/
-
+        public void ExecuteShowMakeGroupWindow(object org)
+        {
+            Window gc = new GroupChatMakeWindow();
+            gc.Show();
+        }
         public void ExeceuteSendMsg(object org)
         {//메세지 공백 방지!
             if (string.IsNullOrWhiteSpace(org as string) == true)
@@ -138,7 +145,7 @@ namespace TelerikWpfApp3.VM
                 networkManager.SendData("<MSG>", msg);
                 chatManager.addChat(target, tmp);
                 msgTextBox = "";
-                chatManager.addChattingList(target, lastmsg);
+                chatManager.addChattingList(target, lastmsg, nowTime);
                 //localDAO.ChattingCreate(id, target, nowTime, plain, "Send");
                 localDAO.ChattingCreate(id, target, nowTime, plain, "Send", isit); // 2019-11-22
             }

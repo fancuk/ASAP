@@ -172,6 +172,9 @@
     <Compile Include="View\FriendAddWindow.xaml.cs">
       <DependentUpon>FriendAddWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\GroupChatMakeWindow.xaml.cs">
+      <DependentUpon>GroupChatMakeWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\UserControl\ChatUserControl.xaml.cs">
       <DependentUpon>ChatUserControl.xaml</DependentUpon>
     </Compile>
@@ -238,6 +241,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\FriendAddWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\GroupChatMakeWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

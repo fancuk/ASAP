@@ -80,7 +80,7 @@ namespace TelerikWpfApp3.Service
         public int IsFriendReading(string friend) // send 할 때 쓰면 될 듯!!
         {                                          // 만약 true 받으면 친구가 읽고 있다는 뜻
             int isit = 0;                      // 아 존나게 머리 아파질거 같은게 이 메서드랑 remove메서드랑 동시에 실행되면
-                                                   // 뭔가 존나게 복잡해질 거 같은 느낌적인 느낌
+                                                   // 뭔가 존나게 복잡해질 거 같은 느낌적인 느낌....썅
             foreach(string target in friendsReading)
             {
                 if (target == friend)
@@ -90,6 +90,7 @@ namespace TelerikWpfApp3.Service
             }
             return isit;
         }
+    
         public void myRead(string friend)
         {
             // 친구 꺼를 읽어야 한다.
@@ -114,6 +115,9 @@ namespace TelerikWpfApp3.Service
                         break; // 그 전의 메시지는 이미 읽었을 것임.
                     }
                 }
+               // Chatdict[friend] = tmp;
+                //localDAO.ChangeChatStatus(friend); => 채팅방 목록에서 chatroom 생성이 안되서 주석처리함 (AllChatlistitem에 status 추가해야함)
+                // dao의 alter기능 추가
             }
         }
 
@@ -171,6 +175,11 @@ namespace TelerikWpfApp3.Service
         {
             return ACL.ChattingList;
         }
+
+        public ItemsChangeObservableCollection<Chatitem> getChatList(string target)
+        {
+            return this.Chatdict[target];
+        }
         public ItemsChangeObservableCollection<Chatitem> loadChat(string target)
         {
             if (Chatdict.ContainsKey(target))
@@ -191,10 +200,10 @@ namespace TelerikWpfApp3.Service
                 ItemsChangeObservableCollection<Chatitem> tmp = new ItemsChangeObservableCollection<Chatitem>();
                 tmp = this.Chatdict[name];
                 Chatitem a = tmp[tmp.Count - 1];
-                ACL.ChattingList.Add(new AllChatListItem(name, a.Text));
+                ACL.ChattingList.Add(new AllChatListItem(name, a.Text, a.Time));
             }
         }
-        public void addChattingList(string name,string lastMessage) //대화 보낼 때 마다
+        public void addChattingList(string name,string lastMessage, string lastTime) //대화 보낼 때 마다
         {
             AllChatListItem temp;
             bool isit = false;
@@ -212,15 +221,16 @@ namespace TelerikWpfApp3.Service
             }
             if (ACL.ChattingList.Count == 0)
             {
-                ACL.ChattingList.Add(new AllChatListItem(name, lastMessage));
+                ACL.ChattingList.Add(new AllChatListItem(name, lastMessage, lastTime));
             }
             else
             {
                 if(isit == false)
                 {
-                    ACL.ChattingList.Add(new AllChatListItem(name, lastMessage));
+                    ACL.ChattingList.Add(new AllChatListItem(name, lastMessage, lastTime));
                 }
             }
+            // 정렬 실패..
         }
         public IDictionary<string, ItemsChangeObservableCollection<Chatitem>> getDict()
         {

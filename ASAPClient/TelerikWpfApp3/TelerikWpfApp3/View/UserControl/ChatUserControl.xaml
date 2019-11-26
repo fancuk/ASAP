@@ -4,7 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TelerikWpfApp3.View.UserControl" 
-             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" 
+            xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase" 
+            xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" 
              xmlns:VM="clr-namespace:TelerikWpfApp3.VM"
              x:Class="TelerikWpfApp3.View.UserControl.ChatUserControl"
              mc:Ignorable="d" 
@@ -15,6 +16,7 @@
         </VM:ChatUserControlViewModel>
     </UserControl.DataContext>
     <UserControl.Resources>
+
         <Style x:Key="SimpleListBoxItem" TargetType="ListBoxItem">
             <Setter Property="FocusVisualStyle" Value="{x:Null}" />
             <Setter Property="Template">
@@ -74,9 +76,11 @@
                         <Border Height="38" BorderThickness="1,1,1,1" Margin="0,-1,-2,0">
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0" Width="161" Height="38">
                                 <RadioButton 
+                                    x:Name="singleButton"
+                                    IsChecked="True"
                                             Command="{Binding FriendsPageOn}"
                                             GroupName="menu" Content="Single Chat"  Style="{StaticResource friendButton}"  BorderBrush="{x:Null}"
-                                                Width="161" FontSize="20" Foreground="#FFF1F1F1" FontFamily="Impact" HorizontalAlignment="Center" IsChecked="True" VerticalAlignment="Center" Background="{x:Null}" Height="38" Margin="0,0,0,0.4"/>
+                                                Width="161" FontSize="20" Foreground="#FFF1F1F1" FontFamily="Impact" HorizontalAlignment="Center"  VerticalAlignment="Center" Background="{x:Null}" Height="38" Margin="0,0,0,0.4"/>
                             </StackPanel>
                         </Border>
                     </StackPanel>
@@ -84,6 +88,7 @@
                         <Border Height="38" BorderThickness="1,1,1,1" Margin="0">
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="-1" Width="160" Height="38">
                                 <RadioButton 
+                                                                        x:Name="groupButton"
                                     Command="{Binding FriendsPageOn}"
                                     GroupName="menu" Content="Group Chat"  Style="{StaticResource friendButton}" BorderBrush="{x:Null}"
                                     Width="161" FontSize="20" Foreground="#FFF1F1F1" FontFamily="Impact" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{x:Null}" Height="38" Margin="0,0,0,0.4"/>
@@ -107,31 +112,154 @@
                     </StackPanel>
                 </StackPanel>
             </Border>
+            <Border>
+                <Border.Style>
+                    <Style TargetType="Border">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ElementName=groupButton, Path=IsChecked}" Value="True">
+                                <Setter Property="Height" Value="544"></Setter>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding ElementName=groupButton, Path=IsChecked}" Value="False">
+                                <Setter Property="Height" Value="0"></Setter>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
+                <StackPanel>
+                    <StackPanel Height="469">
+                        <ListBox
+                                ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                                BorderThickness="0,0,0,0" x:Name="groupChatList" 
+                                Height="456" ItemsSource="{Binding}"  
+                                IsSynchronizedWithCurrentItem="False"  
+                                BorderBrush="{x:Null}" Margin="0,10,0,0" Background="{x:Null}" SelectionChanged="ChatBox_SelectionChanged">
+
+                            <ListBox.ItemContainerStyle>
+
+                                <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource {x:Type ListBoxItem}}">
+                                    <EventSetter Event="Control.MouseDoubleClick" Handler="RoomDoubleClick"/>
+                                </Style>
+                            </ListBox.ItemContainerStyle>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Height="69" Margin="0,5,0,0" Orientation="Horizontal" Background="{x:Null}" Width="310">
+                                        <Border RenderOptions.BitmapScalingMode="HighQuality" CornerRadius="20" Width="40" Margin="0,0,0,25" Height="40">
+                                            <Border.Background>
+                                                <ImageBrush Stretch="Uniform" ImageSource="/TelerikWpfApp3;component/Resources/id.png"/>
+                                            </Border.Background>
+                                            <Border.Style>
+                                                <Style>
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding ElementName=status, Path=Text}" Value="true">
+                                                            <Setter Property="Border.Background" >
+                                                                <Setter.Value>
+                                                                    <ImageBrush ImageSource="/TelerikWpfApp3;component/Resources/Thunder.png" Stretch="Uniform"></ImageBrush>
+                                                                </Setter.Value>
+                                                            </Setter>
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding ElementName=status, Path=Text}" Value="false">
+                                                            <Setter Property="Border.Background" >
+                                                                <Setter.Value>
+                                                                    <ImageBrush ImageSource="/TelerikWpfApp3;component/Resources/OffThunder.png" Stretch="Uniform"></ImageBrush>
+                                                                </Setter.Value>
+                                                            </Setter>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Border.Style>
+                                        </Border>
+                                        <StackPanel Orientation="Vertical">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock x:Name="User" Text="{Binding Target}"  TextAlignment="Left" FontFamily="Calibri" Margin="5,0,0,0" FontSize="16" FontWeight="Bold" Width="90"/>
+                                                <TextBlock x:Name="time" Text="{Binding LastTime}" Margin="40,0,0,0" TextAlignment="Right" AutomationProperties.AcceleratorKey="time"/>
+                                            </StackPanel>
+                                            <TextBlock  Text="{Binding LastMessage}" Margin="5,0,0,0" />
+                                        </StackPanel>
+                                        <!--<TextBlock x:Name="User" Text="{Binding Target}" Height="31" TextAlignment="Center" FontFamily="MS PGothic" Margin="22,22,10,0" FontSize="16" FontWeight="Bold"/>-->
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+
+                    </StackPanel>
+                    <StackPanel Height="80" Orientation="Horizontal" Background="#FFF1F1F1">
+                        <TextBlock>
+                        <Hyperlink Command="{Binding MakeGroupEvent}">
+                            <TextBlock>
+                        <StackPanel Orientation="Horizontal" Width="317">
+                            <StackPanel Width="79">
+                                <Border RenderOptions.BitmapScalingMode="HighQuality" CornerRadius="20" Height="32" Margin="34,20,10,20">
+                                    <Border.Background>
+                                        <ImageBrush Stretch="Uniform" ImageSource="/TelerikWpfApp3;component/Resources/friends.png"/>
+                                    </Border.Background>
+                                </Border>
+                            </StackPanel>
+                            <StackPanel Width="198">
+                                <StackPanel Height="56" Margin="0,11,0,0">
+                                    <TextBlock Text="You need more group?" Margin="0,10,0,0" Height="28" FontSize="16" FontFamily="Calibri"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </StackPanel>
+                                </TextBlock>
+                        </Hyperlink>
+                        </TextBlock>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
             <Border Height="507">
                 <StackPanel>
                     <Border Height="527" Margin="0,10,0,0" Background="White">
                         <StackPanel Margin="0,0,0,13.4">
-                            <ContentControl></ContentControl>
                             <ListBox
+                               
                                 ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                                 BorderThickness="0,0,0,0" x:Name="ChatRoomList" 
                                 Height="510" ItemsSource="{Binding}"  
-                                IsSynchronizedWithCurrentItem="False" 
+                                IsSynchronizedWithCurrentItem="False"  
                                 BorderBrush="{x:Null}" Margin="0,10,0,0" Background="{x:Null}" SelectionChanged="ChatBox_SelectionChanged">
+
                                 <ListBox.ItemContainerStyle>
+
                                     <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource {x:Type ListBoxItem}}">
                                         <EventSetter Event="Control.MouseDoubleClick" Handler="RoomDoubleClick"/>
                                     </Style>
                                 </ListBox.ItemContainerStyle>
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
-                                        <StackPanel Height="69" Margin="0,5,0,0" Orientation="Horizontal" Background="#FFFBFBFB">
-
-                                            <TextBlock x:Name="User" Text="{Binding Target}" Height="31" TextAlignment="Center" FontFamily="MS PGothic" Margin="22,22,10,0" FontSize="16" FontWeight="Bold"/>
-                                            
-                                            <Border CornerRadius="20" Background="#FFF1F0F0" Margin="19,19,0,5" Width="181">
-                                                <TextBlock Text="{Binding LastMessage}" Margin="18,14,18,12" TextAlignment="Center"/>
+                                        <StackPanel Height="69" Margin="0,5,0,0" Orientation="Horizontal" Background="{x:Null}" Width="310">
+                                            <Border RenderOptions.BitmapScalingMode="HighQuality" CornerRadius="20" Width="40" Margin="0,0,0,25" Height="40">
+                                                <Border.Background>
+                                                    <ImageBrush Stretch="Uniform" ImageSource="/TelerikWpfApp3;component/Resources/id.png"/>
+                                                </Border.Background>
+                                                <Border.Style>
+                                                    <Style>
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding ElementName=status, Path=Text}" Value="true">
+                                                                <Setter Property="Border.Background" >
+                                                                    <Setter.Value>
+                                                                        <ImageBrush ImageSource="/TelerikWpfApp3;component/Resources/Thunder.png" Stretch="Uniform"></ImageBrush>
+                                                                    </Setter.Value>
+                                                                </Setter>
+                                                            </DataTrigger>
+                                                            <DataTrigger Binding="{Binding ElementName=status, Path=Text}" Value="false">
+                                                                <Setter Property="Border.Background" >
+                                                                    <Setter.Value>
+                                                                        <ImageBrush ImageSource="/TelerikWpfApp3;component/Resources/OffThunder.png" Stretch="Uniform"></ImageBrush>
+                                                                    </Setter.Value>
+                                                                </Setter>
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </Border.Style>
                                             </Border>
+                                            <StackPanel Orientation="Vertical">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock x:Name="User" Text="{Binding Target}"  TextAlignment="Left" FontFamily="Calibri" Margin="5,0,0,0" FontSize="16" FontWeight="Bold" Width="90"/>
+                                                    <TextBlock x:Name="time" Text="{Binding LastTime}" Margin="40,0,0,0" TextAlignment="Right" AutomationProperties.AcceleratorKey="time"/>
+                                                </StackPanel>
+                                                <TextBlock  Text="{Binding LastMessage}" Margin="5,0,0,0" />
+                                            </StackPanel>
+                                            <!--<TextBlock x:Name="User" Text="{Binding Target}" Height="31" TextAlignment="Center" FontFamily="MS PGothic" Margin="22,22,10,0" FontSize="16" FontWeight="Bold"/>-->
                                         </StackPanel>
                                     </DataTemplate>
                                 </ListBox.ItemTemplate>

@@ -17,7 +17,10 @@ namespace TelerikWpfApp3.M
             {
                 return chattingList;
             }
-
+            set
+            {
+                this.chattingList = value;
+            }
         }
         AllChatListItem ACL = null;
         public AllChatList()

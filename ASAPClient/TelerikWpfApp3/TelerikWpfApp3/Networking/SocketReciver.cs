@@ -116,15 +116,14 @@ namespace TelerikWpfApp3.Networking
                     {
                         tmp.Asap = false;
                     }
-                    tmp.Status = chatManager.NowIReading(tokens[1]);
-                    int isitfocus;
-                    if (tmp.Status == true)
+                    int isitfocus = chatManager.IsFriendReading(tmp.User);
+                    if (isitfocus == 1)
                     {
-                        isitfocus = 1;
+                        tmp.Status = true;
                     }
                     else
                     {
-                        isitfocus = 0;
+                        tmp.Status = false;
                     }
                     // 여기 이제 수정 필요!!
                     localDAO.ChattingCreate(tokens[1], tokens[2], tokens[3], tokens[4], "Receive", isitfocus); //2019-11-22
@@ -132,8 +131,8 @@ namespace TelerikWpfApp3.Networking
                     //localDAO.ChattingCreate(tokens[1], tokens[2], tokens[3], tokens[4], "Receive");
                     DispatchService.Invoke(() =>
                     {
-                        chatManager.addChat(tmp.User, tmp);
-                        chatManager.addChattingList(tokens[1], tokens[4]) ;
+                       chatManager.addChat(tmp.User, tmp);
+                        chatManager.addChattingList(tokens[1], tokens[4],tokens[3]);
                         Window msgWindow = MessageToast.instance;
                         MessageToast.instance.getToastInfo(tokens[1], tokens[3], tokens[4]);
                         msgWindow.Show();
@@ -147,6 +146,40 @@ namespace TelerikWpfApp3.Networking
                     //   // ((App)Application.Current).LoadMSGAlert();
                     //});
                 }
+                /*else if (tag.Equals("<MSQ>"))
+                {
+
+                    int count = Int32.Parse(tokens[1]);
+                    int idx = 2;
+                    for (int i = 0; i < count; i++)
+                    {
+                        string[] token2 = tokens[idx + i].Split(',');
+                        string user = token2[0];
+                        string msg = token2[1];
+                        string time = token2[2];
+
+                        Chatitem tmp = new Chatitem();
+                        tmp.User = user;
+                        tmp.Time = time;
+                        tmp.Text = msg;
+                       localDAO.ChattingCreate(user,      //2019-11-22
+                           networkManager.MyId, time, msg, "Receive", 0);
+                        //localDAO.ChattingCreate(user,
+                        //networkManager.MyId, time, msg, "Receive");
+                    }
+                    if (!FriendsUserControlViewModel.Instance.loadAllChk)
+                    {
+                        networkManager.SendData("<FLD>", networkManager.MyId);
+                    }
+                    FriendsUserControlViewModel.Instance.loadAllChk = true; //다민
+                }
+                else if (tag.Equals("<FIN>"))
+                {
+                    if (networkManager.nowConnect == true)
+                    {
+                        sc.closeSock();
+                    }
+                }*/
                 else if (tag.Equals("<CHR>")) // 서버 업데이트 후에
                 {
                     string friendID = tokens[1];
@@ -166,6 +199,23 @@ namespace TelerikWpfApp3.Networking
                         });
                     }
                 }
+                /*else if (tag.Equals("<FLD>"))
+                {
+                    int count = Int32.Parse(tokens[1]);
+                    int idx = 2;
+                    for (int i = 0; i < count; i++)
+                    {
+                        string[] resToken = tokens[idx + i].Split('^');
+                        DispatchService.Invoke(() =>
+                        {
+                            FriendsUserControlViewModel.Instance.AddFriend(resToken[0], resToken[1]);
+                        });
+                    }
+                    DispatchService.Invoke(() =>
+                    {
+                        localDAO.ReadChat();
+                    });
+                }*/
                 // 텍스트박스에 추가해준다.
                 // 비동기식으로 작업하기 때문에 폼의 UI 스레드에서 작업을 해줘야 한다.
                 // 따라서 대리자를 통해 처리한다.

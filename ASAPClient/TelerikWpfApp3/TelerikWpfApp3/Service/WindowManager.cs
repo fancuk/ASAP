@@ -42,10 +42,9 @@ namespace TelerikWpfApp3.Service
             Window mt = TelerikWpfApp3.View.Alert.MessageToast.instance;
             MessageToast messageToast = (MessageToast)mt;
             messageToast.getToastInfo(chatItem.User,
-                chatItem.Time,chatItem.Text);
+                chatItem.Time, chatItem.Text);
             mt.Show();
-           
-        }
 
+        }
     }
 }

@@ -44,6 +44,7 @@ namespace TelerikWpfApp3.View.UserControl
             //((App)Application.Current).LoadMyFriends();
             //ClientList.DataContext = ((App)Application.Current).getFriends(); 다민
             ChatRoomList.DataContext = chatManager.getChattingList();
+            
             //this.PreviewKeyDown += new KeyEventHandler(OnEnterKeyDownHandler);
 
 

@@ -557,3 +557,5 @@ C:\Users\king1\Desktop\소공\ASAP\TelerikWpfApp3\TelerikWpfApp3\obj\x86\Debug\V
 C:\Users\king1\Desktop\소공\ASAP\TelerikWpfApp3\TelerikWpfApp3\obj\x86\Debug\View\Alert\MessageToast.g.cs
 C:\Users\king1\Desktop\소공\ASAP\TelerikWpfApp3\TelerikWpfApp3\bin\Debug\ToastNotifications.dll
 C:\Users\king1\Desktop\소공\ASAP\TelerikWpfApp3\TelerikWpfApp3\bin\Debug\ToastNotifications.Messages.dll
+C:\Users\king1\Desktop\소공\ASAP\TelerikWpfApp3\TelerikWpfApp3\obj\x86\Debug\View\GroupChatMakeWindow.g.cs
+C:\Users\king1\Desktop\소공\ASAP\TelerikWpfApp3\TelerikWpfApp3\obj\x86\Debug\View\GroupChatMakeWindow.baml
