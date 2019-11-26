@@ -61,6 +61,10 @@ namespace TelerikWpfApp3.Service
             socketSender = new SocketSender();
             socketCloser = new SocketCloser();
         }
+        public void ReceiveSocket()
+        {
+            socketConnector.StartReceive();
+        }
         public void SendData(string type, string text)
         {
             if (nowConnect == false) StartSocket();

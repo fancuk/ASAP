@@ -102,6 +102,7 @@ namespace TelerikWpfApp3.VM
             {
                 networkManager.MyId = id;
                 networkManager.SendData("<LOG>", parameter);
+                networkManager.ReceiveSocket();
             }
         }
         

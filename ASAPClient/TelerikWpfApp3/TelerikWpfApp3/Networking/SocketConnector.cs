@@ -16,6 +16,7 @@ namespace TelerikWpfApp3.Networking
 
         private Socket nowSock;
         SocketReciver sr = new SocketReciver();
+        SyncSocketReceiver ssr = new SyncSocketReceiver();
 
         public SocketConnector()
         {
@@ -23,9 +24,9 @@ namespace TelerikWpfApp3.Networking
         }
         public bool SocketConnect()
         {
-            //string address = "52.231.154.88";
+            string address = "52.231.154.88";
            //string address = "54.180.26.230";
-           string address = "127.0.0.1";
+           //string address = "127.0.0.1";
            //string address = "203.229.204.23"; // "127.0.0.1" 도 가능
             int port = 11000;
             return BeginConnection(address, port);
@@ -50,8 +51,16 @@ namespace TelerikWpfApp3.Networking
         {
             AsyncObject ao = new AsyncObject(4096);
             ao.WorkingSocket = nowSock;
-            ao.WorkingSocket.BeginReceive(ao.Buffer, 0, ao.BufferSize, 0, sr.DataReceived, ao);
+            //ao.WorkingSocket.BeginReceive(ao.Buffer, 0, ao.BufferSize, 0, sr.DataReceived, ao);
             networkManager.nowConnect = true;
+        }
+        public void StartReceive()
+        {
+            AsyncObject ao = new AsyncObject(4096);
+            ao.WorkingSocket = nowSock;
+            ao.WorkingSocket.Receive(ao.Buffer);
+            string text = Encoding.UTF8.GetString(ao.Buffer);
+            ssr.syncReceive(text);
         }
     }
 }

@@ -183,6 +183,7 @@ namespace TelerikWpfApp3.VM
                 if (networkManager.StartSocket() == true)
                 {
                     networkManager.SendData("<ICF>", id);
+                    networkManager.ReceiveSocket();
                 }
             }
         }
@@ -191,6 +192,7 @@ namespace TelerikWpfApp3.VM
         {
             string parameter = myinfo.MyId + "/" + myinfo.Pw + "/" + myinfo.Email + "/";
             networkManager.SendData("<REG>",parameter);
+            networkManager.ReceiveSocket();
         }
 
         private void ExecuteClose(object obj)

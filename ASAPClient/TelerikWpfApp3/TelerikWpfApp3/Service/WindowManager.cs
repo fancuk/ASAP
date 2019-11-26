@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using TelerikWpfApp3.M;
 using TelerikWpfApp3.View.Alert;
+using TelerikWpfApp3.VM;
 
 namespace TelerikWpfApp3.Service
 {
@@ -30,7 +31,12 @@ namespace TelerikWpfApp3.Service
             Window Rg = TelerikWpfApp3.Register.Instance;
             Rg.Hide();
         }
-
+        public void CloseAll()
+        {
+            ChattingRoomManager.Instance.closeAllChatRoom();
+            Window m = TelerikWpfApp3.StartWindow.Instance;
+            m.Hide();
+        }
         public void ShowMessageToast(Chatitem chatItem)
         {
             Window mt = TelerikWpfApp3.View.Alert.MessageToast.instance;

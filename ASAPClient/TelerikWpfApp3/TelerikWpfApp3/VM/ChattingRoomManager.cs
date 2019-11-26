@@ -53,7 +53,13 @@ namespace TelerikWpfApp3.VM
         {
             chatRoom = new Dictionary<string, Window>();
         }
-
+        public void closeAllChatRoom() // 로그아웃 할 때 다 꺼주기
+        {
+            foreach (string name in chatRoom.Keys)
+            {
+                chatRoom[name].Hide();
+            }
+        }
 
     }
 }

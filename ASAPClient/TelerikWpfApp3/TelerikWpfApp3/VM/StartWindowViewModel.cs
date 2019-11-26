@@ -66,7 +66,10 @@ namespace TelerikWpfApp3.VM
             {
                 if (networkManager.nowConnect == true)
                 {
+
                     networkManager.CloseSocket();
+                    WindowManager windowManager = ((App)Application.Current).windowManager;
+                    windowManager.CloseAll();
                 }
                 Window vt = TelerikWpfApp3.viewtest.Instance;
                 Window sw = TelerikWpfApp3.StartWindow.Instance;
@@ -84,6 +87,7 @@ namespace TelerikWpfApp3.VM
             }
             Window vt = TelerikWpfApp3.viewtest.Instance;
             Window sw = TelerikWpfApp3.StartWindow.Instance;
+            ChattingRoomManager.Instance.closeAllChatRoom();
             vt.Show();
             sw.Hide();
         }

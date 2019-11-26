@@ -50,7 +50,7 @@ namespace TelerikWpfApp3.Networking
                 string[] tokens = text.Split('/');
                 string tag = tokens[0];
                 if (tokens.Length == 1) return;
-                if (tag.Equals("<LOG>")) // 로그인
+                /*if (tag.Equals("<LOG>")) // 로그인
                 {
                     string flag = tokens[1];
                     if (flag.Equals("true"))
@@ -129,7 +129,7 @@ namespace TelerikWpfApp3.Networking
                         });
                     }
                    networkManager.CloseSocket();
-                }
+                }*/
                 else if (tag.Equals("<FRR>"))
                 {
                     if (tokens[1] == "true")
@@ -225,7 +225,7 @@ namespace TelerikWpfApp3.Networking
                     //   // ((App)Application.Current).LoadMSGAlert();
                     //});
                 }
-                else if (tag.Equals("<MSQ>"))
+                /*else if (tag.Equals("<MSQ>"))
                 {
 
                     int count = Int32.Parse(tokens[1]);
@@ -258,7 +258,7 @@ namespace TelerikWpfApp3.Networking
                     {
                         sc.closeSock();
                     }
-                }
+                }*/
                 else if (tag.Equals("<CHR>")) // 서버 업데이트 후에
                 {
                     string friendID = tokens[1];
@@ -278,7 +278,7 @@ namespace TelerikWpfApp3.Networking
                         });
                     }
                 }
-                else if (tag.Equals("<FLD>"))
+                /*else if (tag.Equals("<FLD>"))
                 {
                     int count = Int32.Parse(tokens[1]);
                     int idx = 2;
@@ -294,7 +294,7 @@ namespace TelerikWpfApp3.Networking
                     {
                         localDAO.ReadChat();
                     });
-                }
+                }*/
                 // 텍스트박스에 추가해준다.
                 // 비동기식으로 작업하기 때문에 폼의 UI 스레드에서 작업을 해줘야 한다.
                 // 따라서 대리자를 통해 처리한다.
