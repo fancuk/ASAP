@@ -13,6 +13,74 @@
 
         Background="{x:Null}" HorizontalAlignment="Left"
         >
+    <Window.Resources>
+
+        <Style x:Key="ToggleModuleClass" TargetType="{x:Type ToggleButton}">
+            <Setter Property="Background" Value="#45C8C7"></Setter>
+            <Setter Property="Foreground" Value="White"></Setter>
+            <Setter Property="FontFamily" Value="Segoe UI"></Setter>
+            <Setter Property="FontSize" Value="13"></Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Grid x:Name="grid" VerticalAlignment="Center" HorizontalAlignment="Left"  >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="30"></ColumnDefinition>
+                                <ColumnDefinition Width="120"></ColumnDefinition>
+                                <ColumnDefinition Width="2"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="50"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Rectangle Fill="White" Grid.Column="0"  Width="20" Height="20"></Rectangle>
+                            <TextBlock Grid.Column="1"  VerticalAlignment="Center" HorizontalAlignment="Center">
+                                                   <ContentPresenter  x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"  />
+                            </TextBlock>
+                            <Grid Grid.Column="2" Background="White" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></Grid>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="Button.IsDefaulted" Value="True"/>
+                            <Trigger Property="IsMouseOver" Value="True"/>
+                            <Trigger Property="IsPressed" Value="True"/>
+                            <Trigger Property="ToggleButton.IsChecked" Value="True">
+                                <Setter Property="Grid.Background" TargetName="grid" Value="#45C8C7"/>
+                            </Trigger>
+                            <Trigger Property="ToggleButton.IsChecked" Value="False">
+                                <Setter Property="Grid.Background" TargetName="grid" Value="#DDE1E2"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
+        <Style x:Key="RadioButtonListBoxStyle" TargetType="{x:Type ListBox}">
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="KeyboardNavigation.DirectionalNavigation" Value="Cycle" />
+            <Setter Property="ItemContainerStyle">
+                <Setter.Value>
+                    <Style TargetType="{x:Type ListBoxItem}" >
+                        <Setter Property="Margin" Value="2, 2, 2, 0" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate>
+                                    <Border Background="Transparent">
+                                        <RadioButton
+                                    Content="{TemplateBinding ContentPresenter.Content}" VerticalAlignment="Center"
+                                    IsChecked="{Binding Path=IsSelected,RelativeSource={RelativeSource TemplatedParent},Mode=TwoWay}"/>
+
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
     <Border CornerRadius="10" Background="#FFF7F7F7" Padding="0" Margin="5">
         <Border.Effect>
             <DropShadowEffect Color="Gray"></DropShadowEffect>
@@ -62,77 +130,97 @@
 
                 <StackPanel Height="380" Margin="0">
                     <StackPanel Height="376">
-                        <StackPanel Height="320" Orientation="Horizontal">
-                            <StackPanel Width="307">
-                                <ListBox
-                                ScrollViewer.HorizontalScrollBarVisibility="Hidden"
-                                BorderThickness="0,0,0,0" x:Name="ClientList" 
-                                Height="310" ItemsSource="{Binding}"  
-                                IsSynchronizedWithCurrentItem="False" 
-                                  BorderBrush="{x:Null}" Margin="0" Background="{x:Null}" SelectionChanged="ClientList_SelectionChanged">
-                                    <ListBox.ItemContainerStyle>
-                                        <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource {x:Type ListBoxItem}}">
-                                            <EventSetter Event="MouseDoubleClick" Handler="FriendDoubleClick"/>
-                                            <Style.Triggers>
-                                                <Trigger Property="IsMouseOver" Value="True">
-                                                    <Setter Property="Background" Value="#FF006FFF" />
-                                                </Trigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </ListBox.ItemContainerStyle>
-                                    <ListBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <StackPanel Height="69" Margin="0,5,0,0" Orientation="Horizontal" Background="{x:Null}" Width="310">
-                                                <Border RenderOptions.BitmapScalingMode="HighQuality" CornerRadius="20" Width="40" Margin="0,0,0,25" Height="40">
-                                                    <Border.Style>
-                                                        <Style>
-                                                            <Style.Triggers>
-                                                                <DataTrigger Binding="{Binding ElementName=status, Path=Text}" Value="true">
-                                                                    <Setter Property="Border.Background" >
-                                                                        <Setter.Value>
-                                                                            <ImageBrush ImageSource="/TelerikWpfApp3;component/Resources/Thunder.png" Stretch="Uniform"></ImageBrush>
-                                                                        </Setter.Value>
-                                                                    </Setter>
-                                                                </DataTrigger>
-                                                                <DataTrigger Binding="{Binding ElementName=status, Path=Text}" Value="false">
-                                                                    <Setter Property="Border.Background" >
-                                                                        <Setter.Value>
-                                                                            <ImageBrush ImageSource="/TelerikWpfApp3;component/Resources/OffThunder.png" Stretch="Uniform"></ImageBrush>
-                                                                        </Setter.Value>
-                                                                    </Setter>
-                                                                </DataTrigger>
-                                                            </Style.Triggers>
-                                                        </Style>
-                                                    </Border.Style>
-                                                </Border>
-                                                <TextBlock x:Name="status" Text="{Binding Status}" MaxWidth="0" MaxHeight="0"></TextBlock>
-                                                <StackPanel Orientation="Vertical">
-                                                    <TextBlock x:Name="User" Text="{Binding User}"  TextAlignment="Left" FontFamily="Calibri" Margin="5,0,0,0" FontSize="16" FontWeight="Bold"/>
-                                                    <TextBlock Text="하하하하..." Margin="5,0,0,0"></TextBlock>
+                        <Border Height="320" BorderThickness="0,0,0,1" BorderBrush="#FFAEAEAE">
+                            <StackPanel Orientation="Horizontal">
+                                <StackPanel Width="235">
+                                    <TextBox  x:Name="txtNameToSearch"
+                                        TextChanged="txtNameToSearch_TextChanged"
+                                        Height="33"/>
+                                    <ListBox
+                                        SelectionMode="Multiple"
+                                        ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                                        BorderThickness="0,0,0,0" x:Name="ClientList" 
+                                        Height="281" ItemsSource="{Binding}"  
+                                        IsSynchronizedWithCurrentItem="False" 
+                                        BorderBrush="{x:Null}" Margin="0" Background="White" 
+                                        SelectionChanged="ClientList_SelectionChanged">
+
+                                        <ListBox.ItemContainerStyle>
+                                            <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource {x:Type ListBoxItem}}">
+                                                <EventSetter Event="Control.MouseDoubleClick" Handler="FriendDoubleClick"/>
+                                                <Style.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Background" Value="#FF006FFF" />
+                                                    </Trigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </ListBox.ItemContainerStyle>
+                                        <ListBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Height="30" Margin="0,5,0,0" Orientation="Horizontal" Background="{x:Null}" Width="310">
+                                                    <Border RenderOptions.BitmapScalingMode="HighQuality" CornerRadius="20" Width="40" Margin="0,0,0,25" Height="40">
+                                                        <Border.Style>
+                                                            <Style>
+                                                                <Style.Triggers>
+                                                                    <DataTrigger Binding="{Binding Text, ElementName=status}" Value="true">
+                                                                        <Setter Property="Border.Background" >
+                                                                            <Setter.Value>
+                                                                                <ImageBrush ImageSource="/TelerikWpfApp3;component/Resources/Thunder.png" Stretch="Uniform"/>
+                                                                            </Setter.Value>
+                                                                        </Setter>
+                                                                    </DataTrigger>
+                                                                    <DataTrigger Binding="{Binding Text, ElementName=status}" Value="false">
+                                                                        <Setter Property="Border.Background" >
+                                                                            <Setter.Value>
+                                                                                <ImageBrush ImageSource="/TelerikWpfApp3;component/Resources/OffThunder.png" Stretch="Uniform"/>
+                                                                            </Setter.Value>
+                                                                        </Setter>
+                                                                    </DataTrigger>
+                                                                </Style.Triggers>
+                                                            </Style>
+                                                        </Border.Style>
+                                                    </Border>
+                                                    <TextBlock x:Name="status" MaxWidth="0" MaxHeight="0"/>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <TextBlock x:Name="User" Text="{Binding User}"  TextAlignment="Left" FontFamily="Calibri" Margin="1,0,0,0" FontSize="16" FontWeight="Bold"/>
+                                                        <TextBlock Text="하하하하..." Margin="5,0,0,0"/>
+                                                    </StackPanel>
                                                 </StackPanel>
-                                                <RadioButton ></RadioButton>
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </ListBox.ItemTemplate>
-                                </ListBox>
+                                            </DataTemplate>
+                                        </ListBox.ItemTemplate>
+                                    </ListBox>
+                                </StackPanel>
+                                <StackPanel Width="151">
+                                    <ListBox x:Name="addedList" ItemsSource="{Binding}" Height="319" Background="#FFF7F7F7" BorderBrush="{x:Null}">
+                                        <ListBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackPanel>
+                                                    <Border Background="#FFEC5F5F" CornerRadius="10"
+                                                            Height="25" Width="140">
+                                                        <Border.Effect>
+                                                            <DropShadowEffect Color="#FFE2E0E0">
+                                                                
+                                                            </DropShadowEffect>
+                                                        </Border.Effect>
+                                                        <TextBlock Text="{Binding User}" TextAlignment="Center"
+                                                              Margin="0,5,0,0"  Foreground="White"/> 
+                                                    </Border>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </ListBox.ItemTemplate>
+                                    </ListBox>
+                                </StackPanel>
                             </StackPanel>
-                            <StackPanel Width="79">
-                                <ListBox Height="319">
-                                    
-                                </ListBox>
-                            </StackPanel>
-                        </StackPanel>
+                        </Border>
                         <StackPanel Height="52" Orientation="Horizontal">
-                            <TextBlock Height="45">
-                                <Hyperlink TextDecorations="{x:Null}" Command="{Binding FriendsAddButton }">
-                            <Border CornerRadius="5" Background="#FFEC5F5F" Height="33" Margin="77,7,0,0" Width="112">
+                            <TextBlock Height="45"><Hyperlink TextDecorations="{x:Null}" Command="{Binding FriendsAddButton}"><InlineUIContainer>
+                                        <Border CornerRadius="5" Background="#FFEC5F5F" Height="33" Margin="77,7,0,0" Width="112">
                             
-                            <StackPanel>
-                                <TextBlock Text="Make" Height="32" Foreground="White" TextAlignment="Center" FontFamily="Calibri" FontWeight="Bold" FontSize="28" Margin="0,0,-2,0"></TextBlock>
-                            </StackPanel>
-                            </Border>
-                                </Hyperlink>
-                            </TextBlock>
+                                            <StackPanel>
+                                                <TextBlock Text="Make" Height="32" Foreground="White" TextAlignment="Center" FontFamily="Calibri" FontWeight="Bold" FontSize="28" Margin="0,0,-2,0"/>
+                                            </StackPanel>
+                                        </Border>
+                                    </InlineUIContainer></Hyperlink></TextBlock>
                             <TextBlock Height="45"><Hyperlink TextDecorations="{x:Null}" Command="{Binding FriendsAddButton}"><InlineUIContainer>
                                         <Border CornerRadius="5" Background="#FF9E8C8C" Height="33" Margin="10,7,90,0" Width="112">
                             
