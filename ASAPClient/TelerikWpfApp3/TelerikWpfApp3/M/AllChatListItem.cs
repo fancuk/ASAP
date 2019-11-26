@@ -24,13 +24,18 @@ namespace TelerikWpfApp3.M
                 OnPropertyChanged("Target");
             } }
 
-        public string LastTime { get => lastTime; set => lastTime = value; }
+        public string LastTime { get => lastTime; set
+            {
+                this.lastTime = value;
+                OnPropertyChanged("LastTime");
+            }
+        }
 
         public AllChatListItem(string target,string lastMessage, string lastTime)
         {
             this.LastMessage = lastMessage;
             this.Target = target;
-            this.lastTime = lastTime;
+            this.LastTime = lastTime;
         }
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string name)

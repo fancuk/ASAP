@@ -215,6 +215,7 @@ namespace TelerikWpfApp3.Service
                 if (temp.Target == name)
                 {
                     temp.LastMessage = lastMessage;
+                    temp.LastTime = lastTime;
                     ACL.ChattingList[i] = temp;
                     isit = true;
                 }
