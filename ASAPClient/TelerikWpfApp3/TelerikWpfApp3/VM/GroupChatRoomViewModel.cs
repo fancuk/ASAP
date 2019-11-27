@@ -7,8 +7,13 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using TelerikWpfApp3.M;
-using TelerikWpfApp3.Service;
+using TelerikWpfApp3;
+using System.Windows.Documents;
+using System.Collections.ObjectModel;
 using TelerikWpfApp3.Utility;
+using TelerikWpfApp3.Service;
+using TelerikWpfApp3.LocalDB;
+using TelerikWpfApp3.View;
 
 namespace TelerikWpfApp3.VM
 {
@@ -16,6 +21,20 @@ namespace TelerikWpfApp3.VM
     {
         DabbingPreventor dabbingPreventor = ((App)Application.Current).dabbingPreventor;
         NetworkManager networkManager = ((App)Application.Current).networkManager;
+
+        private string _msgTextBox;
+        public string msgTextBox
+        {
+            get
+            {
+                return this._msgTextBox;
+            }
+            set
+            {
+                this._msgTextBox = value;
+                OnPropertyChanged(msgTextBox);
+            }
+        }
 
         public ICommand GroupSendText { get; set; } // 그룹 채팅방 전송 버튼
         public GroupChatRoomViewModel()
@@ -43,7 +62,7 @@ namespace TelerikWpfApp3.VM
             string id = networkManager.MyId;
             string plain = message;
             string nowTime = DateTime.Now.ToString();
-            // 여기다가 기능 추가!!!!
+            
         }
         #region INotify 인터페이스
         public event PropertyChangedEventHandler PropertyChanged;

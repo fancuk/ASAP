@@ -25,7 +25,7 @@ namespace TelerikWpfApp3
         public ChatManager chatManager;
         public DabbingPreventor dabbingPreventor;
         public UserStatusManager userStatusManager;
-        public ASAPManager asapManager;
+        public GroupChatManager groupChatManager;
         public App()
         {
              networkManager = new NetworkManager();
@@ -34,7 +34,7 @@ namespace TelerikWpfApp3
              windowManager = new WindowManager();
              dabbingPreventor = new DabbingPreventor();
             userStatusManager = new UserStatusManager();
-            asapManager = new ASAPManager();
+            groupChatManager = new GroupChatManager();
             Startup += App_Startup;
             InitializeComponent();
         }
