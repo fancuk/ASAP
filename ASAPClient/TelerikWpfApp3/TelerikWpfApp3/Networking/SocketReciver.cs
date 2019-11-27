@@ -23,6 +23,7 @@ namespace TelerikWpfApp3.Networking
         LocalDAO localDAO = ((App)Application.Current).localDAO;
         UserStatusManager userStatusManager = ((App)Application.Current).userStatusManager;
         ASAPManager asapManager = ((App)Application.Current).asapManager;
+        GroupMemberListManager groupMemberListManager = ((App)Application.Current).groupMemberListManager;
         private Socket nowSock;
         SocketCloser sc = new SocketCloser();
         public SocketReciver()
@@ -194,6 +195,37 @@ namespace TelerikWpfApp3.Networking
                         asapManager.RemoveLastChat(time);
                         chatManager.RemoveChat_ASAP(friendID, time);
                     }
+                }
+                else if (tag.Equals("<MKG>"))
+                {
+                    if (tokens[1].Equals("false"))
+                    {
+                        MessageBox.Show("그룹 채팅방 만들기 실패 ㅠ");
+                    }
+                    else
+                    {
+                        string maker = tokens[1];
+                        string groupName = tokens[2];
+                        string groupIdx = tokens[3];
+                        int memberCount = int.Parse(tokens[4]);
+                        List<string> groupMemberList = new List<string>(memberCount);
+                        for (int i = 5; i < i + memberCount; i++)
+                        {
+                            groupMemberList.Add(tokens[i]);
+                        }
+                        groupMemberListManager.AddGroupMemberList(groupIdx, groupMemberList);
+                        // dao에 넣어주면 될 듯
+                        // 그룹 채팅방 만들어주고 거기다가 maker가 만들었습니다 라고 메시지로 띄우기 (maker가 보낸 것 처럼)
+                    }
+                }
+                else if (tag.Equals("<GSG>"))
+                {
+                    string sender = tokens[1];
+                    string gIdx = tokens[2];
+                    string plain = tokens[3];
+                    string time = tokens[4];
+                    // dao에 넣어주고
+                    // 그룹 채팅방에 메시지 보내주기
                 }
                 // 텍스트박스에 추가해준다.
                 // 비동기식으로 작업하기 때문에 폼의 UI 스레드에서 작업을 해줘야 한다.
