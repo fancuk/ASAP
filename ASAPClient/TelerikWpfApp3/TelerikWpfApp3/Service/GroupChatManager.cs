@@ -28,6 +28,12 @@ namespace TelerikWpfApp3.Service
 
         GroupChatList GCL = new GroupChatList();
 
+        public void makeGroupChat(string groupName ,string groupMembers)
+        {
+            string groupMaker = networkManager.MyId;
+            networkManager.SendData("<MKG>", groupMaker + "/" + groupName + "/" + groupMembers);
+        }
+
         public void addChat(string groupidx, GroupChatItem groupChatItem)
         {//새로운 채팅 추가
           

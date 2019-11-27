@@ -75,17 +75,27 @@ namespace TelerikWpfApp3.View
         {
             string groupName = groupNameTxt.Text as string;
             if (groupName == "") return;
-            List<string> parameter = new List<string>();
             int len = selcon.Count-1;
             if (len + 1 < 2) return;
+            string groupMembers = "";
             for (int i = 0; i < len; i++)
             {
-                parameter.Add(selcon[i].User as string);
+                groupMembers += selcon[i].User as string;
+                if(i != len-1)
+                {
+                    groupMembers += "^";
+                }
             }
             // parameter 가 선택된 친구들의 id를 담고 있는 string List임 
             // module을 생성하여 바인딩 하면 된다.
             // groupName은 그룹의 이름을 가지고 있는 string 임
-            MessageBox.Show("Wow");
+            GroupChatManager groupChatManager = new GroupChatManager();
+            groupChatManager.makeGroupChat(groupName,groupMembers);
+        }
+
+        private void Hyperlink_Click_1(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }
