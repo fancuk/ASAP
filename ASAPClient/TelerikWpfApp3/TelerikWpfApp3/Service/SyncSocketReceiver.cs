@@ -160,6 +160,24 @@ namespace TelerikWpfApp3.Service
                         windowManager.CloseAll();
                     }
                 }
+
+                else if (tag.Equals("<MKG>")) //그룹채팅방 최초 생성시
+                {
+                    string createGroupChat = tokens[1];
+                    if (tokens[1] == "true")
+                    {
+                        string groupIdx = tokens[2];
+                        DispatchService.Invoke(() =>
+                        {
+                            
+                        });
+                    }
+                    else
+                    {
+                        MessageBox.Show("채팅방이 생성되지 않았습니다.");
+                    }
+
+                }
                 else if (tag.Equals("<FLD>"))
                 {
                     int count = Int32.Parse(tokens[1]);
