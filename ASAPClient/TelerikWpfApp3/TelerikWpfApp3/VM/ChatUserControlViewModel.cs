@@ -200,7 +200,7 @@ namespace TelerikWpfApp3.VM
                     return;
                 }
                 sendMessage("<ASG>", org as string);
-            }
+            }*/
         }
 
         // 정구
