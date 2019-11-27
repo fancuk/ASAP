@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using TelerikWpfApp3.View;
 
 namespace TelerikWpfApp3.Service
 {
@@ -26,10 +27,12 @@ namespace TelerikWpfApp3.Service
         {
             groupChatRoom = new Dictionary<string, Window>();
         }
-        public void makeChatRoom(string groupIndex)
+        public void makeChatRoom(string groupIndex) // 그룹 채팅방 더블 클릭 시
         {
             //Window gCR = new GroupChatRoom(target); 여기다가 groupChatRoom 클래스 넣어야 함.
             //groupChatRoom.Add(target, gCR);
+            Window groupChattingRoom = new GroupChatRoom(groupIndex);
+            groupChatRoom.Add(groupIndex, groupChattingRoom);
         }
 
         public bool findChatRoom(string groupIndex)

@@ -22,6 +22,7 @@ namespace TelerikWpfApp3.VM
         DabbingPreventor dabbingPreventor = ((App)Application.Current).dabbingPreventor;
         NetworkManager networkManager = ((App)Application.Current).networkManager;
         GroupMemberListManager groupMemberListManager = ((App)Application.Current).groupMemberListManager;
+        GroupChatManager groupChatManager = ((App)Application.Current).groupChatManager;
         private string _msgTextBox;
         public string msgTextBox
         {
@@ -62,6 +63,7 @@ namespace TelerikWpfApp3.VM
             string id = networkManager.MyId;
             string plain = message;
             string nowTime = DateTime.Now.ToString();
+            //groupChatManager.addChattingList() 그룹 인덱스, 그룹 이름
         }
         public List<string> getGroupMemberList(string gIdx) // 여기다가 그룹 사용자들 바인딩 걸면 될 듯
         {

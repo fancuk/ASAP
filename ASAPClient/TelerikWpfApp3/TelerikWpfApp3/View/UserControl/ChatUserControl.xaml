@@ -137,7 +137,7 @@
                             <ListBox.ItemContainerStyle>
 
                                 <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource {x:Type ListBoxItem}}">
-                                    <EventSetter Event="Control.MouseDoubleClick" Handler="RoomDoubleClick"/>
+                                    <EventSetter Event="Control.MouseDoubleClick" Handler="GroupRoomDoubleClick"/>
                                 </Style>
                             </ListBox.ItemContainerStyle>
                             <ListBox.ItemTemplate>

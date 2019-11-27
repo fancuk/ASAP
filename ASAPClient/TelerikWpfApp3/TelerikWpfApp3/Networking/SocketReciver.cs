@@ -24,6 +24,7 @@ namespace TelerikWpfApp3.Networking
         UserStatusManager userStatusManager = ((App)Application.Current).userStatusManager;
         ASAPManager asapManager = ((App)Application.Current).asapManager;
         GroupMemberListManager groupMemberListManager = ((App)Application.Current).groupMemberListManager;
+        GroupChatManager groupChatManager = ((App)Application.Current).groupChatManager;
         private Socket nowSock;
         SocketCloser sc = new SocketCloser();
         public SocketReciver()
@@ -209,13 +210,19 @@ namespace TelerikWpfApp3.Networking
                         string groupIdx = tokens[3];
                         int memberCount = int.Parse(tokens[4]);
                         List<string> groupMemberList = new List<string>(memberCount);
-                        for (int i = 5; i < i + memberCount; i++)
+                        string[] nameSlice = tokens[5].Split('^');
+                        int length = nameSlice.Length;
+                        string time = DateTime.Now.ToString();
+                        groupMemberList.Add(maker);
+                        for (int i = 0; i < length; i++)
                         {
-                            groupMemberList.Add(tokens[i]);
+                            groupMemberList.Add(nameSlice[i]);
                         }
                         groupMemberListManager.AddGroupMemberList(groupIdx, groupMemberList);
-                        // dao에 넣어주면 될 듯
+                        groupChatManager.addChattingList(groupIdx, groupName, maker + "님이 채팅방을 만들었습니다.", time);
+                        //localDAO.GroupInfoCreate(groupIdx, groupName, maker + "^" + tokens[5]); // DAO에 넣어주는거 추가했습니다 BY 정구
                         // 그룹 채팅방 만들어주고 거기다가 maker가 만들었습니다 라고 메시지로 띄우기 (maker가 보낸 것 처럼)
+
                     }
                 }
                 else if (tag.Equals("<GSG>"))

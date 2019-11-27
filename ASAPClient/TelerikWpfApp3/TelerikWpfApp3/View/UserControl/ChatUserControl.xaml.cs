@@ -28,6 +28,7 @@ namespace TelerikWpfApp3.View.UserControl
     {
 
         ChatManager chatManager = ((App)Application.Current).chatManager;
+        GroupChatManager groupChatManager = ((App)Application.Current).groupChatManager;
         private void OnPropertyChanged(string v)
         {
             throw new NotImplementedException();
@@ -44,7 +45,7 @@ namespace TelerikWpfApp3.View.UserControl
             //((App)Application.Current).LoadMyFriends();
             //ClientList.DataContext = ((App)Application.Current).getFriends(); 다민
             ChatRoomList.DataContext = chatManager.getChattingList();
-            
+            groupChatList.DataContext = groupChatManager.getGroupChattingList();
             //this.PreviewKeyDown += new KeyEventHandler(OnEnterKeyDownHandler);
 
 
@@ -118,6 +119,23 @@ namespace TelerikWpfApp3.View.UserControl
             else
             {
                 ChattingRoomManager.Instance.showChatRoom(target);
+            }
+        }
+        private void GroupRoomDoubleClick(object sender,RoutedEventArgs e)
+        {
+            string groupIdx = null;
+            foreach (GroupChatListItem obj in groupChatList.SelectedItems)
+            {
+                groupIdx = obj.GroupIndex;
+            }
+            if (GroupChattingRoomManager.Instance.findChatRoom(groupIdx)) //다민
+            {
+                GroupChattingRoomManager.Instance.makeChatRoom(groupIdx);
+                GroupChattingRoomManager.Instance.showChatRoom(groupIdx);
+            }
+            else
+            {
+                GroupChattingRoomManager.Instance.showChatRoom(groupIdx);
             }
         }
         // 새로운 대화가 추가될때 선택되는 형태이므로 선택에 변화가 생기면 Unselect 해주게 변경.
