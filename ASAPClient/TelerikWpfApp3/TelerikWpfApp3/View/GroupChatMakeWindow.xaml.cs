@@ -28,34 +28,20 @@ namespace TelerikWpfApp3.View
         ChatManager chatManager = ((App)Application.Current).chatManager;
         ObservableCollection<string> addedCollection = new ObservableCollection<string>();
         List<FriendsItem> selectedCollection;
+        private bool status = false;
+        List<FriendsItem> selcon;
         public GroupChatMakeWindow()
         {
             InitializeComponent();
             selectedCollection = new List<FriendsItem>();
             ClientList.DataContext = FriendsUserControlViewModel.Instance.getFriends();
-
+            selcon = new List<FriendsItem>();
         }
-          private void txtNameToSearch_TextChanged(object sender,
-  TextChangedEventArgs e)
-          {
-              string txtOrig = txtNameToSearch.Text;
-              string upper = txtOrig.ToUpper();
-              string lower = txtOrig.ToLower();
   
-              var empFiltered = from Emp in FriendsUserControlViewModel.Instance.getFriends()
-                                let ename = Emp.User
-                                where
-                                 ename.StartsWith(lower)
-                                 || ename.StartsWith(upper)
-                                 || ename.Contains(txtOrig)
-                                select Emp;
-  
-              ClientList.DataContext = empFiltered;
-          }
         private void ClientList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ListBox lb = (ListBox)sender;
-            List<FriendsItem> selcon = new List<FriendsItem>();
+            selcon = new List<FriendsItem>(); 
             int len = lb.SelectedItems.Count;
             for(int i=0; i<len; i++)
             {
@@ -85,5 +71,21 @@ namespace TelerikWpfApp3.View
             }
         }
 
+        private void Hyperlink_Click(object sender, RoutedEventArgs e)
+        {
+            string groupName = groupNameTxt.Text as string;
+            if (groupName == "") return;
+            List<string> parameter = new List<string>();
+            int len = selcon.Count-1;
+            if (len + 1 < 2) return;
+            for (int i = 0; i < len; i++)
+            {
+                parameter.Add(selcon[i].User as string);
+            }
+            // parameter 가 선택된 친구들의 id를 담고 있는 string List임 
+            // module을 생성하여 바인딩 하면 된다.
+            // groupName은 그룹의 이름을 가지고 있는 string 임
+            MessageBox.Show("Wow");
+        }
     }
 }
