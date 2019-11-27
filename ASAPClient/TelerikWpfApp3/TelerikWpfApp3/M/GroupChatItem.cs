@@ -12,7 +12,7 @@ namespace TelerikWpfApp3.M
         private string text;
         private string user;
         private string time;
-
+        private bool chk;
         public string Text
         {
             get { return this.text; }
@@ -40,14 +40,29 @@ namespace TelerikWpfApp3.M
                 OnPropertyChanged("Time");
             }
         }
-        public GroupChatItem(string text, string user, string time)
+        public bool Chk
+        {
+            get { return this.chk; }
+            set
+            {
+                this.chk = value;
+                OnPropertyChanged("Chk");
+            }
+        }
+        public GroupChatItem(string text, string user, string time, bool chk)
         {
             this.Text = text;
             this.User = user;
             this.Time = time;
+            this.Chk = chk;
         }
-       
 
+        // default 생성자 추가
+        public GroupChatItem()
+        {
+
+        }
+        
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string name)

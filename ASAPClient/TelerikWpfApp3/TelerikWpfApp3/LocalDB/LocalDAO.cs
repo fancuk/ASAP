@@ -15,8 +15,10 @@ namespace TelerikWpfApp3.LocalDB
     {
         NetworkManager networkManager = ((App)Application.Current).networkManager;
         ChatManager chatManager;
+        GroupMemberListManager groupMemberListManager;
         public LocalDAO()
         {
+            groupMemberListManager = ((App)Application.Current).groupMemberListManager;
             chatManager = ((App)Application.Current).chatManager;
         }
         public bool chatIsIt = false;
@@ -33,11 +35,33 @@ namespace TelerikWpfApp3.LocalDB
             }
             try
             {
-                string Query = "create table if not exists " + myId +
+                // Made By 정구
+                // 그룹 채팅방 관리를 위한 테이블 생성
+                // CREATE 두번 실행하기 위해 트랜잭션 생성
+
+                SQLiteCommand command = Conn.CreateCommand();
+                SQLiteTransaction trans;
+
+                trans = Conn.BeginTransaction();
+                command.Connection = Conn;
+                command.Transaction = trans;
+
+                command.CommandText = "CREATE TABLE IF NOT EXISTS " + myId +
+                     " (sender VARCHAR(20), receiver VARCHAR(20), time VARCHAR(20), msg VARCHAR(200), isRead TINYINT)";
+                command.ExecuteNonQuery();
+                command.CommandText = "CREATE TABLE IF NOT EXISTS GroupFor" + myId +
+                    " (GIDX VARCHAR(10), name VARCHAR(1100))";
+                command.ExecuteNonQuery();
+                trans.Commit();
+
+                Conn.Close();
+
+                /*string Query = "create table if not exists " + myId +
                      " (sender varchar(20), receiver varchar(20), time varchar(20), msg varchar(200), isRead TINYINT)";
                 SQLiteCommand command = new SQLiteCommand(Query, Conn);
                 int Result = command.ExecuteNonQuery();
-                Conn.Close();
+                Conn.Close();*/
+
             }
             catch (Exception e)
             {
@@ -154,6 +178,7 @@ namespace TelerikWpfApp3.LocalDB
                 Conn.Open();
                 SQLiteCommand Command = new SQLiteCommand(query, Conn);
                 SQLiteDataReader Datareader = Command.ExecuteReader();
+                bool isGroup = false;
                 while (Datareader.Read())
                 {
                     string msg = Datareader["msg"].ToString();
@@ -161,30 +186,66 @@ namespace TelerikWpfApp3.LocalDB
                     string receiver = Datareader["receiver"].ToString();
                     string time = Datareader["time"].ToString();
                     int status = int.Parse(Datareader["isRead"].ToString()); //true 1 false 0, 1은 읽은거, 0은 안읽은거
+
                     Chatitem tmpChatItem = new Chatitem();
-                    tmpChatItem.User = sender;
-                    tmpChatItem.Text = msg;
-                    tmpChatItem.Time = time;
-                    if (status == 1)
+                    GroupChatItem tmpGroupChatItem = new GroupChatItem();
+                    if (status != 3)
                     {
-                        tmpChatItem.Status = true;
+                        tmpChatItem.User = sender;
+                        tmpChatItem.Text = msg;
+                        tmpChatItem.Time = time;
+                        if (status == 1)
+                        {
+                            tmpChatItem.Status = true;
+                        }
+                        else
+                        {
+                            tmpChatItem.Status = false;
+                        }
                     }
                     else
                     {
-                        tmpChatItem.Status = false;
+                        tmpGroupChatItem.User = sender;
+                        tmpGroupChatItem.Text = msg;
+                        tmpGroupChatItem.Time = time;
+
+                        // 여기는 그룹 채팅 넣어주는 거. 읽었다고 처리할려고 true로 반환해줌.
+                        isGroup = true;
                     }
-                    if (sender.Equals(myId))
+                    if (isGroup == true) // 그룹채팅때 수행, addChat은 저렇게 넣어야 됨.
                     {
-                        tmpChatItem.Chk = true;
-                        chatManager.addChat(receiver, tmpChatItem);
+                        if (sender.Equals(myId)) // 그룹 챗 보낸 사람이 나다!
+                        {
+                            tmpGroupChatItem.Chk = true;
+                            // 넣는 순서는 receiver, tmpChatItem
+                            // 이때 receiver는 Gidx이다.
+                            //chatManager.addChat(receiver, tmpChatItem);
+                        }
+                        else // 그룹 챗 보낸 사람이 나는 아니다!
+                        {
+                            tmpGroupChatItem.Chk = false;
+                            //chatManager.addChat(receiver, tmpChatItem);
+                        }
+                        isGroup = false;
                     }
-                    else if (receiver.Equals(myId))
+                    else // 그룹 아니면 일반 채팅
                     {
-                        tmpChatItem.Chk = false;
-                        chatManager.addChat(sender, tmpChatItem);
+                        if (sender.Equals(myId))
+                        {
+                            tmpChatItem.Chk = true;
+                            chatManager.addChat(receiver, tmpChatItem);
+                        }
+                        else if (receiver.Equals(myId))
+                        {
+                            tmpChatItem.Chk = false;
+                            chatManager.addChat(sender, tmpChatItem);
+                        }
                     }
                 }
                 chatManager.setChattingList();
+                
+                // 여기는 그룹 챗 세팅 부분
+                // 여기다 추가
             }
             catch (Exception e)
             {
@@ -210,8 +271,10 @@ namespace TelerikWpfApp3.LocalDB
             SQLiteConnection Conn = new
                 SQLiteConnection("Data Source=Chatting;Version=3");
             //string query = "UPDATE " + myId + " SET isRead = " + 1 + " WHERE isRead = 0 AND (sender = " + reader + " OR receiver = " + reader + " )"; // change status
-            string query = "UPDATE " + myId + " SET isRead = " + 1 + " WHERE sender = '" + reader + "' OR receiver = '" + reader + "'"; // change status
+            //string query = "UPDATE " + myId + " SET isRead = " + 1 + " WHERE sender = '" + reader + "' OR receiver = '" + reader + "'"; // change status
 
+            // isRead = 0 넣은 이유는 GroupChat을 공유하는데 0과 1을 따로 처리하니까 바꿔버림 그냥 그룹 챗은 3으로 때려박을게.
+            string query = "UPDATE " + myId + " SET isRead = " + 1 + " WHERE isRead = " + 0 + " AND (sender = '" + reader + "' OR receiver = '" + reader + "')"; // change status
             try
             {
                 Conn.Open();
@@ -227,6 +290,125 @@ namespace TelerikWpfApp3.LocalDB
                 Conn.Close();
             }
 
+        }
+        #endregion
+
+        #region Create_GroupChat
+        // Made by 정구
+        // 그룹 대화 추가는 table이 myId이여야 하고, isRead를 예외적으로 3으로 처리함으로써 그룹으로 인식하겠끔 사용
+        // 3이 되면 싱글 챗과 전혀  관련이 없어진다. 또한 Chat 읽기도 수정해놓음.
+        public bool GroupChattingCreate(string Sender, string Gidx, string Time, string Msg) // 그룹 대화 추가
+        {
+            string myId = networkManager.MyId;
+            createChattingFile(myId);
+            bool flag = false;
+            string query;
+
+            query =
+                   "INSERT INTO " + myId + "(sender,receiver,time,msg,isRead) " +
+                   "VALUES('" + Sender + "','" + Gidx + "','" + Time + "','" + Msg + "','" + 3 + "') ";
+            SQLiteConnection Conn = new
+                SQLiteConnection("Data Source=Chatting;Version=3");
+            try
+            {
+                Conn.Open();
+                SQLiteCommand Command = new SQLiteCommand(query, Conn);
+                Command.ExecuteNonQuery();
+                flag = true;
+            }
+            catch (Exception e)
+            {
+                //추가
+            }
+            finally
+            {
+                Conn.Close();
+            }
+            return flag;
+        }
+        #endregion
+
+        #region Create_GroupList
+        // Made By 정구
+        // 그룹챗이 생성되면 생성된 그룹방 정보 Insert - GroupIndex 와 UseerName들이 들어감.
+
+        public bool GroupInfoCreate(string GIDX, string GroupUsers) // Insert Group Data
+        {
+            string myId = networkManager.MyId;
+            createChattingFile(myId);
+            bool flag = false;
+            string query = "INSERT INTO GroupFor" + myId + "(GIDX, name) " +
+                   "VALUES('" + GIDX + "','" + GroupUsers + "') ";
+
+
+            SQLiteConnection Conn = new
+                SQLiteConnection("Data Source=Chatting;Version=3");
+            try
+            {
+                Conn.Open();
+                SQLiteCommand Command = new SQLiteCommand(query, Conn);
+                Command.ExecuteNonQuery();
+                flag = true;
+            }
+            catch (Exception e)
+            {
+                //추가
+            }
+            finally
+            {
+                Conn.Close();
+            }
+            return flag;
+
+        }
+
+        #endregion
+
+        #region Read_GroupList
+        // Made By 정구
+        // 그룹 채팅방 정보를 읽기 위한 Read Function
+
+        public void ReadGroupList() // Read Group Data
+        {
+            string myId = networkManager.MyId;
+            createChattingFile(myId);
+            string query = "SELECT DISTINCT * FROM GroupFor" + myId;
+
+            SQLiteConnection Conn = new
+                SQLiteConnection("Data Source=Chatting;Version=3");
+            try
+            {
+                Conn.Open();
+                SQLiteCommand Command = new SQLiteCommand(query, Conn);
+                Command.ExecuteNonQuery();
+
+                SQLiteDataReader Datareader = Command.ExecuteReader();
+
+                while (Datareader.Read())
+                {
+
+                    string GIDX = Datareader["GIDX"].ToString();
+                    string name = Datareader["name"].ToString();
+                    List<string> groupMembers = new List<string>();
+                    string[] nameSlice = name.Split(',');
+                    int length = nameSlice.Length;
+                    for (int i = 0; i < length; i++)
+                    {
+                        groupMembers.Add(nameSlice[i]);
+                    }
+                    // 이거는 그룹 리스트 넣어줌
+                    groupMemberListManager.AddGroupMemberList(GIDX, groupMembers);
+
+                }
+            }
+            catch (Exception e)
+            {
+                //추가
+            }
+            finally
+            {
+                Conn.Close();
+            }
         }
         #endregion
     }
