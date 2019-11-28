@@ -24,6 +24,7 @@ namespace TelerikWpfApp3.VM
         GroupMemberListManager groupMemberListManager = ((App)Application.Current).groupMemberListManager;
         GroupChatManager groupChatManager = ((App)Application.Current).groupChatManager;
         private string _msgTextBox;
+        public string gIdx; // ChatRoom new 생성자로 계속 만들어주니까 그때 마다 gIdx 넣어주면 될 듯
         public string msgTextBox
         {
             get
@@ -35,6 +36,13 @@ namespace TelerikWpfApp3.VM
                 this._msgTextBox = value;
                 OnPropertyChanged(msgTextBox);
             }
+        }
+
+        public void OnWindowClosing(object sender, CancelEventArgs e)
+        {
+            // Handle closing logic, set e.Cancel as needed
+            e.Cancel = true;
+            GroupChattingRoomManager.Instance.closeChatRoom(gIdx);
         }
 
         public ICommand GroupSendText { get; set; } // 그룹 채팅방 전송 버튼

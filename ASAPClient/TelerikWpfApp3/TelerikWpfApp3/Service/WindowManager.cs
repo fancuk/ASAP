@@ -7,6 +7,7 @@ using System.Windows;
 using TelerikWpfApp3.M;
 using TelerikWpfApp3.View.Alert;
 using TelerikWpfApp3.VM;
+using TelerikWpfApp3.View;
 
 namespace TelerikWpfApp3.Service
 {
@@ -30,6 +31,17 @@ namespace TelerikWpfApp3.Service
         {
             Window Rg = TelerikWpfApp3.Register.Instance;
             Rg.Hide();
+        }
+
+        public void GroupMakeWindowShow()
+        {
+            Window groupMakeWindow = GroupChatMakeWindow.Instance;
+            groupMakeWindow.Show();
+        }
+        public void GroupMakeWindowClose()
+        {
+            Window groupMakeWindow = GroupChatMakeWindow.Instance;
+            groupMakeWindow.Hide();
         }
         public void CloseAll()
         {

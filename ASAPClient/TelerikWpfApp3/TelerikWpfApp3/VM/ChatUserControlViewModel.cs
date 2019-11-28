@@ -109,8 +109,7 @@ namespace TelerikWpfApp3.VM
         }*/
         public void ExecuteShowMakeGroupWindow(object org)
         {
-            Window gc = new GroupChatMakeWindow();
-            gc.Show();
+            windowManager.GroupMakeWindowShow();
         }
         //public void ExeceuteSendMsg(object org)
         //{//메세지 공백 방지!

@@ -25,12 +25,24 @@ namespace TelerikWpfApp3.View
     /// </summary>
     public partial class GroupChatMakeWindow : Window
     {
+        private static GroupChatMakeWindow instance = null;
+        public static GroupChatMakeWindow Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new GroupChatMakeWindow();
+                }
+                return instance;
+            }
+        }
         ChatManager chatManager = ((App)Application.Current).chatManager;
         ObservableCollection<string> addedCollection = new ObservableCollection<string>();
         List<FriendsItem> selectedCollection;
         private bool status = false;
         List<FriendsItem> selcon;
-        public GroupChatMakeWindow()
+        private GroupChatMakeWindow()
         {
             InitializeComponent();
             selectedCollection = new List<FriendsItem>();
@@ -89,8 +101,8 @@ namespace TelerikWpfApp3.View
             // parameter 가 선택된 친구들의 id를 담고 있는 string List임 
             // module을 생성하여 바인딩 하면 된다.
             // groupName은 그룹의 이름을 가지고 있는 string 임
-            GroupChatManager groupChatManager = new GroupChatManager();
-            groupChatManager.makeGroupChat(groupName,groupMembers);
+            //GroupChatManager groupChatManager = new GroupChatManager();
+            //groupChatManager.makeGroupChat(groupName,groupMembers); ViewModel 만들었음!
         }
 
         private void Hyperlink_Click_1(object sender, RoutedEventArgs e)
