@@ -90,18 +90,18 @@
                 <StackPanel Height="105">
                     <Border CornerRadius="10" Background="White" Height="92">
                         <Border.Effect>
-                            <DropShadowEffect Opacity="0.03"></DropShadowEffect>
+                            <DropShadowEffect Opacity="0.03" BlurRadius="10" Color="gray" ShadowDepth="0"></DropShadowEffect>
                         </Border.Effect>
                         <StackPanel Margin="0,0,0,10">
                             <StackPanel Height="146"  Orientation="Vertical">
                                 <StackPanel Height="27" Orientation="Horizontal">
-                                    <StackPanel Width="22" Margin="264,4,0,10">
+                                    <StackPanel Width="22" Margin="358,2,0,10">
                                         <StackPanel.DataContext>
                                             <vm:TitleControl></vm:TitleControl>
                                         </StackPanel.DataContext>
                                         <TextBlock>
                                             <Hyperlink TextDecorations="{x:Null}"
-                                                      >
+                                                      Click="Hyperlink_Click_1" >
                                                 <StackPanel  Width="12" Height="12" Margin="0">
                                                     <StackPanel.Background>
                                                         <ImageBrush Stretch="Uniform" ImageSource="/TelerikWpfApp3;component/Resources/exitSmall.png"/>

@@ -25,24 +25,12 @@ namespace TelerikWpfApp3.View
     /// </summary>
     public partial class GroupChatMakeWindow : Window
     {
-        private static GroupChatMakeWindow instance = null;
-        public static GroupChatMakeWindow Instance
-        {
-            get
-            {
-                if (instance == null)
-                {
-                    instance = new GroupChatMakeWindow();
-                }
-                return instance;
-            }
-        }
         ChatManager chatManager = ((App)Application.Current).chatManager;
         ObservableCollection<string> addedCollection = new ObservableCollection<string>();
         List<FriendsItem> selectedCollection;
         private bool status = false;
         List<FriendsItem> selcon;
-        private GroupChatMakeWindow()
+        public GroupChatMakeWindow()
         {
             InitializeComponent();
             selectedCollection = new List<FriendsItem>();
@@ -87,22 +75,22 @@ namespace TelerikWpfApp3.View
         {
             string groupName = groupNameTxt.Text as string;
             if (groupName == "") return;
-            int len = selcon.Count-1;
-            if (len + 1 < 2) return;
+            int len = selcon.Count;
+            if (len  < 2) return;
             string groupMembers = "";
             for (int i = 0; i < len; i++)
             {
                 groupMembers += selcon[i].User as string;
-                if(i != len-1)
-                {
-                    groupMembers += "^";
-                }
+                groupMembers += "^";
+
             }
+            len += 1;
+            string groupMemberCount = len.ToString();
             // parameter 가 선택된 친구들의 id를 담고 있는 string List임 
             // module을 생성하여 바인딩 하면 된다.
             // groupName은 그룹의 이름을 가지고 있는 string 임
-            //GroupChatManager groupChatManager = new GroupChatManager();
-            //groupChatManager.makeGroupChat(groupName,groupMembers); ViewModel 만들었음!
+            GroupChatManager groupChatManager = new GroupChatManager();
+            groupChatManager.makeGroupChat(groupName,groupMembers, groupMemberCount);
         }
 
         private void Hyperlink_Click_1(object sender, RoutedEventArgs e)
