@@ -14,6 +14,7 @@ using TelerikWpfApp3.Utility;
 using TelerikWpfApp3.Service;
 using TelerikWpfApp3.LocalDB;
 using TelerikWpfApp3.View;
+using TelerikWpfApp3.Collection;
 
 namespace TelerikWpfApp3.VM
 {
@@ -24,7 +25,7 @@ namespace TelerikWpfApp3.VM
         GroupMemberListManager groupMemberListManager = ((App)Application.Current).groupMemberListManager;
         GroupChatManager groupChatManager = ((App)Application.Current).groupChatManager;
         private string _msgTextBox;
-        public string gIdx; // ChatRoom new 생성자로 계속 만들어주니까 그때 마다 gIdx 넣어주면 될 듯
+        public string gIdx; // ChatRoom new 생성자로 계속 만들어주니까 그때 마다 gIdx 넣어주면 될 듯 바인딩 필요 x
         public string msgTextBox
         {
             get
@@ -37,7 +38,6 @@ namespace TelerikWpfApp3.VM
                 OnPropertyChanged(msgTextBox);
             }
         }
-
         public void OnWindowClosing(object sender, CancelEventArgs e)
         {
             // Handle closing logic, set e.Cancel as needed
@@ -63,15 +63,21 @@ namespace TelerikWpfApp3.VM
                     MessageBox.Show("도배 하지 마세요!");
                     return;
                 }
-                sendMessage("<MSG>", org as string);
+                sendMessage("<GSG>", org as string);
             }
+        }
+        public ItemsChangeObservableCollection<GroupChatItem> loadChat(string gIdx) // 여기다가 그룹 대화 바인딩 걸면 될 듯
+        {
+            return groupChatManager.loadChat(gIdx);
         }
         public void sendMessage(string tag, string message)
         {
             string id = networkManager.MyId;
             string plain = message;
             string nowTime = DateTime.Now.ToString();
-            //groupChatManager.addChattingList() 그룹 인덱스, 그룹 이름
+            string text = id + "/" + gIdx + "/" + plain + "/" + nowTime;
+            groupChatManager.addChat(gIdx, new GroupChatItem(plain, id, nowTime, true));
+            networkManager.SendData(tag, text);
         }
         public List<string> getGroupMemberList(string gIdx) // 여기다가 그룹 사용자들 바인딩 걸면 될 듯
         {
