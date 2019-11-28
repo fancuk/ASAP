@@ -74,11 +74,7 @@ namespace TelerikWpfApp3.Service
         }
         #endregion
         #region 그룹 채팅 관련
-        public void makeGroupChat(string groupName, string groupMembers)
-        {
-            string groupMaker = networkManager.MyId;
-            networkManager.SendData("<MKG>", groupMaker + "/" + groupName + "/" + groupMembers);
-        }
+        
         public void addChat(string groupidx, GroupChatItem groupChatItem)
         {//새로운 채팅 추가
 

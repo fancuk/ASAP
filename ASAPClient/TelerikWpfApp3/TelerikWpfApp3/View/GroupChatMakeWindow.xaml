@@ -230,7 +230,7 @@
                                                 </StackPanel>
                                             </Border>
                                         </InlineUIContainer></Hyperlink></TextBlock>
-                                <TextBlock Height="45"><Hyperlink TextDecorations="{x:Null}" Command="{Binding FriendsAddButton}"><InlineUIContainer>
+                                <TextBlock Height="45"><Hyperlink TextDecorations="{x:Null}" Click="Hyperlink_Click_1" Command="{Binding FriendsAddButton}"><InlineUIContainer>
                                             <Border CornerRadius="5" Background="#FF9E8C8C" Height="33" Margin="10,7,10,0" Width="112">
                             
                                                 <StackPanel>

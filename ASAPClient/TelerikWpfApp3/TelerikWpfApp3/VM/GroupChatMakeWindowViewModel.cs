@@ -42,27 +42,20 @@ namespace TelerikWpfApp3.VM
                 OnPropertyChanged("GroupFriendsList");
             }
         }
-        
-        public ICommand MakeGroupButton { get; set; }
+
         public GroupChatMakeWindowViewModel()
         {
-            MakeGroupButton = new Command(MakeGroup, CanExecuteMethod);
+
         }
-        public void MakeGroup(object org)
+
+        public void makeGroupChat(string groupName, string groupMembers, string groupMemberCount)
         {
             string groupMaker = networkManager.MyId;
-            int count = groupMembers.Count;
-            string groupmembers = groupMaker + "^";
-            for(int i = 0; i < count; i++)
-            {
-                groupmembers += groupMembers[i];
-                if (i != count - 1)
-                {
-                    groupmembers += "^";
-                }
-            }
-            networkManager.SendData("<MKG>", groupMaker + "/" + GroupName + "/" + groupMembers);
+            groupMembers += groupMaker;
+            networkManager.SendData("<MKG>", groupMaker + "/" + groupName + "/" +
+                groupMemberCount + "/" + groupMembers);
         }
+
         public void OnWindowClosing(object sender, CancelEventArgs e)
         {
             // Handle closing logic, set e.Cancel as needed
