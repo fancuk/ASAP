@@ -194,6 +194,7 @@ namespace TelerikWpfApp3.Service
                     DispatchService.Invoke(() =>
                     {
                         localDAO.ReadChat();
+                        localDAO.ReadGroupList();
                     });
                 }
                 else

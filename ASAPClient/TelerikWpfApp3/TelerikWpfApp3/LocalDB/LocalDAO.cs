@@ -16,10 +16,12 @@ namespace TelerikWpfApp3.LocalDB
         NetworkManager networkManager = ((App)Application.Current).networkManager;
         ChatManager chatManager;
         GroupMemberListManager groupMemberListManager;
+        GroupChatManager groupManager;
         public LocalDAO()
         {
             groupMemberListManager = ((App)Application.Current).groupMemberListManager;
             chatManager = ((App)Application.Current).chatManager;
+            groupManager = ((App)Application.Current).groupChatManager;
         }
         public bool chatIsIt = false;
         #region createChattingFile
@@ -219,12 +221,12 @@ namespace TelerikWpfApp3.LocalDB
                             tmpGroupChatItem.Chk = true;
                             // 넣는 순서는 receiver, tmpChatItem
                             // 이때 receiver는 Gidx이다.
-                            //chatManager.addChat(receiver, tmpChatItem);
+                            groupManager.addChat(receiver, tmpGroupChatItem);
                         }
                         else // 그룹 챗 보낸 사람이 나는 아니다!
                         {
                             tmpGroupChatItem.Chk = false;
-                            //chatManager.addChat(receiver, tmpChatItem);
+                            groupManager.addChat(receiver, tmpGroupChatItem);
                         }
                         isGroup = false;
                     }
@@ -243,6 +245,7 @@ namespace TelerikWpfApp3.LocalDB
                     }
                 }
                 chatManager.setChattingList();
+                groupManager.setChattingList();
 
                 // 여기는 그룹 챗 세팅 부분
                 // 여기다 추가
@@ -399,7 +402,7 @@ namespace TelerikWpfApp3.LocalDB
                     }
                     // 이거는 그룹 리스트 넣어줌
                     groupMemberListManager.AddGroupMemberList(GIDX, groupMembers);
-
+                    groupManager.addGroupName(GIDX, groupname);
                 }
             }
             catch (Exception e)
