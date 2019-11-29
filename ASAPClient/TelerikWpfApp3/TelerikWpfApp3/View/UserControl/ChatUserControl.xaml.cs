@@ -128,9 +128,10 @@ namespace TelerikWpfApp3.View.UserControl
             {
                 groupIdx = obj.GroupIndex;
             }
+            string groupName = groupChatManager.getGroupName(groupIdx);
             if (GroupChattingRoomManager.Instance.findChatRoom(groupIdx)) //다민
             {
-                GroupChattingRoomManager.Instance.makeChatRoom(groupIdx);
+                GroupChattingRoomManager.Instance.makeChatRoom(groupIdx,groupName);
                 GroupChattingRoomManager.Instance.showChatRoom(groupIdx);
             }
             else

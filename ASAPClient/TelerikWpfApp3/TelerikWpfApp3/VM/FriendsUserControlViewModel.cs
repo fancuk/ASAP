@@ -61,7 +61,11 @@ namespace TelerikWpfApp3.VM
             {
                 if (ico[i].User == target)
                 {
-                    return true;
+                    if (ico[i].Status.Equals("true"))
+                    {
+                        return true;
+                    }
+                    else return false;
                 }
             }
             return false;

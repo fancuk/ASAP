@@ -220,7 +220,7 @@ namespace TelerikWpfApp3.Networking
                         }
                         groupMemberListManager.AddGroupMemberList(groupIdx, groupMemberList);
                         string plain = maker + "님이 채팅방을 만드셨습니다.";
-                        GroupChattingRoomManager.Instance.makeChatRoom(groupIdx);
+                        GroupChattingRoomManager.Instance.makeChatRoom(groupIdx, groupName);
                         groupChatManager.addChattingList(groupIdx, groupName, plain, time);
                         if (maker == networkManager.MyId) // 만든 사람이 나라면
                         {
@@ -234,8 +234,9 @@ namespace TelerikWpfApp3.Networking
                         {
                             groupChatManager.addChat(groupIdx, new GroupChatItem(plain, maker, time, false)); // check가 true면 내가 보낸건가?
                         }
-                        localDAO.GroupInfoCreate(groupIdx, groupName, maker + "^" + tokens[5]); // DAO에 넣어주는거 추가했습니다 BY 정구
+                        localDAO.GroupInfoCreate(groupIdx, groupName, maker + "^" + tokens[5]);
                         localDAO.GroupChattingCreate(maker, groupIdx, time, plain);
+
                     }
                 }
                 else if (tag.Equals("<GSG>"))
@@ -248,9 +249,7 @@ namespace TelerikWpfApp3.Networking
                     // dao에 넣어주고
                     // 그룹 채팅방에 메시지 보내주기
                     groupChatManager.addChat(gIdx, new GroupChatItem(plain, sender, time, false));
-                    
-                    groupChatManager.addChattingList(gIdx, groupName, plain, time); // null 값에 groupname을 받아오자 // null 값에 groupname을 받아오자
-                                                                                    //  groupchatmanager에게 gidx를 주면 받을 수 있게 구현하자
+                    groupChatManager.addChattingList(gIdx, groupName, plain, time);
                     localDAO.GroupChattingCreate(sender, gIdx, time, plain);
                 }
                 // 텍스트박스에 추가해준다.
