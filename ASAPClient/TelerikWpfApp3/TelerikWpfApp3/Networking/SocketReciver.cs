@@ -242,10 +242,11 @@ namespace TelerikWpfApp3.Networking
                     string gIdx = tokens[2];
                     string plain = tokens[3];
                     string time = tokens[4];
+                    string groupName = groupChatManager.getGroupName(gIdx);
                     // dao에 넣어주고
                     // 그룹 채팅방에 메시지 보내주기
                     groupChatManager.addChat(gIdx, new GroupChatItem(plain, sender, time, false));
-                    groupChatManager.addChattingList(gIdx, null, plain, time); // null 값에 groupname을 받아오자
+                    groupChatManager.addChattingList(gIdx, groupName, plain, time); // null 값에 groupname을 받아오자
                                                                                //  groupchatmanager에게 gidx를 주면 받을 수 있게 구현하자 
                 }
                 // 텍스트박스에 추가해준다.

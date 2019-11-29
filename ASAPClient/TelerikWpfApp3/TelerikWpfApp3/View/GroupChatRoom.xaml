@@ -14,7 +14,7 @@
         Background="{x:Null}" HorizontalAlignment="Left" Activated="ChattingRoom_Activated" Deactivated="ChattingRoom_Deactivated"
         >
     <Window.DataContext>
-        <VM:ChatUserControlViewModel></VM:ChatUserControlViewModel>
+        <VM:GroupChatRoomViewModel></VM:GroupChatRoomViewModel>
     </Window.DataContext>
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Closing">
