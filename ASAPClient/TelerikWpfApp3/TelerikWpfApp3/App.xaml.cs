@@ -31,12 +31,12 @@ namespace TelerikWpfApp3
         public App()
         {
              networkManager = new NetworkManager();
+            groupChatManager = new GroupChatManager();
             chatManager = new ChatManager();
             localDAO = new LocalDAO();
              windowManager = new WindowManager();
              dabbingPreventor = new DabbingPreventor();
             userStatusManager = new UserStatusManager();
-            groupChatManager = new GroupChatManager();
             groupMemberListManager = new GroupMemberListManager();
             asapManager = new ASAPManager();
             Startup += App_Startup;

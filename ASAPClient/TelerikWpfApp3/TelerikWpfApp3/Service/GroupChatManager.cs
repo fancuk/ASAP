@@ -66,10 +66,11 @@ namespace TelerikWpfApp3.Service
         {
             foreach (string gIdx in GroupChatDict.Keys)
             {
+                string groupName = getGroupName(gIdx);
                 ItemsChangeObservableCollection<GroupChatItem> tmp = new ItemsChangeObservableCollection<GroupChatItem>();
                 tmp = this.GroupChatDict[gIdx].Item2;
                 GroupChatItem a = tmp[tmp.Count - 1];
-                //GCL.GroupChattingList.Add(new GroupChatListItem(a.GroupName,a.Text,a.Text); GroupChatItem 수정 후에 주석 풀기
+                GCL.GroupChattingList.Add(new GroupChatListItem(groupName, a.Text, a.Time));
             }
         }
         public ItemsChangeObservableCollection<GroupChatListItem> getGroupChattingList()

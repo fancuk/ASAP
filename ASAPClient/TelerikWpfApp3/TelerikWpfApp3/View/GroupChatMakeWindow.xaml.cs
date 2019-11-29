@@ -100,8 +100,8 @@ namespace TelerikWpfApp3.View
             // groupName은 그룹의 이름을 가지고 있는 string 임
             GroupChatMakeWindowViewModel groupChatMakeWindowVM = new GroupChatMakeWindowViewModel();
             groupChatMakeWindowVM.makeGroupChat(groupName, groupMembers, groupMemberCount);
+            this.Close();
         }
-
         private void Hyperlink_Click_1(object sender, RoutedEventArgs e)
         {
             this.Close();

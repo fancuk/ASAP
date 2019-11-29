@@ -221,8 +221,11 @@ namespace TelerikWpfApp3.Networking
                         }
                         groupMemberListManager.AddGroupMemberList(groupIdx, groupMemberList);
                         string plain = maker + "님이 채팅방을 만드셨습니다.";
-                        GroupChattingRoomManager.Instance.makeChatRoom(groupIdx, groupName);
-                        groupChatManager.addChattingList(groupIdx, groupName, plain, time);
+                        DispatchService.Invoke(() =>
+                        {
+                            groupChatManager.addChattingList(groupIdx, groupName, plain, time);
+                            GroupChattingRoomManager.Instance.makeChatRoom(groupIdx, groupName);
+                        });
                         if (maker == networkManager.MyId) // 만든 사람이 나라면
                         {
                             DispatchService.Invoke(() =>
