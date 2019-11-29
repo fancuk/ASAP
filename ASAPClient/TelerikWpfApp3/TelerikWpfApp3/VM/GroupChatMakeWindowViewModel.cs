@@ -56,12 +56,6 @@ namespace TelerikWpfApp3.VM
                 groupMemberCount + "/" + groupMembers);
         }
 
-        public void OnWindowClosing(object sender, CancelEventArgs e)
-        {
-            // Handle closing logic, set e.Cancel as needed
-            e.Cancel = true;
-            windowManager.GroupMakeWindowClose();
-        }
         private bool CanExecuteMethod(object arg)
         {
             return true;

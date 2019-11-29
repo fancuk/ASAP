@@ -31,19 +31,6 @@ namespace TelerikWpfApp3.View
         private bool status = false;
         List<FriendsItem> selcon;
 
-        private static GroupChatMakeWindow instance = null;
-        public static GroupChatMakeWindow Instance
-        {
-            get
-            {
-                if (instance == null)
-                {
-                    instance = new GroupChatMakeWindow();
-                }
-                return instance;
-            }
-        }
-
         public GroupChatMakeWindow()
         {
             InitializeComponent();
@@ -88,7 +75,11 @@ namespace TelerikWpfApp3.View
         private void Hyperlink_Click(object sender, RoutedEventArgs e)
         {
             string groupName = groupNameTxt.Text as string;
-            if (groupName == "") return;
+            if (groupName == "")
+            {
+                MessageBox.Show("그룹 이름을 입력 하세요");
+                return;
+            }
             int len = selcon.Count;
             if (len < 2)
             {

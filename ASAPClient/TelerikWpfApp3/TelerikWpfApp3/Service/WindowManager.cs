@@ -33,16 +33,6 @@ namespace TelerikWpfApp3.Service
             Rg.Hide();
         }
 
-        public void GroupMakeWindowShow()
-        {
-            Window groupMakeWindow = GroupChatMakeWindow.Instance;
-            groupMakeWindow.Show();
-        }
-        public void GroupMakeWindowClose()
-        {
-            Window groupMakeWindow = GroupChatMakeWindow.Instance;
-            groupMakeWindow.Hide();
-        }
         public void CloseAll()
         {
             ChattingRoomManager.Instance.closeAllChatRoom();
