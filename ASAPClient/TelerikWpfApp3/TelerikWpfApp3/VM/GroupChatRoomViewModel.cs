@@ -24,8 +24,22 @@ namespace TelerikWpfApp3.VM
         NetworkManager networkManager = ((App)Application.Current).networkManager;
         GroupMemberListManager groupMemberListManager = ((App)Application.Current).groupMemberListManager;
         GroupChatManager groupChatManager = ((App)Application.Current).groupChatManager;
+        LocalDAO localDAO = ((App)Application.Current).localDAO;
         private string _msgTextBox;
         public string gIdx; // ChatRoom new 생성자로 계속 만들어주니까 그때 마다 gIdx 넣어주면 될 듯 바인딩 필요 x
+        public string _groupChatName;
+        public string groupChatName
+        {
+            get
+            {
+                return this._groupChatName;
+            }
+            set
+            {
+                this._groupChatName = value;
+                OnPropertyChanged(groupChatName);
+            }
+        }
         public string msgTextBox
         {
             get
@@ -80,6 +94,7 @@ namespace TelerikWpfApp3.VM
             string groupName = groupChatManager.getGroupName(gIdx);
             groupChatManager.addChattingList(gIdx, groupName, plain, nowTime);
             networkManager.SendData(tag, text);
+            localDAO.GroupChattingCreate(id, gIdx, nowTime, plain);
         }
         public List<string> getGroupMemberList(string gIdx) // 여기다가 그룹 사용자들 바인딩 걸면 될 듯
         {
