@@ -28,11 +28,13 @@ namespace TelerikWpfApp3.View
         GroupChatManager gcm = ((App)Application.Current).groupChatManager;
         GroupChatRoomViewModel gc = new GroupChatRoomViewModel();
 
-        public GroupChatRoom(string groupidx,string groupName)
+        public GroupChatRoom(string groupidx, string groupName)
         {
             InitializeComponent();
             this.MouseLeftButtonDown += MoveWindow;
             gc.gIdx = groupidx;
+            gc.groupChatName = groupName;
+
             Closing += gc.OnWindowClosing;
             ChatBox.DataContext = gcm.loadChat(gc.gIdx);
             UpdateScrollBar(ChatBox);
