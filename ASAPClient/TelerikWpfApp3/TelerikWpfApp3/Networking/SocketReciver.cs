@@ -196,6 +196,7 @@ namespace TelerikWpfApp3.Networking
                         asapManager.RemoveLastChat(time);
                         chatManager.RemoveChat_ASAP(friendID, time);
                     }
+                    asapManager.ASAP_RemoveSentList(friendID);
                 }
                 else if (tag.Equals("<MKG>"))
                 {
