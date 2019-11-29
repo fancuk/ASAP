@@ -50,7 +50,7 @@ namespace TelerikWpfApp3.LocalDB
                      " (sender VARCHAR(20), receiver VARCHAR(20), time VARCHAR(20), msg VARCHAR(200), isRead TINYINT)";
                 command.ExecuteNonQuery();
                 command.CommandText = "CREATE TABLE IF NOT EXISTS GroupFor" + myId +
-                    " (GIDX VARCHAR(10), name VARCHAR(1100))";
+                    " (GIDX VARCHAR(10), groupname VARCHAR(30), name VARCHAR(1100))";
                 command.ExecuteNonQuery();
                 trans.Commit();
 
@@ -138,7 +138,7 @@ namespace TelerikWpfApp3.LocalDB
                     tmpChatItem.Text = msg;
                     tmpChatItem.Time = time;
                     tmpChatItem.Chk = true;
-                    if(status == 1)
+                    if (status == 1)
                     {
                         tmpChatItem.Status = true;
                     }
@@ -243,7 +243,7 @@ namespace TelerikWpfApp3.LocalDB
                     }
                 }
                 chatManager.setChattingList();
-                
+
                 // 여기는 그룹 챗 세팅 부분
                 // 여기다 추가
             }
@@ -332,13 +332,13 @@ namespace TelerikWpfApp3.LocalDB
         // Made By 정구
         // 그룹챗이 생성되면 생성된 그룹방 정보 Insert - GroupIndex 와 UseerName들이 들어감.
 
-        public bool GroupInfoCreate(string GIDX, string GroupUsers) // Insert Group Data
+        public bool GroupInfoCreate(string GIDX, string GroupName, string GroupUsers) // Insert Group Data
         {
             string myId = networkManager.MyId;
             createChattingFile(myId);
             bool flag = false;
-            string query = "INSERT INTO GroupFor" + myId + "(GIDX, name) " +
-                   "VALUES('" + GIDX + "','" + GroupUsers + "') ";
+            string query = "INSERT INTO GroupFor" + myId + "(GIDX, groupname, name) " +
+                   "VALUES('" + GIDX + "','" + GroupName + "','" + GroupUsers + "') ";
 
 
             SQLiteConnection Conn = new
@@ -388,9 +388,10 @@ namespace TelerikWpfApp3.LocalDB
                 {
 
                     string GIDX = Datareader["GIDX"].ToString();
+                    string groupname = Datareader["groupname"].ToString();
                     string name = Datareader["name"].ToString();
                     List<string> groupMembers = new List<string>();
-                    string[] nameSlice = name.Split(',');
+                    string[] nameSlice = name.Split('^');
                     int length = nameSlice.Length;
                     for (int i = 0; i < length; i++)
                     {

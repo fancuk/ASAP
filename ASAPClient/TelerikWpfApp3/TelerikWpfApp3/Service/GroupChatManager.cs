@@ -22,8 +22,8 @@ namespace TelerikWpfApp3.Service
 
         LocalDAO localDAO;
         NetworkManager networkManager = ((App)Application.Current).networkManager;
-        IDictionary<string, ItemsChangeObservableCollection<GroupChatItem>> GroupChatDict
-        = new Dictionary<string, ItemsChangeObservableCollection<GroupChatItem>>();
+        IDictionary<string, (string, ItemsChangeObservableCollection<GroupChatItem>)> GroupChatDict
+        = new Dictionary<string, (string, ItemsChangeObservableCollection<GroupChatItem>)>();
         //dictionary = groupindex, groupchatitem
 
         GroupChatList GCL = new GroupChatList();
@@ -46,7 +46,11 @@ namespace TelerikWpfApp3.Service
                     isit = true;
                 }
             }
-            if (GCL.GroupChattingList.Count == 0)
+            if (groupName == null)
+            {
+                return;
+            }
+            else if (GCL.GroupChattingList.Count == 0)
             {
                 GCL.GroupChattingList.Add(new GroupChatListItem(groupName, lastMessage, lastTime));
             }
@@ -63,7 +67,7 @@ namespace TelerikWpfApp3.Service
             foreach (string gIdx in GroupChatDict.Keys)
             {
                 ItemsChangeObservableCollection<GroupChatItem> tmp = new ItemsChangeObservableCollection<GroupChatItem>();
-                tmp = this.GroupChatDict[gIdx];
+                tmp = this.GroupChatDict[gIdx].Item2;
                 GroupChatItem a = tmp[tmp.Count - 1];
                 //GCL.GroupChattingList.Add(new GroupChatListItem(a.GroupName,a.Text,a.Text); GroupChatItem 수정 후에 주석 풀기
             }
@@ -81,16 +85,16 @@ namespace TelerikWpfApp3.Service
             if (!this.GroupChatDict.ContainsKey(groupidx))
             {
                 ItemsChangeObservableCollection<GroupChatItem> inputTmp = new ItemsChangeObservableCollection<GroupChatItem>();
-                this.GroupChatDict.Add(groupidx, inputTmp);
+                this.GroupChatDict.Add(groupidx, (null, inputTmp));
             }
-            this.GroupChatDict[groupidx].Add(groupChatItem);
+            this.GroupChatDict[groupidx].Item2.Add(groupChatItem);
         }
         public void addChat(string groupidx)
         { 
             if (!this.GroupChatDict.ContainsKey(groupidx))
             {
                 ItemsChangeObservableCollection<GroupChatItem> inputTmp = new ItemsChangeObservableCollection<GroupChatItem>();
-                this.GroupChatDict.Add(groupidx, inputTmp);
+                this.GroupChatDict.Add(groupidx, (null, inputTmp));
             }
         }
 
@@ -98,19 +102,29 @@ namespace TelerikWpfApp3.Service
         {
             if(GroupChatDict.ContainsKey(groupidx))
             {
-                return this.GroupChatDict[groupidx];
+                return this.GroupChatDict[groupidx].Item2;
             }
             else
             {
                 addChat(groupidx);
-                return this.GroupChatDict[groupidx];
+                return this.GroupChatDict[groupidx].Item2;
             }
         }
 
         public ItemsChangeObservableCollection<GroupChatItem> getChatList(string groupidx)
         {
-            return this.GroupChatDict[groupidx];
+            return this.GroupChatDict[groupidx].Item2;
         }
+
+        public string getGroupName(string groupidx) // 그룹 네임 불러오는 것 - 정구
+        {
+            if (GroupChatDict.ContainsKey(groupidx))
+            {
+                return this.GroupChatDict[groupidx].Item1;
+            }
+            else return null;
+        }
+
         #endregion
     }
 }
