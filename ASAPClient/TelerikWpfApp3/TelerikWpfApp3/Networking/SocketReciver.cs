@@ -227,13 +227,12 @@ namespace TelerikWpfApp3.Networking
                                 GroupChattingRoomManager.Instance.makeChatRoom(groupIdx);
                                 networkManager.SendData
                                 ("<GSG>", maker + "/" + groupIdx + "/" + plain + "/" + time);
-                                groupChatManager.addChattingList(maker, groupIdx, plain, time); // 자신은 gsg를  안받기 때문에 추가해주기
+                                groupChatManager.addChattingList(groupIdx, groupName, plain, time); // 자신은 gsg를  안받기 때문에 추가해주기
                                 groupChatManager.addChat(groupIdx, new GroupChatItem(plain, maker, time, true)); // check가 true면 내가 보낸건가?
                                 GroupChattingRoomManager.Instance.showChatRoom(groupIdx);
                             });
                         }
                         //localDAO.GroupInfoCreate(groupIdx, groupName, maker + "^" + tokens[5]); // DAO에 넣어주는거 추가했습니다 BY 정구
-                        // 그룹 채팅방 만들어주고 거기다가 maker가 만들었습니다 라고 메시지로 띄우기 (maker가 보낸 것 처럼)
 
                     }
                 }
@@ -245,9 +244,9 @@ namespace TelerikWpfApp3.Networking
                     string time = tokens[4];
                     // dao에 넣어주고
                     // 그룹 채팅방에 메시지 보내주기
+                    groupChatManager.addChat(gIdx, new GroupChatItem(plain, sender, time, false));
                     groupChatManager.addChattingList(gIdx, null, plain, time); // null 값에 groupname을 받아오자
                                                                                //  groupchatmanager에게 gidx를 주면 받을 수 있게 구현하자 
-                    groupChatManager.addChat(gIdx, new GroupChatItem(plain, sender, time, false));
                 }
                 // 텍스트박스에 추가해준다.
                 // 비동기식으로 작업하기 때문에 폼의 UI 스레드에서 작업을 해줘야 한다.

@@ -77,6 +77,7 @@ namespace TelerikWpfApp3.VM
             string nowTime = DateTime.Now.ToString();
             string text = id + "/" + gIdx + "/" + plain + "/" + nowTime;
             groupChatManager.addChat(gIdx, new GroupChatItem(plain, id, nowTime, true));
+            //groupChatManager.addChattingList(gIdx, null, plain, nowTime); null에 groupname추가
             networkManager.SendData(tag, text);
         }
         public List<string> getGroupMemberList(string gIdx) // 여기다가 그룹 사용자들 바인딩 걸면 될 듯

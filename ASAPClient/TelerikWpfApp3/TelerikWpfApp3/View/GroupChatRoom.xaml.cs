@@ -34,6 +34,7 @@ namespace TelerikWpfApp3.View
             this.MouseLeftButtonDown += MoveWindow;
             gc.gIdx = groupidx;
             Closing += gc.OnWindowClosing;
+            ChatBox.DataContext = gcm.loadChat(gc.gIdx);
             UpdateScrollBar(ChatBox);
             this.PreviewKeyDown += new KeyEventHandler(OnEnterKeyDownHandler);
            
