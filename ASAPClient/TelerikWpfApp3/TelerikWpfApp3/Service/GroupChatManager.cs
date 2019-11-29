@@ -98,6 +98,14 @@ namespace TelerikWpfApp3.Service
             }
         }
 
+        public void addGroupName(string groupidx, string groupname)
+        {
+            if (this.GroupChatDict[groupidx].Item1 == "")
+            {
+                GroupChatDict[groupidx].Item1.Concat(groupname);
+            }
+        }
+
         public ItemsChangeObservableCollection<GroupChatItem> loadChat(string groupidx)//해당 groupidx 채팅방 로드
         {
             if(GroupChatDict.ContainsKey(groupidx))
