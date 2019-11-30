@@ -244,7 +244,7 @@ namespace TelerikWpfApp3.Networking
                         tmp.Text = tokens[3];
                         tmp.Asap = true;
                         tmp.Chk = true;
-                        tmp.Status = true;
+                        tmp.Status = false;
                         localDAO.ChattingCreate(tokens[1], networkManager.MyId, tokens[2], tokens[3], "Receive", 1);
 
                         DispatchService.Invoke(() =>
@@ -326,6 +326,7 @@ namespace TelerikWpfApp3.Networking
                         groupChatManager.addChattingList(gIdx, groupName, plain, time);
                     });
                     localDAO.GroupChattingCreate(sender, gIdx, time, plain);
+                    groupChatManager.addGroupName(gIdx, groupName);
                 }
                 // 텍스트박스에 추가해준다.
                 // 비동기식으로 작업하기 때문에 폼의 UI 스레드에서 작업을 해줘야 한다.
