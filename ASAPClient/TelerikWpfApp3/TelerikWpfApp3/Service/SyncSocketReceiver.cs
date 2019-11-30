@@ -61,6 +61,7 @@ namespace TelerikWpfApp3.Service
                         });
                         string myId = networkManager.MyId;
                         isit = 3;
+                        networkManager.SendData("<MSQ>", myId);
                     }
                     else
                     {
@@ -144,8 +145,9 @@ namespace TelerikWpfApp3.Service
                             chatManager.addChat(tmp.User, tmp);
                         });
                     }
+                    string myId = networkManager.MyId;
+                    networkManager.SendData("<MKQ>", myId);
                     isit = 3;
-                    FriendsUserControlViewModel.Instance.loadAllChk = true;
                 }
                 else if (tag.Equals("<FIN>"))
                 {
@@ -185,11 +187,11 @@ namespace TelerikWpfApp3.Service
                         string maker = tokens[1];
                         string groupName = tokens[2];
                         string groupIdx = tokens[3];
-                        int memberCount = int.Parse(tokens[4]);
+                        string groupTime = tokens[4];
+                        int memberCount = int.Parse(tokens[5]);
                         List<string> groupMemberList = new List<string>(memberCount);
-                        string[] nameSlice = tokens[5].Split('^');
+                        string[] nameSlice = tokens[6].Split('^');
                         int length = nameSlice.Length;
-                        string time = DateTime.Now.ToString();
                         for (int i = 0; i < length; i++)
                         {
                             groupMemberList.Add(nameSlice[i]);
@@ -198,23 +200,23 @@ namespace TelerikWpfApp3.Service
                         string plain = maker + "님이 채팅방을 만드셨습니다.";
                         DispatchService.Invoke(() =>
                         {
-                            groupChatManager.addChattingList(groupIdx, groupName, plain, time);
+                            groupChatManager.addChattingList(groupIdx, groupName, plain, groupTime);
                             GroupChattingRoomManager.Instance.makeChatRoom(groupIdx, groupName);
                         });
                         if (maker == networkManager.MyId) // 만든 사람이 나라면
                         {
                             DispatchService.Invoke(() =>
                             {
-                                groupChatManager.addChat(groupIdx, new GroupChatItem(plain, maker, time, true)); // check가 true면 내가 보낸건가?
+                                groupChatManager.addChat(groupIdx, new GroupChatItem(plain, maker, groupTime, true)); // check가 true면 내가 보낸건가?
                                 GroupChattingRoomManager.Instance.showChatRoom(groupIdx);
                             });
                         }
                         else
                         {
-                            groupChatManager.addChat(groupIdx, new GroupChatItem(plain, maker, time, false)); // check가 true면 내가 보낸건가?
+                            groupChatManager.addChat(groupIdx, new GroupChatItem(plain, maker, groupTime, false)); // check가 true면 내가 보낸건가?
                         }
                         localDAO.GroupInfoCreate(groupIdx, groupName, maker + "^" + tokens[5]);
-                        localDAO.GroupChattingCreate(maker, groupIdx, time, plain);
+                        localDAO.GroupChattingCreate(maker, groupIdx, groupTime, plain);
                         isit = 2;
                     }
                 }
@@ -246,6 +248,8 @@ namespace TelerikWpfApp3.Service
                             localDAO.GroupChattingCreate(maker, gIdx, time, plain);
                         });
                     }
+                    string myId = networkManager.MyId;
+                    networkManager.SendData("<GMQ>", myId);
                     isit = 3;
                 }
                 else if (tag.Equals("<GMQ>"))
@@ -270,6 +274,7 @@ namespace TelerikWpfApp3.Service
                     {
                         networkManager.SendData("<FLD>", networkManager.MyId);
                     }
+                    FriendsUserControlViewModel.Instance.loadAllChk = true;
                     isit = 3;
                 }
                 else
