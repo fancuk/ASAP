@@ -257,7 +257,28 @@
                                                     <TextBlock x:Name="User" Text="{Binding Target}"  TextAlignment="Left" FontFamily="Calibri" Margin="5,0,0,0" FontSize="16" FontWeight="Bold" Width="90"/>
                                                     <TextBlock x:Name="time" Text="{Binding LastTime}" Margin="40,0,0,0" TextAlignment="Right" AutomationProperties.AcceleratorKey="time"/>
                                                 </StackPanel>
+                                                <StackPanel Orientation="Horizontal">
                                                 <TextBlock  Text="{Binding LastMessage}" Margin="5,0,0,0" />
+                                                    <TextBlock x:Name="unReadCount" Text="{Binding ElementName=UnReadMessageCount}" Width="0"></TextBlock>
+                                                <Border Margin="10,0,0,0" CornerRadius="10" Background="#FFF91E1E">
+                                                        <Border.Style>
+                                                            <Style>
+                                                                <Style.Triggers>
+                                                                    <DataTrigger Binding="{Binding ElementName=UnReadMessageCount, Path=Text}" Value="0">
+                                                                        <Setter Property="Border.Background"  Value="White">
+                                                                        </Setter>
+                                                                    </DataTrigger>
+
+                                                                    <DataTrigger Binding="{Binding ElementName=UnReadMessageCount, Path=Text}" Value="0">
+                                                                        <Setter Property="Border.Height" Value="0" />
+                                                                        <Setter Property="Border.Width" Value="0"></Setter>
+                                                                    </DataTrigger>
+                                                                </Style.Triggers>
+                                                            </Style>
+                                                        </Border.Style>
+                                                        <TextBlock Width="20" x:Name="UnReadMessageCount" TextAlignment="Center" Foreground="White" Text="{Binding UnReadMessageCount}" FontSize="14"></TextBlock>
+                                                </Border>
+                                                </StackPanel>
                                             </StackPanel>
                                             <!--<TextBlock x:Name="User" Text="{Binding Target}" Height="31" TextAlignment="Center" FontFamily="MS PGothic" Margin="22,22,10,0" FontSize="16" FontWeight="Bold"/>-->
                                         </StackPanel>
