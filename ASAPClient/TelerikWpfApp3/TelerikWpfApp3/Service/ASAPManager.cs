@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,10 +10,11 @@ using TelerikWpfApp3.VM;
 
 namespace TelerikWpfApp3.Service
 {
-    public class ASAPManager
+    public class ASAPManager : INotifyPropertyChanged
     {
         private List<string> sentASAPList = new List<string>();
         ChatManager chatManager = ((App)Application.Current).chatManager;
+        ChattingRoomManager chattingRoomManager =TelerikWpfApp3.VM.ChattingRoomManager.Instance;
         public ASAPManager() // Application에서만 생성!!!!!
         {
         }
@@ -33,11 +35,13 @@ namespace TelerikWpfApp3.Service
         {
             sentASAPList.Add(target);
             // Send하면 추가해주기
+            //chattingRoomManager.removeAsapTopBar(target);
         }
         public void ASAP_RemoveSentList(string target) // 확인 응답이 왔다면 리스트에서 삭제
         {
             sentASAPList.Remove(target);
             // ASR fasle든 true든 바꿔줘야 함
+            chattingRoomManager.removeAsapTopBar(target);
         }
         #endregion
         #region 상대 온라인인지 확인하고 ASAP 보내기
@@ -53,5 +57,11 @@ namespace TelerikWpfApp3.Service
             chatManager.RemoveLastChat(lastTime);
         }
         #endregion
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged(string name)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        }
     }
 }

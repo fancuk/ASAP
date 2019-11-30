@@ -16,6 +16,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using TelerikWpfApp3.VM;
 using TelerikWpfApp3.Service;
+using System.Windows.Media.Animation;
+using System.Threading;
+using System.Windows.Threading;
 
 namespace TelerikWpfApp3.View
 {
@@ -43,16 +46,19 @@ namespace TelerikWpfApp3.View
         public ChatRoom(string target) 
         {
             InitializeComponent();
+            ((Storyboard)FindResource("WaitStoryboard")).Begin();
+
             this.MouseLeftButtonDown += MoveWindow;
             setTarget(target); 
             cu.target = target; 
             this.DataContext = cu;
-           
+   
             ChatBox.DataContext =cu.loadChat(this.target);
             cu.target = (this.target);
             UpdateScrollBar(ChatBox);
             this.PreviewKeyDown += new KeyEventHandler(OnEnterKeyDownHandler);
             Closing += cu.OnWindowClosing;
+
         }
         /*public void MakeChatRoom(string target) //다민
         {
@@ -91,6 +97,11 @@ namespace TelerikWpfApp3.View
         private void ChatBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ChatBox.UnselectAll();
+            runStoryBoard();
+        }
+
+        public void runStoryBoard()
+        {
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -128,6 +139,18 @@ namespace TelerikWpfApp3.View
         {
             bool isit = false;
             cm.AboutFocus(isit, target);
+        }
+
+        private void SendTextMsgButton1_Click(object sender, RoutedEventArgs e)
+        {
+            AsapTopBar.Height = 68;
+            //this.Dispatcher.Invoke((ThreadStart)(() => { }), DispatcherPriority.ApplicationIdle);
+            //Thread.Sleep(10000);
+            //AsapTopBar.Height = 0;
+        }
+        public void closeTopBar()
+        {
+            AsapTopBar.Height = 0;
         }
     }
 }

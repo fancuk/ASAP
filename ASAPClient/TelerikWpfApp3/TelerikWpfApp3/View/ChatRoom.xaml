@@ -22,6 +22,16 @@
         </i:EventTrigger>
     </i:Interaction.Triggers>
     <Window.Resources>
+        <Storyboard x:Key="WaitStoryboard">
+            <DoubleAnimation
+            Storyboard.TargetName="Wait"
+            Storyboard.TargetProperty="(TextBlock.RenderTransform).(RotateTransform.Angle)"
+            From="0"
+            To="360"
+            Duration="0:0:2"
+            RepeatBehavior="Forever" />
+        </Storyboard>
+
         <Style TargetType="TextBox">
             <Setter Property="Padding" Value="5"/>
             <Setter Property="Margin" Value="5"/>
@@ -112,6 +122,7 @@ VerticalScrollBarVisibility="Hidden"/>
                         <DropShadowEffect Color="#FFECE2E2" Direction="280">
                         </DropShadowEffect>
                     </Border.Effect>
+
                     <StackPanel Orientation="Horizontal" Background="White" Margin="0,10,0,0">
                         <StackPanel Width="278" Margin="20,0,0,0" Orientation="Horizontal">
                             <TextBlock Text="{Binding targetStatus}" x:Name="status" Width="0"></TextBlock>
@@ -140,7 +151,21 @@ VerticalScrollBarVisibility="Hidden"/>
                     </StackPanel>
                 </Border>
                 <StackPanel Height="410" Background="#FFEEF1F7" Margin="0,4,0,0">
-                    <ListBox Style="{StaticResource disabledListBoxWithScroll}" BorderThickness="0,0,0,0" x:Name="ChatBox" Height="410" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionChanged="ChatBox_SelectionChanged"
+                    <Canvas Height="2">
+                        <Grid x:Name="AsapTopBar" Opacity="0.65" Height="0" Width="348" Background="#FFFF8080" Panel.ZIndex="0" Margin="0">
+                            <TextBlock Text="ASAP 메세지를 전송중입니다" Margin="38,22,80,10" FontFamily="Calibri" FontWeight="Bold" FontSize="18"></TextBlock>
+                            <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Height="34" Width="35" Margin="273,22,40,0">
+                                <TextBlock x:Name="Wait" FontFamily="./../Fonts/#FontAwesome" FontSize="30" Text="&#xF110;" RenderTransformOrigin="0.5, 0.5" Margin="27,-7,-27,0">
+                                    <TextBlock.RenderTransform>
+                                        <RotateTransform Angle="0" />
+                                    </TextBlock.RenderTransform>
+                                </TextBlock>
+                            </Grid>
+                        </Grid>
+                    </Canvas>
+                    <ListBox 
+                        Panel.ZIndex="-1"
+                        SelectionChanged="ChatBox_SelectionChanged" Style="{StaticResource disabledListBoxWithScroll}" BorderThickness="0,0,0,0" x:Name="ChatBox" Height="406" ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
                             VM:ListBoxBehavior.ScrollOnNewItem="True" ItemsSource="{Binding}"   IsSynchronizedWithCurrentItem="False" BorderBrush="{x:Null}" Background="{x:Null}">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
@@ -155,6 +180,7 @@ VerticalScrollBarVisibility="Hidden"/>
                                             <TextBlock x:Name="PART_Time" Text="{Binding Time, StringFormat=hh:mm:ss}" FontSize="8"/>
                                             <TextBlock x:Name="recieveReadChk" Foreground="#FF9B9B04" Text="1" FontSize="12" FontWeight="Bold" Margin="6,0,0,0"></TextBlock >
                                             <TextBlock x:Name="statusChk" Width="0" Height="0" Text="{Binding Status}"></TextBlock>
+
                                         </StackPanel>
                                     </StackPanel>
                                 </StackPanel>
@@ -210,7 +236,8 @@ VerticalScrollBarVisibility="Hidden"/>
                         </Border>
                         <Border Background="#FFEE534F" CornerRadius="10" Margin="0,7,0,0">
 
-                            <TextBlock Height="31"><Hyperlink x:Name="sendTextMsgButton1" TextDecorations="{x:Null}" Command="{Binding SendAsap}" CommandParameter="{Binding Text, ElementName=MessageBox}"><InlineUIContainer>
+                            <TextBlock Height="31"><Hyperlink x:Name="sendTextMsgButton1" TextDecorations="{x:Null}"  Click="SendTextMsgButton1_Click"
+                                                              Command="{Binding SendAsap}" CommandParameter="{Binding Text, ElementName=MessageBox}"><InlineUIContainer>
                                         <StackPanel Orientation="Horizontal">
                                             <TextBlock x:Name="Msg1" Text="    " Margin="7,12,0,10" Foreground="White" FontSize="22" Width="46" FontFamily="Impact"/>
                                             <Canvas Width="30" Margin="-51,5,5,10" Height="20" >

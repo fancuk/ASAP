@@ -8,7 +8,7 @@ using TelerikWpfApp3.View;
 
 namespace TelerikWpfApp3.VM
 {
-    class ChattingRoomManager
+    public class ChattingRoomManager
     {
         private static ChattingRoomManager instance = null;
 
@@ -43,6 +43,12 @@ namespace TelerikWpfApp3.VM
         public void showChatRoom(string target)
         {
             chatRoom[target].Show();
+        }
+
+        public void removeAsapTopBar(string target)
+        {
+            ChatRoom s = (ChatRoom)chatRoom[target];
+            s.closeTopBar();
         }
         
         public void closeChatRoom(string target)
