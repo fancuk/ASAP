@@ -199,6 +199,7 @@ namespace TelerikWpfApp3.Service
         {
             AllChatListItem temp;
             for (int i = 0; i < ACL.ChattingList.Count; i++)
+            {
                 temp = ACL.ChattingList[i];
                 if (temp.Target == target)
                 {
