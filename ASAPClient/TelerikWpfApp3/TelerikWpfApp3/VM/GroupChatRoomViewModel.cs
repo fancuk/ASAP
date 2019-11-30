@@ -28,6 +28,7 @@ namespace TelerikWpfApp3.VM
         private string _msgTextBox;
         public string gIdx; // ChatRoom new 생성자로 계속 만들어주니까 그때 마다 gIdx 넣어주면 될 듯 바인딩 필요 x
         public string _groupChatName;
+        private static GroupChatRoomViewModel instance = null;
         public string groupChatName
         {
             get
@@ -52,6 +53,18 @@ namespace TelerikWpfApp3.VM
                 OnPropertyChanged(msgTextBox);
             }
         }
+        public static GroupChatRoomViewModel Instance 
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new GroupChatRoomViewModel();
+                }
+                return instance;
+            }
+        }
+
         public void OnWindowClosing(object sender, CancelEventArgs e)
         {
             // Handle closing logic, set e.Cancel as needed
@@ -60,9 +73,17 @@ namespace TelerikWpfApp3.VM
         }
 
         public ICommand GroupSendText { get; set; } // 그룹 채팅방 전송 버튼
+        public ICommand GroupFriendListOpen { get; set; }
         public GroupChatRoomViewModel()
         {
             GroupSendText = new Command(ExecuteGroupSendText, CanExecuteMethod);
+            GroupFriendListOpen = new Command(ExecuteGroupFriends, CanExecuteMethod);
+        }
+
+        public void ExecuteGroupFriends(object obj)
+        {
+            GroupFriendShow gfs = new GroupFriendShow();
+            gfs.ShowDialog();
         }
         public void ExecuteGroupSendText(object org)
         {

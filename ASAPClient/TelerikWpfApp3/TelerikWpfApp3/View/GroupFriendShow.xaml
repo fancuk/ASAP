@@ -1,0 +1,168 @@
+﻿<Window x:Class="TelerikWpfApp3.View.GroupFriendShow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+       xmlns:local="clr-namespace:TelerikWpfApp3.View"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:VM="clr-namespace:TelerikWpfApp3.VM"
+        mc:Ignorable="d"
+        Title="GroupChatRoom" Height="400" Width="300"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+                AllowsTransparency="True"
+        Background="{x:Null}" HorizontalAlignment="Left"  >
+    <Window.DataContext>
+        <VM:GroupChatRoomViewModel></VM:GroupChatRoomViewModel>
+    </Window.DataContext>
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Closing">
+            <i:InvokeCommandAction  Command="{Binding CloseCommand}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Window.Resources>
+        <Style TargetType="TextBox">
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="MinHeight" Value="20"/>
+            <Setter Property="MinWidth" Value="250"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Border x:Name="border"
+                                   CornerRadius="2" BorderBrush="{x:Null}" 
+                                BorderThickness="1" Background="{x:Null}">
+                            <ScrollViewer x:Name="PART_ContentHost"
+                                            Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{x:Null}"/>
+                                <Setter Property="Foreground" Value="#FF4B4B4B" />
+                                <Setter Property="FontWeight" Value="Bold" />
+                            </Trigger>
+                            <Trigger Property="IsFocused" Value="true">
+                                <Setter Property="Foreground" Value="#FF4B4B4B" />
+                                <Setter Property="BorderBrush" TargetName="border" Value="{x:Null}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="SimpleListBoxItem" TargetType="ListBoxItem">
+            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Border
+           Name="Border"
+           Padding="2"
+           SnapsToDevicePixels="true">
+                            <ContentPresenter />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="true">
+                                <Setter TargetName="Border" Property="Background"
+                     Value="#FFEAEAEA"/>
+
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="disabledListBoxWithScroll" TargetType="{x:Type ListBox}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListBox}">
+                        <Border x:Name="Bd" SnapsToDevicePixels="true" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Padding="1">
+                            <ScrollViewer Padding="{TemplateBinding Padding}" Focusable="false">
+                                <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" IsEnabled="False" IsHitTestVisible="True"/>
+                            </ScrollViewer>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" TargetName="Bd" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsGrouping" Value="true">
+                                <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Border CornerRadius="10" Background="White" Margin="5">
+        <Border.Effect>
+            <DropShadowEffect Direction="250" Color="#FF9E9A9A"/>
+        </Border.Effect>
+        <Grid>
+            <StackPanel Orientation="Vertical">
+                <Border CornerRadius="10" Background="LightCoral" Height="53">
+                    <Border.Effect>
+                        <DropShadowEffect Color="#FFECE2E2" Direction="280">
+                        </DropShadowEffect>
+                    </Border.Effect>
+                    <StackPanel Orientation="Horizontal" Background="LightCoral" Margin="0,10,0,0">
+                        <StackPanel Width="231" Margin="20,0,0,0.2" Orientation="Horizontal">
+                            <TextBlock Text="Group Members" x:Name="GroupNameText"
+                                    Foreground="White" Margin="21,5,19,4.2" FontSize="20" FontFamily="Microsoft YaHei UI" FontWeight="Bold" Width="205" TextAlignment="Center"/>
+                        </StackPanel>
+
+                        <Button Width="28" Margin="5,3,10,9.8" Command="{Binding close}" Background="{x:Null}" BorderBrush="{x:Null}" FontWeight="Bold" FontFamily="Malgun Gothic Semilight" FontSize="18"
+                                CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}}}" >
+                            <Button.DataContext>
+                                <VM:TitleControl></VM:TitleControl>
+                            </Button.DataContext>
+                            <ContentControl Width="69">
+                                <Hyperlink Foreground="{x:Null}" Command="{Binding close}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}">
+                                    <InlineUIContainer>
+                                        <StackPanel Height="20" Width="20" Margin="0,0,44,0" HorizontalAlignment="Right">
+                                            <StackPanel.Background>
+                                                <ImageBrush ImageSource="/TelerikWpfApp3;component/Resources/exitSmallGray.png" Stretch="Uniform"/>
+                                            </StackPanel.Background>
+                                        </StackPanel>
+                                    </InlineUIContainer>
+                                </Hyperlink>
+                            </ContentControl>
+                        </Button>
+                    </StackPanel>
+                </Border>
+                <StackPanel Height="322" Background="#FFEEF1F7" Margin="0,4,0.6,0">
+                    <ListBox  SelectionMode="Multiple" ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                               BorderThickness="0,0,0,0" x:Name="ClientList" 
+                                Height="335" ItemsSource="{Binding}"  
+                                 IsSynchronizedWithCurrentItem="False" 
+                                 BorderBrush="{x:Null}" Margin="0,0,-0.2,0" Background="White">
+
+                        <ListBox.ItemContainerStyle>
+                            <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource {x:Type ListBoxItem}}">
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#FF006FFF" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ListBox.ItemContainerStyle>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Height="50" Margin="0,5,0,0" Orientation="Horizontal" Background="{x:Null}" Width="300">
+                                    <TextBlock x:Name="status" MaxWidth="0" MaxHeight="0"/>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock x:Name="User" Text="{Binding User}"  TextAlignment="Left" FontFamily="Calibri" Margin="1,0,0,0" FontSize="16" FontWeight="Bold"/>
+                                        <TextBlock Text="     " Margin="5,0,0,0"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </StackPanel>
+
+            </StackPanel>
+        </Grid>
+    </Border>
+</Window>
+
