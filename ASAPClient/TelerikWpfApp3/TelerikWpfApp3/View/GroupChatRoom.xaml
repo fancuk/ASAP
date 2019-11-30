@@ -113,13 +113,20 @@ VerticalScrollBarVisibility="Hidden"/>
                         </DropShadowEffect>
                     </Border.Effect>
                     <StackPanel Orientation="Horizontal" Background="White" Margin="0,10,0,0">
-                        <StackPanel Width="278" Margin="20,0,0,0" Orientation="Horizontal">
+                        <StackPanel Width="253" Margin="20,0,0,0.2" Orientation="Horizontal">
                             <Border CornerRadius="20" Width="20" VerticalAlignment="Center" Height="21" Margin="0,15,0,17"/>
-                            <TextBlock Text="{Binding groupChatName}" x:Name="GroupNameText"
-                                     Margin="21,4,19,10" FontSize="20" FontFamily="Microsoft YaHei UI" FontWeight="Bold" Width="219" TextAlignment="Center"/>
+                            <TextBlock Text="{Binding GroupName}" x:Name="GroupNameText"
+                                     Margin="21,4,19,10.2" FontSize="20" FontFamily="Microsoft YaHei UI" FontWeight="Bold" Width="212" TextAlignment="Center"/>
                         </StackPanel>
-
-                        <Button Width="28" Margin="10,6,15,9.8" Command="{Binding close}" Background="{x:Null}" BorderBrush="{x:Null}" FontWeight="Bold" FontFamily="Malgun Gothic Semilight" FontSize="18"
+                        <Button Width="30" Margin="12,6,-5,9.2" Background="{x:Null}" BorderBrush="{x:Null}"
+                                Command="{Binding GroupFriendListOpen }" >
+                            <StackPanel  Height="26" Margin="0,0,0,0" Width="28">
+                                <StackPanel.Background>
+                                    <ImageBrush ImageSource="/TelerikWpfApp3;component/Resources/friendslist.png" Stretch="Uniform"/>
+                                </StackPanel.Background>
+                            </StackPanel>
+                        </Button>
+                        <Button Width="28" Margin="12,6,15,9.8" Command="{Binding close}" Background="{x:Null}" BorderBrush="{x:Null}" FontWeight="Bold" FontFamily="Malgun Gothic Semilight" FontSize="18"
                                 CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}}}" >
                             <Button.DataContext>
                                 <VM:TitleControl></VM:TitleControl>
