@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -77,13 +78,17 @@ namespace TelerikWpfApp3.View
             string groupName = groupNameTxt.Text as string;
             if (groupName == "")
             {
-                MessageBox.Show("그룹 이름을 입력 하세요");
+                MessageBox.Show("그룹 이름을 입력 하세요.");
                 return;
+            }
+             else if(Regex.IsMatch(groupName, @"[&^/]"))
+            {
+                MessageBox.Show("특수문자(^,&,/)는 사용 불가능합니다.");
             }
             int len = selcon.Count;
             if (len < 2)
             {
-                MessageBox.Show("2명 이상 선택하세요");
+                MessageBox.Show("2명 이상 선택하세요.");
                 return;
             }
             string groupMembers = "";

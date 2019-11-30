@@ -15,6 +15,7 @@ using TelerikWpfApp3.Service;
 using TelerikWpfApp3.LocalDB;
 using TelerikWpfApp3.View;
 using TelerikWpfApp3.Collection;
+using System.Text.RegularExpressions;
 
 namespace TelerikWpfApp3.VM
 {
@@ -81,7 +82,7 @@ namespace TelerikWpfApp3.VM
 
         public void ExecuteGroupFriends(object obj)
         {
-            GroupFriendShow groupFriendShow = new GroupFriendShow(this.gIdx);
+            GroupFriendShow groupFriendShow = new GroupFriendShow(groupIdx);
             groupFriendShow.ShowDialog();
         }
         public void ExecuteGroupSendText(object org)
@@ -89,6 +90,10 @@ namespace TelerikWpfApp3.VM
             if (string.IsNullOrWhiteSpace(org as string) == true)
             {
                 MessageBox.Show("메세지를 입력해주세요.");
+            }
+            else if (Regex.IsMatch((org as string), @"[&^/]"))
+            {
+                MessageBox.Show("특수문자(^,&,/)는 사용 불가능합니다.");
             }
             else
             {

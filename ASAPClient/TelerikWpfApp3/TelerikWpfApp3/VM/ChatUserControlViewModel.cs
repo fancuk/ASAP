@@ -14,6 +14,7 @@ using TelerikWpfApp3.Utility;
 using TelerikWpfApp3.Service;
 using TelerikWpfApp3.LocalDB;
 using TelerikWpfApp3.View;
+using System.Text.RegularExpressions;
 
 namespace TelerikWpfApp3.VM
 {
@@ -162,6 +163,10 @@ namespace TelerikWpfApp3.VM
             {
                 MessageBox.Show("메세지를 입력해주세요.");
             }
+            else if (Regex.IsMatch((org as string), @"[&^/]"))
+            {
+                MessageBox.Show("특수문자(^,&,/)는 사용 불가능합니다.");
+            }
             else
             {
                 if (dabbingPreventor.isDabbing())
@@ -180,6 +185,10 @@ namespace TelerikWpfApp3.VM
             if (string.IsNullOrWhiteSpace(org as string) == true)
             {
                 MessageBox.Show("메세지를 입력해주세요.");
+            }
+            else if(Regex.IsMatch((org as string), @"[&^/]"))
+            {
+                MessageBox.Show("특수문자(^,&,/)는 사용 불가능합니다.");
             }
             else
             {

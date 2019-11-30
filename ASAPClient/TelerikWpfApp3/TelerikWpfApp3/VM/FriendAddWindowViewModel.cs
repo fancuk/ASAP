@@ -10,7 +10,7 @@ using TelerikWpfApp3.M;
 using TelerikWpfApp3.View;
 using TelerikWpfApp3.Collection;
 using TelerikWpfApp3.Service;
-
+using System.Text.RegularExpressions;
 
 namespace TelerikWpfApp3.VM
 {
@@ -47,6 +47,10 @@ namespace TelerikWpfApp3.VM
             {
                 MessageBox.Show("추가할 친구를 입력해주세요.");
             }
+            else if (Regex.IsMatch((obj as string), @"[&^/]"))
+            {
+                MessageBox.Show("특수문자(^,&,/)는 사용 불가능합니다.");
+            }
             else
             {
                 if (FriendsUserControlViewModel.Instance.FriendDoubleCheck(friendID))
@@ -62,6 +66,7 @@ namespace TelerikWpfApp3.VM
                     string str = friendID + "/";
                     string member = networkManager.MyId;
                     networkManager.SendData("<FRR>", str + member);
+
                     friendID = "";
                 }
                 
