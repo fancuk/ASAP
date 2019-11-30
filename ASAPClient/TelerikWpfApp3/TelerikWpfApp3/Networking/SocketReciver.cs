@@ -243,8 +243,8 @@ namespace TelerikWpfApp3.Networking
                         tmp.Time = tokens[2];
                         tmp.Text = tokens[3];
                         tmp.Asap = true;
-                        tmp.Chk = true;
-                        tmp.Status = false;
+                        tmp.Chk = false;
+                        tmp.Status = true;
                         localDAO.ChattingCreate(tokens[1], networkManager.MyId, tokens[2], tokens[3], "Receive", 1);
 
                         DispatchService.Invoke(() =>
