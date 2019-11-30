@@ -31,8 +31,10 @@ namespace TelerikWpfApp3.View
         public GroupChatRoom(string groupidx, string groupName)
         {
             InitializeComponent();
+            this.DataContext = groupChatRoomViewModel;
             this.MouseLeftButtonDown += MoveWindow;
-            groupChatRoomViewModel.gIdx = groupidx;
+            this.groupidx = groupidx;
+            groupChatRoomViewModel.groupIdx = groupidx;
             string groupChatName = groupName;
             GroupNameText.Text = groupChatName;
             Closing += groupChatRoomViewModel.OnWindowClosing;

@@ -115,6 +115,7 @@ namespace TelerikWpfApp3.VM
             groupChatManager.addChattingList(gIdx, groupName, plain, nowTime);
             networkManager.SendData(tag, text); 
             localDAO.GroupChattingCreate(id, gIdx, nowTime, plain);
+            msgTextBox = "";
         }
         public List<string> getGroupMemberList(string gIdx) // 여기다가 그룹 사용자들 바인딩 걸면 될 듯
         {

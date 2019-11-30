@@ -147,7 +147,7 @@ namespace TelerikWpfApp3.VM
 
         public void cloaseModal()
         {
-            faw.Close();
+            faw.Hide();
         }
         private bool CanExecute(object obj)
         {
