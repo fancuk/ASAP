@@ -22,6 +22,8 @@ namespace TelerikWpfApp3.Service
         WindowManager windowManager = ((App)Application.Current).windowManager;
         UserStatusManager userStatusManager = ((App)Application.Current).userStatusManager;
         LocalDAO localDAO = ((App)Application.Current).localDAO;
+        GroupChatManager groupChatManager = ((App)Application.Current).groupChatManager;
+        GroupMemberListManager groupMemberListManager = ((App)Application.Current).groupMemberListManager;
         SocketCloser sc = new SocketCloser();
         SocketReciver sr = new SocketReciver();
         public void syncReceive(string text)
@@ -160,24 +162,6 @@ namespace TelerikWpfApp3.Service
                         windowManager.CloseAll();
                     }
                 }
-
-                else if (tag.Equals("<MKG>")) //그룹채팅방 최초 생성시
-                {
-                    string createGroupChat = tokens[1];
-                    if (tokens[1] == "true")
-                    {
-                        string groupIdx = tokens[2];
-                        DispatchService.Invoke(() =>
-                        {
-                            
-                        });
-                    }
-                    else
-                    {
-                        MessageBox.Show("채팅방이 생성되지 않았습니다.");
-                    }
-
-                }
                 else if (tag.Equals("<FLD>"))
                 {
                     int count = Int32.Parse(tokens[1]);
@@ -196,6 +180,50 @@ namespace TelerikWpfApp3.Service
                         localDAO.ReadChat();
                         localDAO.ReadGroupList();
                     });
+                }
+                else if (tag.Equals("<MKG>"))
+                {
+                    if (tokens[1].Equals("false"))
+                    {
+                        MessageBox.Show("그룹 채팅방 만들기 실패 ㅠ");
+                    }
+                    else
+                    {
+                        string maker = tokens[1];
+                        string groupName = tokens[2];
+                        string groupIdx = tokens[3];
+                        int memberCount = int.Parse(tokens[4]);
+                        List<string> groupMemberList = new List<string>(memberCount);
+                        string[] nameSlice = tokens[5].Split('^');
+                        int length = nameSlice.Length;
+                        string time = DateTime.Now.ToString();
+                        for (int i = 0; i < length; i++)
+                        {
+                            groupMemberList.Add(nameSlice[i]);
+                        }
+                        groupMemberListManager.AddGroupMemberList(groupIdx, groupMemberList);
+                        string plain = maker + "님이 채팅방을 만드셨습니다.";
+                        DispatchService.Invoke(() =>
+                        {
+                            groupChatManager.addChattingList(groupIdx, groupName, plain, time);
+                            GroupChattingRoomManager.Instance.makeChatRoom(groupIdx, groupName);
+                        });
+                        if (maker == networkManager.MyId) // 만든 사람이 나라면
+                        {
+                            DispatchService.Invoke(() =>
+                            {
+                                groupChatManager.addChat(groupIdx, new GroupChatItem(plain, maker, time, true)); // check가 true면 내가 보낸건가?
+                                GroupChattingRoomManager.Instance.showChatRoom(groupIdx);
+                            });
+                        }
+                        else
+                        {
+                            groupChatManager.addChat(groupIdx, new GroupChatItem(plain, maker, time, false)); // check가 true면 내가 보낸건가?
+                        }
+                        localDAO.GroupInfoCreate(groupIdx, groupName, maker + "^" + tokens[5]);
+                        localDAO.GroupChattingCreate(maker, groupIdx, time, plain);
+                        isit = 2;
+                    }
                 }
                 else
                 {

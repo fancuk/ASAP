@@ -33,8 +33,8 @@ namespace TelerikWpfApp3.View
             InitializeComponent();
             this.MouseLeftButtonDown += MoveWindow;
             gc.gIdx = groupidx;
-            gc.groupChatName = groupName;
-
+            string groupChatName = groupName;
+            GroupNameText.Text = groupChatName;
             Closing += gc.OnWindowClosing;
             ChatBox.DataContext = gcm.loadChat(gc.gIdx);
             UpdateScrollBar(ChatBox);

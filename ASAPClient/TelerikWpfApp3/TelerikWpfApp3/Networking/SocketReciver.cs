@@ -198,51 +198,16 @@ namespace TelerikWpfApp3.Networking
                     }
                     asapManager.ASAP_RemoveSentList(friendID);
                 }
-                else if (tag.Equals("<MKG>"))
+                else if (tag.Equals("<SYN>"))
                 {
-                    if (tokens[1].Equals("false"))
+                    if (networkManager.nowConnect == true) //예외 처리 obj beginreceive
                     {
-                        MessageBox.Show("그룹 채팅방 만들기 실패 ㅠ");
-                    }
-                    else
-                    {
-                        string maker = tokens[1];
-                        string groupName = tokens[2];
-                        string groupIdx = tokens[3];
-                        int memberCount = int.Parse(tokens[4]);
-                        List<string> groupMemberList = new List<string>(memberCount);
-                        string[] nameSlice = tokens[5].Split('^');
-                        int length = nameSlice.Length;
-                        string time = DateTime.Now.ToString();
-                        groupMemberList.Add(maker);
-                        for (int i = 0; i < length; i++)
-                        {
-                            groupMemberList.Add(nameSlice[i]);
-                        }
-                        groupMemberListManager.AddGroupMemberList(groupIdx, groupMemberList);
-                        string plain = maker + "님이 채팅방을 만드셨습니다.";
-                        DispatchService.Invoke(() =>
-                        {
-                            groupChatManager.addChattingList(groupIdx, groupName, plain, time);
-                            GroupChattingRoomManager.Instance.makeChatRoom(groupIdx, groupName);
-                        });
-                        if (maker == networkManager.MyId) // 만든 사람이 나라면
-                        {
-                            DispatchService.Invoke(() =>
-                            {
-                                groupChatManager.addChat(groupIdx, new GroupChatItem(plain, maker, time, true)); // check가 true면 내가 보낸건가?
-                                GroupChattingRoomManager.Instance.showChatRoom(groupIdx);
-                            });
-                        }
-                        else
-                        {
-                            groupChatManager.addChat(groupIdx, new GroupChatItem(plain, maker, time, false)); // check가 true면 내가 보낸건가?
-                        }
-                        localDAO.GroupInfoCreate(groupIdx, groupName, maker + "^" + tokens[5]);
-                        localDAO.GroupChattingCreate(maker, groupIdx, time, plain);
-
+                        obj.ClearBuffer();
+                        networkManager.ReceiveSocket(); // 그룹 생성 하면 mkg 보내고, syn 받은 후에 동기로 전환.
+                        
                     }
                 }
+                
                 else if (tag.Equals("<GSG>"))
                 {
                     string sender = tokens[1];
