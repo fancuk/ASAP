@@ -52,13 +52,13 @@ namespace TelerikWpfApp3.Service
             }
             else if (GCL.GroupChattingList.Count == 0)
             {
-                GCL.GroupChattingList.Add(new GroupChatListItem(groupName, lastMessage, lastTime));
+                GCL.GroupChattingList.Add(new GroupChatListItem(groupidx, groupName, lastMessage, lastTime));
             }
             else
             {
                 if (isit == false)
                 {
-                    GCL.GroupChattingList.Add(new GroupChatListItem(groupName, lastMessage, lastTime));
+                    GCL.GroupChattingList.Add(new GroupChatListItem(groupidx, groupName, lastMessage, lastTime));
                 }
             }
         }
@@ -70,7 +70,7 @@ namespace TelerikWpfApp3.Service
                 ItemsChangeObservableCollection<GroupChatItem> tmp = new ItemsChangeObservableCollection<GroupChatItem>();
                 tmp = this.GroupChatDict[gIdx].Item2;
                 GroupChatItem a = tmp[tmp.Count - 1];
-                GCL.GroupChattingList.Add(new GroupChatListItem(groupName, a.Text, a.Time));
+                GCL.GroupChattingList.Add(new GroupChatListItem(gIdx,groupName, a.Text, a.Time));
             }
         }
         public ItemsChangeObservableCollection<GroupChatListItem> getGroupChattingList()

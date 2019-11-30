@@ -76,7 +76,12 @@ namespace TelerikWpfApp3.VM
             get { return this._email; }
             set
             {
-                this._email = value; OnPropertyChanged("email");
+                this._email = value;
+                OnPropertyChanged("email");
+                if (this._nowSelectedEmail != null)
+                {
+                    emailChk = "V";
+                }
             }
         }
         public string emailChk
@@ -121,10 +126,15 @@ namespace TelerikWpfApp3.VM
 
         public string NowSelectedEmail
         {
-            get => _nowSelectedEmail; set
+            get => _nowSelectedEmail;
+            set
             {
                 _nowSelectedEmail = value;
                 OnPropertyChanged("NowSelectedEmail");
+                if (this._email != null)
+                {
+                    emailChk = "V";
+                }
             }
         }
 

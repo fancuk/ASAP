@@ -53,11 +53,12 @@ namespace TelerikWpfApp3.M
             }
         }
         
-        public GroupChatListItem(string groupName, string lastMessage, string lastTime)
+        public GroupChatListItem(string groupidx, string groupName, string lastMessage, string lastTime)
         {
             this.LastMessage = lastMessage;
             this.LastTime = lastTime;
             this.GroupName = groupName;
+            this.GroupIndex = groupidx;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
