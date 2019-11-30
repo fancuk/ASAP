@@ -50,10 +50,11 @@ namespace TelerikWpfApp3.VM
 
         public void makeGroupChat(string groupName, string groupMembers, string groupMemberCount)
         {
+            string time = DateTime.Now.ToString();
             string groupMaker = networkManager.MyId;
             groupMembers += groupMaker;
             networkManager.SendData("<MKG>", groupMaker + "/" + groupName + "/" +
-                groupMemberCount + "/" + groupMembers);
+                time + "/" + groupMemberCount + "/" + groupMembers);
         }
 
         private bool CanExecuteMethod(object arg)
