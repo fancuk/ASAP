@@ -133,12 +133,14 @@ namespace TelerikWpfApp3.View
         {
             bool isit = true;
             cm.AboutFocus(isit, target);
+            
         }
 
         private void ChattingRoom_Deactivated(object sender, EventArgs e) // LostFocus 상태
         {
             bool isit = false;
             cm.AboutFocus(isit, target);
+            cm.removeUnReadCount(target);
         }
 
         private void SendTextMsgButton1_Click(object sender, RoutedEventArgs e)

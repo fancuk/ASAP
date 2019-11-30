@@ -239,7 +239,7 @@ namespace TelerikWpfApp3.VM
             networkManager.SendData(tag, msg);
             chatManager.addChat(target, tmp);
             msgTextBox = "";
-            chatManager.addChattingList(target, lastmsg, nowTime);
+            chatManager.addChattingList(target, lastmsg, nowTime,true);
             //localDAO.ChattingCreate(id, target, nowTime, plain, "Send");
             if (tag.Equals("<MSG>"))
                 localDAO.ChattingCreate(id, target, nowTime, plain, "Send", isit); // 2019-11-22

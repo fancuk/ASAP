@@ -192,16 +192,27 @@ namespace TelerikWpfApp3.Service
                 ItemsChangeObservableCollection<Chatitem> tmp = new ItemsChangeObservableCollection<Chatitem>();
                 tmp = this.Chatdict[name];
                 Chatitem a = tmp[tmp.Count - 1];
-                ACL.ChattingList.Add(new AllChatListItem(name, a.Text, a.Time));
+                ACL.ChattingList.Add(new AllChatListItem(name, a.Text, a.Time,tmp.Count.ToString()));
             }
         }
-        public void addChattingList(string name,string lastMessage, string lastTime) //대화 보낼 때 마다
+        public void removeUnReadCount(string target)
+        {
+            AllChatListItem temp;
+            for (int i = 0; i < ACL.ChattingList.Count; i++)
+                temp = ACL.ChattingList[i];
+                if (temp.Target == target)
+                {
+                    ACL.ChattingList[i].UnReadMessageCount = "0";
+                }
+            }
+        }
+
+        public void addChattingList(string name,string lastMessage, string lastTime, bool isImSender) //대화 보낼 때 마다
         {
             AllChatListItem temp;
             bool isit = false;
-
             // 이미 채팅리스트에 있는지 확인 해줘야 함
-            for(int i = 0; i < ACL.ChattingList.Count; i++)
+            for (int i = 0; i < ACL.ChattingList.Count; i++)
             {
                 temp = ACL.ChattingList[i];
                 if (temp.Target == name)
@@ -210,17 +221,30 @@ namespace TelerikWpfApp3.Service
                     temp.LastTime = lastTime;
                     ACL.ChattingList[i] = temp;
                     isit = true;
+                    if (!isImSender)
+                    {
+                        int unReadMessageCountInt = Int32.Parse(ACL.ChattingList[i].UnReadMessageCount);
+                        unReadMessageCountInt += 1;
+                        string unReadMessageCount = unReadMessageCountInt.ToString();
+                        ACL.ChattingList[i].UnReadMessageCount = unReadMessageCount;
+                    }
                 }
             }
             if (ACL.ChattingList.Count == 0)
             {
-                ACL.ChattingList.Add(new AllChatListItem(name, lastMessage, lastTime));
+                if(isImSender)
+                ACL.ChattingList.Add(new AllChatListItem(name, lastMessage, lastTime,"0"));
+                else
+                    ACL.ChattingList.Add(new AllChatListItem(name, lastMessage, lastTime, "1"));
             }
             else
             {
                 if(isit == false)
                 {
-                    ACL.ChattingList.Add(new AllChatListItem(name, lastMessage, lastTime));
+                    if (isImSender)
+                        ACL.ChattingList.Add(new AllChatListItem(name, lastMessage, lastTime, "0"));
+                    else
+                        ACL.ChattingList.Add(new AllChatListItem(name, lastMessage, lastTime, "1"));
                 }
             }
             // 정렬 실패..
@@ -246,11 +270,14 @@ namespace TelerikWpfApp3.Service
             {
                 string lastChat = temp[tempCount - 2].Text;
                 string _lastTime = temp[tempCount - 2].Time;
-                AllChatListItem tempList = new AllChatListItem(friendID, lastChat, _lastTime);
                 for (int i = 0; i < ChatListcount; i++)
                 {
                     if (ACL.ChattingList[i].LastTime == lastTime)
                     {
+                        int unReadMessageCountInt = Int32.Parse(ACL.ChattingList[i].UnReadMessageCount);
+                        if (unReadMessageCountInt != 0) unReadMessageCountInt -= 1;
+                        string unReadMessageCount = unReadMessageCountInt.ToString();
+                        AllChatListItem tempList = new AllChatListItem(friendID, lastChat, _lastTime,unReadMessageCount);
                         ACL.ChattingList[i] = tempList;
                     }
                 }

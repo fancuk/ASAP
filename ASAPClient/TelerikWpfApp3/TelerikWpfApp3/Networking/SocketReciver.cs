@@ -136,7 +136,7 @@ namespace TelerikWpfApp3.Networking
                     DispatchService.Invoke(() =>
                     {
                        chatManager.addChat(tmp.User, tmp);
-                        chatManager.addChattingList(tokens[1], tokens[4],tokens[3]);
+                        chatManager.addChattingList(tokens[1], tokens[4],tokens[3],false);
                         Window msgWindow = MessageToast.instance;
                         MessageToast.instance.getToastInfo(tokens[1], tokens[3], tokens[4]);
                         msgWindow.Show();
@@ -250,7 +250,7 @@ namespace TelerikWpfApp3.Networking
                         DispatchService.Invoke(() =>
                         {
                             chatManager.addChat(tmp.User, tmp);
-                            chatManager.addChattingList(tokens[1], tokens[3], tokens[2]);
+                            chatManager.addChattingList(tokens[1], tokens[3], tokens[2],false);
                             Window msgWindow = MessageToast.instance;
                             MessageToast.instance.getToastInfo(tokens[1], tokens[3], tokens[2]);
                             msgWindow.Show();

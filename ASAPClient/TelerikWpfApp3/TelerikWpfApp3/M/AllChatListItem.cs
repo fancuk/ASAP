@@ -12,6 +12,7 @@ namespace TelerikWpfApp3.M
         private string lastMessage;
         private string target;
         private string lastTime;
+        private string unReadMessageCount;
 
         public string LastMessage { get => lastMessage; set
             {
@@ -31,11 +32,20 @@ namespace TelerikWpfApp3.M
             }
         }
 
-        public AllChatListItem(string target,string lastMessage, string lastTime)
+        public string UnReadMessageCount { get => unReadMessageCount;
+            set
+            {
+                this.unReadMessageCount = value;
+                OnPropertyChanged("UnReadMessageCount");
+            }
+        }
+
+        public AllChatListItem(string target,string lastMessage, string lastTime,string unReadMessageCount)
         {
             this.LastMessage = lastMessage;
             this.Target = target;
             this.LastTime = lastTime;
+            this.UnReadMessageCount = unReadMessageCount;
         }
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string name)
