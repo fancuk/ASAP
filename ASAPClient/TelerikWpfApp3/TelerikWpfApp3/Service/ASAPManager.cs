@@ -52,9 +52,9 @@ namespace TelerikWpfApp3.Service
         }
         #endregion
         #region asr false받으면 삭제해주기
-        public void RemoveLastChat(string lastTime)
+        public void RemoveLastChat(string lastTime,string friendID)
         {
-            chatManager.RemoveLastChat(lastTime);
+            chatManager.RemoveLastChat(lastTime, friendID);
         }
         #endregion
 

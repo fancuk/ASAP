@@ -222,7 +222,7 @@ namespace TelerikWpfApp3.Networking
                             else
                             {
 
-                                asapManager.RemoveLastChat(time);
+                                asapManager.RemoveLastChat(time, friendID);
                                 chatManager.RemoveChat_ASAP(friendID, time);
                             }
                             asapManager.ASAP_RemoveSentList(friendID);

@@ -225,13 +225,35 @@ namespace TelerikWpfApp3.Service
             }
             // 정렬 실패..
         }
-        public void RemoveLastChat(string lastTime) // ASR에서 false받으면
+        public void RemoveLastChat(string lastTime,string friendID) // ASR에서 false받으면
         {
-            int count = ACL.ChattingList.Count;
-            if(ACL.ChattingList[count-1].LastTime == lastTime) // 마지막 메시지가 ASAP 이라면 (ASAP을 보내고 일반 메시지를 보낼 수도 있다)
+            ItemsChangeObservableCollection<Chatitem> temp = Chatdict[friendID];
+            int tempCount = temp.Count;
+            int ChatListcount = ACL.ChattingList.Count;
+            if (tempCount == 1) // ASAP 메시지가 처음 이라면 (아예 채팅 처음 시작이 ASAP이라면)
             {
-                AllChatListItem delete = ACL.ChattingList[count - 1];
-                ACL.ChattingList.Remove(delete);
+                for(int i = 0; i < ChatListcount; i++)
+                {
+                    if (ACL.ChattingList[i].LastTime == lastTime)
+                    {
+                        AllChatListItem delete = ACL.ChattingList[i];
+                        ACL.ChattingList.Remove(delete);
+                    }
+                }
+                return;
+            }
+            if (temp[tempCount - 1].Time == lastTime) // 마지막 메시지가 ASAP이라면
+            {
+                string lastChat = temp[tempCount - 2].Text;
+                string _lastTime = temp[tempCount - 2].Time;
+                AllChatListItem tempList = new AllChatListItem(friendID, lastChat, _lastTime);
+                for (int i = 0; i < ChatListcount; i++)
+                {
+                    if (ACL.ChattingList[i].LastTime == lastTime)
+                    {
+                        ACL.ChattingList[i] = tempList;
+                    }
+                }
             }
         }
         // 정구
