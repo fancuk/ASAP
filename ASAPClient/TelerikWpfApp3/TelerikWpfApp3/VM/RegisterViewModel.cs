@@ -157,7 +157,7 @@ namespace TelerikWpfApp3.VM
             idChecking = new Command(idCheckButton, CanExecute);
             emailList = new ObservableCollection<string>()
             {
-                 "@naver.com","@gamil.com","@daum.net"
+                 "@naver.com","@gmail.com","@daum.net"
             };
         }
 
