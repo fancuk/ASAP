@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -67,13 +68,10 @@ namespace TelerikWpfApp3.VM
                 if (networkManager.nowConnect == true)
                 {
                     networkManager.CloseSocket();
-                    WindowManager windowManager = ((App)Application.Current).windowManager;
-                    windowManager.CloseAll();
+
                 }
-                Window vt = TelerikWpfApp3.viewtest.Instance;
-                Window sw = TelerikWpfApp3.StartWindow.Instance;
-                vt.Show();
-                sw.Hide();
+                Process.GetCurrentProcess().Kill();
+
             }
         }
         public void OnWindowClosing(object sender, CancelEventArgs e)
@@ -84,11 +82,8 @@ namespace TelerikWpfApp3.VM
             {
                 networkManager.CloseSocket();
             }
-            Window vt = TelerikWpfApp3.viewtest.Instance;
-            Window sw = TelerikWpfApp3.StartWindow.Instance;
-            ChattingRoomManager.Instance.closeAllChatRoom();
-            vt.Show();
-            sw.Hide();
+            Process.GetCurrentProcess().Kill();
+
         }
         private bool CE(object obj)
         {
