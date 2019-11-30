@@ -11,7 +11,7 @@ namespace TelerikWpfApp3.M
     public class GroupChatListItem: INotifyPropertyChanged
     {
         private string lastMessage;
-        private string groupName;
+        private string target;
         private string lastTime;
         private string groupidx; 
 
@@ -43,13 +43,13 @@ namespace TelerikWpfApp3.M
             }
         }
 
-        public string GroupName
+        public string Target
         {
-            get => groupName;
+            get => target;
             set
             {
-                this.groupName = value;
-                OnPropertyChanged("GroupName");
+                this.target = value;
+                OnPropertyChanged("Target");
             }
         }
         
@@ -57,7 +57,7 @@ namespace TelerikWpfApp3.M
         {
             this.LastMessage = lastMessage;
             this.LastTime = lastTime;
-            this.GroupName = groupName;
+            this.Target = groupName;
             this.GroupIndex = groupidx;
         }
 

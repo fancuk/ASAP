@@ -245,7 +245,6 @@ namespace TelerikWpfApp3.LocalDB
                     }
                 }
                 chatManager.setChattingList();
-                groupManager.setChattingList();
 
                 // 여기는 그룹 챗 세팅 부분
                 // 여기다 추가
@@ -373,6 +372,8 @@ namespace TelerikWpfApp3.LocalDB
 
         public void ReadGroupList() // Read Group Data
         {
+            if(groupMemberListManager == null)
+                groupMemberListManager = ((App)Application.Current).groupMemberListManager;
             string myId = networkManager.MyId;
             createChattingFile(myId);
             string query = "SELECT DISTINCT * FROM GroupFor" + myId;
@@ -403,6 +404,8 @@ namespace TelerikWpfApp3.LocalDB
                     // 이거는 그룹 리스트 넣어줌
                     groupMemberListManager.AddGroupMemberList(GIDX, groupMembers);
                     groupManager.addGroupName(GIDX, groupname);
+
+                    groupManager.setChattingList();
                 }
             }
             catch (Exception e)
