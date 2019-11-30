@@ -21,11 +21,13 @@ namespace TelerikWpfApp3.View
     /// </summary>
     public partial class GroupFriendShow : Window
     {
-        GroupChatRoomViewModel gc = new GroupChatRoomViewModel();
-        public GroupFriendShow()
+      
+        public GroupFriendShow(string gidx)
         {
             InitializeComponent();
-            ClientList.DataContext = GroupChatRoomViewModel.Instance.getGroupMemberList(gc.gIdx);
+            GroupChatRoomViewModel groupChatRoomViewModel = new GroupChatRoomViewModel();
+            ClientList.DataContext = groupChatRoomViewModel.getGroupMemberList(gidx);
+            
         }
     }
 }

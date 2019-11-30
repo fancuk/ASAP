@@ -132,11 +132,11 @@
                     </StackPanel>
                 </Border>
                 <StackPanel Height="322" Background="#FFEEF1F7" Margin="0,4,0.6,0">
-                    <ListBox  SelectionMode="Multiple" ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                    <ListBox   ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                                BorderThickness="0,0,0,0" x:Name="ClientList" 
                                 Height="335" ItemsSource="{Binding}"  
                                  IsSynchronizedWithCurrentItem="False" 
-                                 BorderBrush="{x:Null}" Margin="0,0,-0.2,0" Background="White">
+                                 BorderBrush="{x:Null}" Margin="0,0,1.8,0" Background="White">
 
                         <ListBox.ItemContainerStyle>
                             <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource {x:Type ListBoxItem}}">
@@ -147,17 +147,7 @@
                                 </Style.Triggers>
                             </Style>
                         </ListBox.ItemContainerStyle>
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <StackPanel Height="50" Margin="0,5,0,0" Orientation="Horizontal" Background="{x:Null}" Width="300">
-                                    <TextBlock x:Name="status" MaxWidth="0" MaxHeight="0"/>
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock x:Name="User" Text="{Binding User}"  TextAlignment="Left" FontFamily="Calibri" Margin="1,0,0,0" FontSize="16" FontWeight="Bold"/>
-                                        <TextBlock Text="     " Margin="5,0,0,0"/>
-                                    </StackPanel>
-                                </StackPanel>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
+                       
                     </ListBox>
                 </StackPanel>
 

@@ -44,6 +44,8 @@ namespace TelerikWpfApp3.Service
             else return true;
         }
 
+       
+
         public void showChatRoom(string groupIndex)
         {
             groupChatRoom[groupIndex].Show();

@@ -25,18 +25,18 @@ namespace TelerikWpfApp3.View
     public partial class GroupChatRoom : INotifyPropertyChanged
     {
         private string groupidx;
-        GroupChatManager gcm = ((App)Application.Current).groupChatManager;
-        GroupChatRoomViewModel gc = new GroupChatRoomViewModel();
+        GroupChatManager groupChatManager = ((App)Application.Current).groupChatManager;
+        GroupChatRoomViewModel groupChatRoomViewModel = new GroupChatRoomViewModel();
 
         public GroupChatRoom(string groupidx, string groupName)
         {
             InitializeComponent();
             this.MouseLeftButtonDown += MoveWindow;
-            gc.gIdx = groupidx;
+            groupChatRoomViewModel.gIdx = groupidx;
             string groupChatName = groupName;
             GroupNameText.Text = groupChatName;
-            Closing += gc.OnWindowClosing;
-            ChatBox.DataContext = gcm.loadChat(gc.gIdx);
+            Closing += groupChatRoomViewModel.OnWindowClosing;
+            ChatBox.DataContext = groupChatManager.loadChat(groupChatRoomViewModel.gIdx);
             UpdateScrollBar(ChatBox);
             this.PreviewKeyDown += new KeyEventHandler(OnEnterKeyDownHandler);
            
@@ -114,5 +114,6 @@ namespace TelerikWpfApp3.View
         {
            
         }
+
     }
 }
