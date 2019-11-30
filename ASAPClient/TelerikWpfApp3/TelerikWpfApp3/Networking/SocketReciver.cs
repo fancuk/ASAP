@@ -62,6 +62,7 @@ namespace TelerikWpfApp3.Networking
                         {
                             //((App)Application.Current).AddFriend(target, "true"); 다민
                             FriendsUserControlViewModel.Instance.AddFriend(target, "true"); //다민
+                            FriendsUserControlViewModel.Instance.cloaseModal();
                         });
                         MessageBox.Show("친구 추가 되었습니다!");
                     }

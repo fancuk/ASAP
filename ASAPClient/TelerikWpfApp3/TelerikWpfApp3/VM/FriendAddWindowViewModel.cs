@@ -62,8 +62,9 @@ namespace TelerikWpfApp3.VM
                     string str = friendID + "/";
                     string member = networkManager.MyId;
                     networkManager.SendData("<FRR>", str + member);
-                }
 
+                }
+                
             }
         }
      

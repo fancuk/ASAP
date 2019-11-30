@@ -17,6 +17,7 @@ namespace TelerikWpfApp3.VM
     class FriendsUserControlViewModel : INotifyPropertyChanged
     {
         NetworkManager networkManager = ((App)Application.Current).networkManager;
+        FriendAddWindow faw = new FriendAddWindow();
 
         private static FriendsUserControlViewModel instance = null; // 다민
         private string _myID;
@@ -140,15 +141,14 @@ namespace TelerikWpfApp3.VM
 
         private void showModal(object e)
         {
-            FriendAddWindow faw = new FriendAddWindow();
             faw.Owner = Application.Current.MainWindow;
-            if(faw.ShowDialog() == true)
-            {
-
-            }
+            faw.ShowDialog();
         }
 
-        
+        public void cloaseModal()
+        {
+            faw.Close();
+        }
         private bool CanExecute(object obj)
         {
             return true;
