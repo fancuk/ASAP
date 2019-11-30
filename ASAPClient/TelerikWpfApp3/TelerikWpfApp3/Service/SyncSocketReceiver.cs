@@ -215,8 +215,9 @@ namespace TelerikWpfApp3.Service
                         {
                             groupChatManager.addChat(groupIdx, new GroupChatItem(plain, maker, groupTime, false)); // check가 true면 내가 보낸건가?
                         }
-                        localDAO.GroupInfoCreate(groupIdx, groupName, maker + "^" + tokens[5]);
+                        localDAO.GroupInfoCreate(groupIdx, groupName, maker + "^" + tokens[6]);
                         localDAO.GroupChattingCreate(maker, groupIdx, groupTime, plain);
+                        groupChatManager.addGroupName(groupIdx, groupName);
                         isit = 2;
                     }
                 }
@@ -244,7 +245,7 @@ namespace TelerikWpfApp3.Service
                             groupChatManager.addChattingList(gIdx, groupName, plain, time);
                             GroupChattingRoomManager.Instance.makeChatRoom(gIdx, groupName);
                             groupChatManager.addChat(gIdx, new GroupChatItem(plain, maker, time, false));
-                            localDAO.GroupInfoCreate(gIdx, groupName, maker + "^" + tokens[5]);
+                            localDAO.GroupInfoCreate(gIdx, groupName, groupInfo[5]);
                             localDAO.GroupChattingCreate(maker, gIdx, time, plain);
                         });
                     }
@@ -254,27 +255,44 @@ namespace TelerikWpfApp3.Service
                 }
                 else if (tag.Equals("<GMQ>"))
                 {
-                    int messageCount = int.Parse(tokens[1]);
-                    for (int i = 0; i < messageCount; i++)
+                    if (tokens[1].Equals("false"))
                     {
-                        string[] groupInfo = tokens[i + 2].Split('^');
-                        string sender = groupInfo[0];
-                        string gIdx = groupInfo[1];
-                        string plain = groupInfo[2];
-                        string time = groupInfo[3];
-                        string groupName = groupChatManager.getGroupName(gIdx);
-                        DispatchService.Invoke(() =>
+
+                    }
+                    else
+                    {
+                        int messageCount = int.Parse(tokens[1]);
+                        for (int i = 0; i < messageCount; i++)
                         {
-                            groupChatManager.addChat(gIdx, new GroupChatItem(plain, sender, time, false));
-                            groupChatManager.addChattingList(gIdx, groupName, plain, time);
-                            localDAO.GroupChattingCreate(sender, gIdx, time, plain);
-                        });
+                            string[] groupInfo = tokens[i + 2].Split('^');
+                            string sender = groupInfo[0];
+                            string gIdx = groupInfo[1];
+                            string plain = groupInfo[2];
+                            string time = groupInfo[3];
+                            string groupName = groupChatManager.getGroupName(gIdx);
+                            DispatchService.Invoke(() =>
+                            {
+                                groupChatManager.addChat(gIdx, new GroupChatItem(plain, sender, time, false));
+                                groupChatManager.addChattingList(gIdx, groupName, plain, time);
+                                localDAO.GroupChattingCreate(sender, gIdx, time, plain);
+                            });
+                        }
                     }
                     if (!FriendsUserControlViewModel.Instance.loadAllChk)
                     {
                         networkManager.SendData("<FLD>", networkManager.MyId);
                     }
                     FriendsUserControlViewModel.Instance.loadAllChk = true;
+                    isit = 3;
+                }
+                else if (tag.Equals("<LGS>"))
+                {
+                    string FriendID = tokens[1];
+                    string status = tokens[2];
+                    DispatchService.Invoke(() =>
+                    {
+                        FriendsUserControlViewModel.Instance.ChangeStatus(FriendID, status);//다민
+                    });
                     isit = 3;
                 }
                 else
