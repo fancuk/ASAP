@@ -143,15 +143,8 @@ namespace TelerikWpfApp3.Service
                         {
                             chatManager.addChat(tmp.User, tmp);
                         });
-
-                        //localDAO.ChattingCreate(user,
-                        //networkManager.MyId, time, msg, "Receive");
                     }
-                    if (!FriendsUserControlViewModel.Instance.loadAllChk)
-                    {
-                        networkManager.SendData("<FLD>", networkManager.MyId);
-                        isit = 3;
-                    }
+                    isit = 3;
                     FriendsUserControlViewModel.Instance.loadAllChk = true;
                 }
                 else if (tag.Equals("<FIN>"))
@@ -224,6 +217,60 @@ namespace TelerikWpfApp3.Service
                         localDAO.GroupChattingCreate(maker, groupIdx, time, plain);
                         isit = 2;
                     }
+                }
+                else if (tag.Equals("<MKQ>"))//만든 사람 생각 안해줘도 된다.
+                {
+                    int groupCount = int.Parse(tokens[1]);
+                    for (int i = 0; i < groupCount; i++)
+                    {
+                        string[] groupInfo = tokens[i + 2].Split('&');
+                        string[] groupMemberInfo = groupInfo[5].Split('^');
+                        string maker = groupInfo[0];
+                        string groupName = groupInfo[1];
+                        string gIdx = groupInfo[2];
+                        string time = groupInfo[3];
+                        int memberCount = int.Parse(groupInfo[4]);
+                        List<string> groupMemberList = new List<string>(memberCount);
+                        for (int j = 0; j < memberCount; j++)
+                        {
+                            groupMemberList.Add(groupMemberInfo[j]);
+                        }
+                        DispatchService.Invoke(() =>
+                        {
+                            groupMemberListManager.AddGroupMemberList(gIdx, groupMemberList);
+                            string plain = maker + "님이 채팅방을 만드셨습니다.";
+                            groupChatManager.addChattingList(gIdx, groupName, plain, time);
+                            GroupChattingRoomManager.Instance.makeChatRoom(gIdx, groupName);
+                            groupChatManager.addChat(gIdx, new GroupChatItem(plain, maker, time, false));
+                            localDAO.GroupInfoCreate(gIdx, groupName, maker + "^" + tokens[5]);
+                            localDAO.GroupChattingCreate(maker, gIdx, time, plain);
+                        });
+                    }
+                    isit = 3;
+                }
+                else if (tag.Equals("<GMQ>"))
+                {
+                    int messageCount = int.Parse(tokens[1]);
+                    for (int i = 0; i < messageCount; i++)
+                    {
+                        string[] groupInfo = tokens[i + 2].Split('^');
+                        string sender = groupInfo[0];
+                        string gIdx = groupInfo[1];
+                        string plain = groupInfo[2];
+                        string time = groupInfo[3];
+                        string groupName = groupChatManager.getGroupName(gIdx);
+                        DispatchService.Invoke(() =>
+                        {
+                            groupChatManager.addChat(gIdx, new GroupChatItem(plain, sender, time, false));
+                            groupChatManager.addChattingList(gIdx, groupName, plain, time);
+                            localDAO.GroupChattingCreate(sender, gIdx, time, plain);
+                        });
+                    }
+                    if (!FriendsUserControlViewModel.Instance.loadAllChk)
+                    {
+                        networkManager.SendData("<FLD>", networkManager.MyId);
+                    }
+                    isit = 3;
                 }
                 else
                 {
