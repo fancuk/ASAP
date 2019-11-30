@@ -267,7 +267,50 @@ namespace TelerikWpfApp3.Networking
                         
                     }
                 }
-                
+                else if (tag.Equals("<MKG>"))
+                {
+                    if (tokens[1].Equals("false"))
+                    {
+                        MessageBox.Show("그룹 채팅방 만들기 실패 ㅠ");
+                    }
+                    else
+                    {
+                        string maker = tokens[1];
+                        string groupName = tokens[2];
+                        string groupIdx = tokens[3];
+                        string groupTime = tokens[4];
+                        int memberCount = int.Parse(tokens[5]);
+                        List<string> groupMemberList = new List<string>(memberCount);
+                        string[] nameSlice = tokens[6].Split('^');
+                        int length = nameSlice.Length;
+                        for (int i = 0; i < length; i++)
+                        {
+                            groupMemberList.Add(nameSlice[i]);
+                        }
+                        groupMemberListManager.AddGroupMemberList(groupIdx, groupMemberList);
+                        string plain = maker + "님이 채팅방을 만드셨습니다.";
+                        DispatchService.Invoke(() =>
+                        {
+                            groupChatManager.addChattingList(groupIdx, groupName, plain, groupTime);
+                            GroupChattingRoomManager.Instance.makeChatRoom(groupIdx, groupName);
+                        
+                        if (maker == networkManager.MyId) // 만든 사람이 나라면
+                        {
+                                groupChatManager.addChat(groupIdx, new GroupChatItem(plain, maker, groupTime, true)); // check가 true면 내가 보낸건가?
+                                GroupChattingRoomManager.Instance.showChatRoom(groupIdx);
+                        }
+                        else
+                        {
+                            groupChatManager.addChat(groupIdx, new GroupChatItem(plain, maker, groupTime, false)); // check가 true면 내가 보낸건가?
+                        }
+                        });
+                        localDAO.GroupInfoCreate(groupIdx, groupName, maker + "^" + tokens[6]);
+                        localDAO.GroupChattingCreate(maker, groupIdx, groupTime, plain);
+                        groupChatManager.addGroupName(groupIdx, groupName);
+  
+                    }
+                }
+
                 else if (tag.Equals("<GSG>"))
                 {
                     string sender = tokens[1];
@@ -277,8 +320,11 @@ namespace TelerikWpfApp3.Networking
                     string groupName = groupChatManager.getGroupName(gIdx);
                     // dao에 넣어주고
                     // 그룹 채팅방에 메시지 보내주기
-                    groupChatManager.addChat(gIdx, new GroupChatItem(plain, sender, time, false));
-                    groupChatManager.addChattingList(gIdx, groupName, plain, time);
+                    DispatchService.Invoke(() =>
+                    {
+                        groupChatManager.addChat(gIdx, new GroupChatItem(plain, sender, time, false));
+                        groupChatManager.addChattingList(gIdx, groupName, plain, time);
+                    });
                     localDAO.GroupChattingCreate(sender, gIdx, time, plain);
                 }
                 // 텍스트박스에 추가해준다.
