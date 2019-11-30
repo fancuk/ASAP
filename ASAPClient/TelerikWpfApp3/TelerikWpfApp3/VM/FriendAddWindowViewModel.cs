@@ -47,7 +47,7 @@ namespace TelerikWpfApp3.VM
             {
                 MessageBox.Show("추가할 친구를 입력해주세요.");
             }
-            else if (Regex.IsMatch((obj as string), @"[&^/]"))
+            else if (Regex.IsMatch(friendID, @"[&^/]"))
             {
                 MessageBox.Show("특수문자(^,&,/)는 사용 불가능합니다.");
             }
