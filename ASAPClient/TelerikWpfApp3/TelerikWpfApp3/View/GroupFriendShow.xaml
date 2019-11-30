@@ -101,18 +101,18 @@
         </Border.Effect>
         <Grid>
             <StackPanel Orientation="Vertical">
-                <Border CornerRadius="10" Background="LightCoral" Height="38" Margin="0,0,-0.4,0">
+                <Border CornerRadius="10" Background="#FFADA7A7" Height="38" Margin="0,0,-0.4,0">
                     <Border.Effect>
                         <DropShadowEffect Color="#FFECE2E2" Direction="280">
                         </DropShadowEffect>
                     </Border.Effect>
-                    <StackPanel Orientation="Horizontal" Background="LightCoral" Margin="0,10,0,0">
-                        <StackPanel Width="138" Margin="10,0,0,-0.2" Orientation="Horizontal">
+                    <StackPanel Orientation="Horizontal" Background="#FFADA7A7" Margin="0,10,0,0">
+                        <StackPanel Width="147" Margin="10,0,0,-0.2" Orientation="Horizontal">
                             <TextBlock Text="Group Members" x:Name="GroupNameText"
-                                    Foreground="White" Margin="25,1,19,4.8" FontSize="13" FontFamily="Microsoft YaHei UI" FontWeight="Bold" Width="117" TextAlignment="Center"/>
+                                    Foreground="White" Margin="21,1,19,4.8" FontSize="14" FontFamily="Microsoft YaHei UI" FontWeight="Bold" Width="122" TextAlignment="Center"/>
                         </StackPanel>
 
-                        <Button Width="28" Margin="12,3,10,9.8" Command="{Binding close}" Background="{x:Null}" BorderBrush="{x:Null}" FontWeight="Bold" FontFamily="Malgun Gothic Semilight" FontSize="18"
+                        <Button Width="28" Margin="3,3,10,9.8" Command="{Binding close}" Background="{x:Null}" BorderBrush="{x:Null}" FontWeight="Bold" FontFamily="Malgun Gothic Semilight" FontSize="18"
                                 CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}}}" >
                             <Button.DataContext>
                                 <VM:TitleControl></VM:TitleControl>
@@ -122,7 +122,7 @@
                                     <InlineUIContainer>
                                         <StackPanel Height="12" Width="21" HorizontalAlignment="Right">
                                             <StackPanel.Background>
-                                                <ImageBrush ImageSource="/TelerikWpfApp3;component/Resources/exitSmallGray.png" Stretch="Uniform"/>
+                                                <ImageBrush ImageSource="/TelerikWpfApp3;component/Resources/exitSmall.png" Stretch="Uniform"/>
                                             </StackPanel.Background>
                                         </StackPanel>
                                     </InlineUIContainer>
@@ -137,17 +137,21 @@
                                 Height="206" ItemsSource="{Binding}"  
                                  IsSynchronizedWithCurrentItem="False" 
                                  BorderBrush="{x:Null}" Margin="0,0,1.8,0" Background="White">
-
-                        <ListBox.ItemContainerStyle>
-                            <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource {x:Type ListBoxItem}}">
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="#FF006FFF" />
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </ListBox.ItemContainerStyle>
-
+                        
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <Border Background="White" BorderBrush="LightCoral" BorderThickness="3.5" CornerRadius="10" Margin="42,5,0,0"
+                                                           HorizontalAlignment="Center" Height="25" Width="100">
+                                        <Border.Effect>
+                                            <DropShadowEffect Color="#FFE2E0E0"/>
+                                        </Border.Effect>
+                                        <TextBlock Text="{Binding }" HorizontalAlignment="Center" TextAlignment="Center"
+                                            Margin="1,0,0,0"  Foreground="Black"/>
+                                    </Border>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
                     </ListBox>
                 </StackPanel>
 

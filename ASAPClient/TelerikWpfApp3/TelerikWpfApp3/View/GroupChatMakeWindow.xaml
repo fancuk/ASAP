@@ -202,8 +202,8 @@
                                             <ListBox.ItemTemplate>
                                                 <DataTemplate>
                                                     <StackPanel>
-                                                        <Border Background="#FFEC5F5F" CornerRadius="10"
-                                                            Height="25" Width="100">
+                                                        <Border  Background="#FFEC5F5F" CornerRadius="10"
+                                                            Height="25" Width="100" HorizontalAlignment="Center" Margin="10,0,0,0">
                                                             <Border.Effect>
                                                                 <DropShadowEffect Color="#FFE2E0E0"/>
                                                             </Border.Effect>
