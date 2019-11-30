@@ -177,7 +177,7 @@ namespace TelerikWpfApp3.VM
         // ASAP Button Command Binding 용
         public void ExecuteSendASAP(object org) // 서버 업데이트 후에
         {//메세지 공백 방지!
-            /*if (string.IsNullOrWhiteSpace(org as string) == true)
+            if (string.IsNullOrWhiteSpace(org as string) == true)
             {
                 MessageBox.Show("메세지를 입력해주세요.");
             }
@@ -200,7 +200,7 @@ namespace TelerikWpfApp3.VM
                     return;
                 }
                 sendMessage("<ASG>", org as string);
-            }*/
+            }
         }
 
         // 정구

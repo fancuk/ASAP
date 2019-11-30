@@ -156,6 +156,7 @@ namespace TelerikWpfApp3.Networking
                     {
                         sc.closeSock();
                     }
+                    
                 }
                 else if (tag.Equals("<CHR>")) // 서버 업데이트 후에
                 {
@@ -176,12 +177,14 @@ namespace TelerikWpfApp3.Networking
                         });
                     }
                 }
+                
                 else if (tag.Equals("<ASG>"))
                 {
                     string friendID = tokens[1];
                     string time = tokens[2];
                     chatManager.AlertReceiveChat_ASAP(friendID, time);
                 }
+                /*
                 else if (tag.Equals("<ASR>"))
                 {
                     string friendID = tokens[1];
@@ -199,6 +202,62 @@ namespace TelerikWpfApp3.Networking
                     }
                     asapManager.ASAP_RemoveSentList(friendID);
                 }
+                */
+
+                else 
+                if (tag.Equals("<ASR>"))
+                {
+                    if (!asapManager.ASAP_SentCheck(tokens[1])) // 내가 보낸 사람이면 해당 내용 수행
+                    {
+                        string friendID = tokens[1];
+                        string time = tokens[2];
+                        string isit = tokens[3];
+                        DispatchService.Invoke(() =>
+                        {
+                            if (isit.Equals("true"))
+                            {
+                                // sqlite에 저장해라!
+                                chatManager.AddChatInLocalDB_ASAP(friendID, time);
+                            }
+                            else
+                            {
+
+                                asapManager.RemoveLastChat(time);
+                                chatManager.RemoveChat_ASAP(friendID, time);
+                            }
+                            asapManager.ASAP_RemoveSentList(friendID);
+                        });
+                        
+                    }
+                }
+                else if (tag.Equals("<ARS>"))
+                {
+
+                    if (asapManager.ASAP_SentCheck(tokens[1]))
+                    {
+                        string friendID = tokens[1];
+                        string time = tokens[2];
+                        string isit = tokens[3];
+                        Chatitem tmp = new Chatitem();
+                        tmp.User = tokens[1];
+                        tmp.Time = tokens[2];
+                        tmp.Text = tokens[3];
+                        tmp.Asap = true;
+                        tmp.Chk = true;
+                        tmp.Status = true;
+                        localDAO.ChattingCreate(tokens[1], networkManager.MyId, tokens[2], tokens[3], "Receive", 1);
+
+                        DispatchService.Invoke(() =>
+                        {
+                            chatManager.addChat(tmp.User, tmp);
+                            chatManager.addChattingList(tokens[1], tokens[3], tokens[2]);
+                            Window msgWindow = MessageToast.instance;
+                            MessageToast.instance.getToastInfo(tokens[1], tokens[3], tokens[2]);
+                            msgWindow.Show();
+                        });
+                    }
+                }
+
                 else if (tag.Equals("<SYN>"))
                 {
                     if (networkManager.nowConnect == true) //예외 처리 obj beginreceive

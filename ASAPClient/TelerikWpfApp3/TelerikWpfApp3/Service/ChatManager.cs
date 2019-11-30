@@ -16,13 +16,13 @@ namespace TelerikWpfApp3.Service
     {
         public ChatManager()
         {
-            localDAO = ((App)Application.Current).localDAO;
+
         }
         NetworkManager networkManager = ((App)Application.Current).networkManager;
         IDictionary<string, ItemsChangeObservableCollection<Chatitem>> Chatdict
                = new Dictionary<string, ItemsChangeObservableCollection<Chatitem>>();
         AllChatList ACL = new AllChatList();
-        LocalDAO localDAO;
+        LocalDAO localDAO = ((App)Application.Current).localDAO;
         private string nowIReading = null; // 내가 누구 꺼 읽고 있는지
 
         List<string> friendsReading = new List<string>(); // 여러 명이 내 대화를 보고 있을 
@@ -252,6 +252,10 @@ namespace TelerikWpfApp3.Service
         // ASAP 읽었다는 신호를 Sender가 받으면 LocalDB에 저장.
         public void AddChatInLocalDB_ASAP(string friendID, string time)
         {
+            if(localDAO == null)
+            {
+                localDAO = ((App)Application.Current).localDAO;
+            }
             if (Chatdict.ContainsKey(friendID))
             {
                 object changeChat; // 이거는 그냥 받는 용도
