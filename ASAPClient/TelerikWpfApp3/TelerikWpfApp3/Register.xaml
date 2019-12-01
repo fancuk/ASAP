@@ -130,7 +130,7 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                                     <InlineUIContainer>
                                         <StackPanel Width="20" Height="17">
                                             <StackPanel.Background>
-                                                <ImageBrush ImageSource="Resources/exiticon2.png"/>
+                                                <ImageBrush ImageSource="Resources/exitSmall.png" Stretch="Uniform"/>
                                             </StackPanel.Background>
                                         </StackPanel>
                                     </InlineUIContainer>
@@ -142,13 +142,13 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 
                 <Border BorderThickness="0,0,0,1" BorderBrush="#FFBBB3B3" Margin="10,0">
                     <StackPanel Height="70" Margin="0,0,-0.4,0">
-                        <TextBlock FontSize="30" FontFamily="Impact" Margin="10,20,0,0" Foreground="#FFEE534F" TextAlignment="Center"><Run Text="Register"/></TextBlock>
+                        <TextBlock FontSize="30" FontFamily="Impact" Margin="10,20,17,0" Foreground="#FFEE534F" TextAlignment="Center"><Run Text="Register"/></TextBlock>
                     </StackPanel>
                 </Border>
                 <Border Height="380">
                     <StackPanel Margin="0,0,-0.4,-145">
 
-                        <StackPanel Height="405" Orientation="Horizontal">
+                        <StackPanel Height="405" Orientation="Horizontal" Margin="-7,0,-0.2,0">
                             <Border Margin="10,10,10,-84.667" BorderThickness="1" CornerRadius="4">
                                 <StackPanel HorizontalAlignment="Left" Width="397" Margin="0,-0.8,0,-0.4">
                                     <StackPanel Height="66" Orientation="Horizontal" HorizontalAlignment="Left" Width="394">

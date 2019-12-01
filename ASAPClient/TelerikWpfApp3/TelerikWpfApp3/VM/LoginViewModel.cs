@@ -73,14 +73,14 @@ namespace TelerikWpfApp3.VM
             Window s = TelerikWpfApp3.Register.Instance;
             Window loginView = TelerikWpfApp3.viewtest.Instance;
             double screenWidth = System.Windows.SystemParameters.PrimaryScreenWidth;
-            screenWidth = (screenWidth / 2) - 197.5;
+            screenWidth = (screenWidth / 2) - 197;
 
             if (screenWidth >= loginView.Left)
             {
                 s.Owner = loginView;
 
                 s.Top = loginView.Top;
-                s.Left = loginView.Left + 395;
+                s.Left = loginView.Left + 360;
                 s.Show();
             }
             else
@@ -88,7 +88,7 @@ namespace TelerikWpfApp3.VM
                 s.Owner = loginView;
 
                 s.Top = loginView.Top;
-                s.Left = loginView.Left - 541;
+                s.Left = loginView.Left - 418;
                 s.Show();
             }
         }

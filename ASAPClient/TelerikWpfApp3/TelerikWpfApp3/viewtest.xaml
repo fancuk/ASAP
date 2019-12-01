@@ -178,7 +178,7 @@
                                     <InlineUIContainer>
                                         <StackPanel RenderOptions.BitmapScalingMode="HighQuality" HorizontalAlignment="Center" VerticalAlignment="Center" Width="20" Height="17" Margin="0">
                                             <StackPanel.Background>
-                                                <ImageBrush ImageSource="/Resources/menuicon2.png"/>
+                                                <ImageBrush ImageSource="/Resources/optionSmall.png" Stretch="Uniform"/>
                                             </StackPanel.Background>
                                         </StackPanel>
                                     </InlineUIContainer>
@@ -194,7 +194,7 @@
                                     <InlineUIContainer>
                                         <StackPanel Width="20" Height="17">
                                             <StackPanel.Background>
-                                                <ImageBrush ImageSource="Resources/minimizeicon2.png"/>
+                                                <ImageBrush ImageSource="Resources/samllMinimize.png" Stretch="Uniform"/>
                                             </StackPanel.Background>
                                         </StackPanel>
                                     </InlineUIContainer>
@@ -210,7 +210,7 @@
                                     <InlineUIContainer>
                                         <StackPanel Width="20" Height="17">
                                             <StackPanel.Background>
-                                                <ImageBrush ImageSource="/Resources/exiticon2.png"/>
+                                                <ImageBrush ImageSource="/Resources/exitSmall.png" Stretch="Uniform"/>
                                             </StackPanel.Background>
                                         </StackPanel>
                                     </InlineUIContainer>
