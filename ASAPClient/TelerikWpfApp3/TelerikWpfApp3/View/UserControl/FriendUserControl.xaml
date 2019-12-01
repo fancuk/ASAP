@@ -124,7 +124,7 @@
                                 </ListBox.ItemContainerStyle>
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
-                                        <StackPanel Height="69" Margin="0,5,0,0" Orientation="Horizontal" Background="{x:Null}" Width="310">
+                                        <StackPanel Height="69" Margin="0,5,0,0" Orientation="Horizontal" Background="{x:Null}" Width="310" PreviewMouseRightButtonUp="ClientList_PreviewMouseRightButtonUp">
                                             <Border RenderOptions.BitmapScalingMode="HighQuality" CornerRadius="20" Width="40" Margin="0,0,0,25" Height="40">
                                                 <Border.Style>
                                                     <Style>
@@ -151,6 +151,10 @@
                                             <StackPanel Orientation="Vertical">
                                                 <TextBlock x:Name="User" Text="{Binding User}"  TextAlignment="Left" FontFamily="Calibri" Margin="5,0,0,0" FontSize="16" FontWeight="Bold"/>
                                                 <TextBlock Text="하하하하..." Margin="5,0,0,0"></TextBlock>
+                                                <TextBlock Width="500" Height="500" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></TextBlock>
+                                            </StackPanel>
+                                            <StackPanel Width="500">
+                                                <TextBlock Width="500" Height="500" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></TextBlock>
                                             </StackPanel>
                                         </StackPanel>
                                     </DataTemplate>
