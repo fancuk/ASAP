@@ -16,6 +16,7 @@ using TelerikWpfApp3.LocalDB;
 using TelerikWpfApp3.View;
 using TelerikWpfApp3.Collection;
 using System.Text.RegularExpressions;
+using TelerikWpfApp3.VM;
 
 namespace TelerikWpfApp3.VM
 {
@@ -83,6 +84,10 @@ namespace TelerikWpfApp3.VM
         public void ExecuteGroupFriends(object obj)
         {
             GroupFriendShow groupFriendShow = new GroupFriendShow(groupIdx);
+            Window groupRoom = GroupChattingRoomManager.Instance.getGroupChat(groupIdx);
+            groupFriendShow.Owner = groupRoom;
+            groupFriendShow.Top = groupRoom.Top + 50;
+            groupFriendShow.Left = groupRoom.Left + 76;
             groupFriendShow.ShowDialog();
         }
         public void ExecuteGroupSendText(object org)

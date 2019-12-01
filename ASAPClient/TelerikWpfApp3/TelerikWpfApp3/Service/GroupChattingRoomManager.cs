@@ -66,6 +66,11 @@ namespace TelerikWpfApp3.Service
             }
         }
 
+        public Window getGroupChat(string gIdx)
+        {
+            return groupChatRoom[gIdx];
+        }
+
         public void closeChatRoom(string groupIndex)
         {
             groupChatRoom[groupIndex].Hide();
