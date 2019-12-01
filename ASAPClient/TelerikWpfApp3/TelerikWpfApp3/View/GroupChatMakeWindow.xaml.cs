@@ -35,7 +35,7 @@ namespace TelerikWpfApp3.View
         public GroupChatMakeWindow()
         {
             InitializeComponent();
-            this.MouseLeftButtonDown += MoveWindow;
+          
             selectedCollection = new List<FriendsItem>();
             ClientList.DataContext = FriendsUserControlViewModel.Instance.getFriends();
             selcon = new List<FriendsItem>();
@@ -110,12 +110,6 @@ namespace TelerikWpfApp3.View
             groupChatMakeWindowVM.makeGroupChat(groupName, groupMembers, groupMemberCount);
             this.Close();
         }
-        void MoveWindow(object sender, MouseEventArgs e)
-
-        {
-            this.DragMove();
-        }
-
         private void Hyperlink_Click_1(object sender, RoutedEventArgs e)
         {
             this.Close();
