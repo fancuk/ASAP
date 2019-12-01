@@ -89,6 +89,21 @@
                                 </StackPanel>
                             </Border>
                             <StackPanel Height="69" Margin="0,1,0,0" Orientation="Horizontal">
+                                <StackPanel Height="69" Margin="8,5,0,0" Orientation="Horizontal" Background="{x:Null}" Width="310" PreviewMouseRightButtonUp="FriendDelete">
+                                    <Border RenderOptions.BitmapScalingMode="HighQuality" CornerRadius="20" Width="40" Margin="0,0,0,25" Height="40">
+                                        <Border.Background>
+                                            <ImageBrush Stretch="Uniform" ImageSource="/TelerikWpfApp3;component/Resources/Thunder.png"/>
+                                        </Border.Background>
+
+                                    </Border>
+                                    <TextBlock x:Name="status" Text="{Binding Status}" MaxWidth="0" MaxHeight="0"></TextBlock>
+                                    <StackPanel Orientation="Vertical" Margin="0">
+                                        <TextBlock x:Name="User" Text="{Binding MyID}"  TextAlignment="Left" FontFamily="Calibri" Margin="5,0,0,0" FontSize="16" FontWeight="Bold"/>
+                                        <TextBlock Text="하하하하..." Margin="5,0,0,0"></TextBlock>
+                                        <TextBlock Width="170" Height="20" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></TextBlock>
+                                    </StackPanel>
+
+                                </StackPanel>
                                 <TextBlock Text="{Binding MyID}" Height="31" Width="100" TextAlignment="Center" FontFamily="Calibri" Margin="22,22,10,0" FontSize="18" FontWeight="Bold"/>
                                 <Border CornerRadius="20" Width="13" Background="#FF39910F" Margin="0,30,0,25"/>
                                 <Border CornerRadius="20" Background="#FFF1F0F0" Margin="19,19,0,5" Width="146">
@@ -102,7 +117,7 @@
                             <Border Height="32" BorderThickness="0,0,0,0.7" BorderBrush="#FFE6E1E1" Margin="10,0">
                                 <StackPanel>
                                     <TextBlock Text="Friends" Height="19" TextAlignment="Center" FontFamily="Calibri" Margin="0,12,241,0" FontWeight="Bold" VerticalAlignment="Bottom"/>
-                                    
+
                                 </StackPanel>
                             </Border>
                             <ListBox
