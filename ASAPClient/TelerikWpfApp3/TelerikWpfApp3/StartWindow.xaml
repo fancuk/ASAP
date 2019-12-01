@@ -149,7 +149,7 @@
             BorderThickness="0"
             Background="White" Margin="5,5,0,5">
         <Border.Effect>
-            <DropShadowEffect ShadowDepth="0" BlurRadius="10" Color="Gray"/>
+            <DropShadowEffect ShadowDepth="0" Opacity="0.5" Color="Gray"/>
         </Border.Effect>
         <Grid Width="410" HorizontalAlignment="Left">
 

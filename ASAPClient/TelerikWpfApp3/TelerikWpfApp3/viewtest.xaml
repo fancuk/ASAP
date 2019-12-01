@@ -111,6 +111,9 @@
         </Style>
     </Window.Resources>
     <Border CornerRadius="10" Margin="3,3,3,3" Background="White" BorderBrush="#FF515151">
+        <Border.Effect>
+            <DropShadowEffect Opacity="0.5" Color="gray" ShadowDepth="0"></DropShadowEffect>
+        </Border.Effect>
         <Grid>
 
             <StackPanel MaxWidth="450">
