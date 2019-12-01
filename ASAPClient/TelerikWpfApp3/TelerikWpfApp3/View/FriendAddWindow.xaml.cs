@@ -22,6 +22,12 @@ namespace TelerikWpfApp3.View
         public FriendAddWindow()
         {
             InitializeComponent();
+            this.MouseLeftButtonDown += MoveWindow;
+        }
+        void MoveWindow(object sender, MouseEventArgs e)
+
+        {
+            this.DragMove();
         }
 
         private void Hyperlink_Click(object sender, RoutedEventArgs e)

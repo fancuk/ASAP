@@ -35,6 +35,7 @@ namespace TelerikWpfApp3.View
         public GroupChatMakeWindow()
         {
             InitializeComponent();
+            this.MouseLeftButtonDown += MoveWindow;
             selectedCollection = new List<FriendsItem>();
             ClientList.DataContext = FriendsUserControlViewModel.Instance.getFriends();
             selcon = new List<FriendsItem>();
@@ -84,7 +85,9 @@ namespace TelerikWpfApp3.View
              else if(Regex.IsMatch(groupName, @"[&^/]"))
             {
                 MessageBox.Show("특수문자(^,&,/)는 사용 불가능합니다.");
+                return;
             }
+          
             int len = selcon.Count;
             if (len < 2)
             {
@@ -107,6 +110,12 @@ namespace TelerikWpfApp3.View
             groupChatMakeWindowVM.makeGroupChat(groupName, groupMembers, groupMemberCount);
             this.Close();
         }
+        void MoveWindow(object sender, MouseEventArgs e)
+
+        {
+            this.DragMove();
+        }
+
         private void Hyperlink_Click_1(object sender, RoutedEventArgs e)
         {
             this.Close();
