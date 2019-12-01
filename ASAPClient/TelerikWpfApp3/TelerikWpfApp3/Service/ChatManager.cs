@@ -192,7 +192,7 @@ namespace TelerikWpfApp3.Service
                 ItemsChangeObservableCollection<Chatitem> tmp = new ItemsChangeObservableCollection<Chatitem>();
                 tmp = this.Chatdict[name];
                 Chatitem a = tmp[tmp.Count - 1];
-                ACL.ChattingList.Add(new AllChatListItem(name, a.Text, a.Time,tmp.Count.ToString()));
+                ACL.ChattingList.Add(new AllChatListItem(name, a.Text, a.Time,"0"));
             }
         }
         public void removeUnReadCount(string target)
