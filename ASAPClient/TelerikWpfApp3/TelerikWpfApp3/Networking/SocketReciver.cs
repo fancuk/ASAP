@@ -81,31 +81,14 @@ namespace TelerikWpfApp3.Networking
                         MessageBox.Show("친구 추가 되었습니다!");
                     }
                 }
-                /*else if (tag.Equals("<FRR>")) // 친구추가
+                else if (tag.Equals("<FRD>"))
                 {
-                    if (MessageBoxResult.Yes == //친구 요청 받으면
-                    MessageBox.Show(tokens[1] + tokens[3], "친구 요청", MessageBoxButton.YesNo))
-                    {
-                        OnSendData("<FRA>", tokens[1] + "/" + tokens[2]+ "/Yes/");
-                    }
-                    else
-                    {
-                        OnSendData("<FRA>", tokens[1] + "/" + tokens[2] + "/No/");
-                    }
+                    string sender = tokens[1];
                     DispatchService.Invoke(() =>
                     {
-                        ((App)Application.Current).StartMainWindow();
+                        FriendsUserControlViewModel.Instance.DelteFriend(sender);
                     });
                 }
-                else if (tag.Equals("<FRA>")) // 친구 feedback
-                {
-                    MessageBox.Show(tokens[2] + tokens[3]);
-                    DispatchService.Invoke(() =>
-                    {
-                        ((App)Application.Current).StartMainWindow();
-                    });
-                }
-                */
                 else if (tag.Equals("<LGS>"))
                 {
                     string FriendID = tokens[1];

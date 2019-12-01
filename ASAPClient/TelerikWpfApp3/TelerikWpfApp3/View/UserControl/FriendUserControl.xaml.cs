@@ -35,7 +35,7 @@ namespace TelerikWpfApp3.View.UserControl
             //sendMsgStackPanel.Height = 0;
             //defaultContent.Height = 540;
             //ClientList.DataContext = ((App)Application.Current).getFriends(); 다민
-            ClientList.DataContext = FriendsUserControlViewModel.Instance.getFriends(); 
+            ClientList.DataContext = FriendsUserControlViewModel.Instance.getFriends();
             //this.PreviewKeyDown += new KeyEventHandler(OnEnterKeyDownHandler);
         }
 
@@ -83,6 +83,14 @@ TextChangedEventArgs e)
         private void ClientList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+
+
+        private void FriendDelete(object sender, MouseButtonEventArgs e)
+        {
+            string friendName = (((sender as StackPanel).FindName("User") as TextBlock).Text);
+            FriendsUserControlViewModel.Instance.ShowDeleteWindow(friendName);
+            //FriendDeleteWindow instance show 해주면 될듯.
         }
     }
 }

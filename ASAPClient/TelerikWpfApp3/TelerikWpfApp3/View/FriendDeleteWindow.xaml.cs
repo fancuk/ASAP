@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using TelerikWpfApp3.VM;
 
 namespace TelerikWpfApp3.View
 {
@@ -19,9 +20,16 @@ namespace TelerikWpfApp3.View
     /// </summary>
     public partial class FriendDeleteWindow : Window
     {
+        FriendDeleteWindowViewModel friendDeleteWindowViewModel = new FriendDeleteWindowViewModel();
         public FriendDeleteWindow()
         {
             InitializeComponent();
+            this.DataContext = friendDeleteWindowViewModel;
+            Closing += friendDeleteWindowViewModel.OnWindowClosing;
+        }
+        public void setFriendID(string friendID)
+        {
+            friendDeleteWindowViewModel.FriendID = friendID;
         }
 
         private void Hyperlink_Click(object sender, RoutedEventArgs e)

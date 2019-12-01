@@ -18,6 +18,7 @@ namespace TelerikWpfApp3.VM
     {
         NetworkManager networkManager = ((App)Application.Current).networkManager;
         FriendAddWindow faw = new FriendAddWindow();
+        FriendDeleteWindow friendDeleteWindow = new FriendDeleteWindow();
 
         private static FriendsUserControlViewModel instance = null; // 다민
         private string _myID;
@@ -85,6 +86,20 @@ namespace TelerikWpfApp3.VM
                 ico.Add(new FriendsItem(user, null, "false"));
             }
         }
+        public void DelteFriend(string friendID)
+        {
+            int count = ico.Count;
+            for(int i = 0; i < count; i++)
+            {
+                FriendsItem temp = ico[i];
+                if(temp.User == friendID)
+                {
+                    ico.Remove(temp);
+                    CloseDeleteWindow();
+                    return;
+                }
+            }
+        }
 
         public void ChangeStatus(string User, string _status)// 다민
         {
@@ -107,7 +122,6 @@ namespace TelerikWpfApp3.VM
             return false;
         }
         public ICommand showFriendModal { get; set; }
-
      
 
         /*public FriendsUserControlViewModel()
@@ -138,7 +152,16 @@ namespace TelerikWpfApp3.VM
             fl = new FullyObservableCollection<FriendsItem>();
             ico = new ItemsChangeObservableCollection<FriendsItem>();
         }
-
+        public void ShowDeleteWindow(string friendID)
+        {
+            friendDeleteWindow.Owner = Application.Current.MainWindow;
+            friendDeleteWindow.setFriendID(friendID);
+            friendDeleteWindow.ShowDialog();
+        }
+        public void CloseDeleteWindow()
+        {
+            friendDeleteWindow.Hide();
+        }
         private void showModal(object e)
         {
             faw.Owner = Application.Current.MainWindow;
