@@ -133,7 +133,7 @@ namespace TelerikWpfApp3.View
         {
             bool isit = true;
             cm.AboutFocus(isit, target);
-            
+            cm.removeUnReadCount(target);
         }
 
         private void ChattingRoom_Deactivated(object sender, EventArgs e) // LostFocus 상태
@@ -143,16 +143,13 @@ namespace TelerikWpfApp3.View
             cm.removeUnReadCount(target);
         }
 
-        private void SendTextMsgButton1_Click(object sender, RoutedEventArgs e)
-        {
-            AsapTopBar.Height = 68;
-            //this.Dispatcher.Invoke((ThreadStart)(() => { }), DispatcherPriority.ApplicationIdle);
-            //Thread.Sleep(10000);
-            //AsapTopBar.Height = 0;
-        }
         public void closeTopBar()
         {
             AsapTopBar.Height = 0;
+        }
+        public void showTopBar()
+        {
+            AsapTopBar.Height = 68;
         }
     }
 }

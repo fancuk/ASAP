@@ -208,6 +208,7 @@ namespace TelerikWpfApp3.VM
                     MessageBox.Show(target + "한테 이미 보내셨습니다.");
                     return;
                 }
+                ChattingRoomManager.Instance.showAsapTopBar(target);
                 sendMessage("<ASG>", org as string);
             }
         }

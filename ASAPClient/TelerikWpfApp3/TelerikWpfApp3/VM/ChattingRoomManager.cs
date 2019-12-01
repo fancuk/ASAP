@@ -50,7 +50,11 @@ namespace TelerikWpfApp3.VM
             ChatRoom s = (ChatRoom)chatRoom[target];
             s.closeTopBar();
         }
-        
+        public void showAsapTopBar(string target)
+        {
+            ChatRoom s = (ChatRoom)chatRoom[target];
+            s.showTopBar();
+        }
         public void closeChatRoom(string target)
         {
             chatRoom[target].Hide();
