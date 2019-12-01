@@ -54,21 +54,30 @@ namespace TelerikWpfApp3.Networking
                 string tag = tokens[0];
                 if (tokens.Length == 1) return;
                 if (tag.Equals("<FRR>"))
-                {
-                    if (tokens[1] == "true")
+                { // frr/sender/status
+                    string sender = tokens[1];
+                    string status = tokens[2];
+                    DispatchService.Invoke(() =>
                     {
-                        string target = tokens[2];
+                        FriendsUserControlViewModel.Instance.AddFriend(sender, status);
+                    });
+                }
+                else if (tag.Equals("<FRS>"))
+                { // frs/true or false/status/friendID
+                    if (tokens[1].Equals("false"))
+                    {
+                        MessageBox.Show("존재하지 않는 ID입니다.");
+                    }
+                    else // 친구 추가 성공
+                    {
+                        string status = tokens[2];
+                        string friendID = tokens[3];
                         DispatchService.Invoke(() =>
                         {
-                            //((App)Application.Current).AddFriend(target, "true"); 다민
-                            FriendsUserControlViewModel.Instance.AddFriend(target, "true"); //다민
+                            FriendsUserControlViewModel.Instance.AddFriend(friendID, status); //다민
                             FriendsUserControlViewModel.Instance.cloaseModal();
                         });
                         MessageBox.Show("친구 추가 되었습니다!");
-                    }
-                    else
-                    {
-                        MessageBox.Show("존재하지 않는 ID입니다.");
                     }
                 }
                 /*else if (tag.Equals("<FRR>")) // 친구추가
