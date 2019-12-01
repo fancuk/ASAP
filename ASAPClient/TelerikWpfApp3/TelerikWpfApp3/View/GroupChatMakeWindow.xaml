@@ -132,7 +132,7 @@
                                         BorderBrush="#FFC7C7C7" BorderThickness="1,1,1,1">
                                     <TextBox 
                                         x:Name="groupNameTxt"
-                                        Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" FontFamily="Calibri" FontSize="16"></TextBox>
+                                        Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" MaxLength="8" FontFamily="Calibri" FontSize="16"></TextBox>
                                 </Border>
                             </StackPanel>
                         </Border>
@@ -189,12 +189,12 @@
                                             <TextBlock Text="Now invite" FontFamily="Calibri" FontSize="14" Margin="10,5,0,0"/>
                                         </StackPanel>
 
-                                        <ListBox x:Name="addedList" ItemsSource="{Binding}" Height="189" Background="White" BorderBrush="{x:Null}">
+                                        <ListBox x:Name="addedList" ItemsSource="{Binding}" IsHitTestVisible="False" Height="189" Background="White" BorderBrush="{x:Null}">
                                             <ListBox.ItemTemplate>
                                                 <DataTemplate>
                                                     <StackPanel>
                                                         <Border  Background="#FFEC5F5F" CornerRadius="10"
-                                                            Height="25" Width="100" HorizontalAlignment="Center" Margin="0,0,0,0">
+                                                            Height="25" Width="100" HorizontalAlignment="Center" Margin="10,0,0,0">
                                                             <Border.Effect>
                                                                 <DropShadowEffect Color="#FFE2E0E0"/>
                                                             </Border.Effect>

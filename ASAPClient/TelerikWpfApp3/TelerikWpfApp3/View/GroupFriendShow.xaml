@@ -133,6 +133,7 @@
                 </Border>
                 <StackPanel Height="210" Background="#FFEEF1F7" Margin="0,4,0.6,0">
                     <ListBox   ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                               IsHitTestVisible="False"
                                BorderThickness="0,0,0,0" x:Name="ClientList" 
                                 Height="206" ItemsSource="{Binding}"  
                                  IsSynchronizedWithCurrentItem="False" 
@@ -143,9 +144,7 @@
                                 <StackPanel>
                                     <Border Background="White" BorderBrush="LightCoral" BorderThickness="3.5" CornerRadius="10" Margin="42,5,0,0"
                                                            HorizontalAlignment="Center" Height="25" Width="100">
-                                        <Border.Effect>
-                                            <DropShadowEffect Color="#FFE2E0E0"/>
-                                        </Border.Effect>
+                                        
                                         <TextBlock Text="{Binding }" HorizontalAlignment="Center" TextAlignment="Center"
                                             Margin="1,0,0,0"  Foreground="Black"/>
                                     </Border>
