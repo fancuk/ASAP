@@ -63,9 +63,9 @@ namespace TelerikWpfApp3.VM
                 }
                 else
                 {
-                    string str = friendID + "/";
+                    string str = friendID + "/"; // 아이템 
                     string member = networkManager.MyId;
-                    networkManager.SendData("<FRR>", str + member);
+                    networkManager.SendData("<FRS>", str + member);
 
                     friendID = "";
                 }
