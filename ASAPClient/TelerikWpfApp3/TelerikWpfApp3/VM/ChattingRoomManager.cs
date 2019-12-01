@@ -59,6 +59,7 @@ namespace TelerikWpfApp3.VM
                 chatRoom[target].Left = startWindow.Left - 300;
                 chatRoom[target].Show();
             }
+            chatRoom[target].Activate();
         }
 
         public void removeAsapTopBar(string target)
