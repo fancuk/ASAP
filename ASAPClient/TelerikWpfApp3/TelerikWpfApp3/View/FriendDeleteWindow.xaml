@@ -9,7 +9,7 @@
         WindowStyle="None"
         ResizeMode="NoResize"
         AllowsTransparency="True"
-        Title="FriendDeleteWindow" Height="300" Width="303" Background="{x:Null}">
+        Title="FriendDeleteWindow" Height="227.083" Width="303" Background="{x:Null}">
     <Window.DataContext>
         <vm:FriendAddWindowViewModel>
 
@@ -45,14 +45,14 @@
                                         </TextBlock>
                                     </StackPanel>
                                 </StackPanel>
-                                <StackPanel RenderOptions.BitmapScalingMode="HighQuality" Width="69" HorizontalAlignment="Center" Margin="112,1,111.8,4" Height="61">
+                                <StackPanel RenderOptions.BitmapScalingMode="HighQuality" Width="73" HorizontalAlignment="Center" Margin="110,-10,110,0" Height="64">
                                     <StackPanel.Background>
                                         <ImageBrush ImageSource="/TelerikWpfApp3;component/Resources/timerLogo.png" Stretch="Uniform"/>
                                     </StackPanel.Background>
                                 </StackPanel>
                                 <StackPanel Height="71" Background="White">
                                     <TextBlock
-                                        Text="Remove Your Friends" Foreground="#FFD41603" TextAlignment="Center" Height="50" FontSize="24" FontFamily="Calibri" FontWeight="Bold"
+                                        Text="Remove Your Friends?" Foreground="#FFD41603" TextAlignment="Center" Height="46" FontSize="24" FontFamily="Calibri" FontWeight="Bold" Margin="0,14,0,0"
                                         >
 
                                     </TextBlock>
@@ -65,9 +65,9 @@
                 <StackPanel Height="151" Margin="0">
                     <StackPanel Height="151" Margin="0,0,-0.4,0">
                         <StackPanel Height="50"/>
-                        <StackPanel Height="52">
-                            <TextBlock Height="45">
-                                <Hyperlink TextDecorations="{x:Null}" Command="{Binding FriendDeleteButton }">
+                        <StackPanel Height="46" Margin="0,0,-0.2,0">
+                            <TextBlock Height="47" Margin="0,-23,-0.2,0">
+                                <Hyperlink TextDecorations="{x:Null}" Command="{Binding FriendsDeleteButton }">
                             <Border CornerRadius="5" Background="#FFEC5F5F" Height="33" Margin="45,7,0,0" Width="80">
                             
                             <StackPanel Margin="0,0,0,0">
