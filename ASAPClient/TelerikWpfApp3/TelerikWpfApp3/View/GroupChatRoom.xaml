@@ -171,6 +171,7 @@ VerticalScrollBarVisibility="Hidden"/>
                                     <DataTrigger Binding="{Binding Chk}" Value="true">
                                         <Setter TargetName="chatBack" Property="Background" Value="#FFEE534F"/>
                                         <Setter TargetName="senderName" Property="TextElement.Foreground" Value="#FFEEF1F7"/>
+                                        <Setter TargetName="senderName" Property="Height" Value="0"/>
                                         <Setter TargetName="wp" Property="HorizontalAlignment" Value="Right"/>
                                         <Setter TargetName="wp" Property="Margin" Value="0,0,3,0"/>
                                         <Setter TargetName="chatBack" Property="HorizontalAlignment" Value="Right"/>
