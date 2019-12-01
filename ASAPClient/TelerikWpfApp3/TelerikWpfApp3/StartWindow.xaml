@@ -23,6 +23,21 @@
     </i:Interaction.Triggers>
 
     <Window.Resources>
+        <Storyboard Storyboard.TargetProperty="(Image.Opacity)" x:Key="Img1Animation">
+
+            <DoubleAnimation To="0" Storyboard.TargetName="Img2" Duration="0:0:1"/>
+
+            <DoubleAnimation To="1" Storyboard.TargetName="Img1" Duration="0:0:0.5"/>
+
+        </Storyboard>
+
+        <Storyboard Storyboard.TargetProperty="(Image.Opacity)" x:Key="Img2Animation">
+
+            <DoubleAnimation To="0" Storyboard.TargetName="Img1" Duration="0:0:1"/>
+
+            <DoubleAnimation To="1" Storyboard.TargetName="Img2" Duration="0:0:0.5"/>
+
+        </Storyboard>
         <Style TargetType="{x:Type RadioButton}" x:Key="friendButton">
             <Setter Property="Template">
                 <Setter.Value>
@@ -153,7 +168,7 @@
         </Border.Effect>
         <Grid Width="410" HorizontalAlignment="Left">
 
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Width="410">
                 <Border CornerRadius="10" Width="77" Background="WhiteSmoke" BorderThickness="0,0.1,0,0">
                     <StackPanel Background="#FFF9F9F9" Margin="0,10">
                         <Border Height="68">
@@ -187,7 +202,7 @@
                                     </Border>
                                 </StackPanel>
                                 <StackPanel x:Name="margin" Height="172"></StackPanel>
-                                <StackPanel>
+                                <StackPanel Margin="0,225,0,0">
                                     <Border Height="38" BorderThickness="1,1,1,1" Width="75">
                                         <Border.Background>
                                             <ImageBrush ImageSource="Resources/GrayExit.png" Stretch="Uniform"/>
@@ -196,7 +211,7 @@
                                             <RadioButton 
                                                 RenderOptions.BitmapScalingMode="HighQuality"
                                                 Command="{Binding LogOut}"
-                                                GroupName="menu" Content="       " Style="{StaticResource LogOutButton}"  Background="{x:Null}" BorderBrush="{x:Null}" Width="75" FontSize="20" Foreground="White" FontFamily="Impact"/>
+                                                GroupName="menu" Content="       " Style="{StaticResource LogOutButton}"  Background="{x:Null}" BorderBrush="{x:Null}" Width="75" FontSize="20" Foreground="White" FontFamily="Impact" Margin="0"/>
                                         </StackPanel>
                                     </Border>
                                 </StackPanel>
@@ -205,19 +220,19 @@
                     </StackPanel>
 
                 </Border>
-                <Border Width="328" Margin="0,0,0,0" HorizontalAlignment="Left">
-                    <StackPanel Width="328" HorizontalAlignment="Left">
+                <Border Width="335" HorizontalAlignment="Left">
+                    <StackPanel Width="335" HorizontalAlignment="Left">
                         <Border Height="30" BorderThickness="0,0,0,1" BorderBrush="#FFDAD5D5" >
                             <StackPanel Margin="0,0,0,-1" Orientation="Horizontal">
                                 <StackPanel.DataContext>
-                                    <vm:TitleControl></vm:TitleControl>
+                                    <vm:TitleControl/>
                                 </StackPanel.DataContext>
                                 <StackPanel PreviewMouseDown="Banner_MouseDown" Width="262" Orientation="Horizontal">
 
                                     <StackPanel Orientation="Horizontal" Width="260">
                                         <StackPanel Width="109">
                                             <Border Width="100" Margin="0,0,0,0">
-                                                <TextBlock Text="ASAP Ver.0" Margin="0,0,-224,0" FontSize="20" Foreground="#FFEE534F" FontFamily="Impact" Height="30" VerticalAlignment="Top"></TextBlock>
+                                                <TextBlock Text="ASAP Ver.0" Margin="0,0,-224,0" FontSize="20" Foreground="#FFEE534F" FontFamily="Impact" Height="30" VerticalAlignment="Top"/>
 
                                             </Border>
                                         </StackPanel>
@@ -323,7 +338,25 @@
                                 </StackPanel>
                             </StackPanel>
                         </Border>
-                        <ContentControl Content="{Binding ContentView}" Height="620" Margin="0,0,4,0"/>
+                        <ContentControl Height="576" Margin="0,0,4,0" Content="{Binding ContentView}"/>
+                        <StackPanel Height="76" Margin="0,0,2,0">
+                            <Grid>
+
+                                <Image x:Name="Img1"
+
+            Stretch="Fill"
+
+            Opacity="1" Margin="0,0,0,-76" />
+
+                                <Image x:Name="Img2"
+
+            Stretch="Fill"
+
+            Opacity="0" Margin="0,0,0,-76" />
+
+                            </Grid>
+
+                        </StackPanel>
                     </StackPanel>
                 </Border>
             </StackPanel>
