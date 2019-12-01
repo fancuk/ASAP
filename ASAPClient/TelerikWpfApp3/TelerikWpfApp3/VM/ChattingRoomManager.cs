@@ -30,6 +30,8 @@ namespace TelerikWpfApp3.VM
             Window cR = new ChatRoom(target);
             chatRoom.Add(target,cR);
         }
+        
+        
 
         public bool findChatRoom(string target)
         {
@@ -56,7 +58,7 @@ namespace TelerikWpfApp3.VM
             {
                 chatRoom[target].Owner = startWindow;
                 chatRoom[target].Top = startWindow.Top;
-                chatRoom[target].Left = startWindow.Left - 300;
+                chatRoom[target].Left = startWindow.Left - 355;
                 chatRoom[target].Show();
             }
             chatRoom[target].Activate();

@@ -44,8 +44,7 @@ namespace TelerikWpfApp3.Service
             else return true;
         }
 
-       
-
+     
         public void showChatRoom(string groupIndex)
         {
             Window startWindow = TelerikWpfApp3.StartWindow.Instance;
@@ -62,7 +61,7 @@ namespace TelerikWpfApp3.Service
             {
                 groupChatRoom[groupIndex].Owner = startWindow;
                 groupChatRoom[groupIndex].Top = startWindow.Top;
-                groupChatRoom[groupIndex].Left = startWindow.Left - 300;
+                groupChatRoom[groupIndex].Left = startWindow.Left - 355;
                 groupChatRoom[groupIndex].Show();
             }
         }

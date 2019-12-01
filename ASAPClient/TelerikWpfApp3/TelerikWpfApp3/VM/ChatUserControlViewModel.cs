@@ -125,7 +125,7 @@ namespace TelerikWpfApp3.VM
             {
                 groupChatMakeWindow.Owner = startWindow;
                 groupChatMakeWindow.Top = startWindow.Top;
-                groupChatMakeWindow.Left = startWindow.Left - 300;
+                groupChatMakeWindow.Left = startWindow.Left - 395;
                 groupChatMakeWindow.ShowDialog();
             }
            
