@@ -25,7 +25,8 @@ namespace TelerikWpfApp3.Networking
         }
         public bool SocketConnect()
         {
-            string address = "192.168.0.77";
+            string address = "10.2.0.54";
+            //string address = "192.168.0.77";
             //string address = "10.2.0.33";
             //string address = "52.231.154.88";
             //string address = "54.180.26.230";
@@ -46,12 +47,6 @@ namespace TelerikWpfApp3.Networking
             catch (Exception ex)
             {
                 MessageBox.Show("Server Connect Fail!");
-
-                if (networkManager.nowConnect == true)
-                {
-                    networkManager.CloseSocket();
-                }
-                Process.GetCurrentProcess().Kill();
                 return false;
             }
         }

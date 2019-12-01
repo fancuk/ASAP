@@ -12,6 +12,7 @@ using TelerikWpfApp3.View.Alert;
 using TelerikWpfApp3.LocalDB;
 using TelerikWpfApp3.VM;
 using TelerikWpfApp3.Service;
+using System.Diagnostics;
 
 namespace TelerikWpfApp3.Networking
 {
@@ -360,7 +361,7 @@ namespace TelerikWpfApp3.Networking
                 }
                 MessageBox.Show("서버와의 연결 오류!");
                 MessageBox.Show(e.ToString());
-
+                Process.GetCurrentProcess().Kill();
                 return;
             }
         }
