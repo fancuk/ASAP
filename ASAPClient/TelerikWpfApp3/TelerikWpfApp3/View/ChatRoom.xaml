@@ -180,7 +180,6 @@ VerticalScrollBarVisibility="Hidden"/>
                                             <TextBlock x:Name="PART_Time" Text="{Binding Time, StringFormat=hh:mm:ss}" FontSize="8"/>
                                             <TextBlock x:Name="recieveReadChk" Foreground="#FF9B9B04" Text="1" FontSize="12" FontWeight="Bold" Margin="6,0,0,0"></TextBlock >
                                             <TextBlock x:Name="statusChk" Width="0" Height="0" Text="{Binding Status}"></TextBlock>
-
                                         </StackPanel>
                                     </StackPanel>
                                 </StackPanel>
@@ -188,12 +187,14 @@ VerticalScrollBarVisibility="Hidden"/>
                                     <DataTrigger Binding="{Binding Chk}" Value="true">
                                         <Setter TargetName="chatBack" Property="Background" Value="#FFEE534F"/>
                                         <Setter TargetName="wp" Property="HorizontalAlignment" Value="Right"/>
-                                        <Setter TargetName="wp" Property="Margin" Value="0,0,20,0"/>
+                                        <Setter TargetName="wp" Property="Margin" Value="0,0,3,0"/>
+                                        <Setter TargetName="chatBack" Property="HorizontalAlignment" Value="Right"/>
                                         <Setter TargetName="recieveReadChk" Property="Width" Value="0"></Setter>
                                     </DataTrigger>
                                     <DataTrigger Binding="{Binding Chk}"  Value="false">
                                         <Setter TargetName="chatBack" Property="Background" Value="#FF818080"/>
-                                        <Setter TargetName="wp" Property="HorizontalAlignment" Value="left"/>
+                                        <Setter TargetName="wp" Property="HorizontalAlignment" Value="Left"/>
+                                        <Setter TargetName="chatBack" Property="HorizontalAlignment" Value="Left"/>
                                         <Setter TargetName="sendReadChk" Property="Width" Value="0"></Setter>
                                     </DataTrigger>
                                     <DataTrigger Binding="{Binding ElementName=statusChk, Path=Text}" Value="True">

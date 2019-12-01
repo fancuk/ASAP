@@ -114,9 +114,9 @@ VerticalScrollBarVisibility="Hidden"/>
                     </Border.Effect>
                     <StackPanel Orientation="Horizontal" Background="White" Margin="0,10,0,0">
                         <StackPanel Width="253" Margin="20,0,0,0.2" Orientation="Horizontal">
-                            <TextBlock Text="{Binding }" Foreground="White"  Width="20" VerticalAlignment="Center" Height="21" Margin="0,15,0,17"/>
+                            <TextBlock Text="{Binding groupIdx}" Foreground="White"  Width="20" VerticalAlignment="Center" Height="21" Margin="0,15,0,17"/>
                             <TextBlock Text="{Binding GroupName}" x:Name="GroupNameText"
-                                     Margin="21,4,19,10.2" FontSize="20" FontFamily="Microsoft YaHei UI" FontWeight="Bold" Width="212" TextAlignment="Center"/>
+                                     Margin="21,6,19,4" FontSize="18" FontFamily="Microsoft YaHei UI" FontWeight="Bold" Width="212" TextAlignment="Center"/>
                         </StackPanel>
                         <Button Width="30" Margin="12,6,-5,9.2" Background="{x:Null}" BorderBrush="{x:Null}"
                                 Command="{Binding GroupFriendListOpen }">
@@ -147,19 +147,22 @@ VerticalScrollBarVisibility="Hidden"/>
                 </Border>
                 <StackPanel Height="410" Background="#FFEEF1F7" Margin="0,4,0,0">
                     <ListBox Style="{StaticResource disabledListBoxWithScroll}" BorderThickness="0,0,0,0" x:Name="ChatBox" Height="410" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionChanged="ChatBox_SelectionChanged"
-                            VM:ListBoxBehavior.ScrollOnNewItem="True" ItemsSource="{Binding}"   IsSynchronizedWithCurrentItem="False" BorderBrush="{x:Null}" Background="{x:Null}">
+                            VM:ListBoxBehavior.ScrollOnNewItem="True" ItemsSource="{Binding}"  IsSynchronizedWithCurrentItem="False" BorderBrush="{x:Null}" Background="{x:Null}">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <StackPanel Width="320" HorizontalAlignment="Left" >
+                                <StackPanel Width="320"  HorizontalAlignment="Left" >
                                     <StackPanel   x:Name="wp">
                                         <!--<TextBlock Text="{Binding User}" />-->
-                                        <Border x:Name="chatBack" CornerRadius="10" Margin="0,3" >
+                                        <Border x:Name="senderBorder" CornerRadius="7" Margin="0,0,0,3">
+                                                <TextBlock x:Name="senderName" FontSize="12" Text="{Binding User}" Margin="2,0,2,0" TextWrapping="Wrap" MaxWidth="100" FontWeight="Bold"/>
+                                        </Border>
+                                        <Border x:Name="chatBack" CornerRadius="10" >
                                             <TextBlock Text="{Binding Text}" TextWrapping="Wrap" FontSize="11" MaxWidth="200" Margin="5,3,5,7" Foreground="White"/>
                                         </Border>
                                         <StackPanel Orientation="Horizontal">
-                                            <TextBlock x:Name="sendReadChk" Foreground="#FF9B9B04"  Text="1" FontSize="12" FontWeight="Bold" Margin="0,0,6,0"></TextBlock >
+                                            <TextBlock x:Name="sendReadChk" Foreground="#FFEEF1F7"  Text="1" FontSize="12" FontWeight="Bold" Margin="0,0,0,0"></TextBlock >
                                             <TextBlock x:Name="PART_Time" Text="{Binding Time, StringFormat=hh:mm:ss}" FontSize="8"/>
-                                            <TextBlock x:Name="recieveReadChk" Foreground="#FF9B9B04" Text="1" FontSize="12" FontWeight="Bold" Margin="6,0,0,0"></TextBlock >
+                                            <TextBlock x:Name="recieveReadChk" Foreground="#FFEEF1F7" Text="1" FontSize="12" FontWeight="Bold" Margin="6,0,0,0"></TextBlock >
                                             <TextBlock x:Name="statusChk" Width="0" Height="0" Text="{Binding Status}"></TextBlock>
                                         </StackPanel>
                                     </StackPanel>
@@ -167,13 +170,18 @@ VerticalScrollBarVisibility="Hidden"/>
                                 <DataTemplate.Triggers>
                                     <DataTrigger Binding="{Binding Chk}" Value="true">
                                         <Setter TargetName="chatBack" Property="Background" Value="#FFEE534F"/>
+                                        <Setter TargetName="senderName" Property="TextElement.Foreground" Value="#FFEEF1F7"/>
                                         <Setter TargetName="wp" Property="HorizontalAlignment" Value="Right"/>
-                                        <Setter TargetName="wp" Property="Margin" Value="0,0,20,0"/>
-                                        <Setter TargetName="recieveReadChk" Property="Width" Value="0"></Setter>
+                                        <Setter TargetName="wp" Property="Margin" Value="0,0,3,0"/>
+                                        <Setter TargetName="chatBack" Property="HorizontalAlignment" Value="Right"/>
+                                        <Setter TargetName="recieveReadChk" Property="Width" Value="0"/>
                                     </DataTrigger>
                                     <DataTrigger Binding="{Binding Chk}"  Value="false">
                                         <Setter TargetName="chatBack" Property="Background" Value="#FF818080"/>
-                                        <Setter TargetName="wp" Property="HorizontalAlignment" Value="left"/>
+                                        <Setter TargetName="senderBorder" Property="Background" Value="#FFB9CDF4"/>
+                                        <Setter TargetName="senderBorder" Property="HorizontalAlignment" Value="Left"/>
+                                        <Setter TargetName="wp" Property="HorizontalAlignment" Value="Left"/>
+                                        <Setter TargetName="chatBack" Property="HorizontalAlignment" Value="Left"/>
                                         <Setter TargetName="sendReadChk" Property="Width" Value="0"></Setter>
                                     </DataTrigger>
                                     <DataTrigger Binding="{Binding ElementName=statusChk, Path=Text}" Value="True">

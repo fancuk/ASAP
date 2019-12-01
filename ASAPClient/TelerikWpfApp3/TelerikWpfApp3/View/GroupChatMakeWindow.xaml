@@ -99,27 +99,18 @@
                                         <StackPanel.DataContext>
                                             <vm:TitleControl></vm:TitleControl>
                                         </StackPanel.DataContext>
-                                        <TextBlock>
-                                            <Hyperlink TextDecorations="{x:Null}"
-                                                      Click="Hyperlink_Click_1" >
-                                                <StackPanel  Width="12" Height="12" Margin="0">
-                                                    <StackPanel.Background>
-                                                        <ImageBrush Stretch="Uniform" ImageSource="/TelerikWpfApp3;component/Resources/exitSmall.png"/>
-                                                    </StackPanel.Background>
-                                                </StackPanel>
-                                            </Hyperlink>
-                                        </TextBlock>
+
                                     </StackPanel>
                                 </StackPanel>
-                                <StackPanel Orientation="Horizontal">
-                                    <StackPanel RenderOptions.BitmapScalingMode="HighQuality" Width="69" HorizontalAlignment="Center" Margin="34,0,0,0" Height="61">
+                                <StackPanel Orientation="Horizontal" Height="57" Margin="0,0,-0.4,0">
+                                    <StackPanel RenderOptions.BitmapScalingMode="HighQuality" Width="71" HorizontalAlignment="Center" Margin="34,-5,0,-4.2">
                                         <StackPanel.Background>
                                             <ImageBrush ImageSource="/TelerikWpfApp3;component/Resources/timerLogo.png" Stretch="Uniform"/>
                                         </StackPanel.Background>
                                     </StackPanel>
-                                    <StackPanel Height="71" Background="White" Margin="14,0,0,0">
+                                    <StackPanel Height="71" Background="White" Margin="0,0,0,-14.2" Width="249">
                                         <TextBlock
-                                            Text="Make your new Group!" Foreground="#FFD41603" TextAlignment="Center" Height="50" FontSize="24" FontFamily="Calibri" FontWeight="Bold" Margin="0,21,0,0"
+                                            Text="Make your new Group!" Foreground="#FFD41603" TextAlignment="Center" Height="50" FontSize="24" FontFamily="Calibri" FontWeight="Bold" Margin="-1,21,0,0" Width="242"
                                         />
                                     </StackPanel>
                                 </StackPanel>
@@ -203,7 +194,7 @@
                                                 <DataTemplate>
                                                     <StackPanel>
                                                         <Border  Background="#FFEC5F5F" CornerRadius="10"
-                                                            Height="25" Width="100" HorizontalAlignment="Center" Margin="10,0,0,0">
+                                                            Height="25" Width="100" HorizontalAlignment="Center" Margin="0,0,0,0">
                                                             <Border.Effect>
                                                                 <DropShadowEffect Color="#FFE2E0E0"/>
                                                             </Border.Effect>
