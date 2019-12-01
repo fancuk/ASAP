@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
@@ -24,7 +25,9 @@ namespace TelerikWpfApp3.Networking
         }
         public bool SocketConnect()
         {
-            string address = "52.231.154.88";
+            string address = "192.168.0.77";
+            //string address = "10.2.0.33";
+            //string address = "52.231.154.88";
             //string address = "54.180.26.230";
             //string address = "127.0.0.1";
             //string address = "203.229.204.23"; // "127.0.0.1" 도 가능
@@ -43,6 +46,12 @@ namespace TelerikWpfApp3.Networking
             catch (Exception ex)
             {
                 MessageBox.Show("Server Connect Fail!");
+
+                if (networkManager.nowConnect == true)
+                {
+                    networkManager.CloseSocket();
+                }
+                Process.GetCurrentProcess().Kill();
                 return false;
             }
         }
