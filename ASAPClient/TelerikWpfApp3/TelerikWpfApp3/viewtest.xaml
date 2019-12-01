@@ -330,7 +330,7 @@
                         <TextBlock><Hyperlink Command="{Binding Register}" Foreground="Black"  TextDecorations="{x:Null}"><InlineUIContainer>
                                     <TextBlock   TextAlignment="Center" Text="Register" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Width="391" Foreground="#FFEE534F"/>
                                 </InlineUIContainer></Hyperlink></TextBlock>
-                        <TextBlock   TextAlignment="Center" Text="Copyrighted By @Puzzle" Margin="0,20,0,0" FontSize="9"/>
+                        <TextBlock   TextAlignment="Center" Text="Copyrighted By @ASAP" Margin="0,20,0,0" FontSize="9"/>
                     </StackPanel>
                 </StackPanel>
             </StackPanel>

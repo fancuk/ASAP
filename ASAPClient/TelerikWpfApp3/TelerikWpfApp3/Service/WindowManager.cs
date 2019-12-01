@@ -24,6 +24,9 @@ namespace TelerikWpfApp3.Service
         {
             Window s = TelerikWpfApp3.viewtest.Instance;
             Window m = TelerikWpfApp3.StartWindow.Instance;
+            m.Owner = s;
+            m.Top = s.Top;
+            m.Left = s.Left;
             m.Show();
             s.Hide();
         }

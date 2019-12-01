@@ -25,12 +25,7 @@ namespace TelerikWpfApp3.View
         {
             InitializeComponent();
             this.DataContext = friendDeleteWindowViewModel;
-            this.MouseLeftButtonDown += MoveWindow;
             Closing += friendDeleteWindowViewModel.OnWindowClosing;
-        }
-        void MoveWindow(object sender, MouseEventArgs e)
-        {
-            this.DragMove();
         }
         public void setFriendID(string friendID)
         {

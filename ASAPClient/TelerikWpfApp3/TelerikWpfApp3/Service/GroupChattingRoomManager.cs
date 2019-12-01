@@ -48,7 +48,23 @@ namespace TelerikWpfApp3.Service
 
         public void showChatRoom(string groupIndex)
         {
-            groupChatRoom[groupIndex].Show();
+            Window startWindow = TelerikWpfApp3.StartWindow.Instance;
+            double screenWidth = System.Windows.SystemParameters.PrimaryScreenWidth;
+            screenWidth = (screenWidth / 2) - 197;
+            if (screenWidth >= startWindow.Left)
+            {
+                groupChatRoom[groupIndex].Owner = startWindow;
+                groupChatRoom[groupIndex].Top = startWindow.Top;
+                groupChatRoom[groupIndex].Left = startWindow.Left + 415;
+                groupChatRoom[groupIndex].Show();
+            }
+            else
+            {
+                groupChatRoom[groupIndex].Owner = startWindow;
+                groupChatRoom[groupIndex].Top = startWindow.Top;
+                groupChatRoom[groupIndex].Left = startWindow.Left - 300;
+                groupChatRoom[groupIndex].Show();
+            }
         }
 
         public void closeChatRoom(string groupIndex)

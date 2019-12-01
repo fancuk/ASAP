@@ -11,6 +11,7 @@ using TelerikWpfApp3.M;
 using TelerikWpfApp3.View;
 using TelerikWpfApp3.Collection;
 using TelerikWpfApp3.Service;
+using TelerikWpfApp3;
 
 namespace TelerikWpfApp3.VM
 {
@@ -154,8 +155,11 @@ namespace TelerikWpfApp3.VM
         }
         public void ShowDeleteWindow(string friendID)
         {
-            friendDeleteWindow.Owner = Application.Current.MainWindow;
+            Window startWindow = TelerikWpfApp3.StartWindow.Instance;
+            friendDeleteWindow.Owner = startWindow;
             friendDeleteWindow.setFriendID(friendID);
+            friendDeleteWindow.Top = startWindow.Top+40;
+            friendDeleteWindow.Left = startWindow.Left + 75;
             friendDeleteWindow.ShowDialog();
         }
         public void CloseDeleteWindow()
@@ -164,8 +168,23 @@ namespace TelerikWpfApp3.VM
         }
         private void showModal(object e)
         {
-            faw.Owner = Application.Current.MainWindow;
-            faw.ShowDialog();
+            Window startWindow = TelerikWpfApp3.StartWindow.Instance;
+            double screenWidth = System.Windows.SystemParameters.PrimaryScreenWidth;
+            screenWidth = (screenWidth / 2) - 197;
+            if (screenWidth >= startWindow.Left)
+            {
+                faw.Owner = startWindow;
+                faw.Top = startWindow.Top;
+                faw.Left = startWindow.Left + 415;
+                faw.ShowDialog();
+            }
+            else
+            {
+                faw.Owner = startWindow;
+                faw.Top = startWindow.Top;
+                faw.Left = startWindow.Left - 300;
+                faw.ShowDialog();
+            }
         }
 
         public void cloaseModal()

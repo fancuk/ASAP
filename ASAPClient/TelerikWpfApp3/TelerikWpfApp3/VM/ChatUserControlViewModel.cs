@@ -111,7 +111,24 @@ namespace TelerikWpfApp3.VM
         public void ExecuteShowMakeGroupWindow(object org)
         {
             GroupChatMakeWindow groupChatMakeWindow = new GroupChatMakeWindow();
-            groupChatMakeWindow.ShowDialog();
+            Window startWindow = TelerikWpfApp3.StartWindow.Instance;
+            double screenWidth = System.Windows.SystemParameters.PrimaryScreenWidth;
+            screenWidth = (screenWidth / 2) - 197;
+            if (screenWidth >= startWindow.Left)
+            {
+                groupChatMakeWindow.Owner = startWindow;
+                groupChatMakeWindow.Top = startWindow.Top;
+                groupChatMakeWindow.Left = startWindow.Left + 415;
+                groupChatMakeWindow.ShowDialog();
+            }
+            else
+            {
+                groupChatMakeWindow.Owner = startWindow;
+                groupChatMakeWindow.Top = startWindow.Top;
+                groupChatMakeWindow.Left = startWindow.Left - 300;
+                groupChatMakeWindow.ShowDialog();
+            }
+           
         }
         //public void ExeceuteSendMsg(object org)
         //{//메세지 공백 방지!

@@ -154,10 +154,10 @@ VerticalScrollBarVisibility="Hidden"/>
                                     <StackPanel   x:Name="wp">
                                         <!--<TextBlock Text="{Binding User}" />-->
                                         <Border x:Name="senderBorder" CornerRadius="7" Margin="0,0,0,3">
-                                                <TextBlock x:Name="senderName" FontSize="12" Text="{Binding User}" Margin="2,0,2,0" TextWrapping="Wrap" MaxWidth="100" FontWeight="Bold"/>
+                                                <TextBlock x:Name="senderName" FontSize="12" Text="{Binding User}" Margin="3,0,3,0" TextWrapping="Wrap" MaxWidth="100" FontWeight="Bold"/>
                                         </Border>
                                         <Border x:Name="chatBack" CornerRadius="10" >
-                                            <TextBlock Text="{Binding Text}" TextWrapping="Wrap" FontSize="11" MaxWidth="200" Margin="5,3,5,7" Foreground="White"/>
+                                            <TextBlock Text="{Binding Text}" TextWrapping="Wrap" FontSize="11" MaxWidth="200" Margin="8,4,8,4" Foreground="White"/>
                                         </Border>
                                         <StackPanel Orientation="Horizontal">
                                             <TextBlock x:Name="sendReadChk" Foreground="#FFEEF1F7"  Text="1" FontSize="12" FontWeight="Bold" Margin="0,0,0,0"></TextBlock >

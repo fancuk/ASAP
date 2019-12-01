@@ -42,7 +42,23 @@ namespace TelerikWpfApp3.VM
 
         public void showChatRoom(string target)
         {
-            chatRoom[target].Show();
+            Window startWindow = TelerikWpfApp3.StartWindow.Instance;
+            double screenWidth = System.Windows.SystemParameters.PrimaryScreenWidth;
+            screenWidth = (screenWidth / 2) - 197;
+            if (screenWidth >= startWindow.Left)
+            {
+                chatRoom[target].Owner = startWindow;
+                chatRoom[target].Top = startWindow.Top;
+                chatRoom[target].Left = startWindow.Left + 415;
+                chatRoom[target].Show();
+            }
+            else
+            {
+                chatRoom[target].Owner = startWindow;
+                chatRoom[target].Top = startWindow.Top;
+                chatRoom[target].Left = startWindow.Left - 300;
+                chatRoom[target].Show();
+            }
         }
 
         public void removeAsapTopBar(string target)
