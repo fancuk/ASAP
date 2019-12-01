@@ -67,7 +67,7 @@
                         <StackPanel Height="50"/>
                         <StackPanel Height="46" Margin="0,0,-0.2,0">
                             <TextBlock Height="47" Margin="0,-23,-0.2,0">
-                                <Hyperlink TextDecorations="{x:Null}" Command="{Binding FriendsDeleteButton }">
+                                <Hyperlink TextDecorations="{x:Null}" Command="{Binding FriendDeleteButton }">
                             <Border CornerRadius="5" Background="#FFEC5F5F" Height="33" Margin="45,7,0,0" Width="80">
                             
                             <StackPanel Margin="0,0,0,0">
