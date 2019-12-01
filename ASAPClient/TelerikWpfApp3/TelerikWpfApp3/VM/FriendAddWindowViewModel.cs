@@ -40,7 +40,12 @@ namespace TelerikWpfApp3.VM
         {
             FriendsAddButton = new Command(friendsPlus, CanExecute);
         }
-
+        public void OnWindowClosing(object sender, CancelEventArgs e)
+        {
+            // Handle closing logic, set e.Cancel as needed
+            e.Cancel = true;
+            FriendsUserControlViewModel.Instance.cloaseModal();
+        }
         public void friendsPlus(object obj)
         {
             if (string.IsNullOrWhiteSpace(friendID) == true)

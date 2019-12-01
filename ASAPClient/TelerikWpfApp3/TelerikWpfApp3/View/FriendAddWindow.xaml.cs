@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using TelerikWpfApp3.VM;
 
 namespace TelerikWpfApp3.View
 {
@@ -19,10 +20,12 @@ namespace TelerikWpfApp3.View
     /// </summary>
     public partial class FriendAddWindow : Window
     {
+        FriendAddWindowViewModel friendAddWindowViewModel = new FriendAddWindowViewModel();
         public FriendAddWindow()
         {
             InitializeComponent();
             this.MouseLeftButtonDown += MoveWindow;
+            Closing += friendAddWindowViewModel.OnWindowClosing;
         }
         void MoveWindow(object sender, MouseEventArgs e)
 
