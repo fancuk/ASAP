@@ -297,7 +297,7 @@ namespace TelerikWpfApp3.Networking
                             groupChatManager.addChat(groupIdx, new GroupChatItem(plain, maker, groupTime, false)); // check가 true면 내가 보낸건가?
                         }
                         });
-                        localDAO.GroupInfoCreate(groupIdx, groupName, maker + "^" + tokens[6]);
+                        localDAO.GroupInfoCreate(groupIdx, groupName, tokens[6]);
                         localDAO.GroupChattingCreate(maker, groupIdx, groupTime, plain);
                         groupChatManager.addGroupName(groupIdx, groupName);
   

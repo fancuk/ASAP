@@ -404,9 +404,8 @@ namespace TelerikWpfApp3.LocalDB
                     // 이거는 그룹 리스트 넣어줌
                     groupMemberListManager.AddGroupMemberList(GIDX, groupMembers);
                     groupManager.addGroupName(GIDX, groupname);
-
-                    groupManager.setChattingList();
                 }
+                groupManager.setChattingList();
             }
             catch (Exception e)
             {

@@ -117,6 +117,7 @@ namespace TelerikWpfApp3.VM
             string text = id + "/" + gIdx + "/" + plain + "/" + nowTime;
             groupChatManager.addChat(gIdx, new GroupChatItem(plain, id, nowTime, true));
             string groupName = groupChatManager.getGroupName(gIdx);
+            groupChatManager.addGroupName(gIdx, groupName);
             groupChatManager.addChattingList(gIdx, groupName, plain, nowTime);
             networkManager.SendData(tag, text); 
             localDAO.GroupChattingCreate(id, gIdx, nowTime, plain);
