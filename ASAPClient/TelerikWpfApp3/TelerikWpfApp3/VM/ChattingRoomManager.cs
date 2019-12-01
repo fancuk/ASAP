@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media;
 using TelerikWpfApp3.View;
 
 namespace TelerikWpfApp3.VM
@@ -61,6 +63,9 @@ namespace TelerikWpfApp3.VM
                 chatRoom[target].Left = startWindow.Left - 355;
                 chatRoom[target].Show();
             }
+            var border = (Border)VisualTreeHelper.GetChild((chatRoom[target] as ChatRoom).ChatBox, 0);
+            var scrollViewer = (ScrollViewer)VisualTreeHelper.GetChild(border, 0);
+            scrollViewer.ScrollToBottom();
             chatRoom[target].Activate();
         }
 

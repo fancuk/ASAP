@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media;
 using TelerikWpfApp3.View;
 
 namespace TelerikWpfApp3.Service
@@ -64,6 +66,10 @@ namespace TelerikWpfApp3.Service
                 groupChatRoom[groupIndex].Left = startWindow.Left - 355;
                 groupChatRoom[groupIndex].Show();
             }
+            var border = (Border)VisualTreeHelper.GetChild((groupChatRoom[groupIndex] as ChatRoom).ChatBox, 0);
+            var scrollViewer = (ScrollViewer)VisualTreeHelper.GetChild(border, 0);
+            scrollViewer.ScrollToBottom();
+            groupChatRoom[groupIndex].Activate();
         }
 
         public Window getGroupChat(string gIdx)
