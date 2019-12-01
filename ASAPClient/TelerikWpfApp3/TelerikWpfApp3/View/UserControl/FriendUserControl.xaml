@@ -121,7 +121,7 @@
                                 </StackPanel>
                             </Border>
                             <ListBox
-                                
+                                ScrollViewer.VerticalScrollBarVisibility="Visible"
                                 ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                                 BorderThickness="0,0,0,0" x:Name="ClientList" 
                                 Height="468" ItemsSource="{Binding}"  
