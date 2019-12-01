@@ -140,10 +140,6 @@ namespace TelerikWpfApp3.Service
                         localDAO.ChattingCreate(user,      //2019-11-22
                             networkManager.MyId, time, msg, "Receive", 0);
 
-                        DispatchService.Invoke(() =>
-                        {
-                            chatManager.addChat(tmp.User, tmp);
-                        });
                     }
                     string myId = networkManager.MyId;
                     networkManager.SendData("<MKQ>", myId);
@@ -215,7 +211,7 @@ namespace TelerikWpfApp3.Service
                         {
                             groupChatManager.addChat(groupIdx, new GroupChatItem(plain, maker, groupTime, false)); // check가 true면 내가 보낸건가?
                         }
-                        localDAO.GroupInfoCreate(groupIdx, groupName, maker + "^" + tokens[6]);
+                        localDAO.GroupInfoCreate(groupIdx, groupName, tokens[6]);
                         localDAO.GroupChattingCreate(maker, groupIdx, groupTime, plain);
                         groupChatManager.addGroupName(groupIdx, groupName);
                         isit = 2;
@@ -240,10 +236,7 @@ namespace TelerikWpfApp3.Service
                         }
                         DispatchService.Invoke(() =>
                         {
-                            //groupMemberListManager.AddGroupMemberList(gIdx, groupMemberList);
-                            //groupChatManager.addChattingList(gIdx, groupName, plain, time);
-                            //GroupChattingRoomManager.Instance.makeChatRoom(gIdx, groupName);
-                            //groupChatManager.addChat(gIdx, new GroupChatItem(plain, maker, time, false));
+                            
                             string plain = maker + "님이 채팅방을 만드셨습니다.";
                             localDAO.GroupInfoCreate(gIdx, groupName, groupInfo[5]);
                             localDAO.GroupChattingCreate(maker, gIdx, time, plain);
@@ -266,8 +259,8 @@ namespace TelerikWpfApp3.Service
                         //string groupName = groupChatManager.getGroupName(gIdx);
                         DispatchService.Invoke(() =>
                         {
-                            //groupChatManager.addChat(gIdx, new GroupChatItem(plain, sender, time, false));
-                            //groupChatManager.addChattingList(gIdx, groupName, plain, time);
+                            
+
                             localDAO.GroupChattingCreate(sender, gIdx, time, plain);
                         });
                     }
