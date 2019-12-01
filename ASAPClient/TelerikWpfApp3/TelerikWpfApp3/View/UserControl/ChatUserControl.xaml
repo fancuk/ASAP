@@ -174,7 +174,7 @@
                                                 <TextBlock x:Name="time" Text="{Binding LastTime}" Margin="18,0,0,0" FontSize="11" TextAlignment="Right" AutomationProperties.AcceleratorKey="time"/>
                                             </StackPanel>
                                             <Border CornerRadius="4" Background="{x:Null}" Margin="5,3,5,0" HorizontalAlignment="Left">
-                                                <TextBlock  Text="{Binding LastMessage}" TextWrapping="Wrap" Margin="4,0,4,0" MaxWidth="30" HorizontalAlignment="Left" />
+                                                <TextBlock  Text="{Binding LastMessage}"  Margin="4,0,4,0"  HorizontalAlignment="Left" />
                                             </Border>
                                         </StackPanel>
                                         <!--<TextBlock x:Name="User" Text="{Binding Target}" Height="31" TextAlignment="Center" FontFamily="MS PGothic" Margin="22,22,10,0" FontSize="16" FontWeight="Bold"/>-->
